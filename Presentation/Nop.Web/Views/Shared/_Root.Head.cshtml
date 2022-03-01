@@ -1,0 +1,104 @@
+﻿@using Nop.Core.Domain
+@using StackExchange.Profiling
+@using Nop.Core.Domain.Common
+@using Nop.Core.Domain.Seo
+@using Nop.Services.Events
+@using Nop.Services.Security
+@using Nop.Web.Framework.Events
+@using Nop.Core
+@using Nop.Web.Framework.Infrastructure
+@using Nop.Web.Framework.UI
+@inject CommonSettings commonSettings
+@inject IEventPublisher eventPublisher
+@inject IPermissionService permissionService
+@inject IWorkContext workContext
+@inject SeoSettings seoSettings
+@inject StoreInformationSettings storeInformationSettings
+@inject Nop.Services.Localization.ILanguageService languageService
+@inject Nop.Services.Logging.ILogger logger
+@inject IWebHelper webHelper
+@{
+    Html.AppendScriptParts(ResourceLocation.Footer, "~/js/public.ajaxcart.js");
+    Html.AppendScriptParts(ResourceLocation.Footer, "~/js/public.common.js");
+    //when jQuery migrate script logging is active you will see the log in the browser console
+    if (commonSettings.JqueryMigrateScriptLoggingActive)
+    {
+        Html.AppendScriptParts(ResourceLocation.Footer, "~/lib/jquery-migrate/jquery-migrate-3.0.1.js");
+    }
+    else
+    {
+        Html.AppendScriptParts(ResourceLocation.Footer, "~/lib/jquery-migrate/jquery-migrate-3.0.1.min.js");
+    }
+    Html.AppendScriptParts(ResourceLocation.Footer, "~/lib/jquery-ui/jquery-ui-1.12.1.custom/jquery-ui.min.js");
+    Html.AppendScriptParts(ResourceLocation.Footer, "~/lib/jquery-validate/jquery.validate.unobtrusive-v3.2.10/jquery.validate.unobtrusive.min.js");
+    Html.AppendScriptParts(ResourceLocation.Footer, "~/lib/jquery-validate/jquery.validate-v1.17.0/jquery.validate.min.js");
+    //jQuery is the only js file in the head. if we decide to move it to the footer, then ensure that all inline scripts (with jQuery usage) with are also moved to the footer
+    //the issue that it's not possible in some cases (e.g. "Edit address", when Ajax request is made on one-page checkout)
+    Html.AppendScriptParts(ResourceLocation.Head, "~/lib/jquery/jquery-3.3.1.min.js");
+    
+    var isGmapNeeded = webHelper.GetRawUrl(Context.Request)?.Contains("onepagecheckout")??false; 
+    if (isGmapNeeded) { <script asp-location="Footer" src="https://maps.google.com/maps/api/js?sensor=false&key=AIzaSyDJ6S-KUq5dBToqRnpOfZ88TnbPgW_M7ZE" type="text/javascript"></script> }
+    
+    //X-UA-Compatible tag
+    if (commonSettings.RenderXuaCompatible)
+    {
+        Html.AppendHeadCustomParts($"<meta http-equiv=\"X-UA-Compatible\" content=\"{commonSettings.XuaCompatibleValue}\"/>");
+    }
+    //custom tag(s);
+    if (!string.IsNullOrEmpty(seoSettings.CustomHeadTags))
+    {
+        Html.AppendHeadCustomParts(seoSettings.CustomHeadTags);
+    }
+    var displayMiniProfiler = storeInformationSettings.DisplayMiniProfilerInPublicStore
+        && (!storeInformationSettings.DisplayMiniProfilerForAdminOnly || permissionService.Authorize(StandardPermissionProvider.AccessAdminPanel));
+    //event
+    eventPublisher.Publish(new PageRenderingEvent(this.Html));
+}
+<!DOCTYPE html>
+<html lang="@languageService.GetTwoLetterIsoLanguageName(workContext.WorkingLanguage)" @(this.ShouldUseRtlTheme() ? Html.Raw(" dir=\"rtl\"") : null) @Html.NopPageCssClasses()>
+<head>
+    <title>@Html.NopTitle()</title>
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+    <meta name="description" content="@(Html.NopMetaDescription())" />
+    <meta name="keywords" content="@(Html.NopMetaKeywords())" />
+    <meta name="generator" content="nopCommerce" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+
+    <link rel="preconnect" href="https://eshop.orange.jo/" />
+
+    <link rel="preload" as="font" crossorigin="anonymous" href="~/Themes/Eshop2021/Content/Fonts/HelveticaNeueArabic/RAW_TTF_SOURCE/HelveticaNeueW20-45Light.ttf">
+    <link rel="preload" as="font" crossorigin="anonymous" href="~/Themes/Eshop2021/Content/Fonts/HelveticaNeueArabic/RAW_TTF_SOURCE/HelveticaNeueW20-55Roman.ttf">
+    <link rel="preload" as="font" crossorigin="anonymous" href="~/Themes/Eshop2021/Content/Fonts/HelveticaNeueArabic/RAW_TTF_SOURCE/HelveticaNeueW20-75Bold.ttf">
+    <link rel="preload" as="font" crossorigin="anonymous" href="~/Themes/Eshop2021/Content/Fonts/HelveticaNeueEuropean/TTF/HelvNeue65_W1G.ttf">
+    <link rel="preload" as="font" crossorigin="anonymous" href="~/Themes/Eshop2021/Content/Fonts/HelveticaNeueArabic/WOFF2/HelveticaNeueW20-45Light.woff2">
+    <link rel="preload" as="font" crossorigin="anonymous" href="~/Themes/Eshop2021/Content/Fonts/HelveticaNeueArabic/WOFF2/HelveticaNeueW20-55Roman.woff2">
+    <link rel="preload" as="font" crossorigin="anonymous" href="~/Themes/Eshop2021/Content/Fonts/HelveticaNeueArabic/WOFF2/HelveticaNeueW20-75Bold.woff2">
+    <link rel="preload" as="font" crossorigin="anonymous" href="~/Themes/Eshop2021/Content/Fonts/HelveticaNeueEuropean/WOFF2/HelvNeue65_W1G.woff2">
+    <link rel="preload" as="font" crossorigin="anonymous" href="~/Themes/Eshop2021/Content/webfonts/fa-brands-400.woff2">
+    <link rel="preload" as="font" crossorigin="anonymous" href="~/Themes/Eshop2021/Content/webfonts/fa-solid-900.woff2">
+
+    @Html.NopHeadCustom()
+    @*This is used so that themes can inject content into the header*@
+    @await Html.PartialAsync("Head")
+    @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.HeadHtmlTag })
+    @Html.NopCssFiles(this.Url, ResourceLocation.Head)
+    @Html.NopScripts(this.Url, ResourceLocation.Head)
+    @Html.NopCanonicalUrls()
+    @await Component.InvokeAsync("NewsRssHeaderLink")
+    @await Component.InvokeAsync("BlogRssHeaderLink")
+    @*Favicon - upload favicon.ico file to the root directory*@
+    @await Component.InvokeAsync("Favicon")
+    @if (displayMiniProfiler)
+    {
+        <mini-profiler />
+    }
+    @Html.NopInlineScripts(this.Url, ResourceLocation.Head)
+    <!--Powered by nopCommerce - https://www.nopCommerce.com-->
+</head>
+<body data-spy="scroll" data-target="#home-page-category" data-offset="150">
+    @RenderBody()
+    @Html.NopCssFiles(this.Url, ResourceLocation.Footer)
+    @Html.NopScripts(this.Url, ResourceLocation.Footer)
+    @Html.NopInlineScripts(this.Url, ResourceLocation.Footer)
+</body>
+</html>

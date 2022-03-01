@@ -1,0 +1,522 @@
+﻿@model OnePageCheckoutModel
+@using Nop.Core
+@inject IWebHelper webHelper
+@{
+    Layout = "_ColumnsOne";
+
+    //scripts
+    Html.AddScriptParts(ResourceLocation.Footer, "~/js/public.accordion.js");
+    Html.AddScriptParts(ResourceLocation.Footer, "~/js/public.onepagecheckout.js");
+
+    var storeLocation = webHelper.GetStoreLocation();
+
+    //title
+    Html.AddTitleParts(T("PageTitle.Checkout").Text);
+    //page class
+    Html.AppendPageCssClassParts("html-checkout-page");
+}
+
+@{
+
+    //step numbers
+    var billingAddressStepNumber = 1;
+    var shippingAddressStepNumber = 2;
+    var shippingMethodStepNumber = 3;
+    var paymentMethodStepNumber = 4;
+    var paymentInfoStepNumber = 5;
+    var confirmOrderStepNumber = 6;
+    if (!Model.ShippingRequired)
+    {
+        paymentMethodStepNumber = paymentMethodStepNumber - 2;
+        paymentInfoStepNumber = paymentInfoStepNumber - 2;
+        confirmOrderStepNumber = confirmOrderStepNumber - 2;
+    }
+    if (Model.DisableBillingAddressCheckoutStep)
+    {
+        shippingAddressStepNumber--;
+        shippingMethodStepNumber--;
+        paymentMethodStepNumber--;
+        paymentInfoStepNumber--;
+        confirmOrderStepNumber--;
+    }
+}
+<script asp-location="Footer" id="mapid" src="https://maps.google.com/maps/api/js?key=AIzaSyDJ6S-KUq5dBToqRnpOfZ88TnbPgW_M7ZE" type="text/javascript"></script>
+
+<script asp-location="Footer">
+    let isMobile = window.matchMedia("only screen and (max-width:760px)").matches;
+    if (isMobile) 
+    {
+    $('#mpdiv').css('display','none');
+    $('#shipping_mpdiv').css('display','none');
+    $('#mpdivmob').css('display','block');
+  
+    }
+	else
+    {
+    $("#shipping_mpdivmob").css('display','none');
+	$('#mpdiv').css('display','block');
+    $('#shipping_mpdiv').css('display','block');
+    $('#mpdivmob').css('display','none');
+	}
+    $(document).ready(function() 
+    {
+        var lang = $('html')[0].lang;
+        var lannguage = "en";
+        if (lang == "ar") {
+            lannguage = "ar";
+        }
+        var mapurl = 'https://maps.google.com/maps/api/js?region=JOR' + '&language=' + lannguage + '&key=AIzaSyDJ6S-KUq5dBToqRnpOfZ88TnbPgW_M7ZE';
+        $('#mapid').attr('src', mapurl);
+
+        let map;
+        let markers = [];
+     
+        let shipping_map;
+        let shipping_markers = [];
+        
+        let mobile;
+        let mobilemarkers=[];
+        jQuery(document).ready(function () {
+            map = new google.maps.Map($('#serviceLocationMap')[0], {
+                zoom: 12,
+                zoomControl: true,
+                scaleControl: true,
+                center: new google.maps.LatLng(31.9539, 35.9106),
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            });
+
+            google.maps.event.addListener(map, 'click', function (e) {
+
+                if (markers && markers.setMap) {
+                    markers.setMap(null);
+                }
+                markers = new google.maps.Marker({
+                    position: e["latLng"],
+                    title: ""
+                });
+                markers.setMap(map);
+                var latlng = e["latLng"].toJSON();
+                var urld = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + latlng.lat + '%2C' + latlng.lng + '&region=JOR' + '&language=' + lannguage + '&key=AIzaSyDJ6S-KUq5dBToqRnpOfZ88TnbPgW_M7ZE';
+                if (latlng != null && latlng != undefined) {
+                    $.ajax({
+                        url: urld,
+                        type: 'GET',
+                        dataType: 'json',
+                        success: function (data) {
+                            var arr_from_json = data;
+                            $('#BillingNewAddress_Address1').val(arr_from_json.results[0].address_components[1].long_name);
+                            $('#BillingNewAddress_Address2').val(arr_from_json.results[0].address_components[2].long_name);
+                            $('#BillingNewAddress_City').val(arr_from_json.results[0].address_components[3].long_name);
+                             $('#City_Text').text(arr_from_json.results[0].address_components[3].long_name);
+                        },
+                        error: function (request, error) {
+                            alert("Request: " + JSON.stringify(request));
+                        }
+                    });
+                }
+            });
+        });
+        jQuery(document).ready(function () {
+            shipping_map = new google.maps.Map($('#shipping-serviceLocationMap')[0], {
+                zoom: 12,
+                zoomControl: true,
+                scaleControl: true,
+                center: new google.maps.LatLng(31.9539, 35.9106),
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            });
+
+            google.maps.event.addListener(shipping_map, 'click', function (e) {
+
+                if (shipping_markers && shipping_markers.setMap) {
+                    shipping_markers.setMap(null);
+                }
+                shipping_markers = new google.maps.Marker({
+                    position: e["latLng"],
+                    title: ""
+                });
+                shipping_markers.setMap(shipping_map);
+                var latlng = e["latLng"].toJSON();
+                var urld = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + latlng.lat + '%2C' + latlng.lng + '&region=JOR' + '&language=' + lannguage + '&key=AIzaSyDJ6S-KUq5dBToqRnpOfZ88TnbPgW_M7ZE';
+                if (latlng != null && latlng != undefined) {
+                    $.ajax({
+                        url: urld,
+                        type: 'GET',
+                        dataType: 'json',
+                        success: function (data) {
+                            var arr_from_json = data;
+                            $('#ShippingNewAddress_Address1').val(arr_from_json.results[0].address_components[1].long_name);
+                            $('#ShippingNewAddress_Address2').val(arr_from_json.results[0].address_components[2].long_name);
+                            $('#ShippingNewAddress_City').val(arr_from_json.results[0].address_components[3].long_name);
+                             $('#City_Text').text(arr_from_json.results[0].address_components[3].long_name);
+                        },
+                        error: function (request, error) {
+                            alert("Request: " + JSON.stringify(request));
+                        }
+                    });
+                }
+            });
+        });
+          jQuery(document).ready(function () {
+            mobile = new google.maps.Map($('#serviceLocationMapmobile')[0], {
+                zoom: 12,
+                zoomControl: true,
+                scaleControl: true,
+                center: new google.maps.LatLng(31.9539, 35.9106),
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            });
+
+            google.maps.event.addListener(mobile, 'click', function (e) {
+
+                if (mobilemarkers && mobilemarkers.setMap) {
+                    mobilemarkers.setMap(null);
+                }
+                mobilemarkers = new google.maps.Marker({
+                    position: e["latLng"],
+                    title: ""
+                });
+                mobilemarkers.setMap(mobile);
+                var mobilelatlng = e["latLng"].toJSON();
+                var mobileurld = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + mobilelatlng.lat + '%2C' + mobilelatlng.lng + '&region=JOR' + '&language=' + lannguage + '&key=AIzaSyDJ6S-KUq5dBToqRnpOfZ88TnbPgW_M7ZE';
+                if (mobilelatlng != null && mobilelatlng != undefined) {
+                    $.ajax({
+                        url: mobileurld,
+                        type: 'GET',
+                        dataType: 'json',
+                        success: function (data) {
+                            var arr_from_json = data;
+                            $('#BillingNewAddress_Address1').val(arr_from_json.results[0].address_components[1].long_name);
+                            $('#BillingNewAddress_Address2').val(arr_from_json.results[0].address_components[2].long_name);
+                            $('#BillingNewAddress_City').val(arr_from_json.results[0].address_components[3].long_name);
+                             $('#City_Text').text(arr_from_json.results[0].address_components[3].long_name);
+                        },
+                        error: function (request, error) {
+                            alert("Request: " + JSON.stringify(request));
+                        }
+                    });
+                }
+            });
+        });
+    });
+</script>
+<div id="co-cont" class="container">
+    <div class="breadcrumb">
+        <ul>
+            <li class="brd-back"><a href="/">@T("Breadcrumb.Eshop")</a></li>
+            <li>
+                <span>
+                    <a href="javascript:void(0)">
+                        <span>@T("Breadcrumb.Personal") </span>
+                    </a>
+                </span>
+                <span class="delimiter"></span>
+            </li>
+            <li>
+                <a href="/">
+                    <span>@T("Breadcrumb.Eshop")</span>
+                </a>
+                <span class="delimiter"></span>
+            </li>
+            <li>
+                <strong class="current-item">@T("Breadcrumb.ShoppingCart")</strong>
+            </li>
+        </ul>
+    </div>
+    <div class="cart-step">
+        <h2>@T("Checkout")</h2>
+        <div class="step-bx">
+            <ul>
+                <li id="checkout-mycart" class="active"><span>1</span><b>@T("Checkout.Mycart")</b><strong class="line"></strong></li>
+                <li id="checkout-billing" class="active"><span>2</span><b>@T("Checkout.CustomerDetails")</b><strong class="line"></strong></li>
+                <li id="checkout-shipping" class=""><span>3</span><b>@T("Checkout.ShippingAndBilling")</b><strong class="line"></strong></li>
+                <li id="checkout-payment_method" class=""><span>4</span><b>@T("Checkout.DeliveryAndPayment")</b></li>
+            </ul>
+        </div>
+    </div>
+    <div class="page checkout-page">
+        <div class="page-body checkout-data">
+            @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.OpcContentBefore })
+            <ol class="opc" id="checkout-steps">
+                <li id="opc-billing" class="tab-section allow">
+                    <div id="checkout-step-billing" class="step a-item" style="display: none;">
+                        <div class="step-data">
+                            <form id="co-billing-form" action="">
+                                <div id="checkout-billing-load">
+                                    @await Html.PartialAsync("OpcBillingAddress", Model.BillingAddress)
+                                </div>
+                            </form>
+
+                            <script asp-location="Footer">
+                                Billing.init('#co-billing-form', '@(storeLocation)checkout/OpcSaveBilling/', @(Model.DisableBillingAddressCheckoutStep.ToString().ToLowerInvariant()),'@(storeLocation)checkout/completed/');
+                                if ($("#billing-address-select").length > 0) {
+                                    Billing.newAddress(!$('#billing-address-select').val());
+                                }
+                            </script>
+                        </div>
+                        <div class="shop-cart-bottom">
+                            <div class="left_flex">
+                                <a class="back" href="/cart">@T("Common.Back")</a>
+                                <a class="btn cut-out-btn" href="/">@T("Checkout.ReturntotheShop")</a>
+                            </div>
+                            <div class="right_flex">
+                                <div class="price-and-next">
+                                    <div class="prices">
+                                        @*<span>JOD</span>378<span>.99</span>*@
+                                        @await Component.InvokeAsync("CustomOrderTotals", new { isEditable = true })
+                                    </div>
+                                    <div class="next-step">
+                                        @T("Checkout.Nextstep"): <b>@T("Checkout.ShippingAndBilling")</b>
+                                    </div>
+                                </div>
+                                <input type="button" title="@T("Checkout.Next")" class="button-1 new-address-next-step-button btn btn-orange" onclick="Billing.save()" value="@T("Checkout.Next")" />
+                                <input style="display:none;" id="btn-saveCustomBilling" type="button" title="@T("Checkout.Next")" class="button-1 new-address-next-step-button btn btn-orange" onclick="Billing.saveCustomBilling()" value="@T("Checkout.Next")" />
+                                <span id="shipping-please-wait" class="please-wait" style="display: none;"> @T("Common.LoadingNextStep")</span>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                @if (Model.ShippingRequired)
+                {
+                    <li id="opc-shipping" class="tab-section">
+                        <div id="checkout-step-shipping" class="step a-item" style="display:none;">
+                            <div class="step-data st-pdb-0">
+                                <form action="" id="co-shipping-form">
+                                    <div class="step-flex">
+                                        <div class="flex-left">
+                                             <div id="mpdivmob">
+                                                <span><b>@T("ProductDetail.Internet.Fiber.Map.LocateAddress")</b></span>
+                                                <hr />
+                                                <div class="form-group">
+                                                    <div class="fiber-map">
+                                                        <div>
+                                                            <div class="map-container">
+                                                                <div class="map" id="serviceLocationMapmobile" style="width: 100%; height: 155px; margin: 0px auto; position: relative; overflow: hidden;"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="checkout-shipping-load">
+                                                @*shipping address content will be loaded here*@
+                                            </div>
+                                     </div>
+                                        <div class="flex-right">
+                                            <div id="mpdiv" class="col-6 desktop_mpdiv">
+                                                <span  class="spn"><b>@T("ProductDetail.Internet.Fiber.Map.LocateAddress")</b></span>
+                                                <hr />
+                                                <div class="form-group">
+                                                    <div class="fiber-map">
+                                                        <div>
+                                                            <div class="map-container">
+                                                                <div class="map" id="serviceLocationMap"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            @await Component.InvokeAsync("OrderTotals", new { isEditable = true })
+                                            <div id="shipping_mpdiv" class="col-6 desktop_shipping_mpdiv">
+                                                <span  class="spn"><b>@T("ProductDetail.Internet.Fiber.Map.LocateAddress")</b></span>
+                                                <hr />
+                                                <div class="form-group">
+                                                    <div class="fiber-map">
+                                                        <div>
+                                                            <div class="map-container">
+                                                                <div class="map" id="shipping-serviceLocationMap"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                                <script asp-location="Footer">
+                                    Shipping.init('#co-shipping-form', '@(storeLocation)checkout/OpcSaveShipping/', '@(storeLocation)checkout/completed/');
+                                    if ($("#shipping-address-select").length > 0) {
+                                        Shipping.newAddress(!$('#shipping-address-select').val());
+                                    }
+                                </script>
+                                <div class="buttons" id="shipping-buttons-container">
+                                </div>
+                            </div>
+                            <div class="shop-cart-bottom">
+                                <div class="left_flex">-
+                                    @if (!Model.DisableBillingAddressCheckoutStep)
+                                    {
+                                        <a class="back" onclick="Checkout.back();" href="javascript:void(0)">@T("Common.Back")</a>
+                                    }
+                                    <a class="btn cut-out-btn" href="/">@T("Checkout.ReturntotheShop")</a>
+                                </div>
+                                <div class="right_flex">
+                                    <div class="price-and-next">
+                                        <div class="prices">
+                                            @*<span>JOD</span>378<span>.99</span>*@
+                                            @await Component.InvokeAsync("CustomOrderTotals", new { isEditable = true })
+                                        </div>
+                                        <div class="next-step">
+                                            @T("Checkout.Nextstep"): <b>@T("Checkout.DeliveryAndPayment")</b>
+                                        </div>
+                                    </div>
+                                    <input type="button" title="@T("Checkout.Next")" class="button-1 new-address-next-step-button btn btn-orange" onclick="Shipping.save()" value="@T("Checkout.Next")" />
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li id="opc-shipping_method" class="tab-section">
+                        <div id="checkout-step-shipping-method" class="step a-item" style="display: none;">
+                            <div class="step-data">
+                                <div class="step-title">
+                                    <h2 class="title">@T("Checkout.ShippingMethod")</h2>
+                                </div>
+                                <form id="co-shipping-method-form" action="">
+
+                                    <div id="checkout-shipping-method-load">
+                                        @*shipping methods content will be loaded here*@
+                                    </div>
+                                    <script asp-location="Footer">
+                                        ShippingMethod.init('#co-shipping-method-form', '@(storeLocation)checkout/OpcSaveShippingMethod/');
+                                    </script>
+                                    <div class="buttons" id="shipping-method-buttons-container">
+                                        <p class="back-link">
+                                            <a href="javascript:void(0)" onclick="Checkout.back(); return false;"><small>&laquo; </small>@T("Common.Back")</a>
+                                        </p>
+                                        <input type="button" class="button-1 shipping-method-next-step-button btn btn-primary" onclick="ShippingMethod.save()" value="@T("Common.Continue")" />
+                                        <span id="shipping-method-please-wait" class="please-wait" style="display: none;">@T("Common.LoadingNextStep")</span>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="shop-cart-bottom">
+                                <div class="left_flex">
+                                    @if (!Model.DisableBillingAddressCheckoutStep)
+                                    {
+                                        <a class="back" onclick="Checkout.back();" href="javascript:void(0)">@T("Common.Back")</a>
+                                    }
+                                    <a class="btn cut-out-btn">@T("Checkout.ReturntotheShop")</a>
+                                </div>
+                                <div class="right_flex">
+                                    <div class="price-and-next">
+                                        <div class="prices">
+                                            @await Component.InvokeAsync("CustomOrderTotals", new { isEditable = true })
+                                        </div>
+                                        <div class="next-step">
+                                            @T("Checkout.Nextstep"): <b>@T("Checkout.DeliveryAndPayment")</b>
+                                        </div>
+                                    </div>
+                                    <input type="button" title="@T("Common.Continue")" class="button-1 new-address-next-step-button btn btn-orange" onclick="ShippingMethod.save()" value="@T("Common.Continue")" />
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                }
+
+                <li id="opc-payment_method" class="tab-section">
+                    <div id="checkout-step-payment-method" class="step a-item" style="display: none;">
+                        <div class="step-data">
+                            <div class="step-flex" id="checkout-payment-method-load">
+                                @*Load Data from jason*@
+                            </div>
+                            <script asp-location="Footer">
+                                PaymentMethod.init('#co-payment-method-form', '@(storeLocation)checkout/OpcSavePaymentMethod/', '@(storeLocation)checkout/completed/');
+                            </script>
+                            <div class="buttons" id="payment-method-buttons-container">
+                            </div>
+                        </div>
+                        <div class="shop-cart-bottom">
+                            <div class="left_flex">
+                                @if (!Model.DisableBillingAddressCheckoutStep)
+                                {
+                                    <a class="back" onclick="Checkout.back();" href="javascript:void(0)">@T("Common.Back")</a>
+                                }
+                                <a class="btn cut-out-btn" href="/">@T("Checkout.ReturntotheShop")</a>
+                            </div>
+                            <div class="right_flex">
+                                <div class="price-and-next pd-right">
+                                    <div class="prices">
+                                        @*<span>JOD</span>378<span>.99</span>*@
+                                        @await Component.InvokeAsync("CustomOrderTotals", new { isEditable = true })
+                                    </div>
+                                </div>
+                                <input type="button" title="@T("Checkout.Pay")" class="button-1 new-address-next-step-button btn btn-orange" onclick="PaymentMethod.save()" value="@T("Checkout.Pay")" />
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li id="opc-payment_info" class="tab-section">
+                    <div id="checkout-step-payment-info" class="step a-item" style="display: none;">
+                        <div class="step-data">
+                            <div class="step-title">
+                                <h2 class="title">@T("Checkout.PaymentInfo")</h2>
+                            </div>
+                            <form action="" id="co-payment-info-form">
+                                <div id="checkout-payment-info-load">
+                                    @*payment info content will be loaded here*@ Payment is not required
+                                </div>
+                            </form>
+                            <script asp-location="Footer">
+                                PaymentInfo.init('#co-payment-info-form', '@(storeLocation)checkout/OpcSavePaymentInfo/');
+                            </script>
+                            <div class="buttons" id="payment-info-buttons-container">
+                            </div>
+                        </div>
+                        <div class="shop-cart-bottom">
+                            <div class="left_flex">
+                                <a class="back" onclick="Checkout.back();" href="javascript:void(0)">@T("Common.Back")</a>
+                                <a class="btn cut-out-btn" href="/">@T("Checkout.ReturntotheShop")</a>
+                            </div>
+                            <div class="right_flex">
+                                <div class="price-and-next">
+                                    <div class="prices">
+                                        @await Component.InvokeAsync("CustomOrderTotals", new { isEditable = true })
+                                    </div>
+                                </div>
+                                <input type="button" title="@T("Common.Continue")" class="button-1 new-address-next-step-button btn btn-orange" onclick="PaymentInfo.save()" value="@T("Common.Pay")" />
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li id="opc-confirm_order" class="tab-section">
+                    <div id="checkout-step-confirm-order" class="step a-item" style="display: none;">
+                        <div class="step-data">
+                            <div id="checkout-confirm-order-load">
+                                @*confirm order content will be loaded here*@
+
+                            </div>
+
+                            <script asp-location="Footer">
+                                ConfirmOrder.init('@(storeLocation)checkout/OpcConfirmOrder/', '@(storeLocation)checkout/completed/');
+                            </script>
+                        </div>
+                        <div class="shop-cart-bottom">
+                            <div class="left_flex">
+                                <a class="back" onclick="Checkout.back();" href="javascript:void(0)">@T("Common.Back")</a>
+                                <a class="btn cut-out-btn" href="/">@T("Checkout.ReturntotheShop")</a>
+                            </div>
+                            <div class="right_flex">
+                                <div class="price-and-next pd-right">
+                                    <div class="prices">
+                                        @await Component.InvokeAsync("CustomOrderTotals", new { isEditable = true })
+                                    </div>
+                                </div>
+                                <input type="button" title="@T("Checkout.ConfirmButton")" class="button-1 new-address-next-step-button btn btn-orange" onclick="ConfirmOrder.save()" value="@T("Checkout.ConfirmButton")" />
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ol>
+
+            @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.OpcContentAfter })
+        </div>
+
+        <script asp-location="Footer">
+            Accordion.init('checkout-steps', '.step-title', true);
+            Accordion.openSection('#opc-billing');
+            Checkout.init('@(storeLocation)cart/');
+            if (Billing.disableBillingAddressCheckoutStep)
+            {
+                Accordion.hideSection('#opc-billing');
+                Billing.save();
+            }
+        </script>
+    </div>
+</div>
+

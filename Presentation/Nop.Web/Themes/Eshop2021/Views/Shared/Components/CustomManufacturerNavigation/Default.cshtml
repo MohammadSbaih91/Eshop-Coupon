@@ -1,0 +1,113 @@
+﻿@model ManufacturerNavigationModel
+
+@using Nop.Core
+@inject IWebHelper webHelper
+@inject IWorkContext workContext
+@{
+    var supportRtl = workContext.WorkingLanguage.Rtl;
+}
+
+@if (Model.Manufacturers.Count > 0)
+{
+    var mId = webHelper.QueryString<string>("mId");
+    int.TryParse(mId, out int selectedId);
+    
+    <div class="brand-left brand-selector">
+        <div class="dropdown">
+            <input type="hidden" id="hidmanufacturerId" value="0" />
+            <button class="dropdown-toggle btn" type="button" id="dropdownBrand" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownBrand">
+                <a id="selected-0" class="dropdown-item@(selectedId == 0?" active" : "")" onclick="CatalogManufactureFilter()" data-attr="@T("HomePage.Catalog.AllBrand")">@T("HomePage.Catalog.AllBrand")</a>
+                @foreach (var manufacturer in Model.Manufacturers)
+                {
+                    <a id="selected-@(manufacturer.Id)" class="dropdown-item@(selectedId == manufacturer.Id?" active" : "")" onclick="CatalogManufactureFilter(@(manufacturer.Id))" data-attr="@manufacturer.Name">@manufacturer.Name</a>
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="brand-right" id="manufacturerBox">
+        <div class="brand-slider">
+            <ul class="owl-carousel" id="brand-slider">
+                @foreach (var manufacturer in Model.Manufacturers)
+                {
+                    <li>
+                        <a onclick="CatalogManufactureFilter(@(manufacturer.Id))">
+                            <img alt="@(manufacturer.PictureModel.AlternateText)" src="@(manufacturer.PictureModel.ImageUrl)" title="@(manufacturer.PictureModel.Title)">
+                        </a>
+                    </li>
+                }
+            </ul>
+            @if (supportRtl)
+            {
+                <script asp-location="Footer">
+                    $(document).ready(function () {
+                        $('#brand-slider').owlCarousel({
+                            loop: false,
+                            margin: 20,
+                            dots: false,
+                            nav: false,
+                            autoWidth: true,
+                            rtl: true,
+                            responsive: {
+                                0: {
+                                    margin: 5,
+                                },
+                                991: {
+                                    margin: 5,
+                                },
+                                992: {
+                                    margin: 15,
+                                },
+                                1366:{
+                                    margin: 15,
+                                },
+                                1367: {
+                                    margin: 20,
+                                }
+                            }
+                        })
+                    });
+                </script>
+            }
+            else
+            {
+                <script asp-location="Footer">
+                    $(document).ready(function () {
+                        $('#brand-slider').owlCarousel({
+                            loop: false,
+                            margin: 20,
+                            dots: false,
+                            nav: false,
+                            autoWidth: true,
+                            rtl: false,
+                            responsive: {
+                                0: {
+                                    margin: 5,
+                                },
+                                991: {
+                                    margin: 5,
+                                },
+                                1024: {
+                                    margin: 10,
+                                },
+                                1280: {
+                                    margin: 14,
+                                },
+                                1366: {
+                                    margin: 15,
+                                },
+                                1367: {
+                                    margin: 20,
+                                }
+                            }
+                        })
+                    });
+                </script>
+            }
+
+        </div>
+    </div>
+
+}

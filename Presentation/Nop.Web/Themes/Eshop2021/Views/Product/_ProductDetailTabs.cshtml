@@ -1,0 +1,68 @@
+﻿@model ProductDetailsModel
+
+@if (!string.IsNullOrEmpty(Model.KnowingTerms) || !string.IsNullOrEmpty(Model.Conditions) || !string.IsNullOrEmpty(Model.ImportantNotes))
+{
+    <div class="prd-details-tabs" id="prd-details-tabs">
+        <div class="tabs-nav">
+            <ul class="two-step">
+                @if (!string.IsNullOrEmpty(Model.KnowingTerms))
+                {
+                    <li class="active"><a href="#tab200">@T("ProductDetail.WorkKnowing")</a></li>
+                }
+
+                @if (!string.IsNullOrEmpty(Model.Conditions))
+                {
+                    <li @(string.IsNullOrEmpty(Model.KnowingTerms) ? "class=active" : "")><a href="#tab201">@T("ProductDetail.TermsandConditions")</a></li>
+                }
+                @if (!string.IsNullOrEmpty(Model.ImportantNotes))
+                {
+                    <li @((string.IsNullOrEmpty(Model.KnowingTerms) && string.IsNullOrEmpty(Model.Conditions)) ? "class=active" : "")><a href="#tab202">@T("ProductDetail.ImportantNotes")</a></li>
+                }
+            </ul>
+        </div>
+        <div class="tabs-content">
+            @if (!string.IsNullOrEmpty(Model.KnowingTerms))
+            {
+                <div id="tab200">
+                    <div class="tab-ol-list">
+                        @Html.Raw(Model.KnowingTerms)
+
+                    </div>
+                </div>
+            }
+            @if (!string.IsNullOrEmpty(Model.Conditions))
+            {
+                <div id="tab201">
+                    <div class="tab-ol-list">
+                        @Html.Raw(Model.Conditions)
+                    </div>
+                </div>
+            }
+            @if (!string.IsNullOrEmpty(Model.ImportantNotes))
+            {
+                <div id="tab202">
+                    <div class="tab-ol-list">
+                        @Html.Raw(Model.ImportantNotes)
+                    </div>
+                </div>
+            }
+        </div>
+        <script asp-location="Footer">
+            $(document).ready(function () {
+                $(function () {
+                    $('.tabs-nav a', '#prd-details-tabs').click(function () {
+                        // Check for active
+                        $('.tabs-nav li', '#prd-details-tabs').removeClass('active');
+                        $(this).parent().addClass('active');
+
+                        // Display active tab
+                        let currentTab = $(this).attr('href');
+                        $('.tabs-content > div', '#prd-details-tabs').hide();
+                        $(currentTab).show();
+                        return false;
+                    });
+                });
+            })
+        </script>
+    </div>
+}

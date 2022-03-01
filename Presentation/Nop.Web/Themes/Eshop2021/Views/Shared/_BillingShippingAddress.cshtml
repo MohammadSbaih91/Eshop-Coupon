@@ -1,0 +1,176 @@
+﻿@model AddressModel
+
+<input asp-for="Id" type="hidden" />
+
+@if (Model.CityEnabled)
+{
+    <div class="col-md-6">
+        <div class="inputs form-group">
+            <div class="grp-label">
+                <label asp-for="City"></label>
+               
+                <nop-required />
+                
+            </div>
+
+
+           @* <input class="form-control" asp-for="City" />*@
+
+              <div class="dropdown common-dropdown pickupinStore">
+                @Html.HiddenFor(model => model.City)
+                
+                <div class="dropdown-toggle" id="City_Text" data-toggle="dropdown" asp-for="City" aria-haspopup="true" aria-expanded="false">
+                  @T("SelectCity")
+                </div>
+                <div class="dropdown-menu" id="countryddl_Ammman">
+                   
+                   <a class="dropdown-item" onclick="SetSelectedCity('')"> @T("SelectCity")</a>
+                       <a class="dropdown-item" onclick="SetSelectedCity('@T("Amman")')"> @T("Amman")</a>
+                       <a class="dropdown-item" onclick="SetSelectedCity('@T("Irbid")')"> @T("Irbid")</a>
+                       <a class="dropdown-item" onclick="SetSelectedCity('@T("Albalqa")')"> @T("Albalqa")</a>
+                       <a class="dropdown-item" onclick="SetSelectedCity('@T("Al-Karak")')"> @T("Al-Karak")</a>
+                       <a class="dropdown-item" onclick="SetSelectedCity('@T("Maan")')"> @T("Maan")</a>
+                       <a class="dropdown-item" onclick="SetSelectedCity('@T("Zarqa")')"> @T("Zarqa")</a>
+                       <a class="dropdown-item" onclick="SetSelectedCity('@T("Mafraq")')"> @T("Mafraq")</a>
+                       <a class="dropdown-item" onclick="SetSelectedCity('@T("Tafilah")')"> @T("Tafilah")</a>
+                       <a class="dropdown-item" onclick="SetSelectedCity('@T("Madaba")')"> @T("Madaba")</a>
+                       <a class="dropdown-item" onclick="SetSelectedCity('@T("Jerash")')"> @T("Jerash")</a>
+                       <a class="dropdown-item" onclick="SetSelectedCity('@T("Ajloun")')"> @T("Ajloun")</a>
+                       <a class="dropdown-item" onclick="SetSelectedCity('@T("Aqaba")')"> @T("Aqaba")</a>
+                </div>
+                <script>
+                   if($("#BillingNewAddress_City").val!='')
+                   {
+                   let oldcity=$("#BillingNewAddress_City").val();
+                        $("#City_Text").val(oldcity);
+                        $("#City_Text").text(oldcity);
+                   }
+                    function SetSelectedCity(selected) {
+                       if(selected!='')
+                       {
+                        $("#City_Text").val(selected);
+                        $("#City_Text").text(selected);
+                        $("#BillingNewAddress_City").val(selected);
+                       }
+                       else
+                       {
+                        $("#City_Text").val('@T("SelectCity")');
+                        $("#City_Text").text('@T("SelectCity")');
+                        $("#BillingNewAddress_City").val('');
+                       }
+                    }
+
+                        
+                    </script>
+            </div>
+
+            <span asp-validation-for="City"></span>
+
+        </div>
+    </div>
+}
+@if (Model.StreetAddressEnabled)
+{
+    <div class="col-md-6">
+        <div class="inputs form-group">
+            <div class="grp-label">
+                <label asp-for="Address1">@T("OrderDetail.Streetaddress")</label>
+               
+                <nop-required />
+                
+            </div>
+            <input class="form-control" asp-for="Address1" />
+            <span asp-validation-for="Address1"></span>
+        </div>
+    </div>
+}
+@if (Model.StreetAddress2Enabled)
+{
+    <div class="col-md-6">
+        <div class="inputs form-group">
+            <div class="grp-label">
+                <label asp-for="Address2">@T("OrderDetail.Streetaddress2")</label>
+              
+                <nop-required />
+                
+            </div>
+            <input class="form-control" asp-for="Address2" />
+            <span asp-validation-for="Address2"></span>
+        </div>
+    </div>
+}
+
+
+<div class="col-md-6">
+        <div class="inputs form-group">
+            <div class="grp-label">
+                <label asp-for="BuildingNo">@T("Address.Fields.BuildingNo")</label>          
+                               
+            </div>
+            <input class="form-control" asp-for="BuildingNo" />            
+        </div>
+    </div>
+
+@if (Model.CountryEnabled)
+{
+    <div class="col-md-6 billing-country">
+        <div class="inputs form-group">
+            <div class="grp-label">
+                <label asp-for="CountryId"></label>
+                <nop-required />
+            </div>
+            @*<select class="custom-select" asp-for="CountryId" asp-items="Model.AvailableCountries"></select>*@
+            @{
+                var selectedStore = Model.AvailableCountries.Where(p => p.Selected).FirstOrDefault();
+                if (selectedStore == null)
+                {
+                    selectedStore = Model.AvailableCountries.FirstOrDefault();
+                }
+                var countryId = Html.IdFor(model => model.CountryId);
+            }
+            <div class="dropdown common-dropdown pickupinStore">
+                @Html.HiddenFor(model => model.CountryId)
+                
+                <div class="dropdown-toggle" id="@(countryId)_Text" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    @selectedStore.Text
+                </div>
+                <div class="dropdown-menu" id="countryddl_@(countryId)">
+                    @foreach (var country in Model.AvailableCountries)
+                    {
+                        <a onclick="SetSelectedCountry_@(countryId)(this, '@(country.Value)', '@(country.Text)')" class="dropdown-item @(selectedStore.Value == country.Value?"selected":"")">@country.Text</a>
+                    }
+                </div>
+                <script>
+                    $("#@(countryId)").val(@(selectedStore.Value));
+                    function SetSelectedCountry_@(countryId)(selected, dllValue, dllText) {
+                        $("#@(countryId)").val(dllValue);
+                        $("#@(countryId)_Text").text(dllText);
+                        if (selected) {
+                            $("#countryddl_@(countryId)>a.selected").removeClass("selected");
+                            $(selected).addClass("selected");
+                        }
+                    }
+                </script>
+            </div>
+            <span asp-validation-for="CountryId"></span>
+        </div>
+    </div>
+    <script asp-location="Footer">
+        $(document).ready(function () {
+            $('#@Html.IdFor(m => m.CountryId)').trigger('change')
+        });
+    </script>
+}
+@if (Model.CountryEnabled && Model.StateProvinceEnabled)
+{
+    <div class="col-md-6">
+        <div class="inputs form-group">
+            <div class="grp-label">
+                <label asp-for="StateProvinceId"></label>
+            </div>
+            <select class="custom-select" asp-for="StateProvinceId" asp-items="Model.AvailableStates"></select>
+            <span id="states-loading-progress" style="display: none;" class="please-wait">@T("Common.Wait...")</span>
+            <span asp-validation-for="StateProvinceId"></span>
+        </div>
+    </div>
+}

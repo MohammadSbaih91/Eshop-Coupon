@@ -1,0 +1,2 @@
+INSERT [dbo].[ScheduleTask] ( [Name], [Seconds], [Type], [Enabled], [StopOnError], [LastStartUtc], [LastEndUtc], [LastSuccessUtc])
+VALUES ('Product import and update', 3600, 'ProductImportNUpdate.Infrastructure.AutoImportNUpdateTask, ProductImportNUpdate', 1, 0, NULL, NULL, NULL)

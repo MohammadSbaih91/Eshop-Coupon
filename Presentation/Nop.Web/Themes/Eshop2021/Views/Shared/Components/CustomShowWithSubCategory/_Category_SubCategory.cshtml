@@ -1,0 +1,71 @@
+﻿@model CategoryModel
+@using Nop.Core
+@using Nop.Services.Helpers
+@using Microsoft.AspNetCore.Http
+@inject IWorkContext workContext
+@inject IUserAgentHelper userAgentHelper
+@inject IHttpContextAccessor httpContextAccessor
+@using UAParser;
+@{
+    var supportRtl = workContext.WorkingLanguage.Rtl;
+    var itemCount = 4;
+    if (userAgentHelper.IsMobileDevice())
+    {
+        itemCount = 1;
+    }
+
+    bool isTablet = false;
+    var userAgent = Context.Request.Headers["User-Agent"];
+    string uaString = Convert.ToString(userAgent[0]);
+    var uaParser = Parser.GetDefault();
+    ClientInfo c = uaParser.Parse(uaString);
+    var device = c.Device.Family;
+    if (device.Contains("iPad"))
+    {
+        isTablet = true;
+        itemCount = 2;
+    }
+
+}
+@*@if (Model.SubCategories.Count() >= itemCount)
+{*@
+    <div class="container fullwidth-responsive">
+        <div class="full-container">
+            <div class="product-grid home-page-product-grid mobile-plan-product prd-fixed-img">
+                <div class="item-grid">
+                    <div class="owl-carousel prd-auto-width" id="@(Model.OwlCarouselDivId)">
+                        @foreach (var item in Model.SubCategories)
+                        {
+                            item.ParentCategoryId = Model.ActiveCategoryId;
+                            <div class="item-box">
+                                @await Html.PartialAsync("_SubCategoryBox", item)
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+@*}
+else
+{
+    <div class="container">
+        <div class="product-grid home-page-product-grid mobile-plan-product prd-fixed-img">
+            <div class="item-grid">
+                <div class="row prd-not-owl">
+                   
+                        @foreach (var item in Model.SubCategories)
+                        {
+                            item.ParentCategoryId = Model.ActiveCategoryId;
+                            <div class="col-sm-6 col-md-3">
+                                <div class="item-box">
+                                    @await Html.PartialAsync("_SubCategoryBox", item)
+                                </div>
+                            </div>
+                        }
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+}*@

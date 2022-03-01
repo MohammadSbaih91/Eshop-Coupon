@@ -1,0 +1,180 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+	<OutputPath>..\..\Presentation\Nop.Web\Plugins\Misc.eShopSMS</OutputPath>
+    <OutDir>$(OutputPath)</OutDir>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Domain\**" />
+    <Content Remove="Components\**" />
+    <Content Remove="Controllers\**" />
+    <Content Remove="Domain\**" />
+    <Content Remove="Factories\**" />
+    <Content Remove="Models\**" />
+    <EmbeddedResource Remove="Components\**" />
+    <EmbeddedResource Remove="Controllers\**" />
+    <EmbeddedResource Remove="Domain\**" />
+    <EmbeddedResource Remove="Factories\**" />
+    <EmbeddedResource Remove="Models\**" />
+    <None Remove="Components\**" />
+    <None Remove="Controllers\**" />
+    <None Remove="Domain\**" />
+    <None Remove="Factories\**" />
+    <None Remove="Models\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="logo.jpg" />
+    <None Remove="plugin.json" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+	  <EnableDefaultItems>false</EnableDefaultItems>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="Areas\Admin\Controllers\SMSConfigController.cs" />
+    <Compile Include="Areas\Admin\Controllers\SMSTemplateController.cs" />
+    <Compile Include="Areas\Admin\Factories\SmsTemplateModelFactory.cs" />
+    <Compile Include="Areas\Admin\Filters\CustomActionFilter.cs" />
+    <Compile Include="Areas\Admin\Infrastructure\DependencyRegistrar.cs" />
+    <Compile Include="Areas\Admin\Models\ConfigurationModel.cs" />
+    <Compile Include="Areas\Admin\Models\SmsTemplateListModel.cs" />
+    <Compile Include="Areas\Admin\Models\SmsTemplateModel.cs" />
+    <Compile Include="Areas\Admin\Models\SmsTemplateSearchModel.cs" />
+    <Compile Include="Data\SMSObjectContext.cs" />
+    <Compile Include="Data\SMSTemplateMap.cs" />
+    <Compile Include="Domains\SMSTemplate.cs" />
+    <Compile Include="eShopSMSPlugin.cs" />
+    <Compile Include="eShopSMSSettings.cs" />
+    <Compile Include="Infrastructure\DependencyRegistrar.cs" />
+    <Compile Include="Infrastructure\PluginNopStartup.cs" />
+    <Compile Include="Infrastructure\ViewLocationExpander.cs" />
+    <Compile Include="Services\EventConsumer.cs" />
+    <Compile Include="Services\ISendSMSNotificationService.cs" />
+    <Compile Include="Services\ISmsTemplateService.cs" />
+    <Compile Include="Services\OverrideOrderProcessingService.cs" />
+    <Compile Include="Services\SendSMSNotificationService.cs" />
+    <Compile Include="Services\SmsTemplateService.cs" />
+    <Compile Include="SmsDefaults.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Localization\ResourceString\ResourceStringAr.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Localization\ResourceString\ResourceStringEn.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="logo.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="obj\Nop.Plugin.Misc.eShopSMS.csproj.nuget.dgspec.json" />
+    <Content Include="obj\project.assets.json" />
+    <Content Include="plugin.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Areas\Admin\Views\SMSConfig\Configure.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Areas\Admin\Views\SMSTemplate\Edit.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Areas\Admin\Views\SMSTemplate\List.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Areas\Admin\Views\SMSTemplate\_CreateOrUpdate.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Areas\Admin\Views\_ViewImports.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="obj\Debug\netcoreapp2.1\Nop.Plugin.Misc.eShopSMS.assets.cache" />
+    <None Include="obj\Debug\netcoreapp2.1\Nop.Plugin.Misc.eShopSMS.csprojAssemblyReference.cache" />
+    <None Include="obj\Nop.Plugin.Misc.eShopSMS.csproj.nuget.g.props" />
+    <None Include="obj\Nop.Plugin.Misc.eShopSMS.csproj.nuget.g.targets" />
+    <None Include="obj\project.nuget.cache" />
+    <None Include="Views\Configure.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Views\_ViewImports.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Presentation\Nop.Web.Framework\Nop.Web.Framework.csproj" />
+    <ProjectReference Include="..\..\Presentation\Nop.Web\Nop.Web.csproj">
+      <Private>false</Private>
+    </ProjectReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Areas\Admin\Views\SMSConfig\Configure.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Areas\Admin\Views\SMSTemplate\Edit.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="Areas\Admin\Views\SMSTemplate\List.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="Areas\Admin\Views\SMSTemplate\_CreateOrUpdate.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="Areas\Admin\Views\_ViewImports.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Views\BuilderProduct\AttributeMappingProduct.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="Views\BuilderProduct\Details.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="Views\BuilderProduct\ProductDetails.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="Views\BuilderProduct\_CatalogSelectors.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="Views\BuilderProduct\_ProductBox.ProductBuilder.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="Views\Configure.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="Views\_ViewImports.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="RestSharp">
+      <HintPath>RestSharp.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Localization\ResourceString\ResourceStringAr.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Localization\ResourceString\ResourceStringEn.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+   <!-- This target execute after "Build" target -->
+  <Target Name="NopTarget" AfterTargets="Build">
+    <!-- Delete unnecessary libraries from plugins path -->
+    <MSBuild Projects="$(MSBuildProjectDirectory)\..\..\Build\ClearPluginAssemblies.proj" Properties="PluginPath=$(MSBuildProjectDirectory)\$(OutDir)" Targets="NopClear" />
+  </Target>
+</Project>

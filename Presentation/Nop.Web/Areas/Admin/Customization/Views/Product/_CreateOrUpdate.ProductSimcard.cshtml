@@ -1,0 +1,117 @@
+@model ProductModel
+
+@inject AdminAreaSettings adminAreaSettings
+@{
+    var pageSize = adminAreaSettings.DefaultGridPageSize;
+    var availablePageSizes = adminAreaSettings.GridPageSizes;
+}
+<div class="panel-group">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div id="product-simcard-grid"></div>
+            <script>
+                $(document).ready(function() {
+                    $("#product-simcard-grid").kendoGrid({
+                        dataSource: {
+                            type: "json",
+                            transport: {
+                                read: {
+                                    url: "@Html.Raw(Url.Action("ProductSimcardList", "SimCard"))",
+                                    type: "POST",
+                                    dataType: "json",
+                                    data: function additionalData() {
+                                        var data = {
+                                            productId: '@(Model.Id)'
+                                        };
+                                        addAntiForgeryToken(data);
+                                        return data;
+                                    }
+                                },destroy: {
+                                        url: "@Html.Raw(Url.Action("ProductSimCardDelete", "SimCard"))",
+                                        type: "POST",
+                                        dataType: "json",
+                                        data: addAntiForgeryToken
+                                    }
+                            },
+                            schema: {
+                                data: "Data",
+                                total: "Total",
+                                errors: "Errors",
+                                model: {
+                                    id: "Id"
+                                }
+                            },
+                            error: function(e) {
+                                display_kendoui_grid_error(e);
+                                // Cancel the changes
+                                this.cancelChanges();
+                            },
+                            pageSize: @pageSize,
+                            serverPaging: true,
+                            serverFiltering: true,
+                            serverSorting: true
+                        },
+                        pageable: {
+                            refresh: true,
+                            pageSizes: [@availablePageSizes],
+                @await Html.PartialAsync("_GridPagerMessages")
+                        },
+                        editable: {
+                                confirmation: "@T("Admin.Common.DeleteConfirmation")",
+                                mode: "inline"
+                            },
+                        scrollable: false,
+                        columns: [
+                            {
+                                field: "CardNumber",
+                                title: "@T("Admin.SimCard.Fields.CardNumber")",
+                                width: 800
+                            },
+                            {
+                                field: "Group",
+                                title: "@T("Admin.SimCard.Field.Group")",
+                                width: 800
+                            },
+                            {
+                                command: [
+                                    {   
+                                        name: "destroy",
+                                        text: "@T("Admin.Common.Delete")"
+                                    }
+                                ],
+                                width: 100
+                            }
+                        ],
+                        dataBound: function() {
+                      	var grid = this;
+                        var trs = this.tbody.find('tr').each(function(){
+                            var item = grid.dataItem($(this));
+                            if( item.IsSale) {
+                                $(this).find('.k-grid-delete').hide();
+                            }
+                        }); 
+                      }
+                    });
+                });
+            </script>
+        </div>
+        <div class="panel-footer">
+            <button type="submit" id="btnAddNewProductSimcard" onclick="javascript:OpenWindow('@(Url.Action("ProductsimcardAddPopup", "SimCard", new {productId = Model.Id, btnId = "btnRefreshProductSimcard", formId = "product-form"}))', 800, 850, true); return false;" class="btn btn-info">
+                @T("Admin.SimCard.SelectSimCard")
+            </button>
+            <input type="submit" id="btnRefreshProductSimcard" style="display: none" />
+            <script>
+                $(document).ready(function () {
+                    $('#btnRefreshProductSimcard').click(function () {
+                        //refresh grid
+                        var grid = $("#product-simcard-grid").data('kendoGrid');
+                        grid.dataSource.read();
+
+                        //return false to don't reload a page
+                        return false;
+                    });
+                });
+            </script>
+        </div>
+    </div>
+</div>

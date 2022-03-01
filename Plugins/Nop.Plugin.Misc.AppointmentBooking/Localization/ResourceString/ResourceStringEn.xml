@@ -1,0 +1,150 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Language Name="English">
+  <LocaleResource Name="Plugins.Misc.AppointmentBooking.APIUrl">
+    <Value>API URL</Value>
+  </LocaleResource>
+  <LocaleResource Name="Plugins.Misc.AppointmentBooking.APIUrl.Hint">
+    <Value>API URL</Value>
+  </LocaleResource>
+  <LocaleResource Name="Plugins.Misc.AppointmentBooking.OrderCompleted.Button">
+    <Value>Book your appointment</Value>
+  </LocaleResource>
+  <LocaleResource Name="Plugins.Misc.AppointmentBooking.BreadCrumb.Home">
+    <Value>Home</Value>
+  </LocaleResource>
+  <LocaleResource Name="Plugins.Misc.AppointmentBooking.BreadCrumb.eShop">
+    <Value>eShop</Value>
+  </LocaleResource>
+  <LocaleResource Name="Plugins.Misc.AppointmentBooking.BreadCrumb.Checkout">
+    <Value>Checkout</Value>
+  </LocaleResource>
+  <LocaleResource Name="Plugins.Misc.AppointmentBooking.BreadCrumb.appointment">
+    <Value>Book an appointment</Value>
+  </LocaleResource>
+  <LocaleResource Name="Plugins.Misc.AppointmentBooking.Title">
+    <Value>Book an appointment</Value>
+  </LocaleResource>
+  <LocaleResource Name="Plugins.Misc.AppointmentBooking.Title.Desc">
+    <Value>
+      Now you can book appointment to pick up your order at selected shop according to your
+      preferred time and date, so we can serve you with no delays, just be at the shop 15
+      minutes before your selected time ,ticket number will be sent by sms/email after completing the booking steps
+    </Value>
+  </LocaleResource>
+  <LocaleResource Name="Plugins.Misc.AppointmentBooking.StoreList.Title">
+    <Value>Find the nearest Orange Store</Value>
+  </LocaleResource>
+  <LocaleResource Name="Plugins.Misc.AppointmentBooking.StoreList.StoreSearch">
+    <Value>{0} Store for your query "{1}"</Value>
+  </LocaleResource>
+  <LocaleResource Name="Plugins.Misc.AppointmentBooking.StoreList.OpneUntil ">
+    <Value>Open until </Value>
+  </LocaleResource>
+  <LocaleResource Name="Plugins.Misc.AppointmentBooking.storeClosed">
+    <Value>Closed now</Value>
+  </LocaleResource>
+  <LocaleResource Name="Plugins.Misc.AppointmentBooking.StoreList.Access">
+    <Value>Access</Value>
+  </LocaleResource>
+  <LocaleResource Name="Plugins.Misc.AppointmentBooking.StoreList.Contactus">
+    <Value>Contact us</Value>
+  </LocaleResource>
+  <LocaleResource Name="Plugins.Misc.AppointmentBooking.Back">
+    <Value>Back</Value>
+  </LocaleResource>
+  <LocaleResource Name="Plugins.Misc.AppointmentBooking.OrderDetail.Title">
+    <Value>Opening hours</Value>
+  </LocaleResource>
+  <LocaleResource Name="Plugins.Misc.AppointmentBooking.OrderDetail.BookAppoinment">
+    <Value>Book Appointment</Value>
+  </LocaleResource>
+  <LocaleResource Name="Plugins.Misc.AppointmentBooking.SelectDate">
+    <Value>Select date</Value>
+  </LocaleResource>
+  <LocaleResource Name="Plugins.Misc.AppointmentBooking.SelectDate.BookNow">
+    <Value>Book Now</Value>
+  </LocaleResource>
+  <LocaleResource Name="Plugins.Misc.AppointmentBooking.BookingConfirm.Title1">
+    <Value><![CDATA[<span>Order</span> Confirmed and <span>the Pickup</span> appointment is booked]]></Value>
+  </LocaleResource>
+  <LocaleResource Name="Plugins.Misc.AppointmentBooking.BookingConfirm.Title2">
+    <Value><![CDATA[Your order is confirmed and the number is <span>{0}</span>. Orange will send you an email containing the appointment details. And for you to see the order details you can check and print the order summary.]]></Value>
+  </LocaleResource>
+  <LocaleResource Name="Plugins.Misc.AppointmentBooking.ConfirmBooking.OrderSummaryButton">
+    <Value>Check Order Summary</Value>
+  </LocaleResource>
+  <LocaleResource Name="Plugins.Misc.AppointmentBooking.ConfirmBooking.ChangeAppointment">
+    <Value>Change appointment</Value>
+  </LocaleResource>
+  <LocaleResource Name="Plugins.Misc.AppointmentBooking.ConfirmBooking.AppointmentTicket">
+    <Value>Appointment Ticket</Value>
+  </LocaleResource>
+  <LocaleResource Name="Plugins.Misc.AppointmentBooking.ConfirmBooking.FeedBack.Title1">
+    <Value><![CDATA[Give Us a <span>feedback!</span>]]></Value>
+  </LocaleResource>
+  <LocaleResource Name="Plugins.Misc.AppointmentBooking.ConfirmBooking.FeedBack.Title2">
+    <Value>It helps us grow.</Value>
+  </LocaleResource>
+
+  <LocaleResource Name="Plugins.Misc.AppointmentBooking.ErrorMessage.BranchNotLoad">
+    <Value>Selected branch is not loading</Value>
+  </LocaleResource>
+  <LocaleResource Name="Plugins.Misc.AppointmentBooking.ErrorMessage.ServiceNotLoad">
+    <Value>Service is not find for this branch</Value>
+  </LocaleResource>
+  <LocaleResource Name="Plugins.Misc.AppointmentBooking.ErrorMessage.TimeSloftRequired">
+    <Value>Please select time slot</Value>
+  </LocaleResource>
+  <LocaleResource Name="Plugins.Misc.AppointmentBooking.OpenUntil">
+    <Value>Open until</Value>
+  </LocaleResource>
+
+	<LocaleResource Name="Plugins.Misc.AppointmentBooking.AppointmentBranch.menu">
+		<Value>Appointment branch</Value>
+	</LocaleResource>
+	<LocaleResource Name="Plugins.Misc.AppointmentBooking.BackToList">
+		<Value>Back to appointment branch</Value>
+	</LocaleResource>
+	<LocaleResource Name="Plugins.Misc.AppointmentBooking.AppointmentBranch">
+		<Value>Manage appointment branch</Value>
+	</LocaleResource>
+	<LocaleResource Name="Plugins.Misc.AppointmentBooking.EditAppointmentBranch">
+		<Value>Update a appointment branch</Value>
+	</LocaleResource>
+	<LocaleResource Name="Plugins.Misc.AppointmentBooking.CreateAppointmentBranch">
+		<Value>Add a new appointment branch</Value>
+	</LocaleResource>
+	<LocaleResource Name="Plugins.Misc.AppointmentBooking.Updated">
+		<Value>Appointment branch updated successfully</Value>
+	</LocaleResource>
+	<LocaleResource Name="Plugins.Misc.AppointmentBooking.Created">
+		<Value>Appointment branch created successfully</Value>
+	</LocaleResource>
+	<LocaleResource Name="Plugins.Misc.AppointmentBooking.Deleted">
+		<Value>Appointment branch deleted successfully</Value>
+	</LocaleResource>
+	<LocaleResource Name="Plugins.Misc.AppointmentBooking.Fields.BranchId">
+		<Value>BranchId</Value>
+	</LocaleResource>
+	<LocaleResource Name="Plugins.Misc.AppointmentBooking.Fields.BranchId.Hint">
+		<Value>BranchId</Value>
+	</LocaleResource>
+	<LocaleResource Name="Plugins.Misc.AppointmentBooking.Fields.Name">
+		<Value>Name</Value>
+	</LocaleResource>
+	<LocaleResource Name="Plugins.Misc.AppointmentBooking.Fields.Name.Hint">
+		<Value>Name</Value>
+	</LocaleResource>
+	<LocaleResource Name="Plugins.Misc.AppointmentBooking.Fields.Longitude">
+		<Value>Longitude</Value>
+	</LocaleResource>
+	<LocaleResource Name="Plugins.Misc.AppointmentBooking.Fields.Longitude.Hint">
+		<Value>Longitude</Value>
+	</LocaleResource>
+	<LocaleResource Name="Plugins.Misc.AppointmentBooking.Fields.Latitude">
+		<Value>Latitude</Value>
+	</LocaleResource>
+	<LocaleResource Name="Plugins.Misc.AppointmentBooking.Fields.Latitude.Hint">
+		<Value>Latitude</Value>
+	</LocaleResource>
+</Language>

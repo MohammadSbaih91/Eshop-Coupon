@@ -1,0 +1,205 @@
+﻿@model Nop.Web.Customization.Models.Catalog.HomePageProduct
+@using Nop.Core
+@inject IWorkContext workContext
+@{
+    var supportRtl = workContext.WorkingLanguage.Rtl;
+    var rtl = supportRtl ? "true" : "false";
+    var direction = supportRtl ? "left" : "right";
+}
+
+<script asp-location="Footer">
+        $(document).ready(function () {
+            $(function () {
+                $('.tabs-nav .category', '.div-@(Model.categoryModel.Id)').click(function () {
+                    // Check for active
+                    $('.div-@(Model.categoryModel.Id) .tabs-nav li').removeClass('active');
+                    $(this).parent().addClass('active');
+
+                    // Display active tab
+                    let currentTab = $(this).attr('href');
+                    $('.div-@(Model.categoryModel.Id) .tabs-content > div').hide();
+                    $(currentTab).show();
+
+                    return false;
+                });
+            });
+        })
+
+</script>
+
+<div id="div-cat-@(Model.categoryModel.Id)" class="div-cat-container mask-left">
+    <div class="container">
+        <div class="prd-title">
+            <h2>@Model.categoryModel.Name</h2>
+            <div class="other-link">
+                <ul>
+                    <li><a href="/eshop-promotions"><i class="cir"></i><span>@T("HomePage.Category.Promotions")</span></a></li>
+                    <li class="best-seller-icon">
+                        <div class="dropdown">
+                            <div class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="cir"></i><span>@T("HomePage.Category.BestSeller")</span>
+                            </div>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="bestsellerlist-@(Model.categoryModel.Id)">
+                                @*Add filter list by json*@
+
+                                @*  <div class="filter-drop-desktop">
+                                    <a class="dropdown-item active" href="#">Best Seller</a>
+                                    <a class="dropdown-item" href="#">Trending</a>
+                                    <a class="dropdown-item" href="#">Best Prices</a>
+                                    <a class="dropdown-item" href="#">Trending</a>
+                                    <a class="dropdown-item" href="#">Best Prices</a>
+                                    <div>
+                                *@
+
+                                @*For mobile*@
+                                @*<div class="check-drop">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="color1">
+                                            <label class="custom-control-label" for="color1">Red</label>
+                                        </div>
+
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="color2">
+                                            <label class="custom-control-label" for="color2">Green</label>
+                                        </div>
+
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="color3">
+                                            <label class="custom-control-label" for="color3">Yellow</label>
+                                        </div>
+
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="color4">
+                                            <label class="custom-control-label" for="color4">Red</label>
+                                        </div>
+                                    </div>*@
+                            </div>
+                        </div>
+                    </li>
+                    <li class="compare-icon"><a href="/compareproducts"><i class="cir"></i><span>@T("HomePage.Category.Compare.view")</span></a></li>
+                </ul>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+    <div class="div-@(Model.categoryModel.Id)">
+        <div class="container">
+            @await Html.PartialAsync("_Category_SubCategory.cshtml", Model)
+        </div>
+        
+            <div class="tabs-content">
+                @for (int i = 0; i < Model.categoryModel.SubCategories.Count; i++)
+                {
+                    //var viewAllText = string.Format(T("HomePage.Category.ViewAll").Text, Model.categoryModel.Name);
+                    var subcategory = Model.categoryModel.SubCategories[i];
+                    var divId = $"-{Model.categoryModel.Id}-{subcategory.Id}";
+                    Model.OwlCarouselDivId = $"home-page-product{divId}";
+                    <div id="tab@(divId)">
+                        <div id="div@(divId)">
+                            <div class="ajax-loading-productload" style="">
+                            </div>
+                            @*Add All product by json*@
+                            @*@await Html.PartialAsync("_Category" + Model.CategoryProductBoxTemplate + ".cshtml", Model)*@
+                        </div>
+                        <div class="move-btn">
+                            @*<div onclick="GetHomePageProduct(@(Model.categoryModel.Id),0,'',@(rtl),0,true)" class="show-drawer-@(Model.categoryModel.Id) prd-drawer-toggle-@(Model.categoryModel.Id) btn btn-outline-dark move-btn">@viewAllText</div>*@
+                            <a class="btn btn-outline-dark move-btn" href="@UrlStrucutre.UrlDecode(Url.RouteUrl("Category", new { SeName = subcategory.SeName }))">@T("HomePage.Category.ViewAll")</a>
+                        </div>
+                    </div>
+                    if (i == 0)
+                    {
+                        <script asp-location="Footer">
+                            $(document).ready(function () {
+                                GetHomePageProduct(@(Model.categoryModel.Id),@(subcategory.Id),'@(divId)',@rtl)
+                            });
+                        </script>
+                    }
+                }
+            </div>
+        
+    </div>
+</div>
+
+<div class="prd-drawer prd-drawer-@(Model.categoryModel.Id)">
+    <div class="drw-top">
+        <div class="drw-inner">
+            <div class="close_drawer prd-drawer-toggle-@(Model.categoryModel.Id)"><img src="../Themes/Eshop2021/Content/images/close.svg" /></div>
+            <div class="btm">
+                <h4>@Model.categoryModel.Name</h4>
+                <h2>@T("HomePage.Drawer.LineOfAll")</h2>
+                @*<h2>@Model.categoryModel.Description</h2>*@
+            </div>
+        </div>
+        <div class="triangle-up"></div>
+    </div>
+    <div class="drawer-prd">
+        <div id="drawer-div-@(Model.categoryModel.Id)">
+            <div class="ajax-loading-productload" style="">
+            </div>
+            @*Add All product by json*@
+            @*@await Html.PartialAsync("_Category" + Model.CategoryProductBoxTemplate + ".cshtml", Model)*@
+        </div>
+        <div class="clearfix"></div>
+        <div class="other-link">
+            <ul>
+                @*@if (!supportRtl)
+                {
+                    <li>
+                        <div class="view-all-link"><a href="@UrlStrucutre.UrlDecode(Url.RouteUrl("Category", new { SeName = Model.categoryModel.SeName }))" class="link">@T("HomePage.ProductBox.ViewallOffers")</a></div>
+                    </li>
+                }*@
+                <li><a href="/eshop-promotions"><i class="cir"></i><span>@T("HomePage.Category.Promotions")</span></a></li>
+                <li class="best-seller-icon">
+                    <div class="dropdown dropup">
+                        <div class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="cir"></i><span>@T("HomePage.Category.BestSeller")</span>
+                        </div>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="bestsellerlist-drawer-@(Model.categoryModel.Id)">
+                            @*Add filter list by json*@
+                        </div>
+                    </div>
+                </li>
+                <li class="compare-icon"><a href="/compareproducts"><i class="cir"></i><span>@T("HomePage.Category.Compare")</span></a></li>
+                @*@if (supportRtl)
+                {
+                    <li>
+                        <div class="view-all-link"><a href="@UrlStrucutre.UrlDecode(Url.RouteUrl("Category", new { SeName = Model.categoryModel.SeName }))" class="link">@T("HomePage.ProductBox.ViewallOffers")</a></div>
+                    </li>
+                }*@
+            </ul>
+        </div>
+        @*<div class="container"></div>*@
+        <div class="clearfix"></div>
+    </div>
+</div>
+
+<div class="drawer-layer" id="drawer-layer-@(Model.categoryModel.Id)"></div>
+
+
+<script asp-location="Footer">
+    @*$(document).ready(function () {
+        var onClickShowDrawer = function () {
+            $('body').addClass("scroll-lock");
+            $('.drawer-@(Model.categoryModel.Id)').toggle('slide', { direction: '@(direction)' }, 300).animate({ '@(direction)': '0px' });
+            $('#drawer-layer-@(Model.categoryModel.Id)').addClass('active');
+        };
+        $(".show-drawer-@(Model.categoryModel.Id)").click(onClickShowDrawer);
+
+        var onClickCloseDrawer = function () {
+            $('body').removeClass("scroll-lock");
+            $('.drawer-@(Model.categoryModel.Id)').toggle('slide', { direction: '@(direction)' }, 300).animate({ '@(direction)': '-71%' });
+            $('#drawer-layer-@(Model.categoryModel.Id)').removeClass('active');
+        };
+        $(".close-drawer-@(Model.categoryModel.Id)").click(onClickCloseDrawer);
+    });*@
+
+    $(document).ready(function () {
+        var onClickDrawerToggle = function () {
+            $('body').toggleClass("scroll-lock");
+            $('.prd-drawer-@(Model.categoryModel.Id)').toggleClass('active');
+
+            $('#drawer-layer-@(Model.categoryModel.Id)').toggleClass('active');
+        };
+        $(".prd-drawer-toggle-@(Model.categoryModel.Id)").click(onClickDrawerToggle);
+    });
+</script>

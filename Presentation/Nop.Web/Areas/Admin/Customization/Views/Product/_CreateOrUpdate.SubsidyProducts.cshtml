@@ -1,0 +1,114 @@
+@model ProductModel
+
+@inject IStoreService storeService
+@inject IProductTagService productTagService
+@using Nop.Services.Catalog;
+@using Nop.Services.Stores
+
+@{
+    var stores = storeService.GetAllStores();
+
+    //resources for product tags input
+    Html.AppendCssFileParts("~/lib/tagEditor/jquery.tag-editor.css");
+    Html.AppendScriptParts("~/lib/tagEditor/jquery.tag-editor.min.js");
+    Html.AppendScriptParts("~/lib/tagEditor/jquery.caret.min.js");
+}
+<div class="panel-group">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div id="subsidy-products-grid"></div>
+            <script>
+                $(document).ready(function() {
+                    $("#subsidy-products-grid").kendoGrid({
+                        dataSource: {
+                            type: "json",
+                            transport: {
+                                read: {
+                                    url: "@Html.Raw(Url.Action("SubsidyProducts", "Product"))",
+                                    type: "POST",
+                                    dataType: "json",
+                                    data: function additionalData() {
+                                        var data = {
+                                            productId: '@(Model.Id)'
+                                        };
+                                        addAntiForgeryToken(data);
+                                        return data;
+                                    }
+                                },destroy: {
+                                        url: "@Html.Raw(Url.Action("SubsidyProductDelete", "Product", new { productId= Model.Id }))",
+                                        type: "POST",
+                                        dataType: "json",
+                                        data: addAntiForgeryToken
+                                    }
+                            },
+                            schema: {
+                                data: "Data",
+                                total: "Total",
+                                errors: "Errors",
+                                model: {
+                                    id: "Id"
+                                }
+                            },
+                            error: function(e) {
+                                display_kendoui_grid_error(e);
+                                // Cancel the changes
+                                this.cancelChanges();
+                            },
+                            serverPaging: false,
+                            serverFiltering: false,
+                            serverSorting: false
+                        },
+                        pageable: {
+                            refresh: true
+                        },
+                        editable: {
+                                confirmation: "@T("Admin.Common.DeleteConfirmation")",
+                                mode: "inline"
+                            },
+                        scrollable: false,
+                        columns: [
+                            {
+                                field: "Name",
+                                title: "@T("Admin.Catalog.Categories.Products")",
+                                width: 800
+                            }, {
+                                    field: "Id",
+                                    title: "@T("Admin.Common.View")",
+                                    width: 100,
+                                    headerAttributes: { style: "text-align:center" },
+                                    attributes: { style: "text-align:center" },
+                                    template: '<a class="btn btn-default" href="@Url.Content("~/Admin/Product/Edit/")#=Id#"><i class="fa fa-eye"></i>@T("Admin.Common.View")</a>'
+                                }, {
+                                command: [
+                                    {
+                                        name: "destroy",
+                                        text: "@T("Admin.Common.Delete")"
+                                    }
+                                ],
+                                width: 100
+                            }
+                        ]
+                    });
+                });
+            </script>
+        </div>
+        <div class="panel-footer">
+            <button type="submit" id="btnAddNewRequiredProduct" onclick="javascript:OpenWindow('@(Url.Action("SubsidyProductAddPopup", "Product", new {productId = Model.Id, btnId = "btnRefreshsubsidyProducts", formId = "product-form"}))', 800, 850, true); return false;" class="btn btn-info">
+                @T("Admin.Catalog.Products.Fields.RequiredProductIds.AddNew")
+            </button>
+            <input type="submit" id="btnRefreshsubsidyProducts" style="display: none" />
+            <script>
+                $(document).ready(function () {
+                    $('#btnRefreshsubsidyProducts').click(function () {
+                        //refresh grid
+                        var grid = $("#subsidy-products-grid").data('kendoGrid');
+                        grid.dataSource.read();
+
+                        //return false to don't reload a page
+                        return false;
+                    });
+                });
+            </script>
+        </div>
+    </div>
+</div>

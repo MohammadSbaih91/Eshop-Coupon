@@ -1,0 +1,142 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Language Name="عربي">
+  <LocaleResource Name="Plugins.Misc.AppointmentBooking.APIUrl">
+    <Value>URL API</Value>
+  </LocaleResource>
+  <LocaleResource Name="Plugins.Misc.AppointmentBooking.APIUrl.Hint">
+    <Value>URL API</Value>
+  </LocaleResource>
+  <LocaleResource Name="Plugins.Misc.AppointmentBooking.OrderCompleted.Button">
+    <Value>احجز موعدك</Value>
+  </LocaleResource>
+  <LocaleResource Name="Plugins.Misc.AppointmentBooking.BreadCrumb.Home">
+    <Value>الصفحة الرئيسية</Value>
+  </LocaleResource>
+  <LocaleResource Name="Plugins.Misc.AppointmentBooking.BreadCrumb.eShop">
+    <Value>متجر إلكتروني</Value>
+  </LocaleResource>
+  <LocaleResource Name="Plugins.Misc.AppointmentBooking.BreadCrumb.Checkout">
+    <Value>الدفع</Value>
+  </LocaleResource>
+  <LocaleResource Name="Plugins.Misc.AppointmentBooking.BreadCrumb.appointment">
+    <Value>احجز موعدًا</Value>
+  </LocaleResource>
+  <LocaleResource Name="Plugins.Misc.AppointmentBooking.Title">
+    <Value>احجز موعدًا</Value>
+  </LocaleResource>
+  <LocaleResource Name="Plugins.Misc.AppointmentBooking.Title.Desc">
+    <Value>
+      احجز موعد لااستلام طلبك من معارض مختارة من غير انتظار حسب الوقت و اليوم المناسب
+      ما عليك الا التواجد بالمعرض قبل 15 دقائق من الموعد المحدد و سوف يتم ارسال رقم االدور عن طريق ايميل/sms بعد اتمام خطوات حجز الموعد
+    </Value>
+  </LocaleResource>
+  <LocaleResource Name="Plugins.Misc.AppointmentBooking.StoreList.Title">
+    <Value>ابحث عن أقرب متجر Orange</Value>
+  </LocaleResource>
+  <LocaleResource Name="Plugins.Misc.AppointmentBooking.StoreList.StoreSearch">
+    <Value>{0} تخزين لطلب البحث "{1}"</Value>
+  </LocaleResource>
+  <LocaleResource Name="Plugins.Misc.AppointmentBooking.StoreList.OpneUntil ">
+    <Value>مفتوحة حتى </Value>
+  </LocaleResource>
+  <LocaleResource Name="Plugins.Misc.AppointmentBooking.StoreList.Access">
+    <Value>التمكن من</Value>
+  </LocaleResource>
+  <LocaleResource Name="Plugins.Misc.AppointmentBooking.StoreList.Contactus">
+    <Value>اتصل بنا</Value>
+  </LocaleResource>
+  <LocaleResource Name="Plugins.Misc.AppointmentBooking.Back">
+    <Value>عودة</Value>
+  </LocaleResource>
+  <LocaleResource Name="Plugins.Misc.AppointmentBooking.OrderDetail.Title">
+    <Value>ساعات العمل</Value>
+  </LocaleResource>
+  <LocaleResource Name="Plugins.Misc.AppointmentBooking.OrderDetail.BookAppoinment">
+    <Value>موعد الكتاب</Value>
+  </LocaleResource>
+  <LocaleResource Name="Plugins.Misc.AppointmentBooking.SelectDate">
+    <Value>حدد تاريخ</Value>
+  </LocaleResource>
+  <LocaleResource Name="Plugins.Misc.AppointmentBooking.SelectDate.BookNow">
+    <Value>احجز الآن</Value>
+  </LocaleResource>
+  <LocaleResource Name="Plugins.Misc.AppointmentBooking.BookingConfirm.Title1">
+    <Value><![CDATA[تم تأكيد <span> الطلب </span> وحجز موعد <span> الاستلام </span>]]></Value>
+  </LocaleResource>
+  <LocaleResource Name="Plugins.Misc.AppointmentBooking.BookingConfirm.Title2">
+    <Value><![CDATA[تم تأكيد طلبك وأصبح الرقم <span> {0} </span>. سترسل لك Orange رسالة بريد إلكتروني تحتوي على تفاصيل الموعد. ولكي ترى تفاصيل الطلب يمكنك مراجعة وطباعة ملخص الطلب.]]></Value>
+  </LocaleResource>
+  <LocaleResource Name="Plugins.Misc.AppointmentBooking.ConfirmBooking.OrderSummaryButton">
+    <Value>تحقق من ملخص الطلب</Value>
+  </LocaleResource>
+  <LocaleResource Name="Plugins.Misc.AppointmentBooking.ConfirmBooking.ChangeAppointment">
+    <Value>تغيير الموعد</Value>
+  </LocaleResource>
+  <LocaleResource Name="Plugins.Misc.AppointmentBooking.ConfirmBooking.AppointmentTicket">
+    <Value>تذكرة موعد</Value>
+  </LocaleResource>
+  <LocaleResource Name="Plugins.Misc.AppointmentBooking.ConfirmBooking.FeedBack.Title1">
+    <Value><![CDATA[قدم لنا <span> تعليقًا! </span>]]></Value>
+  </LocaleResource>
+  <LocaleResource Name="Plugins.Misc.AppointmentBooking.ConfirmBooking.FeedBack.Title2">
+    <Value>يساعدنا على النمو.</Value>
+  </LocaleResource>
+  <LocaleResource Name="Plugins.Misc.AppointmentBooking.ErrorMessage.TimeSloftRequired">
+    <Value>الرجاء تحديد خانة الوقت</Value>
+  </LocaleResource>
+  <LocaleResource Name="Plugins.Misc.AppointmentBooking.OpenUntil">
+    <Value>مفتوحة حتى</Value>
+  </LocaleResource>
+  <LocaleResource Name="Plugins.Misc.AppointmentBooking.storeClosed">
+    <Value>مغلق الأن</Value>
+  </LocaleResource>
+
+	<LocaleResource Name="Plugins.Misc.AppointmentBooking.AppointmentBranch.menu">
+		<Value>فرع التعيين</Value>
+	</LocaleResource>
+	<LocaleResource Name="Plugins.Misc.AppointmentBooking.BackToList">
+		<Value>العودة لفرع المواعيد</Value>
+	</LocaleResource>
+	<LocaleResource Name="Plugins.Misc.AppointmentBooking.AppointmentBranch">
+		<Value>إدارة فرع المواعيد</Value>
+	</LocaleResource>
+	<LocaleResource Name="Plugins.Misc.AppointmentBooking.EditAppointmentBranch">
+		<Value>تحديث فرع المواعيد</Value>
+	</LocaleResource>
+	<LocaleResource Name="Plugins.Misc.AppointmentBooking.CreateAppointmentBranch">
+		<Value>إضافة فرع موعد جديد</Value>
+	</LocaleResource>
+	<LocaleResource Name="Plugins.Misc.AppointmentBooking.Updated">
+		<Value>تم تحديث فرع المواعيد بنجاح</Value>
+	</LocaleResource>
+	<LocaleResource Name="Plugins.Misc.AppointmentBooking.Created">
+		<Value>تم إنشاء فرع المواعيد بنجاح</Value>
+	</LocaleResource>
+	<LocaleResource Name="Plugins.Misc.AppointmentBooking.Deleted">
+		<Value>تم حذف فرع المواعيد بنجاح</Value>
+	</LocaleResource>
+	<LocaleResource Name="Plugins.Misc.AppointmentBooking.Fields.BranchId">
+		<Value>الفرع</Value>
+	</LocaleResource>
+	<LocaleResource Name="Plugins.Misc.AppointmentBooking.Fields.BranchId.Hint">
+		<Value>الفرع</Value>
+	</LocaleResource>
+	<LocaleResource Name="Plugins.Misc.AppointmentBooking.Fields.Name">
+		<Value>اسم</Value>
+	</LocaleResource>
+	<LocaleResource Name="Plugins.Misc.AppointmentBooking.Fields.Name.Hint">
+		<Value>اسم</Value>
+	</LocaleResource>
+	<LocaleResource Name="Plugins.Misc.AppointmentBooking.Fields.Longitude">
+		<Value>خط الطول</Value>
+	</LocaleResource>
+	<LocaleResource Name="Plugins.Misc.AppointmentBooking.Fields.Longitude.Hint">
+		<Value>خط الطول</Value>
+	</LocaleResource>
+	<LocaleResource Name="Plugins.Misc.AppointmentBooking.Fields.Latitude">
+		<Value>خط العرض</Value>
+	</LocaleResource>
+	<LocaleResource Name="Plugins.Misc.AppointmentBooking.Fields.Latitude.Hint">
+		<Value>خط العرض</Value>
+	</LocaleResource>
+</Language>

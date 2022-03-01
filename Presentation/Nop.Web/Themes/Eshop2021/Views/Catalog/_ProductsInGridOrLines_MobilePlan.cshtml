@@ -1,0 +1,41 @@
+﻿@model CategoryModel
+@using Nop.Services.Helpers
+@using Nop.Core
+@inject IWorkContext workContext
+@inject IUserAgentHelper userAgentHelper
+@{
+    var supportRtl = workContext.WorkingLanguage.Rtl;
+}
+
+@if (userAgentHelper.IsMobileDevice())
+{
+    <div class="product-grid mobile-plan-product prd-fixed-img">
+        <div class="item-grid">
+            <div class="owl-carousel prd-auto-width prd-arrow-right" id="catalog-owl_@Model.Id">
+                @foreach (var item in Model.SubCategories)
+                {
+                    <div class="item-box">
+                        @await Html.PartialAsync("_SubCategoryBox", item)
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="product-grid mobile-plan-product prd-fixed-img">
+        <div class="item-grid">
+            <div class="row">
+                @foreach (var item in Model.SubCategories)
+                {
+                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-4">
+                        <div class="item-box">
+                            @await Html.PartialAsync("_SubCategoryBox", item)
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+}

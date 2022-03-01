@@ -1,0 +1,249 @@
+﻿@model IList<CategoryModel>
+@using Nop.Core
+@using Nop.Core.Infrastructure
+@inject IWorkContext workContext
+@inject IStoreContext storeContext
+@{
+    var supportRtl = workContext.WorkingLanguage.Rtl;
+}
+
+@if (Model.Count > 0)
+{
+    <div class="home-category-scroll">
+        <div class="container fullwidth-responsive">
+            <div class="full-container">
+                <div class="category-grid home-page-category-grid">
+                    <div class="item-grid navbar">
+                        <div class="nav" id="home-page-category" data-toggle="affix" data-offset-top="150">
+                            <ul class="owl-carousel" id="home-page-category-slider">
+                                @await Component.InvokeAsync("HomepageCategoriesWithSubCategories")
+                                @foreach (var item in Model)
+                                {
+                                    <li class="nav-item">
+                                        <div class="item-box">
+                                            <div class="category-item">
+                                                <a class="next-category nav-link" title="@item.PictureModel.Title" href="#scroll-spy-@item.Id">
+                                                    <div class="picture">
+                                                        <div class="pic">
+                                                            @{
+
+                                                                var imageName = "";
+                                                                switch (item.Id)
+                                                                {
+                                                                    case 1:
+                                                                        imageName = "Mobile.svg";
+                                                                        break;
+                                                                    case 55:
+                                                                        imageName = "internet.svg";
+                                                                        break;
+                                                                    case 110:
+                                                                        imageName = "devices.svg";
+                                                                        break;
+                                                                    case 78:
+                                                                        imageName = "Smart life.svg";
+                                                                        break;
+                                                                    case 103:
+                                                                        imageName = "Fixed.svg";
+                                                                        break;
+                                                                }
+                                                                var imagePath = EShopHelper.GetSvgUrl(item.PictureModel.ImageUrl, imageName);
+                                                            }
+                                                            <img alt="@item.PictureModel.AlternateText" src="@(imagePath)" title="@item.PictureModel.Title" />
+                                                        </div>
+                                                    </div>
+                                                    <h2 class="title">
+                                                        @item.Name
+                                                    </h2>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    if (supportRtl)
+    {
+        <script asp-location="Footer">
+            $(document).ready(function () {
+                $('#home-page-category-slider').owlCarousel({
+                    loop: false,
+                    margin: 15,
+                    nav: false,
+                    autoWidth: true,
+                    dots: false,
+                    rtl: true,
+                    responsive: {
+                        0: {
+                            margin: 7,
+                        },
+                        991: {
+                            margin: 7,
+                        },
+                        992: {
+                            margin: 7,
+                        },
+                        1024: {
+                            margin: 10,
+                        },
+                        1280: {
+                            margin: 12,
+                        },
+                        1366: {
+                            margin: 13,
+                        },
+                        1400: {
+                            margin: 18,
+                        }
+                    }
+                })
+            });
+        </script>
+    }
+    else
+    {
+        <script asp-location="Footer">
+            $(document).ready(function () {
+                $('#home-page-category-slider').owlCarousel({
+                    loop: false,
+                    margin: 15,
+                    nav: false,
+                    autoWidth: true,
+                    dots: false,
+                    rtl: false,
+                    responsive: {
+                        0: {
+                            margin: 7,
+                        },
+                        991: {
+                            margin: 7,
+                        },
+                        992: {
+                            margin: 7,
+                        },
+                        1366: {
+                            margin: 10,
+                        },
+                        1400: {
+                            margin: 15,
+                        }
+                    }
+                })
+            });
+        </script>
+    }
+
+    <div class="all-products" data-bs-spy="scroll" data-bs-target="#home-page-category" data-bs-offset="0" tabindex="0">
+        <div class="separate-part" id="scroll-spy-1">
+            <div class="marbottom178">
+                @await Component.InvokeAsync("CustomShowWithSubCategory")
+            </div>
+        </div>
+
+        @foreach (var item in Model)
+        {
+            <div id="scroll-spy-@item.Id">
+                <div class="marbottom178">
+                    @await Component.InvokeAsync("HomepageProducts", new { categoryId = item.Id })
+                </div>
+            </div>
+        }
+    </div>
+}
+
+<script asp-location="Footer">
+
+    //$('body').scrollspy({ target: '#home-page-category'});
+    var extra = 120;
+    var affixpt = 108;
+    function GetCategoryScreen() {
+        if (window.matchMedia('(min-width:1367px) and (max-width: 1440px)').matches) {
+            extra = 100;
+            affixpt = 88;
+        }else if (window.matchMedia('(min-width:1281px) and (max-width: 1366px)').matches) {
+            extra = 90;
+            affixpt = 62;
+        } else if (window.matchMedia('(min-width:1025px) and (max-width: 1280px)').matches) {
+            extra = 90;
+            affixpt: 58;
+        } else if (window.matchMedia('(min-width:801px) and (max-width: 1024px)').matches) {
+            extra = 90;
+            affixpt: 48;
+        } else if (window.matchMedia('(min-width:768px) and (max-width: 800px)').matches) {
+            extra = 120;
+            affixpt: 48;
+        }else if (window.matchMedia('(max-width: 767px)').matches) {
+            extra = 68;
+            affixpt: 68;
+        } else {
+            extra = 120;
+            affixpt = 88;
+        }
+    }
+
+    $(document).ready(function () {
+        GetCategoryScreen();
+        $(window).resize(function () {
+            GetCategoryScreen();
+        });
+    });
+
+    $("#home-page-category a[href^='#']").on('click', function (e) {
+
+        // prevent default anchor click behavior
+        e.preventDefault();
+
+        // store hash
+        var hash = this.hash;
+
+        // animate
+        $('html, body').animate({
+            scrollTop: $(hash).offset().top - extra
+        }, 1000, function () {
+
+            // when done, add hash to url
+            // (default click behaviour)
+            //window.location.hash = hash;
+        });
+
+    });
+
+    $(document).ready(function () {
+
+        var toggleAffix = function (affixElement, scrollElement, wrapper) {
+
+            var height = affixElement.outerHeight(),
+                top = wrapper.offset().top - affixpt;
+            if (scrollElement.scrollTop() >= top) {
+                wrapper.height(height);
+                affixElement.addClass("affix");
+            }
+            else {
+                affixElement.removeClass("affix");
+                wrapper.height('auto');
+            }
+
+        };
+
+
+        $('[data-toggle="affix"]').each(function () {
+            var ele = $(this),
+                wrapper = $('<div></div>');
+
+            ele.before(wrapper);
+            $(window).on('scroll resize', function () {
+                toggleAffix(ele, $(this), wrapper);
+            });
+
+            // init
+            toggleAffix(ele, $(window), wrapper);
+        });
+
+    });
+</script>

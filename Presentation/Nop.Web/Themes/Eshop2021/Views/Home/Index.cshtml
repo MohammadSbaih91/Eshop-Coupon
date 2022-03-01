@@ -1,0 +1,123 @@
+﻿@using Nop.Core
+@inject IWorkContext workContext
+@{
+    Layout = "_ColumnsOne";
+
+    //page class
+    Html.AppendPageCssClassParts("html-home-page");
+
+    var supportRtl = workContext.WorkingLanguage.Rtl;
+}
+<div class="page home-page">
+    <div class="page-body">
+        @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.HomePageTop })
+
+        <div class="short-link">
+            <div class="short-link-desktop">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <a asp-route="AramexTrackingInfo" class="text-icon">
+                                <i></i>
+                                <h3>@T("HomePageTopMenu.TopMenu1.TrackyourOrder")</h3>
+                            </a>
+                        </div>
+                        <div class="col-md-4">
+                            <a href="@T("HomePageTopMenu.TopMenu1.UpgradeyourSpeed.URL")" class="text-icon">
+                                <i class="upgrade-icon"></i>
+                                <h3>@T("HomePageTopMenu.TopMenu1.UpgradeyourSpeed")</h3>
+                            </a>
+                        </div>
+                        <div class="col-md-4">
+                            <a href="@T("HomePageTopMenu.TopMenu1.RefillOrangeLines.URL")" class="text-icon no-border">
+                                <i class="refill-icon"></i>
+                                <h3>@T("HomePageTopMenu.TopMenu1.RefillOrangeLines")</h3>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="short-link-mobile">
+                <ul class="owl-carousel" id="short-slider">
+                    <li>
+                        <a asp-route="AramexTrackingInfo" class="text-icon">
+                            <i></i>
+                            <h3>@T("HomePageTopMenu.TopMenu1.TrackyourOrder")</h3>
+                        </a>
+                    </li>
+                    <li class="upg-width">
+                        <a href="@T("HomePageTopMenu.TopMenu1.UpgradeyourSpeed.URL")" class="text-icon">
+                            <i class="upgrade-icon"></i>
+                            <h3>@T("HomePageTopMenu.TopMenu1.UpgradeyourSpeed.mobile")</h3>
+                        </a>
+                    </li>
+                    <li class="ref-width">
+                        <a href="@T("HomePageTopMenu.TopMenu1.RefillOrangeLines.URL")" class="text-icon no-border">
+                            <i class="refill-icon"></i>
+                            <h3>@T("HomePageTopMenu.TopMenu1.RefillOrangeLines")</h3>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            @if (supportRtl)
+            {
+                <script asp-location="Footer">
+                    $(document).ready(function () {
+                        $('#short-slider').owlCarousel({
+                            loop: false,
+                            margin: 0,
+                            dots: true,
+                            nav: true,
+                            autoWidth: true,
+                            rtl: true
+                        })
+                    });
+                </script>
+            }
+            else
+            {
+                <script asp-location="Footer">
+                    $(document).ready(function () {
+                        $('#short-slider').owlCarousel({
+                            loop: false,
+                            margin: 0,
+                            dots: true,
+                            nav: true,
+                            autoWidth: true,
+                            rtl: false
+                        })
+                    });
+                </script>
+            }
+        </div>
+
+        <div class="container">
+            @await Component.InvokeAsync("TopicBlock", new { systemName = "HomePageText" })
+        </div>
+        <div class="container">
+            @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.HomePageBeforeCategories })
+        </div>
+
+        @await Component.InvokeAsync("HomepageCategories")
+    </div>
+    <div class="container">
+        @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.HomePageBeforeProducts })
+    </div>
+    @*@await Component.InvokeAsync("HomepageProducts")*@
+    <div class="container">
+        @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.HomePageBeforeBestSellers })
+    </div>
+    <div class="container">
+        @await Component.InvokeAsync("HomepageBestSellers")
+    </div>
+    <div class="container">
+        @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.HomePageBeforeNews })
+    </div>
+    <div class="container">
+        @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.HomePageBeforePoll })
+    </div>
+    <div class="container">
+        @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.HomePageBottom })
+    </div>
+</div>
+

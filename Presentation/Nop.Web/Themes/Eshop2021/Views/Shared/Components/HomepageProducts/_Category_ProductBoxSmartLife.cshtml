@@ -1,0 +1,22 @@
+﻿@model Nop.Web.Customization.Models.Catalog.HomePageProduct
+
+@if (Model.Products.Count > 0)
+{
+    <div class="container fullwidth-responsive">
+        <div class="full-container">
+            <div class="product-grid home-page-product-grid product-box">
+                <div class="item-grid smartlife-prdbox">
+                    <div class="owl-carousel prd-auto-width" id="@(Model.OwlCarouselDivId)">
+                        @foreach (var item in Model.Products)
+                        {
+                            <div class="item-box">
+                                @await Html.PartialAsync(Model.CategoryProductBoxTemplate, item)
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+

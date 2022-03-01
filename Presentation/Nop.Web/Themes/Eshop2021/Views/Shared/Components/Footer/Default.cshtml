@@ -1,0 +1,401 @@
+﻿@model FooterModel
+@using Nop.Core
+@using Nop.Core.Domain.Tax
+@inject IWorkContext workContext;
+@using Nop.Services.Helpers
+@inject IUserAgentHelper userAgentHelper
+@using Nop.Services.Security
+@inject IPermissionService permissionService
+
+@{
+    var supportRtl = workContext.WorkingLanguage.Rtl;
+    if (permissionService.Authorize(StandardPermissionProvider.AccessAdminPanel))
+    {
+
+        Html.AppendPageCssClassParts("isAdmin");
+    }
+}
+
+@if (userAgentHelper.IsMobileDevice())
+{
+    Html.AppendPageCssClassParts("mobile-device");
+}
+
+<div class="footer-contact">
+    <div class="container">
+        <div class="contact-block">
+            <div class="contact-left">
+                <ul>
+                    <li class="call">
+                        <a href="@T("Footer.Contactus.URL")">
+                            <div class="icon-text">
+                                <div class="icon-circle">
+                                    <i></i>
+                                </div>
+                                <div class="text">
+                                    <h3>@T("HomePage.footer.contactus")</h3>
+                                    <p>@T("HomePage.footer.contactus.detail")</p>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="about">
+                        <a href="@T("Footer.Aboutus.URL")">
+                            <div class="icon-text">
+                                <div class="icon-circle">
+                                    <i></i>
+                                </div>
+                                <div class="text">
+                                    <h3>@T("HomePage.footer.AboutEshop")</h3>
+                                    <p>@T("HomePage.footer.AboutEshop.detail")</p>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="footer">
+    <div class="newsletter-block">
+        <div class="container">
+            @await Component.InvokeAsync("NewsletterBox")
+        </div>
+    </div>
+    <div class="footer-upper">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-9 col-md-12 hide-m">
+                    <div class="row">
+                        <div class="col-lg-2 col-md-4">
+                            <div class="footer-block information">
+                                <div class="title">
+                                    <strong>@T("HomePageFooterMenu.Mobile")</strong>
+                                </div>
+                                <ul class="list">
+                                    <li><a href="@T("HomePageFooterMenu.Mobile.Postpaid.URL")">@T("HomePageFooterMenu.Mobile.Postpaid")</a></li>
+                                    <li><a href="@T("HomePageFooterMenu.Mobile.Prepaid.URL")">@T("HomePageFooterMenu.Mobile.Prepaid")</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-4">
+                            <div class="footer-block customer-service">
+                                <div class="title">
+                                    <strong>@T("HomePageFooterMenu.Internet")</strong>
+                                </div>
+                                <ul class="list">
+                                    <li><a href="@T("HomePageFooterMenu.Internet.OrangeFiberFast.URL")">@T("HomePageFooterMenu.Internet.OrangeFiberFast")</a></li>
+                                    <li><a href="@T("HomePageFooterMenu.Internet.ADSLPlans.URL")">@T("HomePageFooterMenu.Internet.ADSLPlans")</a></li>
+                                    <li><a href="@T("HomePageFooterMenu.Internet.4GFlybox.URL")">@T("HomePageFooterMenu.Internet.4GFlybox")</a></li>
+                                    <li><a href="@T("HomePageFooterMenu.Internet.PrepaidOrangeNet.URL")">@T("HomePageFooterMenu.Internet.PrepaidOrangeNet")</a></li>
+                                    <li><a href="@T("HomePageFooterMenu.Internet.net.URL")">@T("HomePageFooterMenu.Internet.net")</a></li>
+                                    <li><a href="@T("HomePageFooterMenu.Internet.FiberUpgrade.URL")">@T("HomePageFooterMenu.Internet.FiberUpgrade")</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-4">
+                            <div class="footer-block my-account">
+                                <div class="title">
+                                    <strong>@T("HomePageFooterMenu.Business")</strong>
+                                </div>
+                                <ul class="list">
+                                    <li><a href="@T("HomePageFooterMenu.Business.Small.URL")">@T("HomePageFooterMenu.Business.Small")</a></li>
+                                    <li><a href="@T("HomePageFooterMenu.Business.Enterprise.URL")">@T("HomePageFooterMenu.Business.Enterprise")</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-4">
+                            <div class="footer-block my-account">
+                                <div class="title">
+                                    <strong>@T("HomePageFooterMenu.Corporate")</strong>
+                                </div>
+                                <ul class="list">
+                                    <li><a href="@T("HomePageFooterMenu.Corporate.Aboutus.URL")">@T("HomePageFooterMenu.Corporate.Aboutus")</a></li>
+                                    <li><a href="@T("HomePageFooterMenu.Corporate.CSR.URL")">@T("HomePageFooterMenu.Corporate.CSR")</a></li>
+                                    <li><a href="@T("HomePageFooterMenu.Corporate.Careers.URL")">@T("HomePageFooterMenu.Corporate.Careers")</a></li>
+                                    @*<li><a href="@T("HomePageFooterMenu.Corporate.MediaCenter.URL")">@T("HomePageFooterMenu.Corporate.MediaCenter")</a></li>*@
+                                    <li><a href="@T("HomePageFooterMenu.Corporate.ContactUs.URL")">@T("HomePageFooterMenu.Corporate.ContactUs")</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-4">
+                            <div class="footer-block my-account">
+                                <div class="title">
+                                    <strong>@T("HomePageFooterMenu.Others")</strong>
+                                </div>
+                                <ul class="list">
+                                    <li><a href="@T("HomePageTopMenu.TopMenu2.Help.Paybillsandrecharge.URL")">@T("HomePageFooterMenu.Others.QuickPay")</a></li>
+                                    <li><a href="@T("HomePageFooterMenu.Others.Locateyourshop.URL")">@T("HomePageFooterMenu.Others.Locateyourshop")</a></li>
+                                    <li><a href="@T("HomePageFooterMenu.TermsOfUse.Coveragemap.URL")">@T("HomePageFooterMenu.TermsOfUse.Coveragemap")</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-4">
+                            <div class="footer-block my-account">
+                                <div class="title">
+                                    <strong>@T("HomePageFooterMenu.TermsOfUse")</strong>
+                                </div>
+                                <ul class="list">
+                                    <li><a href="~/files/Privacy policy 260921.docx">@T("HomePageFooterMenu.TermsOfUse.PrivacyPolicy")</a></li>
+                                    @*<li><a href="@T("HomePageFooterMenu.TermsOfUse.SiteMap.URL")">@T("HomePageFooterMenu.TermsOfUse.SiteMap")</a></li>*@
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-12">
+                    <div class="footer-block follow-us">
+                        <div class="social">
+                            <div class="title">
+                                <strong>@T("HomePageFooterMenu.LetsConnect")</strong>
+                            </div>
+                            @await Component.InvokeAsync("SocialButtons")
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-lower">
+        <div class="container">
+            <div class="footer-lower-line">
+                <div class="footer-info">
+                    <span class="footer-disclaimer">@T("Content.CopyrightNotice", DateTime.Now.Year, Model.StoreName)</span>
+                    @if (Model.DisplayTaxShippingInfoFooter)
+                    {
+                        var inclTax = workContext.TaxDisplayType == TaxDisplayType.IncludingTax;
+                        <span class="footer-tax-shipping">
+                            @T(inclTax ? "Footer.TaxShipping.InclTax" : "Footer.TaxShipping.ExclTax", Url.RouteUrl("Topic", new { SeName = Html.GetTopicSeName("shippinginfo") }))
+                        </span>
+                    }
+                </div>
+
+                @await Component.InvokeAsync("LanguageSelector")
+
+                @await Component.InvokeAsync("StoreThemeSelector")
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+    @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.Footer })
+    <div class="goToTop"><i></i></div>
+</div>
+@await Html.PartialAsync("_CartDrawer")
+<div id="divAjaxLoader" class="global-load"></div>
+
+
+<script asp-location="Footer">
+    $(document).ready(function () {
+
+        // preloader
+        $(window).on('load', function (event) {
+            $('#preloader').delay(500).fadeOut(500);
+        });
+
+        $(window).scroll(function () {
+            if ($(this).scrollTop() > 320) {
+                $('.goToTop').fadeIn();
+            } else {
+                $('.goToTop').fadeOut();
+            }
+        });
+
+        $('.goToTop').click(function () {
+            $('html, body').animate({ scrollTop: 0 }, 500);
+            return false;
+            //owl.trigger('next.owl.carousel');
+        });
+
+        $(window).scroll(function () {
+            if ($(this).scrollTop() > 150) {
+                $('body').addClass('is-scroll');
+            } else {
+                $('body').removeClass('is-scroll');
+            }
+        });
+    });
+</script>
+
+
+<script asp-location="Footer">
+    $(document).ready(function () {
+        $('.footer-block .title').on('click', function () {
+            var e = window, a = 'inner';
+            if (!('innerWidth' in window)) {
+                a = 'client';
+                e = document.documentElement || document.body;
+            }
+            var result = { width: e[a + 'Width'], height: e[a + 'Height'] };
+            if (result.width < 769) {
+                $(this).siblings('.list').slideToggle('slow');
+            }
+        });
+    });
+</script>
+
+
+<script asp-location="Footer">
+
+    function HomePageFilter(productTagId, categoryId, subCategoryId, containerId, rtl = false, isDrawer = false) {
+        GetHomePageProduct(categoryId, subCategoryId, containerId, rtl, productTagId, isDrawer);
+    }
+
+    function CatalogPageProductFilter(productTagId, categoryId, subCategoryId, containerId, rtl = false, isDrawer = false) {
+        LoadsubCategory(categoryId, subCategoryId, productTagId)
+    }
+
+    function GetHomePageProduct(categoryId, subCategoryId, containerId, rtl = false, productTagId = 0, isDrawer = false) {
+        var postData = {
+            categoryId: categoryId,
+            subCategoryId: subCategoryId,
+            productTagId: productTagId,
+            isDrawer: isDrawer
+        };
+        if (isDrawer) {
+            $("#bestsellerlist-drawer-" + categoryId).html('<div class="ajax-loading-productload" style=""></div>');
+        }
+        else {
+            $("#div" + containerId).html('<div class="ajax-loading-productload" style=""></div>');
+        }
+
+        addAntiForgeryToken(postData);
+        $.ajax({
+            cache: false,
+            type: "POST",
+            url: "/CustomProduct/GetHomePageProduct",
+            data: postData,
+            dataType: 'json',
+            success: function (response) {
+                var flag = false;
+                if (isDrawer) {
+                    $("#drawer-div-" + categoryId).html(response.html);
+                    $("#bestsellerlist-drawer-" + categoryId).html(response.filterhtml);
+
+                    $('#drawer-prd-slider-' + categoryId).owlCarousel({
+                        loop: response.isOwlLoopTrue,
+                        margin: 20,
+                        dots: false,
+                        nav: true,
+                        autoWidth: true,
+                        rtl: rtl,
+                        //for animation
+                        navText: ["", "<div class='timer'><span class='mask'><span class='rotator' style='transform: rotate(1deg);'></span></span></div>"],
+                        responsive: {
+                            0: {
+                                margin: 10,
+                                items: 1
+                            },
+                            991: {
+                                margin: 10,
+                                items: 1
+                            },
+                            992: {
+                                margin: 10,
+                                items: 1
+                            },
+                            1366: {
+                                margin: 10
+                            },
+                            1400: {
+                                margin: 20
+                            }
+                        }
+                    });
+
+                    //for animation
+                    var parentID = "#drawer-div-" + categoryId + "";
+                    var animationspeed = @(Nop.Web.EShopHelper.Animationspeed);
+
+                    //function for animation
+                    AnimationCircling(animationspeed, parentID);
+
+                }
+                else {
+                    $("#div" + containerId).html(response.html);
+                    $("#bestsellerlist-" + categoryId).html(response.filterhtml);
+
+                    $('#home-page-product-' + categoryId +'-'+ subCategoryId).owlCarousel({
+                        loop: response.isOwlLoopTrue,
+                        margin: 20,
+                        dots: true,
+                        nav: true,
+                        autoWidth: true,
+                        rtl: rtl,
+                        //for animation
+                        navText: ["", "<div class='timer'><span class='mask'><span class='rotator' style='transform: rotate(1deg);'></span></span></div>"],
+                        responsive: {
+                            0: {
+                                margin: 10,
+                                items: 1
+                            },
+                            991: {
+                                margin: 10,
+                                items: 1
+                            },
+                            992: {
+                                margin: 10,
+                                items: 1
+                            },
+                            1366: {
+                                margin: 14,
+                            },
+                            1400: {
+                                margin: 20,
+                            }
+                        }
+                    });
+
+                    //for animation
+                    var parentID = "#home-page-product" + containerId + "";
+                    var animationspeed = @(Nop.Web.EShopHelper.Animationspeed);
+
+                    //function for animation
+                    AnimationCircling(animationspeed, parentID);
+
+                }
+                $('[data-toggle="tooltip"]').tooltip();
+            },
+            failure: function (response) {
+                alert(response);
+                if (isDrawer) {
+                    $("#bestsellerlist-drawer-" + categoryId).html('');
+                }
+                else {
+                    $("#bestsellerlist-" + categoryId).html('');
+                }
+            }
+        });
+    }
+</script>
+
+
+<script asp-location="Footer">
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+
+    function showLoader() {
+        $("#divAjaxLoader").addClass("active");
+    }
+
+    function hideLoader() {
+        $("#divAjaxLoader").removeClass("active");
+    }
+</script>
+<script asp-location="Footer">
+    $(document).ready(function () {
+        $("ul li", ".tabs-nav").hover(function () {
+            var left = $(this).find("ul").width();
+            var margin = left / 2;
+            $(this).find("ul").css("margin-left", '-' + margin +'px');
+        });
+    });
+</script>
+
+<!-- Hotjar Tracking Code for www.orange.jo --> 
+<script asp-location="Footer"> 
+    (function(h,o,t,j,a,r){ h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+h._hjSettings={hjid:1502168,hjsv:6}; a=o.getElementsByTagName('head')[0]; r=o.createElement('script');r.async=1; r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv; a.appendChild(r); })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv='); 
+</script>

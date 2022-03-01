@@ -1,0 +1,30 @@
+﻿<div class="container">
+    <div class="breadcrumb">
+        <ul>
+            <li class="brd-back min-back">
+                <a href="@Url.RouteUrl("HomePage")">
+                    <span>@T("Shipping.Aramex.Shipment.Breadcrumb.eShop")</span>
+                </a>
+            </li>
+            <li>
+                <span>
+                    <a href="javascript:void(0)">
+                        <span>@T("Breadcrumb.Personal") </span>
+                    </a>
+                </span>
+                <span class="delimiter"></span>
+            </li>
+            <li>
+                <span>
+                    <a href="@Url.RouteUrl("HomePage")">
+                        <span itemprop="name">@T("Shipping.Aramex.Shipment.Breadcrumb.eShop")</span>
+                    </a>
+                </span>
+                <span class="delimiter"></span>
+            </li>
+            <li>
+                <strong class="current-item">@T("Shipping.Aramex.Shipment.Breadcrumb.Trackyourorder")</strong>
+            </li>
+        </ul>
+    </div>
+</div>

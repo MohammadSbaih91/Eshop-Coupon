@@ -1,0 +1,112 @@
+﻿@model CheckoutPaymentMethodModel
+@using Nop.Core
+@using Nop.Services.Orders
+@inject IWebHelper webHelper
+@inject IShoppingCartService _shoppingCartService
+
+
+
+<div class="flex-left">
+    <div class="step-title">
+        <h2 class="title">@T("Checkout.PaymentMethod")</h2>
+    </div>
+    <form action="" id="co-payment-method-form">
+        <div>
+            <div class="checkout-data">
+                @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.OpCheckoutPaymentMethodTop })
+                <div class="section payment-method">
+                    @if (Model.DisplayRewardPoints && Model.PaymentMethods.Count > 0)
+                    {
+                        <div class="use-reward-points">
+                            @if (Model.RewardPointsEnoughToPayForOrder)
+                            {
+                                <input asp-for="UseRewardPoints" onclick="PaymentMethod.toggleUseRewardPoints(this)" />
+                            }
+                            else
+                            {
+                                <input asp-for="UseRewardPoints" />
+                            }
+                            <label asp-for="UseRewardPoints">@string.Format(T("Checkout.UseRewardPoints").Text, Model.RewardPointsBalance, Model.RewardPointsAmount)</label>
+                            @if (Model.RewardPointsEnoughToPayForOrder)
+                            {
+                                <script>
+                        $(document).ready(function() {
+                            PaymentMethod.toggleUseRewardPoints($('#@Html.IdFor(model => model.UseRewardPoints)'));
+                        });
+                                </script>
+                            }
+                        </div>
+                    }
+                    @if (Model.PaymentMethods.Count > 0)
+                    {
+                        <div class="form-ui">
+                            <div class="row" id="payment-method-block">
+                                @for (var i = 0; i < Model.PaymentMethods.Count; i++)
+                                {
+                                    var paymentMethod = Model.PaymentMethods[i];
+                                    var paymentMethodName = paymentMethod.Name;
+                                    var paymentMethodSystemName = paymentMethod.PaymentMethodSystemName;
+                                    if (!string.IsNullOrEmpty(paymentMethod.Fee))
+                                    {
+                                        paymentMethodName = T("Checkout.SelectPaymentMethod.MethodAndFee", paymentMethodName, paymentMethod.Fee).Text;
+                                    }
+                                    var storelocation = webHelper.GetStoreLocation();
+                                    var path = storelocation + "app-images/PaymentMethodImages/";
+                                    var logoUrl = "";
+                                    @if (paymentMethodSystemName == "Payments.CheckMoneyOrder")
+                                    {
+                                        logoUrl = path + "CashonDelivery.svg";
+                                    }
+                                    else if (paymentMethodSystemName == "Payments.Eskadenia")
+                                    {
+                                        logoUrl = path + "OnlinePayment.svg";
+                                    }
+                                    else if (paymentMethodSystemName == "Payments.OrangeMoney")
+                                    {
+                                        logoUrl = path + "om.svg";
+                                    }
+                                    else
+                                    {
+                                        logoUrl = paymentMethod.LogoUrl;
+                                    }
+                                    @*<li class="@(paymentMethod.PaymentMethodSystemName == "Payments.Eskadenia" ? "hidden":"")">*@
+                                    <div class="col-6">
+                                        <div class="form-group">
+                                            <div class="custom-control custom-radio-button radio-icon mt paymentmethod_@(i)">
+                                                <input class="custom-control-input" id="paymentmethod_@(i)" type="radio" name="paymentmethod" value="@(paymentMethod.PaymentMethodSystemName)" checked="@paymentMethod.Selected" />
+                                                <label class="custom-control-label" for="paymentmethod_@(i)">
+                                                    @*@if (!string.IsNullOrEmpty(logoUrl))
+                                                        {
+                                                            <img src="@logoUrl" alt="@paymentMethodName" />
+                                                        }*@
+                                                    <span>@paymentMethodName</span>
+                                                </label>
+                                            </div>
+                                            @if (!string.IsNullOrEmpty(paymentMethod.Description))
+                                            {
+                                                <div class="payment-description">@paymentMethod.Description</div>
+                                            }
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="message-error">
+                            @T("Checkout.NoPaymentMethods")
+                        </div>
+                    }
+                </div>
+
+                @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.OpCheckoutPaymentMethodBottom })
+            </div>
+        </div>
+    </form>
+</div>
+<div class="flex-right wide">
+    @await Component.InvokeAsync("OrderTotals", new { isEditable = true })
+    @await Component.InvokeAsync("OrderSummary", new { prepareAndDisplayOrderReviewData = true })
+</div>
+

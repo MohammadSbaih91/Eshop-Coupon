@@ -1,0 +1,60 @@
+﻿@model Nop.Web.Customization.Models.Catalog.HomePageProduct
+@using Nop.Core
+@inject IWorkContext workContext
+@{
+    var supportRtl = workContext.WorkingLanguage.Rtl;
+}
+
+
+<div class="drw-top">
+    <div class="drw-inner">
+        <div class="close_drawer" onclick="closeDrawer()"><img src="~/Themes/Eshop2021/Content/images/close.svg" /></div>
+        <div class="btm">
+            <h4>@Model.ParentCategoryName</h4>
+            <h2>@Model.categoryModel.Name</h2>
+            @*<h2>@T("HomePage.Drawer.LineOfAll")</h2>*@
+        </div>
+    </div>
+    <div class="triangle-up"></div>
+</div>
+<div class="drawer-prd">
+    <div id="drawer-div-@(Model.categoryModel.Id)">
+        @await Html.PartialAsync("~/Themes/Eshop2021/Views/Shared/Components/HomepageProducts/_Category" + Model.CategoryProductBoxTemplate + ".cshtml", Model)
+    </div>
+    <div class="clearfix"></div>
+    <div class="other-link">
+        <ul>
+            @*@if (!supportRtl)
+            {
+                <li>
+                    <div class="view-all-link"><a href="@UrlStrucutre.UrlDecode(Url.RouteUrl("Category", new { SeName = "Model.SeName" }))" class="link">@T("HomePage.ProductBox.ViewallOffers")</a></div>
+                </li>
+            }*@
+            <li><a href="/eshop-promotions"><i class="cir"></i><span>@T("HomePage.Category.Promotions")</span></a></li>
+            <li class="best-seller-icon">
+                <div class="dropdown dropup">
+                    <div class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="cir"></i><span>@T("HomePage.Category.BestSeller")</span>
+                    </div>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="bestsellerlist-drawer-@(Model.categoryModel.Id)">
+                        @*Add filter list by json*@
+                    </div>
+                </div>
+            </li>
+            <li class="compare-icon"><a href="/compareproducts"><i class="cir"></i><span>@T("HomePage.Category.Compare")</span></a></li>
+            @*@if (supportRtl)
+            {
+                <li>
+                    <div class="view-all-link"><a href="@UrlStrucutre.UrlDecode(Url.RouteUrl("Category", new { SeName = "Model.SeName" }))" class="link">@T("HomePage.ProductBox.ViewallOffers")</a></div>
+                </li>
+            }*@
+        </ul>
+    </div>
+    @*<div class="container"></div>*@
+    <div class="clearfix"></div>
+</div>
+@*<script>
+    function HomePageFilter(productTagId, categoryId, subCategoryId, containerId, rtl = false, isDrawer = false) {
+        GetSubCategoryProducts(categoryId, productTagId, rtl)
+    }
+</script>*@

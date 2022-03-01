@@ -1,0 +1,24 @@
+﻿@using Nop.Core
+@inject IWorkContext workContext
+@{
+    var supportRtl = workContext.WorkingLanguage.Rtl;
+    Layout = "_ColumnsOne";
+    //page class
+    Html.AppendPageCssClassParts("html-appointment-page");
+
+    @if (supportRtl)
+    {
+        Html.AppendCssFileParts($"~/Plugins/Misc.AppointmentBooking/Views/Content/css/widget.rtl.css");
+    }
+    else
+    {
+        Html.AppendCssFileParts($"~/Plugins/Misc.AppointmentBooking/Views/Content/css/widget.ltr.css");
+    }
+
+    Html.AppendCssFileParts($"~/Plugins/Misc.AppointmentBooking/Views/Content/css/widget.css");
+}
+
+<div class="container">
+    <input type="hidden" id="hidIsDrawer" value="false" />
+    @await Html.PartialAsync("_AppointmentBooking")
+</div>

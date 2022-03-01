@@ -1,0 +1,19 @@
+﻿@model ProductDetailsModel.ProductPriceModel
+@using Microsoft.AspNetCore.Authentication.MicrosoftAccount
+@using Nop.Core
+@using Nop.Core.Domain.Tax
+@inject IWorkContext workContext
+@if (!string.IsNullOrWhiteSpace(Model.PriceWithDiscount))
+{
+    @*<span itemprop="price" content="@Model.PriceValue.ToString("0.00", System.Globalization.CultureInfo.InvariantCulture)" data-ProductCartPrice="" class="price-value-@(Model.ProductId) fiber-price">
+            @Html.Raw(Model.PriceWithDiscount)
+        </span>*@
+    <div class="final price-value-@(Model.ProductId)" data-ProductCartPrice="">@Html.Raw(EShopHelper.GetPriceFormatting(Model.Price)) <span>/ @T("Common.Month")</span></div>
+}
+else
+{
+    <div class="final price-value-@(Model.ProductId)">@Html.Raw(EShopHelper.GetPriceFormatting(Model.Price)) <span>/ @T("Common.Month")</span></div>
+    @*<span @if (string.IsNullOrWhiteSpace(Model.PriceWithDiscount)) { <text> itemprop="price" content="@Model.PriceValue.ToString("0.00", System.Globalization.CultureInfo.InvariantCulture)" class="price-value-@(Model.ProductId) fiber-price" </text> }>
+            @Html.Raw(Model.Price)
+        </span>*@
+}

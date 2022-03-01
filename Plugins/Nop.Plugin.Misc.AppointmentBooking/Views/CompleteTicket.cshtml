@@ -1,0 +1,68 @@
+﻿@model ConfirmAppointment
+@using Nop.Core
+@using System.Globalization;
+@using Nop.Core.Configuration
+
+@inject IWorkContext workContext
+@inject NopConfig _nopConfig
+@{
+    var supportRtl = workContext.WorkingLanguage.Rtl;
+
+    @if (supportRtl)
+    {
+        Html.AppendCssFileParts($"~/Plugins/Misc.AppointmentBooking/Views/Content/css/widget.rtl.css");
+    }
+    else
+    {
+        Html.AppendCssFileParts($"~/Plugins/Misc.AppointmentBooking/Views/Content/css/widget.ltr.css");
+    }
+
+    Html.AppendCssFileParts($"~/Plugins/Misc.AppointmentBooking/Views/Content/css/widget.css");
+}
+@{
+    DateTime appDate = DateTime.ParseExact(Model.BookAppointmentResponse.AppointmentTicketInfo.AppointmentDay, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+    //var appDate = Convert.ToDateTime(Model.BookAppointmentResponse.AppointmentTicketInfo.AppointmentDay);
+    var dt = appDate.ToString("dddd, dd MMMM yyyy");
+}
+
+<div class="book-completed">
+    <div class="flex-left">
+        <h1>
+            @T("Checkout.Order.completed.Pickup.Title")
+        </h1>
+        <p>
+            @*Your order number is <span>{0}.</span> Now you can start tracking your order or you can check and print the summary.*@
+            @{
+                var info = T("Checkout.Order.completed.Pickup.Title.info").ToString();
+                info = string.Format(info, Model.BookAppointmentRequest.OrderId.ToString());
+            }
+            @Html.Raw(info)
+        </p>
+    </div>
+    <div class="flex-ticket">
+        <div class="btn-group-left">
+            <a href="@Url.RouteUrl("OrderDetails", new { orderID = Model.BookAppointmentRequest.OrderId })" class="btn btn-orange btn-block">@T("Plugins.Misc.AppointmentBooking.ConfirmBooking.OrderSummaryButton")</a>
+            <a href="@Url.RouteUrl("appointmentbooking.Appointment",new { orderid = Model.BookAppointmentRequest.OrderId,isChangeAppointent=true})" class="btn btn-outline-dark btn-block">@T("Plugins.Misc.AppointmentBooking.ConfirmBooking.ChangeAppointment")</a>
+        </div>
+        <div class="ticket">
+            <div class="_cir topl"></div><div class="_cir topr"></div>
+            <div class="top">
+                <div class="org-layer">
+                    <img src="~/Themes/Eshop2021/Content/images/logo.svg" />
+                </div>
+                <div class="grp">
+                    <h4>@T("Plugins.Misc.AppointmentBooking.ConfirmBooking.AppointmentTicket")</h4>
+                    <h2>@Model.BookAppointmentResponse.AppointmentTicketInfo.TicketNumber</h2>
+                </div>
+            </div>
+            <div class="bottom">
+                <div class="c_cir cL"></div><div class="c_cir cR"></div>
+                <p>@dt, @Model.BookAppointmentResponse.AppointmentTicketInfo.AppointmentTime</p>
+            </div>
+            <div class="_cir topbl"></div><div class="_cir topbr"></div>
+        </div>
+        <div class="scooter-img">
+            <img src="~/Themes/Eshop2021/Content/images/scooter.svg" />
+        </div>
+    </div>
+</div>

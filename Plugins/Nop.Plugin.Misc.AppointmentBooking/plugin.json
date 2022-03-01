@@ -1,0 +1,11 @@
+﻿{
+  "Group": "eShop",
+  "FriendlyName": "AppointmentBooking",
+  "SystemName": "Misc.AppointmentBooking",
+  "Version": "1.00",
+  "SupportedVersions": [ "4.10" ],
+  "Author": "eShop",
+  "DisplayOrder": 1,
+  "FileName": "Nop.Plugin.Misc.AppointmentBooking.dll",
+  "Description": "Appoiment booking"
+}

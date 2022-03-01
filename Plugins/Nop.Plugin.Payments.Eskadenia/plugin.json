@@ -1,0 +1,11 @@
+﻿{
+  "Group": "Payment methods",
+  "FriendlyName": "Online Payment",
+  "SystemName": "Payments.Eskadenia",
+  "Version": "2.00",
+  "SupportedVersions": [ "4.10" ],
+  "Author": "QBS Team",
+  "DisplayOrder": 1,
+  "FileName": "Nop.Plugin.Payments.Eskadenia.dll",
+  "Description": "This plugin allows paying with Eskadenia"
+}

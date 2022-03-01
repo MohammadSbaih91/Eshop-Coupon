@@ -1,0 +1,101 @@
+﻿<div class="header-background">
+    <div class="container">
+        <div class="header">
+            @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.HeaderBefore })
+            <div class="header-logo">
+                @await Component.InvokeAsync("Logo")
+            </div>
+            <div class="header-right">
+                <div class="header-right-top">
+                    <div class="qlink">
+                        <ul>
+                            <li><a href="@T("HomePageTopMenu.TopMenu1.Personal.URL")">@T("HomePageTopMenu.TopMenu1.Personal")</a></li>
+                            <li><a href="@T("HomePageTopMenu.TopMenu1.Bussiness.URL")">@T("HomePageTopMenu.TopMenu1.Bussiness")</a></li>
+                            <li><a href="@T("HomePageTopMenu.TopMenu1.OrangeMoney.URL")">@T("HomePageTopMenu.TopMenu1.OrangeMoney")</a></li>
+                            <li><a href="@T("HomePageTopMenu.TopMenu1.Enterprise.URL")">@T("HomePageTopMenu.TopMenu1.Enterprise")</a></li>
+                            <li><a href="@T("HomePageTopMenu.TopMenu1.ContactUs.URL")">@T("HomePageTopMenu.TopMenu1.ContactUs")</a></li>
+
+                            @*<li><a>Personal</a></li>
+                            <li><a>Bussiness</a></li>
+                            <li><a>Orange Money</a></li>
+                            <li><a>Corporate</a></li>
+                            <li><a>Contact Us</a></li>*@
+                        </ul>
+                    </div>
+                    <div class="header-upper">
+                        @*<div class="header-selectors-wrapper">
+                            @await Component.InvokeAsync("TaxTypeSelector")
+                            @await Component.InvokeAsync("CurrencySelector")
+                            @await Component.InvokeAsync("LanguageSelector")
+                            @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.HeaderSelectors })
+                        </div>*@
+                        <div class="header-links-wrapper">
+                        @*#TODO:hack for perf check*@
+                            @await Component.InvokeAsync("HeaderLinks")
+                            @*@await Component.InvokeAsync("FlyoutShoppingCart")*@
+                        </div>
+                    </div>
+                </div>
+                <div class="header-right-bottom">
+                    <div class="header-menu">
+                        @await Component.InvokeAsync("TopMenu")
+                    </div>
+                    <div class="header-lower">
+                        <div class="search-icon-label search-menu">@T("Header.Search")</div>
+                        <div id="search-box" class="search-box store-search-box search-box-header">
+                            <div class="container">
+                                <div class="search-box-custom">
+                                    @await Component.InvokeAsync("SearchBox")
+                                    <div class="search-close"><span class="search-menu"><i class="fas fa-times"></i></span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.HeaderMiddle })
+
+            @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.HeaderAfter })
+        </div>
+    </div>
+</div>
+
+<script asp-location="Footer">
+    $(document).ready(function () {
+        $(".search-menu").on("click", function () {
+            $("#search-box").toggleClass('active');
+        });
+    });
+    function fnCheckProductWhileAddToCompare(productId, url,e) {
+        $.ajax({
+            url: '/Product/CheckProductWhileAddToCompare',
+            data: { 'productId': productId},
+            type: 'POST',
+            success: function (result) {
+                //url = url
+                if (result.result == true) {
+                    if (confirm("@T("Product.CompareMessage")")) {
+                        //Clear Compare List
+                        $.ajax({
+                            url: '/Product/ClearCompareListAjax',
+                            type: 'POST',
+                            success: function () {     
+                                //Add Product To Compare List
+                                AjaxCart.addproducttocomparelist(url);
+                            }
+                        });
+                    }
+                    return false;
+                }
+                else {
+                    AjaxCart.addproducttocomparelist(url);
+                }
+            }
+        });
+        e = e || event
+        if (e)
+            e.stopImmediatePropagation();
+    }
+
+</script>

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Language Name="English">
+  <LocaleResource Name="HomePageTopMenu.Logo">
+		<Value>https://www.orange.jo/en</Value>
+	</LocaleResource>
+		<LocaleResource Name="HomePageTopMenu.TopMenu1.OrangeMoney.URL">
+		<Value>https://www.orange.jo/en/OrangeMoney/Pages/default.aspx </Value>
+	</LocaleResource>	
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.Myaccount.Loginandregister.Login.URL">
+		<Value>https://www.orange.jo/en/myaccount/pages/default.aspx</Value>
+	</LocaleResource>
+		<LocaleResource Name="HomePageTopMenu.TopMenu2.OffersAndServices.Mobile.FeedWEstafeedservice.URL">
+		<Value>https://www.orange.jo/en/pages/feed-w-estafeed-for-prepaid-lines.aspx</Value>
+	</LocaleResource>
+		<LocaleResource Name="HomePageTopMenu.TopMenu2.OffersAndServices.Internet.Internetservices.URL">
+		<Value>https://www.orange.jo/en/services/pages/internet-services.aspx</Value>
+	</LocaleResource>
+		<LocaleResource Name="HomePageTopMenu.TopMenu2.Myaccount.Loginandregister.Register.URL">
+		<Value>https://www.orange.jo/en/myaccount/pages/registration.aspx</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.Myaccount.Billspaymentandrecharge.e-sh7anli.URL">
+		<Value>https://www.orange.jo/en/pages/e-sh7anli.aspx</Value>
+	</LocaleResource>
+		<LocaleResource Name="HomePageTopMenu.TopMenu2.Myaccount.Billspaymentandrecharge.Paymentmethods.URL">
+		<Value>https://www.orange.jo/en/myaccount/pages/payment-methods.aspx</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.Myaccount.Rewards.OrangeDeals">
+		<Value>Orange Deals</Value>
+	</LocaleResource>
+  <LocaleResource Name="HomePageTopMenu.TopMenu2.Myaccount.Rewards.OrangeDeals.URL">
+    <Value>https://www.rewards.orange.jo/webviews/deals/en</Value>
+  </LocaleResource>
+  <LocaleResource Name="HomePageTopMenu.TopMenu2.Myaccount.Rewards.OrangeDeals.URL">
+    <Value>https://www.rewards.orange.jo/deals.aspx</Value>
+  </LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.Myaccount.Rewards.TikramPoints.URL">
+		<Value>https://www.rewards.orange.jo/en/Account/Login</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.Help.Helptopics.Onlinechat.URL">
+		<Value>https://www.orange.jo/en/chat/pages/infochat.aspx</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.Help.Helptopics.Contactus.URL">
+		<Value>https://www.orange.jo/en/pages/contact-us.aspx</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.Help.Helptopics.Djingo-chatbot.URL">
+		<Value>https://www.orange.jo/en/pages/djingo-chatbot.aspx</Value>
+	</LocaleResource>
+		<LocaleResource Name="HomePageTopMenu.TopMenu2.Help.Helptopics.Yourguide.URL">
+		<Value>https://www.orange.jo/en/help/internet/pages/guide-to-best-fiber-experience.aspx</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.Help.Helptopics. 4G+.URL">
+		<Value>https://www.orange.jo/en/pages/4g-plus.aspx</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.Help.FAQ.Internet.URL">
+		<Value>https://www.orange.jo/en/help/pages/internet-faq.aspx</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.Help.FAQ.Mobile.URL">
+		<Value>https://www.orange.jo/en/help/pages/mobile-faq.aspx</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.Help.FAQ.Fixedline.URL">
+		<Value>https://www.orange.jo/en/help/pages/fixed-faq.aspx</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.Help.Coveragemap.URL">
+		<Value>https://www.orange.jo/en/pages/coverage.aspx</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.eShop.Mobile.YOLines.URL">
+		<Value>https://yo.orange.jo/</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.eShop.Mobile.MobileGovernoratesoffers.URL">
+		<Value>https://www.orange.jo/EN/offers/mobilepostpaidoffers/Mobilegovernoratesoffers/Pages/default.aspx</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.eShop.Internet.ADSLoffers.URL">
+		<Value>https://www.orange.jo/EN/offers/ADSLOffers/Pages/default.aspx</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.eShop.Fiber.OrangeFiberFastInternet.URL">
+		<Value>https://www.orange.jo/en/offers/fiber-offers/pages/default.aspx</Value>
+	</LocaleResource>
+		<LocaleResource Name="HomePageTopMenu.TopMenu2.OffersAndServices.Internet.4GFlyboxoffers.URL">
+		<Value>https://www.orange.jo/en/offers/flyboxoffers/Pages/default.aspx</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.OffersAndServices.Internet.PrepaidOrangenet.URL">
+		<Value>https://www.orange.jo/en/offers/prepaidorangenet/pages/default.aspx</Value>
+	</LocaleResource>
+  <LocaleResource Name="homepagetopmenu.topmenu2.offersandservices.beinconnect.url">
+    <Value>https://www.orange.jo/en/extra</Value>
+  </LocaleResource>
+  <LocaleResource Name="HomePageTopMenu.TopMenu2.eShop.Internet.ADSLoffers.URL">
+    <Value>https://eshop.orange.jo/en/internet/adsl-offer</Value>
+  </LocaleResource>
+  <LocaleResource Name="HomePageTopMenu.TopMenu2.eShop.Internet.ADSLoffers.URL">
+    <Value>https://eshop.orange.jo/en/internet/fiber-offers</Value>
+  </LocaleResource>
+</Language>
+

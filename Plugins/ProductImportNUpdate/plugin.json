@@ -1,0 +1,11 @@
+﻿{
+    "Group": "Mics",
+    "FriendlyName": "Product Import and Update",
+    "SystemName": "ProductImportNUpdate",
+    "Version": "1",
+    "SupportedVersions": ["4.10"],
+    "Author": "eshop",
+    "DisplayOrder": 1,
+    "FileName": "ProductImportNUpdate.dll",
+    "Description": "This plugin allows you import file and update product name price and quantity"
+}

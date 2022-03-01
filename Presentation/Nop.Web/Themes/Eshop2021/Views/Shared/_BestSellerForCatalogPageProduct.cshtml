@@ -1,0 +1,15 @@
+﻿@model Nop.Web.Customization.Models.Catalog.BestSellerFilterModel
+
+@using Nop.Core
+@inject IWorkContext workContext
+@{
+    var supportRtl = workContext.WorkingLanguage.Rtl;
+    var rtl = supportRtl ? "true" : "false";
+}
+@foreach (var tag in Model.FilterTagModel)
+{
+    var divId = $"-{Model.CategoryId}-{Model.SubCategoryId}";
+    var onClick = string.Format(tag.URL, tag.ProductTagId);
+    var isDrawer = Model.IsDrawer ? "true" : "false";
+    <a class="dropdown-item @(tag.IsSelected ? "active" : "")" onclick="CatalogPageProductFilter(@(tag.ProductTagId),@(Model.CategoryId),@(Model.SubCategoryId),'@(divId)',@(rtl),@(isDrawer))">@tag.ProductTagName</a>
+}

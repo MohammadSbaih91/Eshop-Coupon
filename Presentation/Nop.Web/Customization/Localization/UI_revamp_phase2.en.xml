@@ -1,0 +1,852 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Language Name="English">
+	<!--Start Admin Resource-->
+	<LocaleResource Name="Admin.Catalog.Categories.Fields.CategoryProductBoxTemplate">
+		<Value>Category Product Box template</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.Catalog.Categories.Fields.CategoryProductBoxTemplate.Hint">
+		<Value>Category Product Box template</Value>
+	</LocaleResource>
+
+	<LocaleResource Name="Admin.Messages.NewsLetterSubscriptionType">
+		<Value>Newsletter subscription type</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.Messages.NewsLetterSubscriptionType.BackToList">
+		<Value>back to list</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.Messages.NewsLetterSubscriptionType.AddNew">
+		<Value>Add a new Newsletter subscription type</Value>
+	</LocaleResource>
+
+	<LocaleResource Name="Admin.Messages.NewsLetterSubscriptionType.Fields.Name">
+		<Value>Name</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.Messages.NewsLetterSubscriptionType.Fields.Name.Hint">
+		<Value>Newslatter subscription type</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.Messages.NewsLetterSubscriptionType.Fields.Name.Required">
+		<Value>Name is required</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.Messages.NewsLetterSubscriptionType.Fields.Name.MaxLength">
+		<Value>Our the max Lenght</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.Messages.NewsLetterSubscriptionType.Fields.DisplayOrder">
+		<Value>Display order</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.Messages.NewsLetterSubscriptionType.Fields.DisplayOrder.Hint">
+		<Value>Display order</Value>
+	</LocaleResource>
+
+	<LocaleResource Name="Admin.Messages.NewsLetterSubscriptionType.Fields.Added">
+		<Value>News letter subscription type added.</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.Messages.NewsLetterSubscriptionType.Fields.Updated">
+		<Value>News letter subscription type Updated.</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.Messages.NewsLetterSubscriptionType.Fields.Deleted">
+		<Value>News letter subscription type Deleted.</Value>
+	</LocaleResource>
+
+	<LocaleResource Name="Admin.Catalog.Attributes.SpecificationAttributes.Fields.PictureId">
+		<Value>Picture</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.Catalog.Attributes.SpecificationAttributes.Fields.PictureId.Hint">
+		<Value>Picture</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.Catalog.Attributes.SpecificationAttributes.Fields.IsShowInsideBox">
+		<Value>Show Inside Box</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.Catalog.Attributes.SpecificationAttributes.Fields.IsShowInsideBox.Hint">
+		<Value>Show Inside Box</Value>
+	</LocaleResource>
+
+	<LocaleResource Name="Admin.Catalog.Attributes.AttributesMap.Fields.IsShowButton">
+		<Value>Show Button</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.Catalog.Attributes.AttributesMap.Fields.IsShowButton.Hint">
+		<Value>Show Button</Value>
+	</LocaleResource>
+
+	<LocaleResource Name="Admin.Catalog.Categories.Fields.ShowWithSubCategories">
+		<Value>Show with sub categories</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.Catalog.Categories.Fields.ShowWithSubCategories.Hint">
+		<Value>Show with sub categories</Value>
+	</LocaleResource>
+
+	<LocaleResource Name="Admin.Catalog.Categories.Fields.MinimumPriceOfProduct">
+		<Value>Minimum Price of Product</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.Catalog.Categories.Fields.MinimumPriceOfProduct.Hint">
+		<Value>Minimum Price of Product</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.Catalog.Products.Fields.IsService">
+		<Value>IsService</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.Catalog.Products.Fields.IsService.Hint">
+		<Value>Service product</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.Catalog.Products.Fields.IsHidePlanSelection">
+		<Value>Is hide plan selection</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.Catalog.Products.Fields.IsHidePlanSelection.Hint">
+		<Value>True for hide the device and plan selection on product detail page</Value>
+	</LocaleResource>
+
+	<LocaleResource Name="Admin.Packages.Fields.Name">
+		<Value>Name</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.Packages.Fields.Name.Hint">
+		<Value>Package name</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.Packages.Fields.Name.Required">
+		<Value>Name is required</Value>
+	</LocaleResource>
+
+	<LocaleResource Name="Admin.Packages.Fields.DisplayOrder">
+		<Value>Display Order</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.Packages.Fields.DisplayOrder.Hint">
+		<Value>Display Order</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.Packages.Fields.DisplayOrder.Required">
+		<Value>Display order is required</Value>
+	</LocaleResource>
+
+	<LocaleResource Name="Admin.Packages.Fields.CategoryIds">
+		<Value>Category</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.Packages.Fields.CategoryIds.Hint">
+		<Value>Select category</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.Packages.Fields.CategoryIds.Required">
+		<Value>category is required</Value>
+	</LocaleResource>
+
+	<LocaleResource Name="Admin.Packages.Fields.Published">
+		<Value>Published</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.Packages.Fields.Published.Hint">
+		<Value>Published</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.Packages.Fields.Discount">
+		<Value>Discount</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.Packages.Fields.Discount.Hint">
+		<Value>Discount</Value>
+	</LocaleResource>
+
+	<LocaleResource Name="Admin.Packages.Created">
+		<Value>Package added successfully.</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.Packages.Updated">
+		<Value>Package updated successfully.</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.Packages.Deleted">
+		<Value>Package deleted successfully.</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.Packages.AddNew">
+		<Value>Add new package</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.Packages.Edit">
+		<Value>Edit package</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.Packages">
+		<Value>Packages</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.Package.Products.SaveBeforeEdit">
+		<Value>You need to save the package before you can add products for this package page.</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.Package.Products.EditPackage">
+		<Value>Edit package product</Value>
+	</LocaleResource>
+	<!--End Admin Resource-->
+
+	<!--Start Header-->
+	<LocaleResource Name="Footer.Language">
+		<Value>Language</Value>
+	</LocaleResource>
+	<!--End Header-->
+	<!--Start Footer-->
+	<LocaleResource Name="HomePage.footer.contactus">
+		<Value>Contact us</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePage.footer.contactus.detail">
+		<Value>Always more your supports</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePage.footer.AboutEshop">
+		<Value>About Eshop</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePage.footer.AboutEshop.detail">
+		<Value>Always more your supports</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePage.footer.NewsLetter.OfferPromotions">
+		<Value><![CDATA[Offer & Promotions]]> </Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePage.footer.NewsLetter.OfferNews">
+		<Value><![CDATA[Offer & News]]></Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePage.footer.NewsLetter.BlogPromotions">
+		<Value>Blog Promotions</Value>
+	</LocaleResource>
+	<LocaleResource Name="Newsletter.Email.Placeholder">
+		<Value>Enter your email address</Value>
+	</LocaleResource>
+	<!--END Footer-->
+
+	<!--Start Home Page-->
+	<LocaleResource Name="HomePage.Drawer.LineOfAll">
+		<Value>Lines for All</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePage.Category.ViewAll">
+		<Value>View all</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePage.Category.Promotions">
+		<Value>Promotions</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePage.Category.Compare">
+		<Value>Compare</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePage.Category.BestSeller">
+		<Value>Best Seller</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePage.ProductBox.ViewOffers">
+		<Value>View Offers</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePage.ProductBox.StartForm">
+		<Value>Starting from</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePage.ProductBox.StartFormMonth">
+		<Value>month</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePage.ProductBox.ViewDetails">
+		<Value>View Details</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePage.ProductBox.ViewallOffers">
+		<Value>View all Offers</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePage.ProductBox.IncludingTax">
+		<Value>Tax Inclusive</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePage.ProductBox.ExcludingTax">
+		<Value>Tax Exclusive</Value>
+	</LocaleResource>
+	<!--End Home Page-->
+
+	<!--Start catalog Page-->
+	<LocaleResource Name="HomePage.Catalog.AllBrand">
+		<Value>All Brand</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePage.Catalog.LoadMore">
+		<Value>Load More</Value>
+	</LocaleResource>
+	<LocaleResource Name="CatalogPage.Prices">
+		<Value>Prices</Value>
+	</LocaleResource>
+	<LocaleResource Name="CatalogPage.Filter">
+		<Value>Filter</Value>
+	</LocaleResource>
+	<LocaleResource Name="CatalogPage.Offer">
+		<Value>Offer</Value>
+	</LocaleResource>
+	<LocaleResource Name="CatalogPage.Offer.New">
+		<Value>New</Value>
+	</LocaleResource>
+	<LocaleResource Name="CatalogPage.Offer.OnSale">
+		<Value>On Sale</Value>
+	</LocaleResource>
+	<LocaleResource Name="CatalogPage.Offer.SpecialOffer">
+		<Value>Special Offer</Value>
+	</LocaleResource>
+	<!--End catalog Page-->
+
+
+	<!--Start Sim Card-->
+	<LocaleResource Name="Admin.SimCard">
+		<Value>Sim card</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.SimCard.Title">
+		<Value>Manage Sim card</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.SimCard.Fields.CardNumber">
+		<Value>Card number</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.SimCard.Fields.CardNumber.Hint">
+		<Value>Card number</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.SimCard.Fields.CardNumber.Required">
+		<Value>Card number is required</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.SimCard.Fields.CardNumber.NumberAlreadyExists">
+		<Value>Card number '{0}' is already exist</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.SimCard.Fields.DisplayOrder">
+		<Value>DisplayOrder</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.SimCard.Fields.DisplayOrder.Hint">
+		<Value>DisplayOrder</Value>
+	</LocaleResource>
+	<!--End Sim Card-->
+
+	<!--Start Device Product detail-->
+	<LocaleResource Name="products.specs">
+		<Value>Specifications</Value>
+	</LocaleResource>
+
+	<LocaleResource Name="ProductDetail.DevicePackage">
+		<Value>Device Package</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.DeviceOnly">
+		<Value>Device Only</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.ChoosePlanwithdevice">
+		<Value>Choose Plan with device</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.Phone">
+		<Value>Phone</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.Sim">
+		<Value>Sim</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.Accessories">
+		<Value>Accessories</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.Boughttogether">
+		<Value>Bought together with {0}</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.SelectSimCard">
+		<Value><![CDATA[Select your <br />SIM card number]]></Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.SelectSimCardNumber">
+		<Value>Select</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.ChoosePlan">
+		<Value>Choose Plan</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.FixedLineOnly">
+		<Value>Fixed Line Only</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.FixedLine">
+		<Value>Fixed Line</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.Phone">
+		<Value>Phone</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.Sim">
+		<Value>Sim</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.Prices">
+		<Value>Prices</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.Data">
+		<Value>Data</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.Minutes">
+		<Value>Minutes</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.MobilePrice">
+		<Value>Mobile Price</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.DevicePrice">
+		<Value>Device Price</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.SimPrice">
+		<Value>Sim Price</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.OverallPayment">
+		<Value>Overall Payment</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.FullPrice">
+		<Value>Full price</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.SimorEsimOnly">
+		<Value>Sim / Esim Only</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.Choosedevice">
+		<Value>Choose Device</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.PostpaidLine">
+		<Value>Postpaid Line</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.Device">
+		<Value>Device</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.FixedLinePackage">
+		<Value>Fixed Line Package</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.ChooseSimtype">
+		<Value><![CDATA[Choose <br />Sim type]]></Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.Esim">
+		<Value>Esim</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.Esim">
+		<Value>Esim</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.MonthlyPrices">
+		<Value>Monthly Price</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.WorkKnowing">
+		<Value>Worth Knowing</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.TermsandConditions">
+		<Value><![CDATA[Terms & Conditions]]></Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.ImportantNotes">
+		<Value>Important Notes</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.MobileDevice">
+		<Value>Mobile Device</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.Recommendedforyou">
+		<Value>Recommended for you</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.Whybuyonline">
+		<Value>Why buy online</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.Whybuyonline.YourSide">
+		<Value><![CDATA[By your side <br />24/7]]></Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.Whybuyonline.SecurePayment">
+		<Value><![CDATA[100% Secure <br />payment]]></Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.Whybuyonline.FreeDelivey">
+		<Value><![CDATA[Two working days<br/>and free delivey]]></Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.Whybuyonline.Promotions">
+		<Value><![CDATA[Exclisive<br/> promotions]]></Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.Postpaid.BasicPrices">
+		<Value>Basic price</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.Postpaid.PaymentInstallments">
+		<Value>with payment in 24 installments</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.Yoline.YOPostpaidSim">
+		<Value>YO Postpaid sim</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.OfferDetails">
+		<Value>Offer Details</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.ForMoreOfferDetails">
+		<Value>For more of the offer details</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.ClickHere">
+		<Value>Click Here</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.BasicPrices">
+		<Value>Basic Prices</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.Checkout">
+		<Value>Checkout</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.ViewAllDevice">
+		<Value>View all device</Value>
+	</LocaleResource>
+	<!--End Device Product detail-->
+
+	<LocaleResource Name="ShoppingCart.AddToCart">
+		<Value>Add to cart</Value>
+	</LocaleResource>
+	<LocaleResource Name="ShoppingCart.BuyNow">
+		<Value>Buy Now</Value>
+	</LocaleResource>
+	<LocaleResource Name="Products.Qty">
+		<Value>Quantity</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.SubsidyDiscountText">
+		<Value>Subsidy discount on mobile</Value>
+	</LocaleResource>
+
+	<!--Start Fixed Line Product detail-->
+	<LocaleResource Name="ProductDetail.FixedLine.FixedLinePrice">
+		<Value>Fixed Line Price</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.FixedLine.FixedPhonePrice">
+		<Value>Fixed Phone Price</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.FixedLine.InternationalZonesCovered">
+		<Value>International Zones covered</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.FixedLine.ServiceIncluded">
+		<Value>Service included</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.FixedLine.FixedPlan">
+		<Value>Fixed Plan</Value>
+	</LocaleResource>
+	<!--Start Fixed Line Product detail-->
+
+	<!--Start Internet Product detail-->
+	<LocaleResource Name="ProductDetail.Internet.ChooseAccessory">
+		<Value><![CDATA[Choose an<br/>Accessory]]></Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.Internet.ChooseAccessoryButton">
+		<Value>Choose Accessory</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.Internet.SelectOneAccessories">
+		<Value>To buy a 4G Flybox plan you must select one the below accessories.</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.Internet.4GFlybox">
+		<Value>4G flybox</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.Internet.FiberPlan">
+		<Value>Fiber Plan</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.Internet.Accessories">
+		<Value>Accessories</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.Internet.4GFlyboxPrice">
+		<Value>4G Flybox Price</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.Internet.AccessoryPrice">
+		<Value>Accessory Price</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.Internet.WhyChooseFiberInternet">
+		<Value>Why choose Orange Fiber Fast Internet</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.Internet.VeryFastInternet">
+		<Value><![CDATA[Very fast<br/>Internet]]></Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.Internet.OnlineSurveillanceSystem">
+		<Value><![CDATA[Online Surveillance<br/>System]]></Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.Internet.4kHDMovies">
+		<Value><![CDATA[4K / HD<br/>Movies]]></Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.Internet.OnlineGames">
+		<Value><![CDATA[Online<br/>Games]]></Value>
+	</LocaleResource>
+	<!--End Internet Product detail-->
+
+	<!--Start Yo Postpaid Line Product Detail-->
+	<LocaleResource Name="ProductDetail.YoLine.YOPostpaidSim">
+		<Value>YO Postpaid sim</Value>
+	</LocaleResource>
+	<!--End Yo Postpaid Line Product Detail-->
+	<LocaleResource Name="ProductDetail.SmartCamera">
+		<Value>Smart Devices</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.Internet.Map.Coverage">
+		<Value>Coverage</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.Internet.Fiber.Map.LocateFiber">
+		<Value>Locate Fiber</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.Internet.ADSL.Map.LocateADSL">
+		<Value>Locate ADSL</Value>
+	</LocaleResource>
+
+	<!--Start Yo Postpaid Line Product Detail-->
+	<LocaleResource Name="CompareProducts.Comparator">
+		<Value>Comparator</Value>
+	</LocaleResource>
+	<LocaleResource Name="CompareProducts.Backto">
+		<Value>Back to</Value>
+	</LocaleResource>
+	<LocaleResource Name="CompareProducts.Personal">
+		<Value>Personal</Value>
+	</LocaleResource>
+	<LocaleResource Name="CompareProducts.eShop">
+		<Value>eShop</Value>
+	</LocaleResource>
+	<LocaleResource Name="CompareProducts.Clear">
+		<Value>Clear</Value>
+	</LocaleResource>
+	<LocaleResource Name="CompareProducts.AddToCompare">
+		<Value>Add to Compare</Value>
+	</LocaleResource>
+	<!--End Yo Postpaid Line Product Detail-->
+
+	<!--Start Cart Drawers-->
+	<LocaleResource Name="CartDrawer.YourCart">
+		<Value>Your Cart</Value>
+	</LocaleResource>
+	<LocaleResource Name="CartDrawer.AddServices">
+		<Value>Add Services</Value>
+	</LocaleResource>
+	<LocaleResource Name="CartDrawer.SuggestedProducts">
+		<Value>Suggested Products</Value>
+	</LocaleResource>
+	<LocaleResource Name="CartDrawer.Taxes">
+		<Value>Taxes</Value>
+	</LocaleResource>
+	<LocaleResource Name="CartDrawer.Price">
+		<Value>Price</Value>
+	</LocaleResource>
+	<LocaleResource Name="CartDrawer.EmptyBasket">
+		<Value>Empty Basket</Value>
+	</LocaleResource>
+	<LocaleResource Name="CartDrawer.Change">
+		<Value>Change</Value>
+	</LocaleResource>
+	<!--End Cart Drawers-->
+
+	<!--Start ADSL Internet-->
+	<LocaleResource Name="ProductDetail.AdslInternet.WhyChooseOrangeADSLInternet">
+		<Value>Why choose Orange ADSL Internet</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.Attribute.MonthlyPriceTaxDesc">
+		<Value>Tax inclusive when recharging with Nos B Nos scratch cards</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.InternetFiber.FiberPrice">
+		<Value>FiberPrice</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.InternetFiber.FiberPrice">
+		<Value>Fiber Price</Value>
+	</LocaleResource>
+	<!--End ADSL Internet-->
+
+	<!--Start Checkout-->
+	<LocaleResource Name="Checkout.AddressOption.SameAsBillingAddress">
+		<Value>Use same as billing address</Value>
+	</LocaleResource>
+	<LocaleResource Name="Checkout.AddressOption.DifferentShippingAddress">
+		<Value>Different shipping address</Value>
+	</LocaleResource>
+	<LocaleResource Name="Checkout.AddressOption.BillingAddress">
+		<Value>Billing Address</Value>
+	</LocaleResource>
+	<LocaleResource Name="Checkout.AddressOption.ShippingAddress">
+		<Value>Shipping Address</Value>
+	</LocaleResource>
+	<LocaleResource Name="Checkout.ReturntotheShop">
+		<Value>Return to the shop</Value>
+	</LocaleResource>
+	<LocaleResource Name="ShoppingCart.ModifiedMessage">
+		<Value>You have changed you cart! want to continue without updating it? change will be lost</Value>
+	</LocaleResource>
+
+
+	<LocaleResource Name="Checkout.Mycart">
+		<Value>My cart</Value>
+	</LocaleResource>
+	<LocaleResource Name="Checkout.CustomerDetails">
+		<Value>Customer Details</Value>
+	</LocaleResource>
+	<LocaleResource Name="Checkout.ShippingAndBilling">
+		<Value><![CDATA[Shipping & Billing]]></Value>
+	</LocaleResource>
+	<LocaleResource Name="Checkout.DeliveryAndPayment">
+		<Value><![CDATA[Delivery & Payment]]></Value>
+	</LocaleResource>
+	<LocaleResource Name="Checkout.Nextstep">
+		<Value>Next step</Value>
+	</LocaleResource>
+	<LocaleResource Name="Checkout.Next">
+		<Value>Next</Value>
+	</LocaleResource>
+	<LocaleResource Name="Checkout.Pay">
+		<Value>Pay</Value>
+	</LocaleResource>
+	<LocaleResource Name="Checkout.Order.completed.Title">
+		<Value><![CDATA[<span>Your payment</span> was done successfully]]></Value>
+	</LocaleResource>
+	<LocaleResource Name="Checkout.Order.completed.Title.info">
+		<Value><![CDATA[Your order number is <span>{0}.</span> Now you can start tracking your order or you can check and print the summary.]]></Value>
+	</LocaleResource>
+	<LocaleResource Name="Checkout.Order.completed.Pickup.Title">
+		<Value>
+			<![CDATA[<span>Order</span> confirmed and <span>the pickup</span> appointment is booked]]>
+		</Value>
+	</LocaleResource>
+	<LocaleResource Name="Checkout.Order.completed.Pickup.Title.info">
+		<Value>
+			<![CDATA[Your order is confirmed and the number is  <span>{0}.</span> Orange will send you an email containing the appointment details. And for you to see the order details you can check and print the order summary.]]>
+		</Value>
+	</LocaleResource>
+	<LocaleResource Name="Checkout.suggestedproduct.emptymessage">
+		<Value>No suggested product available</Value>
+	</LocaleResource>
+	<!--End Checkout-->
+
+	<!--Start Order-->
+	<LocaleResource Name="Order.Payment">
+		<Value>Payment</Value>
+	</LocaleResource>
+	<LocaleResource Name="Order.ShippingAddress">
+		<Value>Shipping Address</Value>
+	</LocaleResource>
+	<LocaleResource Name="Order.PersonalDetails">
+		<Value>Personal Details</Value>
+	</LocaleResource>
+	<LocaleResource Name="Order.CustomerDetails">
+		<Value>Customer Details</Value>
+	</LocaleResource>
+	<LocaleResource Name="Order.Nationality">
+		<Value>Nationality</Value>
+	</LocaleResource>
+	<LocaleResource Name="Order.TypeID">
+		<Value>Type ID</Value>
+	</LocaleResource>
+	<LocaleResource Name="Order.IDNumber">
+		<Value>ID Number</Value>
+	</LocaleResource>
+	<LocaleResource Name="Order.PhoneNumber">
+		<Value>Phone Number</Value>
+	</LocaleResource>
+	<LocaleResource Name="Order.EmailAddress">
+		<Value>Email Address</Value>
+	</LocaleResource>
+	<LocaleResource Name="Order.AddressDetails">
+		<Value>Address Details</Value>
+	</LocaleResource>
+	<LocaleResource Name="Order.Country">
+		<Value>Country</Value>
+	</LocaleResource>
+	<!--End Order-->
+	<LocaleResource Name="Breadcrumb.ShoppingCart">
+		<Value>Shopping Cart</Value>
+	</LocaleResource>
+	<LocaleResource Name="Breadcrumb.Personal">
+		<Value>Personal</Value>
+	</LocaleResource>
+	<LocaleResource Name="Breadcrumb.Eshop">
+		<Value>Eshop</Value>
+	</LocaleResource>
+	<LocaleResource Name="Breadcrumb.OrderSummary">
+		<Value>Order Summary</Value>
+	</LocaleResource>
+	<LocaleResource Name="Checkout.InternetPlanInstallationMessage">
+		<Value>Once you finish the checkout process and we get your details, we will contact you soon to install the chosen fiber plan</Value>
+	</LocaleResource>
+	<LocaleResource Name="OrderDetail.InternetPlanInstallationMessage">
+		<Value>Now we got your details we will contact you soon to install the chosen fiber plan in your home.</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.InternetUpgrade.FiberPrice.InTheFirstMonth">
+		<Value>in the first month</Value>
+	</LocaleResource>
+	<LocaleResource Name="OrderDetail.ProductRateText">
+		<Value>Rate the product</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.SelectOffer">
+		<Value>Select Offer</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.ChooseOffer">
+		<Value>Choose Offer</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.ChooseDeviceWithPlan">
+		<Value>Choose device with plan</Value>
+	</LocaleResource>
+	<LocaleResource Name="Newsletter.SubscribeToOur">
+		<Value>Subscribe to our</Value>
+	</LocaleResource>
+	<LocaleResource Name="Header.Search">
+		<Value>Search</Value>
+	</LocaleResource>
+	<LocaleResource Name="Checkout.Summary">
+		<Value>Summary</Value>
+	</LocaleResource>
+	<LocaleResource Name="Checkout.MyCart">
+		<Value>My Cart</Value>
+	</LocaleResource>
+	<LocaleResource Name="Checkout.TrackyourOrder">
+		<Value>Track your Order</Value>
+	</LocaleResource>
+	<LocaleResource Name="CompareProducts.AddDevice">
+		<Value>Add Device</Value>
+	</LocaleResource>
+	<LocaleResource Name="OrderDetail.Streetaddress">
+		<Value>Street address</Value>
+	</LocaleResource>
+	<LocaleResource Name="OrderDetail.Streetaddress2">
+		<Value>Street address 2</Value>
+	</LocaleResource>
+	<LocaleResource Name="OrderDetail.City">
+		<Value>City</Value>
+	</LocaleResource>
+	<LocaleResource Name="Checkout.ChooseAdditionalServices">
+		<Value>Choose additional services</Value>
+	</LocaleResource>
+	<LocaleResource Name="Checkout.SuggestedProducts">
+		<Value>Suggested products</Value>
+	</LocaleResource>
+	<LocaleResource Name="Checkout.Added">
+		<Value>Added</Value>
+	</LocaleResource>
+	<LocaleResource Name="Checkout.NoServiceProductAvailable">
+		<Value>No service product available</Value>
+	</LocaleResource>
+	<LocaleResource Name="CompareProducts.Add">
+		<Value>Add</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Shipment.Trackyourorder.Delivered.Detail">
+		<Value><![CDATA[your order is <br/> delivered]]> </Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Shipment.Activity.OrderCancel">
+		<Value>
+			<![CDATA[We connected to twice and you weren't available, so <span>we cancelled your order</span>. if you want select new products you can visit our online shop or can contact us for more information about your order.]]>
+		</Value>
+	</LocaleResource>
+	<LocaleResource Name="Address.Fields.PhoneNumber.MissMatch">
+		<Value>Invalid phone number</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.PhoneNumber.SelectSimNumber">
+		<Value>Please select sim card number</Value>
+	</LocaleResource>
+	<LocaleResource Name="ShoppingCart.DiscountCouponCode">
+		<Value>Use Promo Code</Value>
+	</LocaleResource>
+	<LocaleResource Name="ShoppingCart.GiftCardCouponCode">
+		<Value>RedeemGift Card</Value>
+	</LocaleResource>
+	<LocaleResource Name="Catrgory.Upgradeyourspeed">
+		<Value>Upgrade speed</Value>
+	</LocaleResource>
+	<LocaleResource Name="Common.PriceFormate">
+		<Value><![CDATA[<span>JOD</span> {0}.<span>{1}</span>]]></Value>
+	</LocaleResource>
+	<LocaleResource Name="Common.OldPriceFormate">
+		<Value><![CDATA[JOD 0]]></Value>
+	</LocaleResource>
+	<LocaleResource Name="Categories.Breadcrumb.Personal">
+		<Value>Personal</Value>
+	</LocaleResource>
+	<LocaleResource Name="AppointmentBooking.viewMap">
+		<Value>View in Map</Value>
+	</LocaleResource>
+	<LocaleResource Name="AppointmentBooking.AroundMe">
+		<Value>Around Me</Value>
+	</LocaleResource>
+	<LocaleResource Name="Checkout.ContinueShopping">
+		<Value>Back to shop</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.Catalog.Products.Fields.OfferDetailsCTA">
+		<Value>Offer Details CTA</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.Catalog.Products.Fields.OfferDetailsCTA.Hint">
+		<Value>Offer Details CTA</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.Catalog.Products.Fields.KnowingTerms">
+		<Value>Worth Knowing</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.Catalog.Products.Fields.KnowingTerms.Hint">
+		<Value>Worth Knowing</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.Catalog.Products.Fields.Conditions">
+		<Value><![CDATA[Terms & Conditions]]></Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.Catalog.Products.Fields.Conditions.Hint">
+		<Value><![CDATA[Terms & Conditions]]></Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.Catalog.Products.Fields.ImportantNotes">
+		<Value>Important Notes</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.Catalog.Products.Fields.ImportantNotes.Hint">
+		<Value>Important Notes</Value>
+	</LocaleResource>
+	<LocaleResource Name="Products.Detail.Discountamount">
+		<Value>Discount amount</Value>
+	</LocaleResource>
+	<LocaleResource Name="Footer.Contactus.URL">
+		<Value>contactus</Value>
+	</LocaleResource>
+	<LocaleResource Name="Products.Detail.DevicePriceWithPlan">
+		<Value>Device price with plan</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.CommitmentPeriod">
+		<Value>Commitment period</Value>
+	</LocaleResource>
+	<LocaleResource Name="checkout.simcardnumber">
+		<Value>Simcard Number</Value>
+	</LocaleResource>
+</Language>

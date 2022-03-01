@@ -1,0 +1,14 @@
+﻿@inject IThemeContext themeContext
+@{ var themeName = themeContext.WorkingThemeName; }
+<div class="footer-orange">
+    <a href="https://www.orange.jo">
+        <img title="" alt="Orange" src="/Themes/@themeName/Content/images/logo.png">
+    </a>
+    <span>حقوق النشر   @DateTime.Now.Year</span>
+    <a href="https://www.orange.jo/ar/Pages/legal.aspx" target="_self">
+        قانوني
+    </a>
+    <a href="http://jobs.orange.com/jobs/jobsearch.do?do=country&amp;CTRY=JO&amp;lang=EN" target="_blank">
+        الوظائف
+    </a>
+</div>

@@ -1,0 +1,45 @@
+﻿@model IList<CategoryModel>
+@{ 
+    var firstBreadc = Model.FirstOrDefault();
+}
+<div class="breadcrumb">
+    <ul itemscope itemtype="http://schema.org/BreadcrumbList">
+        <li>
+            <a title="@T("Categories.Breadcrumb.Personal")">@T("Categories.Breadcrumb.Personal")</a>
+            <span class="delimiter"></span>
+        </li>
+        <li>
+            <a href="@Url.RouteUrl("HomePage")" title="@T("Categories.Breadcrumb.Top")">@T("Categories.Breadcrumb.Top")</a>
+            <span class="delimiter"></span>
+        </li>
+        <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+            <strong class="current-item" itemprop="name">@firstBreadc?.Name</strong>
+            <span itemprop="item" itemscope itemtype="http://schema.org/Thing">
+                <link itemprop="url" href="@Url.RouteUrl("Category", new {SeName = firstBreadc?.SeName})" />
+            </span>
+        </li>
+        @*@{ int position = 1; }
+        @foreach (var cat in Model.CategoryBreadcrumb)
+        {
+            var isLastCategory = cat.Id == Model.Id;
+            <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                @if (isLastCategory)
+                {
+                    <strong class="current-item" itemprop="name">@cat.Name</strong>
+                    <span itemprop="item" itemscope itemtype="http://schema.org/Thing">
+                        <link itemprop="url" href="@Url.RouteUrl("Category", new {SeName = cat.SeName})" />
+                    </span>
+                }
+                else
+                {
+                    <a href="@Url.RouteUrl("Category", new { SeName = cat.SeName })" title="@cat.Name" itemprop="item">
+                        <span itemprop="name">@cat.Name</span>
+                    </a>
+                    <span class="delimiter"></span>
+                }
+                <meta itemprop="position" content="@position" />
+            </li>
+            position++;
+        }*@
+    </ul>
+</div>

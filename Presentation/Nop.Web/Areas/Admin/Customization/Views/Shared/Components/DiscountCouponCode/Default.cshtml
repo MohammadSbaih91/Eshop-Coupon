@@ -1,0 +1,144 @@
+﻿@model DiscountCouponCodesModel
+@if (Model.DiscountId > 0)
+{
+        <div class="content">
+            <div class="form-horizontal" id="pnldiscouncouponcode">
+                <div class="panel-group">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <input asp-for="DiscountId" type="hidden" />
+                            <div class="form-group">
+                                <div class="col-md-3">
+                                    <nop-label asp-for="NoOfCodes" />
+                                </div>
+                                <div class="col-md-9">
+                                    <nop-editor asp-for="NoOfCodes" />
+                                    <span asp-validation-for="NoOfCodes"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-3">
+                                    <nop-label asp-for="CodeLength" />
+                                </div>
+                                <div class="col-md-9">
+                                    <nop-editor asp-for="CodeLength" />
+                                    <span asp-validation-for="CodeLength"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-3">
+                                    <nop-label asp-for="Prefix" />
+                                </div>
+                                <div class="col-md-6">
+                                    <nop-editor asp-for="Prefix" />
+                                    <span asp-validation-for="Prefix"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-3">
+                                    <nop-label asp-for="Suffix" />
+                                </div>
+                                <div class="col-md-6">
+                                    <nop-editor asp-for="Suffix" />
+                                    <span asp-validation-for="Suffix"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-3">
+                                    <nop-label asp-for="CharacterSet" />
+                                </div>
+                                <div class="col-md-6">
+                                    <nop-editor asp-for="CharacterSet" />
+                                    <span asp-validation-for="CharacterSet"></span>
+                                </div>
+                            </div>
+                            <div class="panel-footer">
+                                <button name="discountCouponCodeGenerate" type="submit" class="btn bg-blue">
+                                    <i class="fa fa-floppy-o"></i>
+                                @T("Admin.Promotions.Discounts.GenerateCode")
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div id="discountcouponcode-grid"></div>
+                            <script>
+                                $(document).ready(function() {
+                                    $("#discountcouponcode-grid").kendoGrid({
+                                        dataSource: {
+                                            type: "json",
+                                            transport: {
+                                                read: {
+                                                    url: "@Html.Raw(Url.Action("DiscountCouponCodeList", "Discount"))",
+                                                    type: "POST",
+                                                    dataType: "json",
+                                                    data: function() {
+                                                        var data = {
+                                                            DiscountId: '@(Model.DiscountId)'
+                                                        };
+                                                        addAntiForgeryToken(data);
+                                                        return data;
+                                                    }
+                                                },
+                                                destroy: {
+                                                    url: "@Html.Raw(Url.Action("DeleteDiscountCouponCode", "Discount"))",
+                                                    type: "POST",
+                                                    dataType: "json",
+                                                    data: addAntiForgeryToken
+                                                }
+                                            },
+                                            schema: {
+                                                data: "Data",
+                                                total: "Total",
+                                                errors: "Errors",
+                                                model: {
+                                                    id: "Id",
+                                                }
+                                            },
+                                            error: function(e) {
+                                                display_kendoui_grid_error(e);
+                                                // Cancel the changes
+                                                this.cancelChanges();
+                                            },
+                                            serverPaging: true,
+                                            serverFiltering: true,
+                                            serverSorting: true
+                                        },pageable: {
+                                            refresh: true,
+                                            pageSizes: 10,
+                            @await Html.PartialAsync("_GridPagerMessages")
+                                        },
+                                        editable: {
+                                            confirmation: "@T("Admin.Common.DeleteConfirmation")",
+                                            mode: "inline"
+                                        },
+                                        scrollable: false,
+                                        columns: [
+                                        {
+                                            field: "CouponCode",
+                                            title: "@T("Admin.DiscountCouponCodes.Fields.CouponCode")",
+                                            width: 200
+                                        }, {
+                                            command: { name: "destroy", text: "@T("Admin.Common.Delete")" },
+                                            title: "@T("Admin.Common.Delete")",
+                                            width: 100,
+                                            headerAttributes: { style: "text-align:center" },
+                                            attributes: { style: "text-align:center" }
+                                        }
+                                        ]
+                                    });
+                                });
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+}
+else
+{
+        <div class="panel-body">
+        @T("Admin.Promotions.Discounts.AddCouponCode.SaveBeforeEdit")
+        </div>
+}

@@ -1,0 +1,255 @@
+﻿
+<input type="hidden" id="latitude" />
+<input type="hidden" id="longitude" />
+<input type="hidden" id="orderId" value="@ViewBag.OrderId" />
+<input type="hidden" id="addressId" value="@ViewBag.AddressId" />
+<input type="hidden" id="phoneNumber" value="@ViewBag.PhoneNumber" />
+<div>
+    <partial name="_AppointmentHeader" />
+    <div id="AppointmentStore">
+        <div class="appointment-content">
+            <div class="appointment-body">
+                <div class="appointment-first-popup">
+                    <div class="flex_row">
+                        <div class="flex-md-5 marbottom10">
+                            <div class="appointment-first-left">
+                                <div id="AppointmentStoreList">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex-md-7">
+                            <div class="appointment-first-left">
+                                <div class="map" id="map" style="height: 590px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="AppointmentStoreDetail">
+    </div>
+    <div id="AppointmentTime">
+    </div>
+</div>
+
+@*<script src="https://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>*@
+<script>
+    $(document).ready(function () {
+        AroundMe();
+    });
+
+    function AroundMe() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+        }
+    }
+
+    function showPosition(position) {
+
+            $("#latitude").val(position.coords.latitude);
+            $("#longitude").val(position.coords.longitude);
+            LoadStoreList();
+        }
+
+    function ChangePickupBranch(value) {
+
+        var lalo = value.split(",");
+        var la = lalo[0];
+        var lo = lalo[1];
+        var request = {
+            "currentLatitude" : la,
+            "currentLongitude" : lo
+        };
+
+        addAntiForgeryToken(request);
+        $.ajax({
+            cache: false,
+            type: "POST",
+            url:"@Url.RouteUrl("appointmentbooking.AppointmentStoreList")",
+            data: request,
+            dataType: 'json',
+            success: function (response) {
+                $("#AppointmentStoreDetail").hide();
+                $("#AppointmentTime").hide();
+                $("#AppointmentStore").show();
+                $("#AppointmentStoreList").html(response.html);
+                $("#around_me").removeClass("active");
+                $(".view-map").on("click", function () {
+                    $(".map", ".appointment-first-left").toggleClass("active");;
+                })
+
+            },
+            failure: function (response) {
+                alert(response);
+            }
+        });
+    }
+
+    function LoadStoreList() {
+        var la = $("#latitude").val();
+        var lo = $("#longitude").val();
+        var request = {
+            "currentLatitude" : la,
+            "currentLongitude" : lo
+        };
+
+        addAntiForgeryToken(request);
+        $.ajax({
+            cache: false,
+            type: "POST",
+            url:"@Url.RouteUrl("appointmentbooking.AppointmentStoreList")",
+            data: request,
+            dataType: 'json',
+            success: function (response) {
+                $("#AppointmentStoreDetail").hide();
+                $("#AppointmentTime").hide();
+                $("#AppointmentStore").show();
+                $("#AppointmentStoreList").html(response.html);
+                $("#around_me").addClass("active");
+                $(".view-map").on("click", function () {
+                    $(".map", ".appointment-first-left").toggleClass("active");
+                })
+
+            },
+            failure: function (response) {
+                alert(response);
+            }
+        });
+    }
+
+    function LoadStoreDetail(cityID, departmentID, distance, id, identity, isWorkingNow, latitude, longitude, name,openUntil) {
+        var request = {
+            branch: {
+                "cityID": cityID,
+                "departmentID": departmentID,
+                "distance": distance,
+                "id": id,
+                "identity": identity,
+                "isWorkingNow": isWorkingNow,
+                "latitude": latitude,
+                "longitude": longitude,
+                "name": name
+            },
+            openUntil: openUntil
+        };
+        addAntiForgeryToken(request);
+        $.ajax({
+            cache: false,
+            type: "POST",
+            url:"@Url.RouteUrl("appointmentbooking.AppointmentStoreDetail")",
+            data: request,
+            dataType: 'json',
+            success: function (response) {
+                $("#AppointmentStore").hide();
+                $("#AppointmentTime").hide();
+                $("#AppointmentStoreDetail").show();
+                $("#AppointmentStoreDetail").html(response.html);
+            },
+            failure: function (response) {
+                alert(response);
+            }
+        });
+    }
+    function LoadTime(cityID, departmentID, distance, id, identity, isWorkingNow, latitude, longitude, name, appointmentDay) {
+        displayAjaxLoading(true);
+        var request = {
+            branch: {
+                "cityID": cityID,
+                "departmentID": departmentID,
+                "distance": distance,
+                "id": id,
+                "identity": identity,
+                "isWorkingNow": isWorkingNow,
+                "latitude": latitude,
+                "longitude": longitude,
+                "name": name
+            },
+            appointmentDay: appointmentDay,
+            orderId: $("#orderId").val()
+            //serviceID: serviceID,
+            //openUntil: openUntil
+        };
+        addAntiForgeryToken(request);
+        $.ajax({
+            cache: false,
+            type: "POST",
+            url:"@Url.RouteUrl("appointmentbooking.AppointmentTime")",
+            data: request,
+            dataType: 'json',
+            success: function (response) {
+                displayAjaxLoading(false);
+                if (response.error == 1) {
+                    alert(response.message);
+                }
+                else {
+                    $("#AppointmentStore").hide();
+                    $("#AppointmentStoreDetail").hide();
+                    $("#AppointmentTime").show();
+                    $("#AppointmentTime").html(response.html);
+                }
+            },
+            failure: function (response) {
+                alert(response);
+            }
+        });
+    }
+
+    function BookAppointment(orderId, appointmentDay, branchID, serviceID,storeName) {
+
+        var addressId = $("#addressId").val();
+        var phoneNumber = $("#phoneNumber").val();
+        var selectedAppointmentTime = $("#SelectedAppointmentTime").val();
+        if (selectedAppointmentTime == "") {
+            alert('@T("Plugins.Misc.AppointmentBooking.ErrorMessage.TimeSloftRequired")');
+        }
+        else {
+            var request = {
+                bookAppointmentRequest: {
+                    "OrderId": orderId,
+                    "AppointmentDay": appointmentDay,
+                    "SelectedAppointmentTime": selectedAppointmentTime,
+                    "BranchID": branchID,
+                    "ServiceID": serviceID,
+                    "SelectedStoreName": storeName,
+                    "AddressId": addressId,
+                    "PhoneNumber": phoneNumber
+                },
+                isDrawer: $("#hidIsDrawer").val()
+            };
+            addAntiForgeryToken(request);
+            $.ajax({
+                cache: false,
+                type: "POST",
+                url: "@Url.Action("BookAppointmentCompleted", "AppointmentBooking")",
+                data: request,
+                dataType: 'json',
+                success: function (response) {
+                    if (response.isDrawer == true) {
+                        if (response.url == "") {
+                            alert(response.message);
+                        }
+                        else {
+                            $('.booking-drawer').removeClass('active');
+                            $("body").removeClass("scroll-lock");
+                            $('.booking-drawer-layer').removeClass('active');
+                            $('#btn-saveCustomBilling').trigger('click');
+                        }
+                    }
+                    else {
+                        if (response.url == "") {
+                            alert(response.message);
+                        }
+                        else {
+                            window.location.href = response.url;
+                        }
+                    }
+                },
+                failure: function (response) {
+                    alert(response);
+                }
+            });
+        }
+    }
+</script>

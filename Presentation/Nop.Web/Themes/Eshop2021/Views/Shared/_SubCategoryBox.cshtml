@@ -1,0 +1,53 @@
+﻿
+@model SubCategoryModel
+@using static Nop.Web.Models.Catalog.CategoryModel
+@using Nop.Core
+@using Nop.Core.Domain.Catalog
+@using Nop.Core.Domain.Orders
+@using Nop.Core.Domain.Tax
+@inject CatalogSettings catalogSettings
+@inject IWorkContext workContext
+@{
+    var supportRtl = workContext.WorkingLanguage.Rtl;
+    var rtl = supportRtl ? "true" : "false";
+    var direction = supportRtl ? "left" : "right";
+    
+    var taxTooltip = workContext.TaxDisplayType == TaxDisplayType.IncludingTax ? T("HomePage.ProductBox.IncludingTax") : T("HomePage.ProductBox.ExcludingTax");
+}
+<div class="product-item" data-productid="@Model.Id">
+    <div class="product-top">
+        <div class="picture no-margin-picture">
+            <a class="show-drawer-@(Model.Id) prd-drawer-toggle-subCat" onclick="LoadCategoryProduct(@(Model.Id), 0, @(rtl),@(Model.ParentCategoryId))" title="@Model.PictureModel.Title">
+                <img alt="@Model.PictureModel.AlternateText" src="@Model.PictureModel.ImageUrl" title="@Model.PictureModel.Title" />
+            </a>
+        </div>
+         <a class="show-drawer-@(Model.Id) prd-drawer-toggle-subCat product-title" onclick="LoadCategoryProduct(@(Model.Id), 0, @(rtl),@(Model.ParentCategoryId))">@Model.Name</a>
+        <div class="triangle-up"></div>
+    </div>
+    <div class="details">
+        <div class="description">
+            @Html.Raw(Model.Description)
+        </div>
+        @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.ProductBoxAddinfoBefore, additionalData = Model })
+        <div class="prices">
+            <div class="prices-flex">
+                <div class="tooltip-check" data-toggle="tooltip" data-placement="bottom" title="@taxTooltip">
+                </div>
+                <div class="prices-group">
+                    <div class="start-form">@T("HomePage.ProductBox.StartForm")</div>
+                    <div class="prices-list">
+                        <span class="price actual-price">@Html.Raw(EShopHelper.GetPriceFormatting(Model.FormatMinimumPriceOfProduct)) </span> <span class="pad-top15 startFormMonth">/ @T("HomePage.ProductBox.StartFormMonth")</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="add-info">
+            @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.ProductBoxAddinfoMiddle, additionalData = Model })
+            <div class="buttons">
+                <button type="button" value="@T("Products.Details")" class="show-drawer-@(Model.Id) prd-drawer-toggle-subCat button-1 product-box-detail-button btn btn-primary btn-block text-left lg" onclick="LoadCategoryProduct(@(Model.Id), 0, @(rtl),@(Model.ParentCategoryId))">@T("HomePage.ProductBox.ViewOffers")<i class="fas fa-chevron-right"></i></button>
+            </div>
+            @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.ProductBoxAddinfoAfter, additionalData = Model })
+        </div>
+    </div>
+</div>
+

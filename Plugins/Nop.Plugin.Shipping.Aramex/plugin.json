@@ -1,0 +1,11 @@
+﻿{
+  "Group": "eShop",
+  "FriendlyName": "Aramex Shipping",
+  "SystemName": "Shipping.Aramex",
+  "Version": "1.00",
+  "SupportedVersions": [ "4.10" ],
+  "Author": "eShop",
+  "DisplayOrder": 1,
+  "FileName": "Nop.Plugin.Shipping.Aramex.dll",
+  "Description": ""
+}

@@ -1,0 +1,43 @@
+﻿@model Nop.Web.Customization.Models.Catalog.HomePageProduct
+@using Nop.Core
+@inject IWorkContext workContext
+
+@{
+    var supportRtl = workContext.WorkingLanguage.Rtl;
+    var rtl = supportRtl ? "true" : "false";
+}
+<div class="tabs-nav nav-scroll">
+    <ul>
+        @for (int i = 0; i < Model.categoryModel.SubCategories.Count; i++)
+        {
+            var subcategory = Model.categoryModel.SubCategories[i];
+            var activeClass = subcategory.Id == Model.ActiveCategoryId ? "class=active" : "";
+            var divId = $"-{Model.categoryModel.Id}-{subcategory.Id}";
+            <li @activeClass>
+                @*<a class="category" onclick="GetHomePageProduct(@(Model.categoryModel.Id),@(subcategory.Id),'@(divId)',@rtl,0)" href="#tab@(divId)">@subcategory.Name</a>*@
+                @if (subcategory.ChildCategoryModels.Count() > 0)
+                {
+                    <a>@subcategory.Name</a>
+                }
+                else
+                {
+                    <a class="category" onclick="GetHomePageProduct(@(Model.categoryModel.Id),@(subcategory.Id),'@(divId)',@rtl,0)" href="#tab@(divId)">@subcategory.Name</a>
+                }
+                @if (subcategory.ChildCategoryModels.Count() > 0)
+                {
+                    <ul>
+                        <li>
+                            <a class="category" onclick="GetHomePageProduct(@(Model.categoryModel.Id), @(subcategory.Id),'@(divId)',@rtl,0)" href="#tab@(divId)">@T("Common.All")</a>
+                        </li>
+                        @foreach (var childCategory in subcategory.ChildCategoryModels)
+                        {
+                            <li>
+                                <a class="category" onclick="GetHomePageProduct(@(Model.categoryModel.Id),@(childCategory.Id),'@(divId)',@rtl,0)" href="#tab@(divId)">@childCategory.Name</a>
+                            </li>
+                        }
+                    </ul>
+                }
+            </li>
+        }
+    </ul>
+</div>

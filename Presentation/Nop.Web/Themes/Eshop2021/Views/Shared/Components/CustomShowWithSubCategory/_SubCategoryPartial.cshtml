@@ -1,0 +1,22 @@
+﻿@model Nop.Web.Models.Catalog.CategoryModel
+@using Nop.Core
+@inject IWorkContext workContext
+
+@{
+    var supportRtl = workContext.WorkingLanguage.Rtl;
+    var rtl = supportRtl ? "true" : "false";
+}
+@{ 
+    var subCat = Model.SubCategories.FirstOrDefault();
+}
+<div class="tabs-nav nav-scroll">
+    <ul>
+        @for (int i = 0; i < Model.SubCategories.Count; i++)
+        {
+            var subcategory = Model.SubCategories[i];
+            var activeClass = subcategory.Id == subCat.Id ? "class=active" : "";
+            var divId = $"-{Model.Id}-{subcategory.Id}";
+            <li @activeClass><a onclick="GetCategoriesShowWithSubCategories(@(Model.Id),@(subcategory.Id),'@(divId)',@rtl)" href="#tab@(divId)">@subcategory.Name</a></li>
+        }
+    </ul>
+</div>

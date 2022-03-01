@@ -1,0 +1,302 @@
+﻿@{
+    Layout = "_Root.Head";
+}
+@await Component.InvokeAsync("Widget", new {widgetZone = PublicWidgetZones.BodyStartHtmlTagAfter})
+@await Html.PartialAsync("_Notifications")
+@await Html.PartialAsync("_JavaScriptDisabledWarning")
+@await Html.PartialAsync("_OldInternetExplorerWarning")
+<div class="master-wrapper-page">
+    @*<div class="ramadan">
+            <div class="background-items">
+                <div><img src="~/images/Ramadan/lamp.png"></div>
+                <div><img src="~/images/Ramadan/star.png" style="height: 150px; position: relative; top: -12px;"></div>
+                <div><img src="~/images/Ramadan/moon.png" style="height: 170px; position: relative; top: -12px;"></div>
+                <div><img src="~/images/Ramadan/lamp.png"></div>
+                <div><img src="~/images/Ramadan/star.png" style="height: 150px; position: relative; top: -12px;"></div>
+                <div><img src="~/images/Ramadan/moon.png" style="height: 170px; position: relative; top: -12px;"></div>
+                <div><img src="~/images/Ramadan/lamp.png" style="height: 220px; position: relative; top: -13px;"></div>
+                <div><img src="~/images/Ramadan/star.png" style="height: 150px; position: relative; top: -13px;"></div>
+                <div><img src="~/images/Ramadan/star.png" style="height: 220px; position: relative; top: -13px;"></div>
+                <div><img src="~/images/Ramadan/lamp.png" style="height: 150px; position: relative; top: -13px;"></div>
+                <div><img src="~/images/Ramadan/moon.png" style="height: 220px; position: relative; top: -13px;"></div>
+                <div><img src="~/images/Ramadan/star.png" style="height: 150px; position: relative; top: -10px;"></div>
+                <div><img src="~/images/Ramadan/lamp.png"></div>
+                <div><img src="~/images/Ramadan/star.png" style="height: 150px; position: relative; top: -12px;"></div>
+                <div><img src="~/images/Ramadan/moon.png" style="height: 170px; position: relative; top: -12px;"></div>
+                <div><img src="~/images/Ramadan/lamp.png" style="height: 220px; position: relative; top: -13px;"></div>
+                <div><img src="~/images/Ramadan/star.png" style="height: 150px; position: relative; top: -13px;"></div>
+                <div><img src="~/images/Ramadan/star.png" style="height: 220px; position: relative; top: -13px;"></div>
+                <div><img src="~/images/Ramadan/lamp.png" style="height: 150px; position: relative; top: -13px;"></div>
+                <div><img src="~/images/Ramadan/moon.png" style="height: 220px; position: relative; top: -13px;"></div>
+                <div><img src="~/images/Ramadan/star.png" style="height: 150px; position: relative; top: -10px;"></div>
+                <div><img src="~/images/Ramadan/lamp.png"></div>
+                <div><img src="~/images/Ramadan/star.png" style="height: 150px; position: relative; top: -10px;"></div>
+                <div><img src="~/images/Ramadan/lamp.png" style="height: 220px; position: relative; top: -13px;"></div>
+                <div><img src="~/images/Ramadan/star.png" style="height: 150px; position: relative; top: -15px;"></div>
+                <div><img src="~/images/Ramadan/moon.png"></div>
+                <div><img src="~/images/Ramadan/lamp.png" style="height: 220px; position: relative; top: -13px;"></div>
+                <div><img src="~/images/Ramadan/star.png"></div>
+                <div><img src="~/images/Ramadan/star.png" style="height: 150px; position: relative; top: -12px;"></div>
+                <div><img src="~/images/Ramadan/lamp.png" style="height: 220px; position: relative; top: -13px;"></div>
+                <div><img src="~/images/Ramadan/moon.png" style="height: 250px; position: relative; top: -13px;"></div>
+                <div><img src="~/images/Ramadan/star.png" style="height: 150px; position: relative; top: -10px;"></div>
+                <div><img src="~/images/Ramadan/lamp.png"></div>
+                <div><img src="~/images/Ramadan/star.png" style="height: 150px; position: relative; top: -12px;"></div>
+                <div><img src="~/images/Ramadan/lamp.png" style="height: 220px; position: relative; top: -13px;"></div>
+                <div><img src="~/images/Ramadan/moon.png" style="height: 250px; position: relative; top: -13px;"></div>
+                <div><img src="~/images/Ramadan/star.png" style="height: 150px; position: relative; top: -10px;"></div>
+                <div><img src="~/images/Ramadan/lamp.png"></div>
+                <div><img src="~/images/Ramadan/star.png" style="height: 150px; position: relative; top: -12px;"></div>
+                <div><img src="~/images/Ramadan/lamp.png" style="height: 220px; position: relative; top: -13px;"></div>
+                <div><img src="~/images/Ramadan/moon.png" style="height: 250px; position: relative; top: -13px;"></div>
+                <div><img src="~/images/Ramadan/star.png" style="height: 150px; position: relative; top: -10px;"></div>
+                <div><img src="~/images/Ramadan/lamp.png"></div>
+                <div><img src="~/images/Ramadan/star.png" style="height: 150px; position: relative; top: -12px;"></div>
+                <div><img src="~/images/Ramadan/lamp.png" style="height: 220px; position: relative; top: -13px;"></div>
+                <div><img src="~/images/Ramadan/moon.png" style="height: 250px; position: relative; top: -13px;"></div>
+                <div><img src="~/images/Ramadan/star.png" style="height: 150px; position: relative; top: -10px;"></div>
+                <div><img src="~/images/Ramadan/lamp.png"></div>
+            </div>
+        </div>*@
+
+    @*<div class="eid">
+            <div class="background-items">
+                <div class="swing1">
+                    <img src="~/images/Eid/eid.png">
+                </div>
+                <div class="pull1">
+                    <img src="~/images/Eid/star.png" style="height: 150px; position: relative; top: -12px;">
+                </div>
+                <div class="swing2">
+                    <img src="~/images/Eid/moon.png" style="height: 170px; position: relative; top: -12px;">
+                </div>
+                <div class="swing1">
+                    <img src="~/images/Eid/eid.png" style="height: 220px; position: relative; top: -13px;">
+                </div>
+                <div class="swing3">
+                    <img src="~/images/Eid/star.png" style="height: 150px; position: relative; top: -13px;">
+                </div>
+                <div class="pull2">
+                    <img src="~/images/Eid/star.png" style="height: 220px; position: relative; top: -13px;">
+                </div>
+                <div class="swing2">
+                    <img src="~/images/Eid/eid.png" style="height: 150px; position: relative; top: -13px;">
+                </div>
+                <div class="swing1">
+                    <img src="~/images/Eid/moon.png" style="height: 220px; position: relative; top: -13px;">
+                </div>
+                <div class="pull2">
+                    <img src="~/images/Eid/star.png" style="height: 150px; position: relative; top: -10px;">
+                </div>
+                <div class="swing2">
+                    <img src="~/images/Eid/eid.png">
+                </div>
+                <div class="pull3">
+                    <img src="~/images/Eid/star.png" style="height: 150px; position: relative; top: -10px;">
+                </div>
+                <div class="swing3">
+                    <img src="~/images/Eid/eid.png" style="height: 220px; position: relative; top: -13px;">
+                </div>
+                <div class="pull2">
+                    <img src="~/images/Eid/star.png" style="height: 150px; position: relative; top: -15px;">
+                </div>
+                <div class="swing2">
+                    <img src="~/images/Eid/moon.png">
+                </div>
+                <div class="swing3">
+                    <img src="~/images/Eid/eid.png" style="height: 220px; position: relative; top: -13px;">
+                </div>
+                <div class="pull1">
+                    <img src="~/images/Eid/star.png">
+                </div>
+                <div class="pull1">
+                    <img src="~/images/Eid/star.png" style="height: 150px; position: relative; top: -12px;">
+                </div>
+                <div class="swing2">
+                    <img src="~/images/Eid/eid.png" style="height: 220px; position: relative; top: -13px;">
+                </div>
+                <div class="swing1">
+                    <img src="~/images/Eid/moon.png" style="height: 250px; position: relative; top: -13px;">
+                </div>
+                <div class="pull2">
+                    <img src="~/images/Eid/star.png" style="height: 150px; position: relative; top: -10px;">
+                </div>
+                <div class="swing3">
+                    <img src="~/images/Eid/eid.png">
+                </div>
+            </div>
+        </div>*@
+    @*<div class="ramadan">
+        <div class="background-items">
+            <div class="swing1">
+                <img src="~/images/BlackFriday/tag.png">
+            </div>
+            <div class="pull1">
+                <img src="~/images/BlackFriday/phone.png" style="height: 150px; position: relative; top: -12px;">
+            </div>
+            <div class="swing2">
+                <img src="~/images/BlackFriday/watch.png" style="height: 170px; position: relative; top: -12px;">
+            </div>
+            <div class="swing1">
+                <img src="~/images/BlackFriday/tag.png" style="height: 220px; position: relative; top: -13px;">
+            </div>
+            <div class="swing3">
+                <img src="~/images/BlackFriday/phone.png" style="height: 150px; position: relative; top: -13px;">
+            </div>
+            <div class="pull2">
+                <img src="~/images/BlackFriday/watch.png" style="height: 220px; position: relative; top: -13px;">
+            </div>
+            <div class="swing2">
+                <img src="~/images/BlackFriday/tag.png" style="height: 150px; position: relative; top: -13px;">
+            </div>
+            <div class="swing1">
+                <img src="~/images/BlackFriday/watch.png" style="height: 220px; position: relative; top: -13px;">
+            </div>
+            <div class="pull2">
+                <img src="~/images/BlackFriday/watch.png" style="height: 150px; position: relative; top: -10px;">
+            </div>
+            <div class="swing2">
+                <img src="~/images/BlackFriday/tag.png">
+            </div>
+            <div class="pull3">
+                <img src="~/images/BlackFriday/phone.png" style="height: 150px; position: relative; top: -10px;">
+            </div>
+            <div class="swing3">
+                <img src="~/images/BlackFriday/tag.png" style="height: 220px; position: relative; top: -13px;">
+            </div>
+            <div class="pull2">
+                <img src="~/images/BlackFriday/watch.png" style="height: 150px; position: relative; top: -15px;">
+            </div>
+            <div class="swing2">
+                <img src="~/images/BlackFriday/phone.png">
+            </div>
+            <div class="swing3">
+                <img src="~/images/BlackFriday/tag.png" style="height: 220px; position: relative; top: -13px;">
+            </div>
+            <div class="pull1">
+                <img src="~/images/BlackFriday/phone.png">
+            </div>
+            <div class="pull1">
+                <img src="~/images/BlackFriday/watch.png" style="height: 150px; position: relative; top: -12px;">
+            </div>
+            <div class="swing2">
+                <img src="~/images/BlackFriday/tag.png" style="height: 220px; position: relative; top: -13px;">
+            </div>
+            <div class="swing1">
+                <img src="~/images/BlackFriday/phone.png" style="height: 250px; position: relative; top: -13px;">
+            </div>
+            <div class="pull2">
+                <img src="~/images/BlackFriday/watch.png" style="height: 150px; position: relative; top: -10px;">
+            </div>
+            <div class="swing3">
+                <img src="~/images/BlackFriday/tag.png">
+            </div>
+            <div class="pull1">
+                <img src="~/images/BlackFriday/phone.png" style="height: 150px; position: relative; top: -12px;">
+            </div>
+            <div class="swing2">
+                <img src="~/images/BlackFriday/watch.png" style="height: 170px; position: relative; top: -12px;">
+            </div>
+            <div class="swing1">
+                <img src="~/images/BlackFriday/tag.png" style="height: 220px; position: relative; top: -13px;">
+            </div>
+            <div class="swing3">
+                <img src="~/images/BlackFriday/phone.png" style="height: 150px; position: relative; top: -13px;">
+            </div>
+            <div class="pull2">
+                <img src="~/images/BlackFriday/watch.png" style="height: 220px; position: relative; top: -13px;">
+            </div>
+            <div class="swing2">
+                <img src="~/images/BlackFriday/tag.png" style="height: 150px; position: relative; top: -13px;">
+            </div>
+            <div class="swing1">
+                <img src="~/images/BlackFriday/watch.png" style="height: 220px; position: relative; top: -13px;">
+            </div>
+            <div class="pull2">
+                <img src="~/images/BlackFriday/watch.png" style="height: 150px; position: relative; top: -10px;">
+            </div>
+            <div class="swing2">
+                <img src="~/images/BlackFriday/tag.png">
+            </div>
+            <div class="pull3">
+                <img src="~/images/BlackFriday/phone.png" style="height: 150px; position: relative; top: -10px;">
+            </div>
+            <div class="swing3">
+                <img src="~/images/BlackFriday/tag.png" style="height: 220px; position: relative; top: -13px;">
+            </div>
+            <div class="pull2">
+                <img src="~/images/BlackFriday/watch.png" style="height: 150px; position: relative; top: -15px;">
+            </div>
+            <div class="swing2">
+                <img src="~/images/BlackFriday/phone.png">
+            </div>
+            <div class="swing3">
+                <img src="~/images/BlackFriday/tag.png" style="height: 220px; position: relative; top: -13px;">
+            </div>
+            <div class="pull1">
+                <img src="~/images/BlackFriday/phone.png">
+            </div>
+            <div class="pull1">
+                <img src="~/images/BlackFriday/watch.png" style="height: 150px; position: relative; top: -12px;">
+            </div>
+            <div class="swing2">
+                <img src="~/images/BlackFriday/tag.png" style="height: 220px; position: relative; top: -13px;">
+            </div>
+            <div class="swing1">
+                <img src="~/images/BlackFriday/phone.png" style="height: 250px; position: relative; top: -13px;">
+            </div>
+            <div class="pull2">
+                <img src="~/images/BlackFriday/watch.png" style="height: 150px; position: relative; top: -10px;">
+            </div>
+            <div class="swing3">
+                <img src="~/images/BlackFriday/tag.png">
+            </div>
+        </div>
+    </div>*@
+    
+    <div class="es-header-wraper full-width">
+        @await Component.InvokeAsync("AdminHeaderLinks")
+        @await Html.PartialAsync("_Header")
+        <script asp-location="Footer">
+            AjaxCart.init(false, '.header-links .cart-qty', '.header-links .wishlist-qty', '#flyout-cart');
+        </script>
+        <div class="es-hr full-width"></div>
+        <div class="es-header-menu full-width">
+            <div class="header-menu">
+                @await Component.InvokeAsync("TopMenu")
+            </div>
+        </div>
+    </div>
+    <div class="master-wrapper-content">
+        @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.ContentBefore })
+
+        @if (IsSectionDefined("Breadcrumb"))
+        {
+            @RenderSection("Breadcrumb")
+        }
+        <div class="master-column-wrapper">
+            @RenderBody()
+        </div>
+        @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.ContentAfter })
+    </div>
+    @await Component.InvokeAsync("Footer")
+</div>
+@await Component.InvokeAsync("EuCookieLaw")
+@await Component.InvokeAsync("Widget", new {widgetZone = PublicWidgetZones.BodyEndHtmlTagBefore})
+<script asp-location="Footer">
+    if($('.admin-header-links').length){
+        $('.es-header-wraper').addClass('is-admin')
+    }
+    $(window).scroll(function () {
+        if ($(window).scrollTop() >= 50) {
+            $(".es-header-wraper").addClass('sticky').css('top', 0);
+        }
+        else {
+            $(".es-header-wraper").removeClass('sticky');
+        }
+    });
+    
+    $("[number-only]").on('input',function(){
+        $(this).val($(this).val().replace(/[^0-9 ]/g, ""));
+    });
+</script>

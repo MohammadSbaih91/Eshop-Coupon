@@ -1,0 +1,160 @@
+﻿<div class="es-menu-accordion" id="nop-menu">
+    @*<h1 class="es-home">
+        <a href="https://eshop.orange.jo/ar/">الصفحة الرئيسية</a>
+    </h1>*@
+    <ul class="top-menu mega">
+        <li>
+            <h2 class="accordion-title">
+                <a href="javascript:void(0);">الخلوي</a>
+            </h2>
+            <div class="sublist-toggle"></div>
+            <ul class="sublist first-level">
+                <li>
+                    <a href="https://www.orange.jo/ar/offers/Mobilepostpaidoffers/">
+                        خطوط الخلوي المدفوعة لاحقاً
+                    </a>
+                </li>
+
+                <li>
+                    <a href="https://www.orange.jo/ar/offers/Mobileprepaidoffers/">
+                        الخطوط المدفوعة مسبقاً
+                    </a>
+                </li>
+                <li>
+                    <a href="@(Nop.Services.Common.UrlStrucutre.UrlDecode("/yo-lines"))">
+                        YO خطوط
+                    </a>
+                </li>
+
+                <li>
+                    <a href="@(Nop.Services.Common.UrlStrucutre.UrlDecode("ar/mobile/governorate-lines"))">
+                        عروض الخلوي للمحافظات
+                    </a>
+                </li>
+
+                <li>
+                    <a href="@(Nop.Services.Common.UrlStrucutre.UrlDecode("/ar/mobile/mobile-phone"))">
+                        الأجهزة الخلوية
+                    </a>
+                </li>
+
+                @*<li>
+            <a href="/mobile-packages">
+                حزم الأجهزة الخلوية من<br/> Orange
+            </a>
+        </li>*@
+            </ul>
+        </li>
+        <li>
+            <h2 class="accordion-title">
+                <a href="javascript:void(0);">
+                    الانترنت
+                </a>
+            </h2>
+            <div class="sublist-toggle"></div>
+            <ul class="sublist first-level">
+                <li>
+                    <a href="https://www.orange.jo/ar/offers/ADSLOffers/">
+                        عروض الـ ADSL
+                    </a>
+                </li>
+                <li>
+                    <a href="@(Nop.Services.Common.UrlStrucutre.UrlDecode("ar/upgrade"))">
+                        رفع سرعه ADSL
+                    </a>
+                </li>
+
+                <li>
+                    <a href="@(Nop.Services.Common.UrlStrucutre.UrlDecode("ar/4g-flybox-offer"))">
+                        عروض 4G فلاي بوكس للبيت
+                    </a>
+                </li>
+                <li>
+                    <a href="@(Nop.Services.Common.UrlStrucutre.UrlDecode("/prepaid-orange-net-offers"))">
+                        عروض Orange نت المدفوعة مسبقاً
+                    </a>
+                </li>
+                <li>
+                    <a href="@(Nop.Services.Common.UrlStrucutre.UrlDecode("/bait-al-aileh-offers"))">
+                        عروض بيت العيلة
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <h2 class="accordion-title">
+                <a href="javascript:void(0);">فايبر</a>
+            </h2>
+            <div class="sublist-toggle"></div>
+            <ul class="sublist first-level">
+                <li>
+                    <a href="https://www.orange.jo/ar/offers/fiber-offers/pages/default.aspx">
+                        إنترنت سريع Orange فايبر
+                    </a>
+                </li>
+
+                @*<li>
+                    <a href="/fiber-speed-upgrade">
+                        رفع سرعه الفايبر
+                    </a>
+                </li>*@
+            </ul>
+        </li>
+        <li>
+            <h2 class="accordion-title">
+                <a href="javascript:void(0);">الخط الثابت</a>
+            </h2>
+            <ul class="sublist first-level">
+                <li>
+                    <a href="@(Nop.Services.Common.UrlStrucutre.UrlDecode("/fixed-postpaid-lines"))">
+                        العروض المدفوعة لاحقاً
+                    </a>
+                </li>
+            </ul>
+
+        </li>
+        <li>
+            <h2 class="accordion-title">
+                <a href="javascript:void(0);">إكسسوارات </a>
+            </h2>
+            <ul class="sublist first-level">
+                <li>
+                    <a href="@(Nop.Services.Common.UrlStrucutre.UrlDecode("/ar/accessories/mobile-accessories"))">
+                        إكسسوارات الخلوي
+                    </a>
+                </li>
+                <li>
+                    <a href="@(Nop.Services.Common.UrlStrucutre.UrlDecode("/internet-accessories"))">
+                        إكسسوارات الانترنت
+                    </a>
+                </li>
+                <li>
+                    <a href="@(Nop.Services.Common.UrlStrucutre.UrlDecode("/fixed-phones"))">
+                        الهواتف الثابتة
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+    </ul>
+    <div class="top-menu es-menu-footer">
+        <div>
+            <a href="@(Nop.Services.Common.UrlStrucutre.UrlDecode("/ar/eshop-promotions"))">
+                <span class="icon-discount-white">&nbsp;</span> <span>الترقيات</span>
+            </a>
+        </div>
+        <div>
+            <a href="https://www.orange.jo/ar/myaccount/pages/quick-pay.aspx" target="_self">
+                <span class="icon-top-up-euro">&nbsp;</span> <span>دفع الفواتير وإعادة شحن</span>
+            </a>
+        </div>
+        <div>
+            <a href="@Url.RouteUrl("CompareProducts")">
+                <span class="icon-top-up-euro">&nbsp;</span> @T("Products.Compare.List")
+            </a>
+        </div>
+        <div class="float-right close">
+            <i class="fas fa-times"></i>
+        </div>
+    </div>
+</div>

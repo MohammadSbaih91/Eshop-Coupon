@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Language Name="English">
+  <LocaleResource Name="HomePage.Category.Title">
+    <Value>What you're looking for ?</Value>
+  </LocaleResource>
+  <LocaleResource Name="HomePage.Category.Title.Description">
+    <Value>Enjoy your shopping experience</Value>
+  </LocaleResource>
+	<LocaleResource Name="HomePage.Category.Item.Exploremore">
+		<Value>Explore more</Value>
+	</LocaleResource>
+
+  <LocaleResource Name="Admin.Catalog.Attributes.SpecificationAttributesGroup.Fields.Name">
+    <Value>Group name</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Catalog.Attributes.SpecificationAttributesGroup.Fields.Name.Hint">
+    <Value>Specification attribute group name</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Catalog.Attributes.SpecificationAttributesGroup.Fields.Name.Required">
+    <Value>The group name is required</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Catalog.Attributes.SpecificationAttributesGroup.Fields.DisplayOrder">
+    <Value>Display order</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Catalog.Attributes.SpecificationAttributesGroup.Fields.DisplayOrder.Hint">
+    <Value>Display order</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Catalog.Attributes.SpecificationAttributesGroup.AddNew">
+    <Value>Add a new specification attribute group</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Catalog.Attributes.SpecificationAttributesGroup.EditAttributeGroupDetails">
+    <Value>Edit specification attribute group details</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Catalog.Attributes.SpecificationAttributesGroup.BackToList">
+    <Value>back to specification attribute group list</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Catalog.Attributes.SpecificationAttributesGroup.Added">
+    <Value>The new attribute group has been added successfully.</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Catalog.Attributes.SpecificationAttributesGroup.Updated">
+    <Value>The attribute group has been updated successfully.</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Catalog.Attributes.SpecificationAttributesGroup.Deleted">
+    <Value>The attribute group has been deleted successfully.</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Catalog.Attributes.SpecificationAttributesGroup">
+    <Value>Specification attributes group</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Catalog.Attributes.SpecificationAttributes.Fields.SpecificationAttributeGroup">
+    <Value>Specification attributes group</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Catalog.Attributes.SpecificationAttributes.Fields.SpecificationAttributeGroup.hint">
+    <Value>Specification attributes group</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Catalog.Attributes.SpecificationAttributes.Fields.SpecificationAttributeGroup.Default">
+    <Value>N/A</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Catalog.Attributes.SpecificationAttributes.SpecificationAttributeGroup.Other">
+    <Value>Specifications</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Catalog.ComparePage.EmptyButton">
+    <Value>Empty the comparator</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Catalog.ComparePage.AddProduct">
+    <Value>Add Product</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Catalog.ComparePage.FreeShipping">
+    <Value>Free Shipping</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Catalog.ComparePage.ShowMore">
+    <Value>Show More</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Catalog.ComparePage.AddToCart">
+    <Value>Add to cart</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Catalog.ComparePage.Buynow">
+    <Value>Buy now</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Catalog.ComparePage.AddToCompare">
+    <Value>Add to compare list</Value>
+  </LocaleResource>
+	<LocaleResource Name="Admin.Orders.Shipments.ExpectedDeliveryDate">
+		<Value>Expected delivery date</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.Orders.Shipments.ExpectedDeliveryDate.Hint">
+		<Value>Expected delivery date</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.Orders.Shipments.ExpectedDeliveryDate.Button">
+		<Value>Set expected delivery date</Value>
+	</LocaleResource>
+  <LocaleResource Name="Address.Fields.PhoneNumber.MissMatch">
+    <Value>Invalid phone number</Value>
+  </LocaleResource>
+</Language>

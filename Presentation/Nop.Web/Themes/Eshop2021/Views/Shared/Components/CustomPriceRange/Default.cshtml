@@ -1,0 +1,60 @@
+﻿@model PriceRangeModel
+@using Nop.Core
+@using Nop.Services.Helpers
+@inject IWorkContext workContext
+@inject IThemeContext themeContext
+@inject IUserAgentHelper userAgentHelper
+@{
+    var themeName = themeContext.WorkingThemeName;
+    Html.AddScriptParts(ResourceLocation.Footer, $"~/Themes/{themeName}/Content/js/jquery.ui.touch-punch.min.js");
+
+    var formate = "";
+    if (workContext.WorkingCurrency.CustomFormatting.Contains("JOD"))
+    {
+        formate = "JOD";
+    }
+    else
+    {
+        formate = "دينار";
+    }
+}
+
+
+
+<div class="title @(userAgentHelper.IsMobileDevice() ? "de-active" : "")">
+    <strong>@T("CatalogPage.Prices")</strong>
+</div>
+<div class="listbox" @(userAgentHelper.IsMobileDevice() ? "style=display:none;" : "")>
+    <ul class="list">
+        <li>
+            <div id="slider-range">
+                <span class="range-left"></span>
+                <span class="range-right"></span>
+            </div>
+
+            <div class="clr"></div>
+        </li>
+    </ul>
+</div>
+<script asp-location="Footer">
+    $(function () {
+
+        $("#slider-range").slider({
+            range: true,
+            min: @(Model.MinPrice),
+            max: @(Model.MaxPrice),
+            values: [@(Model.CurrentMinPrice), @(Model.CurrentMaxPrice)],
+            slide: function (event, ui) {
+                $(".range-left", '#slider-range').html('<strong>@(formate) <b>' + ui.values[0] + '</b></strong>');
+                $(".range-right", '#slider-range').html('<strong class="slid-right">@(formate) <b>' + ui.values[1] + '</b></strong>');
+            },
+            change: function (event, ui) {
+                url = updateQueryStringParameter('prange', '' + ui.values + '')
+                CatalogFilterProduct(url);
+            }
+        });
+        $(".range-left", '#slider-range').html('<strong>@(formate) <b>' + $("#slider-range").slider("values", 0) + '</b></strong>');
+        $(".range-right", '#slider-range').html('<strong class="slid-right">@(formate) <b>' + $("#slider-range").slider("values", 1) + '</b></strong>');
+
+    });
+</script>

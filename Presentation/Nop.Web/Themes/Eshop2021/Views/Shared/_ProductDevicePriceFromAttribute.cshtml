@@ -1,0 +1,29 @@
+﻿@* TODO:this entire view is temporary, after launch fix right solution and remove it *@
+@using Nop.Core.Domain.Catalog
+@using Nop.Core.Data
+@using Microsoft.EntityFrameworkCore
+@model ProductOverviewModel
+
+@inject IRepository<ProductAttributeMapping> _productAttributeMapRepository
+@{
+    var SelectPlanAttrId = 146;
+    //var deviceOnlyAttrValueId = 1365;
+
+
+    var productAttribute = await _productAttributeMapRepository
+        .TableNoTracking
+        .Include(x => x.ProductAttributeValues)
+        .FirstOrDefaultAsync(x => x.ProductId == Model.Id && x.ProductAttributeId == SelectPlanAttrId);
+
+    var price = "0";
+    var priceValue = productAttribute?.ProductAttributeValues?.FirstOrDefault(x => x.Name == "Device only" || x.Name == "جهاز فقط")?.PriceAdjustment;
+    if (priceValue != null)
+    {
+        priceValue = Math.Round((decimal)priceValue, 2);
+
+        price = priceValue.ToString();
+    }
+
+}
+
+@Html.Raw(EShopHelper.GetPriceFormatting(price))

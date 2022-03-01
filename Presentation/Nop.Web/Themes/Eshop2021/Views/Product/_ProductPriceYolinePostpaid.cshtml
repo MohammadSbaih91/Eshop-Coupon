@@ -1,0 +1,161 @@
+﻿@model ProductDetailsModel
+@using Nop.Core.Domain.Orders
+@using Nop.Services.Configuration;
+@using Nop.Services
+@inject ISettingService settingService
+@inject IThemeContext themeContext
+@{
+    //Advanced Payment Amount Attribute
+    var advancedPaymentAmountAttrId = settingService.GetSettingByKey<int>(EShopHelperService.AdvancedPaymentAmountAttribute);
+    var advancedPaymentAmountAttribute = Model.ProductAttributes.Where(p => p.ProductAttributeId == advancedPaymentAmountAttrId).FirstOrDefault();
+    var controlId = "";
+    if (advancedPaymentAmountAttribute != null)
+    {
+        controlId = $"product_attribute_{advancedPaymentAmountAttribute.Id}";
+    }
+    var themeName = themeContext.WorkingThemeName;
+}
+<div class="overall-payment">
+    <table>
+        <tr>
+            <td class="wide">
+                <p><span class="span-block">@T("ProductDetail.SimPrice")</span></p>
+                <p id="lblPaymentInstallments"></p>
+            </td>
+            <td colspan="2">
+                <div class="full-price">
+                    <div class="final" id="productPrice" data-productPrice="">
+                    </div>
+                    <div class="final">
+                        @*<strong>/@T("HomePage.ProductBox.StartFormMonth")</strong>*@
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr style="display:none" id="trMobilePrice">
+            <td class="wide">
+                <p><span class="span-block">@T("ProductDetail.MobilePrice")</span> @*@T("ProductDetail.Postpaid.PaymentInstallments")*@</p>
+            </td>
+            <td>
+                <div class="full-price">
+                    <div class="final" id="simPrice" data-simPrice="">
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td class="vertical-top">
+                <p><span>@T("ProductDetail.OverallPayment")</span></p>
+            </td>
+            <td>
+                <div class="over-flex">
+                    <div class="full-price">
+                        @if (advancedPaymentAmountAttribute != null && advancedPaymentAmountAttribute.Values != null)
+                        {
+                            <div class="flex">
+                                <div class="final" id="divTotalPrice">
+                                </div>
+                                <div class="plus">+</div>
+                            </div>
+
+                            var adPrice = 0M;
+                            foreach (var attributeValue in advancedPaymentAmountAttribute.Values)
+                            {
+                                var adjPrice = attributeValue.PriceAdjustment;
+                                adPrice = attributeValue.PriceAdjustmentValue;
+                                @if (!string.IsNullOrEmpty(attributeValue.PriceAdjustment))
+                                {
+                                    adjPrice = attributeValue.PriceAdjustment.Replace("+", "").Replace("-", "");
+                                }
+                                <div class="custom-control custom-radio custom-control-inline" style="display:none;">
+                                    <input class="custom-control-input" id="@(controlId)_@(attributeValue.Id)" type="radio" name="@(controlId)" value="@attributeValue.Id" checked="@attributeValue.IsPreSelected"
+                                           @(advancedPaymentAmountAttribute.Values.Any(value => value.CustomerEntersQty) ? Html.Raw($"onclick=\"showHideRadioQuantity('{controlId}')\"") : null) />
+                                    <label class="custom-control-label" for="@(controlId)_@(attributeValue.Id)"><span>@attributeValue.Name</span></label>
+                                    <div class="monthly-price">
+                                        <div class="monthly-price-info">
+                                            <h3>@Html.Raw(adjPrice)</h3>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="advance-payment">
+                                    @Html.Raw(adjPrice)<p>@attributeValue.Name</p>
+                                </div>
+                            }
+                            <input type="hidden" id="hid_@(controlId)" value="@adPrice" />
+                        }
+                        else
+                        {
+                            <div class="flex">
+                                <div class="final" id="divTotalPrice">
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    <div class="btn btn-outline-white"><span onclick="AjaxCart.addproducttocart_details('@Url.RouteUrl("AddProductToCart-Details", new {productId = Model.Id, shoppingCartTypeId = (int) ShoppingCartType.ShoppingCart})', '#product-details-form');return true;">@T("Admin.Catalog.ComparePage.AddToCart")</span><i></i></div>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
+<input type="hidden" value="@Model.Id" id="hdnProductId" />
+@{
+    Html.AddScriptParts(ResourceLocation.Footer, $"~/Themes/{themeName}/Content/js/productTemplate.js");
+}
+<script>
+    var adControlPayment = $("#hid_@(controlId)").val();
+    var startFormMonth = "@T("HomePage.ProductBox.StartFormMonth")";
+    var hdnProductPrice = @Model.ProductPrice.PriceValue;
+    $(document).ready(function () {
+        productTemplate.fncallCommonDocumentReady(adControlPayment, startFormMonth, hdnProductPrice);
+    });
+</script>
+@*<script>
+        $(document).ready(function () {
+            var productPrice = '@(Model.ProductPrice.PriceValue)';
+            $('#productPrice').attr("data-productPrice", productPrice);
+            fnAjaxCall(productPrice, 0);
+        });
+
+        $('.planwithproductchange').on('change', function () {
+            var planproductid = $('#hdnPlanProductId').val();
+            if (planproductid != null && planproductid != undefined && planproductid != "" && planproductid > 0) {
+                $("#btnplanWithProduct_" + planproductid + "").trigger('click');
+            }
+        });
+
+        function fnProductDevice(mobilePrice, mobilePriceValue, selectedPlanId) {
+            $('#hdnPlanProductId').val(selectedPlanId);
+            if (mobilePriceValue > 0) {
+                $('#trMobilePrice').show();
+                $('#simPrice').html(mobilePrice);
+            }
+            else {
+                $('#trMobilePrice').hide();
+            }
+            $('#simPrice').attr("data-simPrice", mobilePriceValue);
+            var productPrice = $('#productPrice').attr("data-productPrice");
+            fnAjaxCall(productPrice, mobilePriceValue);
+        }
+
+        function fnAjaxCall(productPrice, planPrice) {
+            var adPayment = $("#hid_@(controlId)").val();
+            var productId = $('#hdnProductId').val();
+            $.ajax({
+                url: '@Html.Raw(Url.Action("productdetails_addplan", "shoppingcart"))',
+                data: 'productPrice=' + parseFloat(productPrice) + '&planPrice=' + parseFloat(planPrice) + '&advancePayment=' + adPayment,
+                type: 'post',
+                success: function (data) {
+                    if (planPrice <= 0) {
+                        $('#productPrice').html(data.deviceFormatedPrice + " <strong>/@T("HomePage.ProductBox.StartFormMonth")</strong>");
+                        $('#spnProductFullPrice').html(data.formatedProductFullPrice);
+                    }
+                    $('#divTotalPrice').html(data.subTotalFormatedPrice);
+                    $('#spnTotalFullPrice').html(data.formatedTotalFullPrice);
+                    $('#spnSimFullPrice').html(data.formatedPlanFullPrice);
+                    $('.price-value-' + productId).html(data.price);
+                }
+            });
+        }
+
+    </script>*@

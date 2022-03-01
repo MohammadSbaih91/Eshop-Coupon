@@ -1,0 +1,423 @@
+﻿@using Nop.Core
+@inject IWorkContext workContext
+@inject IThemeContext themeContext
+@{ var lang = workContext.WorkingLanguage.UniqueSeoCode; }
+var themeName = themeContext.WorkingThemeName;
+
+<style>
+/****** ESHOP CONTENT UI ISSUES *******/
+a {
+                color: inherit !important;
+                text-decoration: none !important;
+}
+input {
+                font-size: 14px !important;
+}
+p {
+	color: #000;
+    margin: 0 0 1rem;
+}
+.st-service .st-content a {
+    color: #fff !important;
+}
+input[type="button"], input[type="submit"] {
+	font-weight: bold;
+	font-size: 16px !important;
+	font-family: Arial,sans-serif;
+	padding: 10px 30px;
+}
+.es-header-wraper.is-admin+.master-wrapper-content {
+    margin-top: 210px;
+}
+.pager li {
+	display: inline-block !important;
+}
+.pager li>a:hover {
+	color: #fff !important;
+}
+.pager li span {
+	color: #000;
+}
+.es-header-wraper+.master-wrapper-content {
+    min-height: 65vh;
+}
+.category-description ul h2, .manufacturer-description ul h2, .full-description ul h2, .topic-block ul h2, .topic-page ul h2, .post-body ul h2 {
+color: #ff6600;
+}
+.product-essential p {
+    color: #000;
+}
+.product-essential table p {
+    text-align: center;
+}
+.img-circle {
+    border-radius: 50% !important;
+}
+.breadcrumb li i {
+    position: relative;
+    top: 5px;
+}
+html:not(.html-home-page) .master-column-wrapper {
+    padding-top: 0;
+}
+.bar-notification .content a {
+	text-decoration: underline !important;
+}
+.bar-notification .content {
+    color: #fff;
+}
+.cart .overlay.out-of-stock .overlay-msg, .cart .price, .checkout-cart-index .overlay.out-of-stock .overlay-msg, .checkout-cart-index .price {
+	font-size: 1.2em !important;
+}
+.st-headline {
+	    margin-bottom: 20px !important;
+}
+.ui-widget.ui-widget-content .ui-widget-header {
+    background: #000 !important;
+}
+.required {
+	color: #ff6600;
+}
+.home-page-category-grid .title a {
+	min-height: 50px;
+}
+.home-page-category-grid, .sub-category-grid, .manufacturer-grid, .vendor-grid {
+	margin: 0 0 40px 0;
+}
+.slider-wrapper.theme-custom {
+	margin: 0 0 40px 0 !important
+}
+.st-onstore .st-content a, .st-service .st-content>div {
+	    margin: 0 .5% 0;
+}
+.st-onstore, .st-service {
+	margin: 0 0 40px 0;
+}
+.product-grid .title {
+	padding: 0;
+	margin-bottom: 20px;
+}
+.home-page .product-grid .item-box, .product-details-page .product-grid .item-box, .shopping-cart-page .product-grid .item-box {
+	margin: 0 .5% 40px 0;
+}
+.center-1 {
+    margin: 0 0 50px;
+}
+.product-grid, .product-list {
+    margin: 0 5px 0 0 !important;
+}
+.st-buystep .st-content>div {
+    text-align: center;
+    line-height: 10px;
+}
+.st-buystep .st-content>div h3 {
+	    margin-bottom: 10px !important;
+}
+.bar-notification.success {
+    background-color: #50BE87;
+}
+.bar-notification.error {
+	background-color: #CD3C14;
+}
+.bar-notification .close {
+	width: 30px;
+	height: 30px;
+	opacity: 0.7;
+    border-radius: 50% !important;
+    display: inline-block;
+}
+.nivo-nav i {
+    color: #fff;
+    font-size: 20px;
+    padding-top: 10px;
+}
+.nivo-nav a {
+    background: rgba(0,0,0,0.5) !important;
+    box-shadow: none !important;
+    border: 1px solid #666;
+}
+.theme-custom .nivo-controlNav a {
+	margin: 0 3px;
+	border-radius: 50% !important;
+}
+.terms-of-service label {
+	display: grid;
+	padding-left: 10px;
+}
+.terms-of-service input {
+	float: left;
+}
+.breadcrumb {
+    padding: 0 !important;
+    margin-bottom: 0;
+}
+.breadcrumb ul {
+    margin-bottom: 0;
+}
+.page-title {
+    margin-bottom: 0 !important;
+}
+.page-title>h1 {
+	font-size: 50px;
+}
+.side-2 {
+	margin-top: 67px;
+}
+.block .list a:before {
+	background-color: #ff6600;
+}
+.block .list .sublist a:before {
+	background-color: #ccc;
+}
+.compare-products>input, .email-a-friend>input {
+	font-weight: normal;
+}
+.compare-products-page .clear-list {
+	color: #fff !important;
+	font-weight: bold;
+}
+.product-filter .group li {
+    background-color: #eee;
+    margin: 5px 0;
+    padding: 5px;
+    font-size: 12px;
+    display: block;
+}
+.filtered-items .item {
+    color: #ff6600;
+    background-color: #eee;
+    margin: 5px 0;
+    padding: 5px;
+    font-size: 12px;
+    display: block;
+}
+.remove-filter a {
+	height: 30px;
+	border: 1px solid #000;
+	background-color: #fff;
+	padding: 8px 10px;
+	text-transform: initial;
+}
+.remove-filter a:hover {
+	background-color: #eee;
+}
+.btn-info {
+    color: #fff !important;
+    background-color: #000;
+    border-color: #000;
+}
+.price {
+    color: #ff6600 !important;
+    margin: 15px 0 !important;
+}
+.pager li>a, .pager li>span {
+	padding: 10px 14px !important;
+}
+.anonymous-order-track-page .page-title h1 {
+    background: transparent !important;
+    color: #000 !important;
+    padding: 10px 0 !important;
+}
+.anonymous-order-track-page .button-1 {
+	padding: 10px 30px !important;
+	margin: 20px 0;
+}
+.accordionx {
+    font-size: 18px;
+    font-weight: bold;
+    border: 0;
+    background: transparent;
+    border-bottom: 1px solid #000;
+    padding: 15px 0;
+    width: 100%;
+    text-align: left;
+}
+.price-label {
+	float: none !important;
+}
+.product-title>a {
+	color: #000 !important;
+	font-size: 18px;
+}
+.page-title>h1, .topic-block-body>h2 {
+	font-size: 40px;
+	font-weight: bold;
+    color: #000;
+}
+.page-body .st-headline {
+	font-size: 30px;
+	font-weight: bold;
+    color: #000;
+}
+.item-box {
+    width: 28.33333%;
+    margin: 0 1.5% 30px 1.5%;
+}
+.category-description ul, .manufacturer-description ul, .full-description ul, .topic-block ul, .topic-page ul, .post-body ul {
+	    padding: 0 25px;
+}
+.sub-category-grid .title a {
+	font-size: 24px;
+}
+.hdr-H4 {
+	font-size: 24px !important;
+}
+.order-completed-page .page-title {
+	text-align: center;
+	padding-top: 30px !important;
+}
+.order-completed .title {
+	text-align: center;
+}
+.order-completed .details .details-link {
+	color: #ff6600;
+}
+.write-review {
+	border: 0;
+}
+.review-title {
+	text-align: left;
+	padding: 20px 0;
+	margin: 0;
+}
+.review-title h1 {
+	font-size: 30px;
+}
+.write-review .result {
+	background: transparent;
+}
+.write-review .result h3 {
+	font-size: 24px;
+}
+.attributes dt, .attribute-label {
+	font-size: 24px;
+}
+.cart-collaterals .coupon-code input[type="text"], .cart-collaterals .coupon-code input[type="submit"] {
+	height: 40px;
+}
+.subscribe-newsletter label {
+	width: fit-content !important;
+}
+.shopping-cart-page .common-buttons {
+	margin: 0;
+}
+.payment-method .label, .shipping-method .label {
+    font-size: inherit;
+    color: inherit;
+    padding: 0;
+	font-weight: normal;
+}
+
+@@media (max-width: 768px) {
+.es-header-wraper.is-admin+.master-wrapper-content {
+    margin-top: 20px;
+}
+.item-box {
+    width: 47%;
+}
+.page-body {
+	text-align: left;
+}
+.quantity>.td-title {
+	vertical-align: middle;
+}
+.cart tr {
+	width: 100%;
+}
+.cart tr label {
+	vertical-align: top;
+}
+}
+@@media (max-width: 514px) {
+.item-box {
+    width: 100%;
+}
+.page-title>h1, .topic-block-body>h2 {
+	text-align: left;
+	line-height: 44px;
+}
+.order-summary-content table {
+	max-width: 100% !important;
+}
+}
+
+
+
+</style>
+
+<link rel="stylesheet" href="https://www.orange.jo/_layouts/15/orange2013master/en/assets/css/OldFinalAllCSS2.css">
+<link rel="stylesheet" href="https://www.orange.jo/en/documents/new_brand/brand_framework_shop.css">
+<!--<link rel="stylesheet" href="https://eshop.orange.jo/en/skin/frontend/eshop/eshop/css/bootstrap-orange2015.min.css">-->
+<!--<link type="text/css" rel="stylesheet" href="https://eshop.orange.jo/en/internet/adsl-offers.html">
+-->
+<link type="text/css" rel="stylesheet" href="https://www.orange.jo/EN/Documents/new_brand/orange_brand_framework_export.css">
+
+<!--<link type="text/css" rel="stylesheet" href="https://eshop.orange.jo/en/media/css_secure/29d6f40f74c9a05ca6a337be9ee5cb70.css">-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<div class="header">
+    @* @await Html.PartialAsync("_OrangeStyles") *@
+    @await Component.InvokeAsync("Widget", new {widgetZone = PublicWidgetZones.HeaderBefore})
+    <div class="header-upper">
+        @*<div class="header-selectors-wrapper">
+            @await Component.InvokeAsync("TaxTypeSelector")
+            @await Component.InvokeAsync("CurrencySelector")
+            @await Component.InvokeAsync("LanguageSelector")
+            @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.HeaderSelectors })
+        </div>*@
+        @await Html.PartialAsync($"_Static.HeaderLinks.{lang}")
+        <div class="header-links-wrapper">
+            @await Component.InvokeAsync("HeaderLinks")
+             @await Component.InvokeAsync("FlyoutShoppingCart") 
+        </div>
+    </div>
+    @await Html.PartialAsync("_Static.HeaderSocialMedia")
+    @await Component.InvokeAsync("Widget", new {widgetZone = PublicWidgetZones.HeaderMiddle})
+    <div class="es-hr full-width clear-fix"></div>
+    <div class="header-lower">
+        <div class="header-logo">
+            @await Component.InvokeAsync("Logo")
+        </div>
+        @await Html.PartialAsync($"_Static.Menu.links.{lang}")
+        <div class="hd-lower-right">
+            <div id="topcartlink-mobile">
+                <a href="@Url.RouteUrl("ShoppingCart")" class="ico-cart">
+                    <span class="cart-label">
+                        <i class="fas fa-shopping-cart"></i>
+                    </span>
+                </a>
+            </div>
+            <div class="es-profile-mobile">
+                <a href="@($"https://www.orange.jo/{lang}/myaccount/pages/default.aspx")">
+                    <img alt="Profile" src="~/Themes/Eshop/Content/Images/profile.png" class="margin-top--5 margin-left-5 login-icon-large">
+                </a>
+            </div>
+            <div class="es-search">
+                <div class="search-icon">
+                </div>
+            </div>
+            <div class="es-menu">
+                <span class="es-menu-icon">
+                    <small></small>
+                    <small></small>
+                    <small></small>
+                    <i class="fas fa-times close"></i>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="mobile-header-links">
+        <div class="es-hr full-width clear-fix"></div>
+        @await Component.InvokeAsync("HeaderLinks")
+        <div class="es-hr full-width clear-fix"></div>
+    </div>
+
+    <div class="search-box store-search-box">
+        @await Component.InvokeAsync("SearchBox")
+        <div class="close">
+            <i class="fas fa-times"></i>
+        </div>
+        <div class="es-hr full-width"></div>
+    </div>
+    @await Component.InvokeAsync("Widget", new {widgetZone = PublicWidgetZones.HeaderAfter})
+</div>

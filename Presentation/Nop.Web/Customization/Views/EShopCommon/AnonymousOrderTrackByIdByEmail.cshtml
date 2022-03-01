@@ -1,0 +1,281 @@
+@using Nop.Core
+@using Nop.Core.Domain.Orders
+@model Nop.Web.Customization.Models.OrderTrackModel
+@inject IWorkContext workContext
+@{
+    Layout = "_ColumnsOne";
+    var isRtl = workContext.WorkingLanguage.Rtl;
+    //title
+    Html.AddTitleParts(T("PageTitle.AnonymousOrderTrack").Text);
+    //page class
+    Html.AppendPageCssClassParts("html-anonymous-order-track-page");
+
+    var shippingMethod = Model.OrderDetailsModel.PickUpInStore
+        ? T("AnonymousOrderTrack.ShippingMethod.PickUpInStore")
+        : T("AnonymousOrderTrack.ShippingMethod.HomeDelivery");
+    var paymentMethod = Model.OrderDetailsModel.PickUpInStore
+        ? T("AnonymousOrderTrack.PaymentMethod.PickUpInStore.Cod")
+        : T("AnonymousOrderTrack.PaymentMethod.HomeDelivery.Cod");
+
+    var orderStatuses = Model?.OrderDetailsModel?.OrderNotes?
+        .Where(n => !n.Note.Equals("Order has been cancelled", StringComparison.InvariantCultureIgnoreCase))
+        .Select(n => new
+        {
+            status = n.Note.Equals("Order placed", StringComparison.InvariantCultureIgnoreCase)
+                ? OrderStatus.Pending.ToString()
+                : Enum.GetNames(typeof(OrderStatus))
+                    .FirstOrDefault(st => n.Note.EndsWith(st, StringComparison.InvariantCultureIgnoreCase)),
+            n.CreatedOn
+        }).Where(n => n.status != null) ?? Enumerable.Empty<dynamic>();
+
+    var breadcrumbDelimiter = Html.Raw("<i class=\"fas fa-angle-right\"></i>");
+}
+
+<style>
+/*Note: Added style here to avoid rtl duplication for this limited scope*/
+    .anonymous-order-track-page .orange{
+        color: #F16E00;
+    }
+    .anonymous-order-track-page  #OrderTrack{
+        margin: 20px 0;
+    }
+    .page-title{
+        padding: 6px 0;
+    }
+    .anonymous-order-track-page .page-title h1{
+        background: #000;
+        color: #ffffff;
+        padding: 10px;
+    }
+   .anonymous-order-track-page .flex-box{
+        display: flex;
+        justify-content: space-between;
+    }
+      .lbl{
+        font-size: 18px;
+        margin: 6px 0;
+    }
+    .lbl > div:first-child{
+        font-weight: bold;
+    }
+    .anonymous-order-track-page .inputs label {
+        width: unset;
+        margin: 10px 0;
+        font-weight: bold;
+        display: block;
+        text-align: left;
+    }
+   
+    .order-detail > section {
+        width: 43%;
+    }
+    .order-detail  section h1{
+         font-size: 30px;
+         font-weight: bold;
+         margin-bottom: 20px;
+    }
+    .order-items li{
+        margin: 5px 0;
+    }
+    .order-items{
+        margin: 0 15px 10px;
+        font-size: 16px;
+        list-style: disc;
+    }
+    .anonymous-order-track-page .order-exist .inputs label {
+        font-size: 18px;
+    }
+    
+    .anonymous-order-track-page .btn-back{
+        float: right;
+    }
+    
+    html[dir="rtl"] .anonymous-order-track-page .btn-back{
+        float: left;
+    }
+    html[dir="rtl"] .anonymous-order-track-page  .inputs label,
+    html[dir="rtl"] .anonymous-order-track-page  .inputs {
+        text-align: right;
+    }
+    
+    .anonymous-order-track-page .input-text{
+        min-height: 40px!important;
+        line-height: 2.5!important;
+        padding: 0 4px;
+        max-width: 300px!important;
+        width: 40%!important;
+        min-width: 235px!important;
+        border: 2px solid #000;
+    }
+  
+    .anonymous-order-track-page .button-1{
+        background-color: #F16E00;
+        color: #ffffff!important;
+        border: none;
+        min-height: 40px;
+        line-height: 2.5;
+        padding: 4px 10px;
+        font-size: 15px;
+        display: inline-block;
+    }
+    
+    .anonymous-order-track-page  .button-1:hover{
+        background-color: #000000;
+    }
+    
+    .anonymous-order-track-page  .result{
+        border-bottom: 2px solid #000;
+        border-top: 2px solid #000;
+        margin: 20px 0;
+        padding: 15px 5px;
+        font-size: 18px;
+        color: #000;
+        font-weight: bold;
+    }
+    
+    @@media (min-width: 481px) { 
+        .lbl {
+            flex-direction: row !important;
+        }
+    }
+    @@media (max-width: 1000px) { 
+       .anonymous-order-track-page .flex-box {
+            display: flex;
+            justify-content: space-between;
+            flex-direction: column;
+            text-align: left;
+        }
+        html[dir="rtl"] .anonymous-order-track-page .flex-box {
+            text-align: right;
+        }
+        .lbl > div {
+            margin: 3px;
+        }
+         .order-detail > section {
+            width: 100%;
+         }
+    }
+</style>
+<div class="breadcrumb">
+    <ul itemscope itemtype="http://schema.org/BreadcrumbList">
+        <li>
+            <a href="@Url.RouteUrl("HomePage")" title="@T("Categories.Breadcrumb.Top")">@T("Categories.Breadcrumb.Top")</a>
+            <span class="delimiter">
+                @breadcrumbDelimiter
+            </span>
+        </li>
+        <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+            <strong class="current-item" itemprop="name">@T("PageTitle.AnonymousOrderTrack")</strong>
+        </li>
+    </ul>
+</div>
+<div class="page anonymous-order-track-page">
+    <div class="page-title">
+        <h1>@T("PageTitle.AnonymousOrderTrack")</h1>
+    </div>
+    <div class="page-body">
+        @if (!Model.Success && Model.OrderId != null)
+        {
+            <div class="result">
+                @T("AnonymousOrderTrack.NoRecord")
+            </div>
+        }
+        @if (Model.Success)
+        {
+            <div class="order-exist">
+                <div class="order-detail flex-box">
+                    <section class="order-summary">
+                        <h1>@T("AnonymousOrderTrack.OrderSummary")</h1>
+
+                        <div class="flex-box lbl">
+                            <div>@T("AnonymousOrderTrack.OrderNumber") :</div>
+                            <div class="orange">
+                                <a href="@Url.RouteUrl("OrderDetails", new {orderID = Model.OrderId})">@Model.OrderId</a>
+                            </div>
+                        </div>
+                        <div class="flex-box lbl">
+                            <div>@T("AnonymousOrderTrack.OrderDate") :</div>
+                            <div> @Model.OrderDetailsModel.CreatedOn.ToShortDateString()</div>
+                        </div>
+                        <div class="flex-box lbl">
+                            <div>@T("AnonymousOrderTrack.OrderTime") :</div>
+                            <div> @Model.OrderDetailsModel.CreatedOn.ToShortTimeString()</div>
+                        </div>
+                        <div class="flex-box lbl">
+                            <div>@T("AnonymousOrderTrack.OrderTotal") :</div>
+                            <div> @Model.OrderDetailsModel.OrderTotal</div>
+                        </div>
+                        <div class="flex-box lbl">
+                            <div>@T("AnonymousOrderTrack.ItemList") :</div>
+                        </div>
+                        <ul class="order-items">
+                            @foreach (var item in Model.OrderDetailsModel.Items)
+                            {
+                                var product = isRtl ? $"({item.Quantity}) {item.ProductName}" : $"{item.ProductName} ({item.Quantity})";
+                                <li>
+                                    <span dir="ltr">@product</span>
+                                </li>
+                            }
+                        </ul>
+                        <div class="flex-box lbl">
+                            <div>@shippingMethod.Value</div>
+                        </div>
+
+                        <div class="flex-box lbl">
+                            <div>@paymentMethod.Value</div>
+                        </div>
+                    </section>
+                    <section class="order-history">
+                        <h1>@T("AnonymousOrderTrack.OrderHistory")</h1>
+                        @foreach (var note in orderStatuses)
+                        {
+                            <div class="flex-box lbl orange">
+                                <div>@note.CreatedOn.ToShortDateString()</div>
+                                <div>@T($"AnonymousOrderTrack.OrderStatus.{note.status}")</div>
+                            </div>
+                        }
+                    </section>
+                </div>
+                <div class="inputs">
+                    <a href="@Url.Action("AnonymousOrderTrackByIdByEmail", "EShopCommon")" class="button-1 btn-back"> @T("AnonymousOrderTrack.Button.Back")</a>
+                </div>
+            </div>
+        }
+        else
+        {
+            @await Component.InvokeAsync("TopicBlock", new {systemName = "AnonymousOrderTrack"})
+            <form id="OrderTrack" asp-acton="AnonymousOrderTrackByIdByEmail" method="post">
+                <nop-antiforgery-token/>
+                <div class="fieldset">
+                    <div class="fields">
+                        <div class="inputs">
+                            <label asp-for="OrderId" asp-postfix=":"></label>
+                            <nop-required/>
+                            <input asp-for="OrderId" class="input-text"/>
+                        </div>
+                        <div class="inputs val-msg">
+                            <span asp-validation-for="OrderId"></span>
+                        </div>
+                        <div class="inputs">
+                            <label asp-for="Email" asp-postfix=":"></label>
+                            <input asp-for="Email" class="input-text"/>
+                            <nop-required/>
+                        </div>
+                        <div class="inputs val-msg">
+                            <span asp-validation-for="Email"></span>
+                        </div>
+                        <div class="inputs">
+                            <input type="submit" name="view-status" class="button-1" value="@T("AnonymousOrderTrack.Button.Submit")"/>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        }
+
+    </div>
+</div >
+<script asp-location="Footer">
+    $('.required').each(function(){
+        $(this).appendTo($(this).siblings('label'));
+    });
+</script>

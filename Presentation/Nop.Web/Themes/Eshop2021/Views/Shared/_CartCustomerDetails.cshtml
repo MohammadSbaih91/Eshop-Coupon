@@ -1,0 +1,754 @@
+﻿@using Nop.Core.Domain.Common
+@model AddressModel
+@using Nop.Services.Configuration
+@using Nop.Core
+@inject IWorkContext _workContext
+@inject ISettingService settingService
+@using Nop.Services.Media
+@using Nop.Web.Framework.UI;
+@{
+    //BillingNewAddress.
+    var uploadID = "UploadID";
+   // var allowedFileExtensions = "jpg", "jpeg", "png", "gif";
+    var uploadStudentID="UploadStudentID";
+
+    var isShowPickupInStore = true;
+    var productIdsWhichNotShowPickupInStore = settingService.GetSettingByKey<string>(EShopHelper.ProductIdsWhichNotShowPickupInStore);
+
+    var listProductIds = new List<int>();
+    if (!string.IsNullOrEmpty(productIdsWhichNotShowPickupInStore))
+    {
+        listProductIds = productIdsWhichNotShowPickupInStore.Split(",").Select(int.Parse).ToList();
+    }
+
+    var CartItems = _workContext.CurrentCustomer.ShoppingCartItems.ToList();
+    foreach (var cartItem in CartItems)
+    {
+        var isCartItem = listProductIds.Contains(cartItem.ProductId);
+        if (isCartItem)
+        {
+            isShowPickupInStore = false;
+        }
+    }
+}
+@*@if (Model.CountryEnabled && Model.StateProvinceEnabled)
+    {
+        //we don't move this script to the footer as it's used in Ajax requests where footer is not available
+        <script>
+            $(document).ready(function () {
+                $("#@Html.IdFor(model => model.CountryId)").on('change', function () {
+                var selectedItem = $(this).val();
+                var ddlStates = $("#@Html.IdFor(model => model.StateProvinceId)");
+                var statesProgress = $("#states-loading-progress");
+                statesProgress.show();
+                    $.ajax({
+                    cache: false,
+                        type: "GET",
+                        url: "@(Url.RouteUrl("GetStatesByCountryId"))",
+                        data: { "countryId": selectedItem, "addSelectStateItem": "true" },
+                        success: function (data) {
+                        ddlStates.html('');
+                            $.each(data, function (id, option) {
+                            ddlStates.append($('<option></option>').val(option.id).html(option.name));
+                        });
+                        statesProgress.hide();
+                    },
+                        error: function (xhr, ajaxOptions, thrownError) {
+                        alert('Failed to retrieve states.');
+                        statesProgress.hide();
+                    }
+                });
+            });
+        });
+        </script>
+    }*@
+@*<input asp-for="Id" type="hidden" />*@
+<div class="edit-address">
+    <div class="form-ui">
+        <div class="row" id="billing-new-address-form">
+            <div class="col-md-12">
+                <div class="form-group civility">
+                    <div class="radio-civility">
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input class="custom-control-input" asp-for="Civility" value="Mr" type="radio" checked="@(Model.Civility == Civility.Mr)" id="CivilityMr" />
+                            <label for="CivilityMr" class="custom-control-label">@T("Address.Fields.Civility.Mr")</label>
+                        </div>
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input class="custom-control-input" asp-for="Civility" value="Mrs" type="radio" checked="@(Model.Civility == Civility.Mrs)" id="CivilityMrs" />
+                            <label for="CivilityMrs" class="custom-control-label">@T("Address.Fields.Civility.Mrs")</label>
+                        </div>
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input class="custom-control-input" asp-for="Civility" value="Miss" type="radio" checked="@(Model.Civility == Civility.Miss)" id="CivilityMiss" />
+                            <label for="CivilityMiss" class="custom-control-label">@T("Address.Fields.Civility.Miss")</label>
+                        </div>
+                    </div>
+                    <span asp-validation-for="Civility"></span>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="inputs form-group">
+                    <div class="grp-label">
+                        <label asp-for="FirstName"></label>
+                        <nop-required />
+                    </div>
+                    <input tabindex="1" class="form-control" asp-for="FirstName" />
+                    <span asp-validation-for="FirstName"></span>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="inputs form-group">
+                    <div class="grp-label">
+                        <label asp-for="LastName"></label>
+                        <nop-required />
+                    </div>
+                    <input tabindex="2" class="form-control" asp-for="LastName" />
+                    <span asp-validation-for="LastName"></span>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="inputs form-group">
+                    <div class="grp-label">
+                        <label asp-for="Nationality"></label>
+                        <nop-required />
+                    </div>
+                    <div class="dropdown common-dropdown">
+
+                        @Html.HiddenFor(model => model.Nationality)
+                        <script>
+                            $(document).ready(function () {
+
+                                var nId =$("#BillingNewAddress_Nationality").val();
+                                var nlist = @Html.Raw(Json.Serialize(Model.Nationalities));
+                                var nselected = nlist.find(x => x.Value === nId);
+                                if (nselected) {
+                                    $("#ddlNationality").text(nselected.Text);
+                                    $("#nitem_" + nId).addClass("selected");
+                                }
+                                else {
+                                    $("#BillingNewAddress_Nationality").val('');
+                                }
+
+
+                                $("#dropdownNationalityTypes :not(:first-child)").addClass("ddlhide");
+
+                                var ntId = $("#BillingNewAddress_NationalityType").val();
+                                var ntlist = @Html.Raw(Json.Serialize(Model.NationalityTypes));
+                                var ntselected = ntlist.find(x => x.Value === ntId);
+                                if (ntselected) {
+                                    $("#ddNationalityTypes").text(ntselected.Text);
+                                    $("#ntitem_" + ntId).removeClass("ddlhide");
+                                    $("#ntitem_" + ntId).addClass("selected");
+
+                                    var TypeId = enumMap[Number(nId)];
+                                    $("#ntitem_" + TypeId).removeClass("ddlhide");
+                                }
+                                else {
+                                    $("#BillingNewAddress_NationalityType").val('');
+                                }
+                            });
+                        </script>
+                        <div tabindex="3" class="dropdown-toggle" id="ddlNationality" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            @T("Address.Fields.Nationality.Select")
+                        </div>
+                        <div class="dropdown-menu" id="dropNationalities">
+                            @foreach (var item in Model.Nationalities)
+                            {
+                                <a tabindex="-1" id="nitem_@(item.Value)" onclick="SetSelectedValue(this,'@item.Value', '@item.Text')" class="dropdown-item @(item.Selected?"selected":"")">@item.Text</a>
+                            }
+                        </div>
+
+                        <script asp-location="Footer">
+                            var enumMap =  {
+                                @((int)Nationality.Jordanian):@((int)NationalityType.NationalId),
+                                @((int)Nationality.JordanResident):@((int)NationalityType.ResidentCard),
+                                @((int)Nationality.Other):@((int)NationalityType.Passport)
+                            };
+
+                            function SetSelectedValue(selected, dllValue, dllText) {
+                                $("#@(Html.IdFor(model => model.Nationality))").val(dllValue);
+                                $("#ddlNationality").text(dllText);
+                                $(".dropdown-menu>a.selected").removeClass("selected");
+                                $(selected).addClass("selected");
+                                $("#error-Nationality").hide();
+                                $("#dropdownNationalityTypes :not(:first-child)").addClass("ddlhide");
+
+                                var TypeId = enumMap[Number(dllValue)];
+                                $("#ntitem_" + TypeId).removeClass("ddlhide");
+
+                                SetNationalityTypes('ntitem_', '', '@T("Address.Fields.NationalityType.Select")');
+                            }                             
+                        </script>
+                    </div>
+                    <span id="error-Nationality" asp-validation-for="Nationality"></span>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="inputs form-group">
+                    <div class="grp-label">
+                        <label asp-for="NationalityType"></label>
+                        <nop-required />
+                    </div>
+                    <div class="dropdown common-dropdown" tabindex="0">
+                        @Html.HiddenFor(model => model.NationalityType)
+                        <div tabindex="4" class="dropdown-toggle" id="ddNationalityTypes" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            @T("Address.Fields.NationalityType.Select")
+                        </div>
+
+                        <div class="dropdown-menu" id="dropdownNationalityTypes">
+                            @foreach (var item in Model.NationalityTypes)
+                            {
+                                <a tabindex="-1" id="ntitem_@(item.Value)" onclick="SetNationalityTypes('ntitem_@(item.Value)','@item.Value', '@item.Text')" class="dropdown-item @(item.Selected?"selected":"")">@item.Text</a>
+                            }
+                        </div>
+
+                        <script asp-location="Footer">
+                            $("#dropdownNationalityTypes :not(:first-child)").addClass("ddlhide");
+                            function SetNationalityTypes(selected, dllValue, dllText) {
+                                $("#@(Html.IdFor(model => model.NationalityType))").val(dllValue);
+                                $("#ddNationalityTypes").text(dllText);
+                                $("#dropdownNationalityTypes>a.selected").removeClass("selected");
+                                $("#" + selected).addClass("selected");
+                                $("#error-NationalityType").hide();
+
+                                $(".IdentityCardOrPassport-message-ex").css('display', 'none');
+                                if(dllValue=='2')
+                                {
+                                $(".IdentityCardOrPassport-message-ex").css('display', 'block');
+                                }
+                            }
+                        </script>
+                    </div>
+                    <span id="error-NationalityType" asp-validation-for="NationalityType"></span>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="inputs form-group">
+                    <div class="grp-label">
+                        <label asp-for="IdentityCardOrPassport"></label>
+                        <nop-required />
+                    </div>
+                    <input tabindex="5" class="form-control" asp-for="IdentityCardOrPassport"  />
+                     <span class="IdentityCardOrPassport-message-ex">@T("IdentityCardOrPassportExNumber")</span>
+                    <script asp-location="Footer">                     
+                         function valIdentity()
+                                    {
+                                     $('#BillingNewAddress_IdentityCardOrPassport').keypress(function (e) {    
+                                    if($('#BillingNewAddress_IdentityCardOrPassport').val().length<10)
+                                    {
+                                 if($('#ddNationalityTypes').text()=='National Id'){
+                                var charCode = (e.which) ? e.which : event.keyCode    
+    
+                                if (String.fromCharCode(charCode).match(/[^0-9]/g))    
+                                       return false;                        
+                                            }}
+                                            else{ return false;  }
+                                    });    };
+                            
+
+
+                                      $(document).ready(valIdentity);
+
+                                    $( document).ajaxComplete(valIdentity);
+                    </script>
+                    <span asp-validation-for="IdentityCardOrPassport"></span>
+                </div>
+            </div>
+            @if (Model.PhoneEnabled)
+            {
+                <div class="col-lg-6">
+                    <div class="inputs form-group">
+                        <div class="grp-label">
+                            <label asp-for="PhoneNumber"></label>
+                            @if (Model.PhoneRequired)
+                            {
+                                <nop-required />
+                            }
+                        </div>
+                        <input tabindex="6" class="form-control" asp-for="PhoneNumber" id="PhoneNumber" />
+                        <span class="phone-message-ex">@T("MobileExNumber")</span>
+                        @*Ex: Enter the number with the format 962000000*@
+                        <span asp-validation-for="PhoneNumber"></span>
+                    </div>
+                </div>
+                <script>
+                    $('#PhoneNumber').on('keydown', function (e) {
+                        if ((e.keyCode == 8 || e.keyCode == 46) && $('#PhoneNumber').val().length == 3) {
+                            e.preventDefault();
+                        }
+                    });
+                </script>
+            }
+            <div class="col-lg-6">
+                <div class="inputs form-group">
+                    <div class="grp-label">
+                        <label asp-for="Email"></label>
+                        <nop-required />
+                    </div>
+                    <input tabindex="7" class="form-control" asp-for="Email" />
+                    <span asp-validation-for="Email"></span>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="inputs form-group">
+                    <div class="grp-label">
+                        <label asp-for="EmailConfirm"></label>
+                        <nop-required />
+                    </div>
+                    <input tabindex="8" class="form-control" asp-for="EmailConfirm" />
+                    <span asp-validation-for="EmailConfirm"></span>
+                </div>
+            </div>
+            
+             <div class="col-lg-6">
+                 <div class="inputs form-group">
+                    <div class="grp-label">
+                        <label asp-for="UploadID"></label>
+                         <nop-required />
+                    </div>
+                    
+            @{
+                Html.AddCssFileParts("~/lib/fineuploader/fine-uploader.min.css");
+                Html.AddScriptParts(ResourceLocation.Footer, "~/lib/fineuploader/jquery.fine-uploader.min.js");
+
+               
+            }
+              
+                                 <input id="@(uploadID)" name="@(uploadID)" type="hidden" />
+              @*fine uploader container*@
+                                <div id="@(uploadID)uploader"></div>
+                                @*fine uploader template (keep it synchronized to \Content\fineuploader\templates\default.html)*@
+                                <script type="text/template" asp-location="Footer" id="@(uploadID)-qq-template">
+                                    <div class="qq-uploader-selector qq-uploader">
+                                       @* <div class="qq-upload-drop-area-selector qq-upload-drop-area" qq-hide-dropzone>
+                                            <span>@T("Common.FileUploader.DropFiles")</span>
+                                        </div>*@
+                                        <div  class="qq-upload-button-selector qq-upload-button">
+                                            <div>@T("Common.FileUploader.UploadID")</div>
+                                            <div>@T("Address.Fields.UploadID")</div>
+                                        </div>
+                                        <span class="qq-drop-processing-selector qq-drop-processing">
+                                            <span>@T("Common.FileUploader.Processing")</span>
+                                            <span class="qq-drop-processing-spinner-selector qq-drop-processing-spinner"></span>
+                                        </span>
+                                        <ul class="qq-upload-list-selector qq-upload-list">
+                                            <li>
+                                                <div class="qq-progress-bar-container-selector">
+                                                    <div class="qq-progress-bar-selector qq-progress-bar"></div>
+                                                </div>
+                                                <span class="qq-upload-spinner-selector qq-upload-spinner"></span>
+                                                <span class="qq-edit-filename-icon-selector qq-edit-filename-icon"></span>
+                                                <span class="qq-upload-file-selector qq-upload-file"></span>
+                                                <input class="qq-edit-filename-selector qq-edit-filename" tabindex="0" type="text">
+                                                <span class="qq-upload-size-selector qq-upload-size"></span>
+                                                <a class="qq-upload-cancel-selector qq-upload-cancel" href="#">@T("Common.FileUploader.Cancel")</a>
+                                                <a class="qq-upload-retry-selector qq-upload-retry" href="#">@T("Common.FileUploader.Retry")</a>
+                                                <a class="qq-upload-delete-selector qq-upload-delete" href="#">@T("Common.FileUploader.Delete")</a>
+                                                <span class="qq-upload-status-text-selector qq-upload-status-text" style="display: block;"></span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </script>
+                                <script asp-location="Footer">                               
+                                                               
+                                    function buildupload()
+                                    {
+									if($("#UploadIDuploader div").val()!='')
+									{
+                                     $("#@(uploadID)uploader").fineUploader({
+                                            request: {
+                                                endpoint: '@(Url.RouteUrl("UploadIDFile"))'
+                                            },
+                                            template: "@(uploadID)-qq-template",
+                                            multiple: false,
+                                            
+                                             validation: {                                              
+                                                 acceptFiles: ['image/*'] ,
+                                              },
+                                           
+                                        }).on("complete", function(event, id, name, responseJSON, xhr) {
+                                            $("#@(uploadID)").val(responseJSON.downloadUrl);
+                                            console.log(responseJSON.downloadUrl);
+                                            if (responseJSON.success) {
+                                                $("#@(uploadID + "downloadurl")").html("<a href='" + responseJSON.downloadUrl + "'>@T("Common.FileUploader.DownloadUploadedFile")</a>");
+                                                $("#@(uploadID + "remove")").show();
+                                                $('#uploadIDVal').hide();
+                                            }
+                                            if (responseJSON.success==false) {
+                                               if(responseJSON.message=="@T("ShoppingCart.FailExtensions")"){
+                                                    $(".qq-upload-status-text-selector").eq(0).text("@T("ShoppingCart.FailExtensions")");
+                                                     $("#@(uploadID + "remove")").show();
+                                                $("#@(uploadID)").val('');
+                                                $("#@(uploadID + "downloadurl")").text(responseJSON.message);
+                                               }
+                                               else
+                                               {
+                                                $(".qq-upload-status-text-selector").eq(0).text("@T("ShoppingCart.MaximumUploadedFileSize")");
+                                                $("#@(uploadID + "remove")").show();
+                                                $("#@(uploadID)").val('');
+                                                $("#@(uploadID + "downloadurl")").text(responseJSON.message);
+                                               }                                                                                                                                       
+                                                                                           
+                                            }
+                                        });
+
+                                        $("#@(uploadID + "remove")").on("click", function(e) {
+                                            $("#@(uploadID + "downloadurl")").html("");
+                                            $("#@(uploadID)").val('');
+                                            $(this).hide();
+                                        });
+                                    }}
+
+
+                                      $(document).ready(buildupload);
+
+                                    $( document).ajaxComplete(buildupload);
+                                </script>                    
+                      <span id="uploadIDVal" asp-validation-for="UploadID"></span>
+               </div>
+            </div>
+              @if (Model.IsStudentIdNeeded)
+            {            
+            <div class="col-lg-6">
+                <div class="inputs form-group">
+                    <div class="grp-label">
+                        <label asp-for="StudentID"></label>
+                        <nop-required />
+                    </div>
+                    <input tabindex="7" class="form-control" asp-for="StudentID" />
+                    <script asp-location="Footer">   
+                      
+
+                        function deleteValdation () {
+
+                             $('#BillingNewAddress_StudentID').keypress(function (e) {    
+               
+                                    $('#StudentIDVal').hide();
+                                    }); 
+                                    
+                          } ;   
+                           $(document).ready(deleteValdation);
+
+                        $( document).ajaxComplete(deleteValdation);
+                    </script>
+                    <span id="StudentIDVal" asp-validation-for="StudentID"></span>                     
+                </div>
+            </div>
+            <div class="col-lg-6">
+                 <div class="inputs form-group">
+                    <div class="grp-label">
+                        <label asp-for="UploadStudentID"></label>
+                        <nop-required />
+                    </div>
+
+              
+                @*Html.AddCssFileParts("~/lib/fineuploader/fine-uploader.min.css");
+                Html.AddScriptParts(ResourceLocation.Footer, "~/lib/fineuploader/jquery.fine-uploader.min.js");*@
+             
+                                 <input id="@(uploadStudentID)" name="@(uploadStudentID)" type="hidden" />
+              @*fine uploader container*@
+                                <div id="@(uploadStudentID)uploader"></div>
+                                @*fine uploader template (keep it synchronized to \Content\fineuploader\templates\default.html)*@
+                                <script type="text/template" asp-location="Footer" id="@(uploadStudentID)-qq-template">
+                                    <div class="qq-uploader-selector qq-uploader">
+                                      @*  <div class="qq-upload-drop-area-selector qq-upload-drop-area" qq-hide-dropzone>
+                                            <span>@T("Common.FileUploader.DropFiles")</span>
+                                        </div>*@
+                                        <div class="qq-upload-button-selector qq-upload-button">
+                                            <div>@T("common.fileuploader.uploadStudentID")</div>
+                                            <div>@T("Address.Fields.UploadStudentID")</div>
+                                        </div>
+                                        <span class="qq-drop-processing-selector qq-drop-processing">
+                                            <span>@T("Common.FileUploader.Processing")</span>
+                                            <span class="qq-drop-processing-spinner-selector qq-drop-processing-spinner"></span>
+                                        </span>
+                                        <ul class="qq-upload-list-selector qq-upload-list">
+                                            <li>
+                                                <div class="qq-progress-bar-container-selector">
+                                                    <div class="qq-progress-bar-selector qq-progress-bar"></div>
+                                                </div>
+                                                <span class="qq-upload-spinner-selector qq-upload-spinner"></span>
+                                                <span class="qq-edit-filename-icon-selector qq-edit-filename-icon"></span>
+                                                <span class="qq-upload-file-selector qq-upload-file"></span>
+                                                <input class="qq-edit-filename-selector qq-edit-filename" tabindex="0" type="text">
+                                                <span class="qq-upload-size-selector qq-upload-size"></span>
+                                                <a class="qq-upload-cancel-selector qq-upload-cancel" href="#">@T("Common.FileUploader.Cancel")</a>
+                                                <a class="qq-upload-retry-selector qq-upload-retry" href="#">@T("Common.FileUploader.Retry")</a>
+                                                <a class="qq-upload-delete-selector qq-upload-delete" href="#">@T("Common.FileUploader.Delete")</a>
+                                                <span class="qq-upload-status-text-selector qq-upload-status-text" style="display: block;"></span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </script>
+                                <script asp-location="Footer">
+                                    function uploadStudentIDfile()
+                                    {
+									if($("#UploadStudentIDuploader div").val()!='')
+									{
+                                    $("#@(uploadStudentID)uploader").fineUploader({
+                                            request: {
+                                                endpoint: '@(Url.RouteUrl("UploadIDFile"))'
+                                            },
+                                            template: "@(uploadStudentID)-qq-template",
+                                            multiple: false,
+                                              validation: {                                              
+                                                 acceptFiles: ['image/*'] ,
+                                              },
+                                           
+                                        }).on("complete", function(event, id, name, responseJSON, xhr) {
+                                            $("#@(uploadStudentID)").val(responseJSON.downloadUrl);
+
+                                            if (responseJSON.success) {
+                                                $("#@(uploadStudentID + "downloadurl")").html("<a href='" + responseJSON.downloadUrl + "'>@T("Common.FileUploader.DownloadUploadedFile")</a>");
+                                                $("#@(uploadStudentID + "remove")").show();
+                                                $('#uploadStudentIDVal').hide();
+                                            }
+                                            if (responseJSON.success==false) {
+                                              if (responseJSON.success==false) {
+                                               if(responseJSON.message=="@T("ShoppingCart.FailExtensions")"){
+                                                    $(".qq-upload-status-text-selector").eq(1).text("@T("ShoppingCart.FailExtensions")");
+                                                     $("#@(uploadStudentID + "remove")").show();
+                                                $("#@(uploadStudentID)").val('');
+                                                $("#@(uploadStudentID + "downloadurl")").text(responseJSON.message);
+                                               }
+                                               else
+                                               {
+                                                $(".qq-upload-status-text-selector").eq(1).text("@T("ShoppingCart.MaximumUploadedFileSize")");
+                                                $("#@(uploadStudentID + "remove")").show();
+                                                $("#@(uploadStudentID)").val('');
+                                                $("#@(uploadStudentID + "downloadurl")").text(responseJSON.message);
+                                               }                                                                                                                                       
+                                                                                           
+                                            }
+                                            }
+                                        });
+
+                                        $("#@(uploadStudentID + "remove")").on("click", function(e) {
+                                            $("#@(uploadStudentID + "downloadurl")").html("");
+                                            $("#@(uploadStudentID)").val('');
+                                            $(this).hide();
+                                        });
+                                    }}
+                                    $(document).ready(uploadStudentIDfile);
+
+                                    $( document).ajaxComplete(uploadStudentIDfile);
+                                </script>
+                              
+                    <span id="uploadStudentIDVal" asp-validation-for="UploadStudentID"></span>
+               </div>
+            </div>
+           
+
+             <div class="col-lg-6">
+                
+             </div>
+
+
+              }
+
+             @* <div class="col-lg-6">
+                 <div class="inputs form-group">
+                    <div class="grp-label">
+                        <label asp-for="UploadID"></label>                       
+                    </div>
+                    <input type="file" name="UploadID" asp-for="UploadID"  class="form-control" />                    
+            </div>
+             </div>*@
+
+            @if (Model.CompanyEnabled)
+            {
+                <div class="col-lg-6">
+                    <div class="inputs form-group">
+                        <div class="grp-label">
+                            <label asp-for="Company"></label>
+                            @if (Model.CompanyRequired)
+                            {
+                                <nop-required />
+                            }
+                        </div>
+                        <input tabindex="9" class="form-control" asp-for="Company" />
+                        <span asp-validation-for="Company"></span>
+                    </div>
+                </div>
+            }
+            @*@if (Model.CountryEnabled)
+                {
+                    <div class="col-lg-6">
+                        <div class="inputs form-group">
+                            <div class="grp-label">
+                                <label asp-for="CountryId"></label>
+                                <nop-required />
+                            </div>
+                            <select class="custom-select" asp-for="CountryId" asp-items="Model.AvailableCountries"></select>
+                            <span asp-validation-for="CountryId"></span>
+                        </div>
+                    </div>
+                    <script asp-location="Footer">
+                        $(document).ready(function () {
+                            $('#@Html.IdFor(m => m.CountryId)').trigger('change')
+                        });
+                    </script>
+                }*@
+
+            @*@if (Model.CountryEnabled && Model.StateProvinceEnabled)
+                {
+                    <div class="col-lg-6">
+                        <div class="inputs form-group">
+                            <div class="grp-label">
+                                <label asp-for="StateProvinceId"></label>
+                            </div>
+                            <select class="custom-select" asp-for="StateProvinceId" asp-items="Model.AvailableStates"></select>
+                            <span id="states-loading-progress" style="display: none;" class="please-wait">@T("Common.Wait...")</span>
+                            <span asp-validation-for="StateProvinceId"></span>
+                        </div>
+                    </div>
+                }*@
+            @if (Model.CountyEnabled)
+            {
+                <div class="col-lg-6">
+                    <div class="inputs form-group">
+                        <div class="grp-label">
+                            <label asp-for="County"></label>
+                            @if (Model.CountyRequired)
+                            {
+                                <nop-required />
+                            }
+                        </div>
+                        <input tabindex="10" class="form-control" asp-for="County" />
+                        <span asp-validation-for="County"></span>
+                    </div>
+                </div>
+            }
+            @*@if (Model.CityEnabled)
+                {
+                    <div class="col-lg-6">
+                        <div class="inputs form-group">
+                            <div class="grp-label">
+                                <label asp-for="City"></label>
+                                @if (Model.CityRequired)
+                                {
+                                    <nop-required />
+                                }
+                            </div>
+                            <input class="form-control" asp-for="City" />
+                            <span asp-validation-for="City"></span>
+                        </div>
+                    </div>
+                }*@
+            @*@if (Model.StreetAddressEnabled)
+                {
+                    <div class="col-lg-6">
+                        <div class="inputs form-group">
+                            <div class="grp-label">
+                                <label asp-for="Address1"></label>
+                                @if (Model.StreetAddressRequired)
+                                {
+                                    <nop-required />
+                                }
+                            </div>
+                            <input class="form-control" asp-for="Address1" />
+                            <span asp-validation-for="Address1"></span>
+                        </div>
+                    </div>
+                }*@
+            @*@if (Model.StreetAddress2Enabled)
+                {
+                    <div class="col-lg-6">
+                        <div class="inputs form-group">
+                            <div class="grp-label">
+                                <label asp-for="Address2"></label>
+                                @if (Model.StreetAddress2Required)
+                                {
+                                    <nop-required />
+                                }
+                            </div>
+                            <input class="form-control" asp-for="Address2" />
+                            <span asp-validation-for="Address2"></span>
+                        </div>
+                    </div>
+                }*@
+            @if (Model.ZipPostalCodeEnabled)
+            {
+                <div class="col-lg-6">
+                    <div class="inputs form-group">
+                        <div class="grp-label">
+                            <label asp-for="ZipPostalCode"></label>
+                            @if (Model.ZipPostalCodeRequired)
+                            {
+                                <nop-required />
+                            }
+                        </div>
+                        <input tabindex="11" class="form-control" asp-for="ZipPostalCode" />
+                        <span asp-validation-for="ZipPostalCode"></span>
+                    </div>
+                </div>
+            }
+            @if (Model.FaxEnabled)
+            {
+                <div class="col-lg-6">
+                    <div class="inputs form-group">
+                        <div class="grp-label">
+                            <label asp-for="FaxNumber"></label>
+                            @if (Model.FaxRequired)
+                            {
+                                <nop-required />
+                            }
+                        </div>
+                        <input tabindex="12" class="form-control" asp-for="FaxNumber" />
+                        <span asp-validation-for="FaxNumber"></span>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group">
+                    <div class="custom-control custom-radio-button radio-icon mt">
+                        <input name="PickUpInStore" checked="@(!Model.PickUpInStore)" class="custom-control-input" value="false" type="radio" id="DeliveryOptionHomeDelivery" />
+                        <label for="DeliveryOptionHomeDelivery" class="custom-control-label"><span>@T("Checkout.DeliveryOption.HomeDelivery")</span></label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6">
+                @if (isShowPickupInStore)
+                {
+                    <div class="form-group">
+                        <div class="custom-control custom-radio-button pickup-icon radio-icon" onclick="OpenDrawerBookAppointment(); return true;">
+                            <input name="PickUpInStore" checked="@(Model.PickUpInStore)" class="custom-control-input" value="true" type="radio" id="DeliveryOptionPickUpInStore" />
+                            <label for="DeliveryOptionPickUpInStore" class="custom-control-label"><span>@T("Checkout.DeliveryOption.PickUpInStore")</span></label>
+                        </div>
+                    </div>
+                }
+            </div>
+
+            <script>
+                var $pickupInStore = $('#@Html.IdFor(model => model.PickUpInStore)');
+                $(document).ready(function () {
+                    Shipping.togglePickUpInStore($pickupInStore);
+
+                });
+
+                $("[name='DeliveryOption']").on('change', function () {
+                    //$pickupInStore.prop("checked", $(this).val() === 'PickUpInStore');
+                    $pickupInStore.trigger('click');
+
+                });
+            </script>
+            <div class="col-lg-6">
+                <div class="inputs checkout-checkbox">
+                    <div class="custom-control custom-checkbox custom-control-inline">
+                        <input class="custom-control-input" asp-for="SubscribeNewsletter" />
+                        <label class="custom-control-label" asp-for="SubscribeNewsletter"></label>
+                    </div>
+                    <span asp-validation-for="SubscribeNewsletter"></span>
+                </div>
+            </div>
+        </div>
+        @if (Model.CustomAddressAttributes.Count > 0)
+        {
+            @await Html.PartialAsync("_AddressAttributes", Model.CustomAddressAttributes)
+        }
+    </div>
+</div>
+@*Appointment booking drawercomponent*@
+@await Component.InvokeAsync("WidgetsAppointmentBookingDrawer")

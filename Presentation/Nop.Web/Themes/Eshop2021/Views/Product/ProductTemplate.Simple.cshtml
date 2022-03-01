@@ -1,0 +1,410 @@
+﻿@model ProductDetailsModel
+@using Nop.Core
+@using Nop.Services
+@using Nop.Core.Domain.Seo;
+@using Nop.Core.Domain.Enum;
+@using Nop.Services.Configuration;
+@inject IWebHelper webHelper
+@inject IWorkContext workContext
+@inject SeoSettings seoSettings
+@using Nop.Services.Helpers
+@inject IUserAgentHelper userAgentHelper
+@inject ISettingService settingService
+@{
+    Layout = "_ColumnsOne";
+
+    //title
+    Html.AddTitleParts(!string.IsNullOrEmpty(Model.MetaTitle) ? Model.MetaTitle : Model.Name);
+    //meta
+    Html.AddMetaDescriptionParts(Model.MetaDescription);
+    Html.AddMetaKeywordParts(Model.MetaKeywords);
+    //page class
+    Html.AppendPageCssClassParts("html-product-details-page device-product-details-page");
+
+    //canonical URL
+    if (seoSettings.CanonicalUrlsEnabled)
+    {
+        var productUrl = UrlStrucutre.UrlDecode(Url.RouteUrl("Product", new { SeName = Model.SeName }, webHelper.CurrentRequestProtocol).ToLowerInvariant());
+        Html.AddCanonicalUrlParts(productUrl, seoSettings.QueryStringInCanonicalUrlsEnabled);
+    }
+
+    //open graph META tags
+    if (seoSettings.OpenGraphMetaTags)
+    {
+        Html.AddHeadCustomParts("<meta property=\"og:type\" content=\"product\" />");
+        Html.AddHeadCustomParts("<meta property=\"og:title\" content=\"" + Model.Name + "\" />");
+        Html.AddHeadCustomParts("<meta property=\"og:description\" content=\"" + Nop.Core.Html.HtmlHelper.StripTags(Model.MetaDescription) + "\" />");
+        Html.AddHeadCustomParts("<meta property=\"og:image\" content=\"" + Model.DefaultPictureModel.ImageUrl + "\" />");
+        Html.AddHeadCustomParts("<meta property=\"og:url\" content=\"" + webHelper.GetThisPageUrl(false) + "\" />");
+        Html.AddHeadCustomParts("<meta property=\"og:site_name\" content=\"" + Model.CurrentStoreName + "\" />");
+    }
+
+    //Twitter META tags
+    if (seoSettings.TwitterMetaTags)
+    {
+        Html.AddHeadCustomParts("<meta property=\"twitter:card\" content=\"summary\" />");
+        Html.AddHeadCustomParts("<meta property=\"twitter:site\" content=\"" + Model.CurrentStoreName + "\" />");
+        Html.AddHeadCustomParts("<meta property=\"twitter:title\" content=\"" + Model.Name + "\" />");
+        Html.AddHeadCustomParts("<meta property=\"twitter:description\" content=\"" + Nop.Core.Html.HtmlHelper.StripTags(Model.MetaDescription) + "\" />");
+        Html.AddHeadCustomParts("<meta property=\"twitter:image\" content=\"" + Model.DefaultPictureModel.ImageUrl + "\" />");
+        Html.AddHeadCustomParts("<meta property=\"twitter:url\" content=\"" + webHelper.GetThisPageUrl(false) + "\" />");
+    }
+    // Monthly Price Attribute
+    var attributeChangeHandlerFuncName = $"attribute_change_handler_{Model.Id}";
+    var monthlyPriceAttrId = settingService.GetSettingByKey<int>(EShopHelperService.MonthlyPriceAttribute);
+    var attribute = Model.ProductAttributes.Where(p => p.ProductAttributeId == monthlyPriceAttrId).FirstOrDefault();
+    var controlId = "";
+    if (attribute != null)
+    {
+        controlId = $"product_attribute_{attribute.Id}";
+    }
+
+    //Advanced Payment Amount Attribute
+    var advancedPaymentAmountAttrId = settingService.GetSettingByKey<int>(EShopHelperService.AdvancedPaymentAmountAttribute);
+    var advancedPaymentAmountAttribute = Model.ProductAttributes.Where(p => p.ProductAttributeId == advancedPaymentAmountAttrId).FirstOrDefault();
+    var advancedPaymentcontrolId = "";
+    if (advancedPaymentAmountAttribute != null)
+    {
+        advancedPaymentcontrolId = $"product_attribute_{advancedPaymentAmountAttribute.Id}";
+    }
+}
+<script asp-location="Footer">
+    //import { Modal } from "bootstrap";
+    $(document).ready(function () {
+        var advancedPaymentcontrolId = "@(advancedPaymentcontrolId)";
+        var controlId = '@(controlId)';
+        if (advancedPaymentcontrolId != null && advancedPaymentcontrolId != "") {
+            $("input[type=radio][name=@(advancedPaymentcontrolId)").prop('checked', false);
+            @(attributeChangeHandlerFuncName)();
+        }
+        $('input[type=radio][name=radioDevicePackage]').change(function () {
+            if (this.value == 'DeviceOnly') {
+                $("#div-DevicePackage").hide();
+               // $("#divMonthlyPrice").hide();
+                $("#simSelect").hide()
+                $("#simSelect").removeClass("active with-arrow");
+                productTemplate.fnMobileSim("", 0, 0,false);
+                if (controlId != null && controlId != "") {
+                    $("input[type=radio][name=@(controlId)").prop('checked', false);
+                }
+                if (advancedPaymentcontrolId != null && advancedPaymentcontrolId != "") {
+                    $("input[type=radio][name=@(advancedPaymentcontrolId)").prop('checked', false);
+                }
+                @(attributeChangeHandlerFuncName)();
+            }
+            else if (this.value == 'ChoosePlanwithdevice') {
+                var attribId = $("#hid_attribute_valueId").val();
+                $('#' + attribId).prop('checked', true);
+                $("#div-DevicePackage").show();
+                //$("#divMonthlyPrice").show();
+                $("#simSelect").show()
+                $("#simSelect").addClass("active with-arrow")
+                if (advancedPaymentcontrolId != null && advancedPaymentcontrolId != "") {
+                    $("input[type=radio][name=@(advancedPaymentcontrolId)").prop('checked', true);
+                }
+                @(attributeChangeHandlerFuncName)();
+            }
+        });
+    });
+
+    $(document).ready(function () {
+        $('.add-to-cart-qty').insertAfter('.insert-qty');
+    });
+</script>
+@await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.ProductDetailsAfterBreadcrumb, additionalData = Model })
+<div class="page product-details-page back-reapeat">
+    <div class="page-body">
+        <div class="container">
+            <div class="breadcrumb-cmp-prd">
+                <!--product breadcrumb-->
+                @await Html.PartialAsync("_ProductBreadcrumb", Model.Breadcrumb)
+                @await Html.PartialAsync("_CompareProductsButton", Model)
+            </div>
+        </div>
+        @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.ProductDetailsTop, additionalData = Model })
+    <form asp-route="Product" asp-route-sename="@Model.SeName" method="post" id="product-details-form">
+        <input type="hidden" value="" id="hdnPlanProductId" name="PlanProductId" />
+        <input type="hidden" value="" id="hdnSelectedAttributeValueId" name="SelectedAttributeValueId" />
+        <input type="hidden" value="" id="hdnSelectedSimTypeAttributeValueId" name="SelectedSimTypeAttributeValueId" />
+        <input type="hidden" value="@EnumProductDetail.Postpaid" id="hdnEnumProductDetail" name="enumProductDetail" />
+        <div itemscope itemtype="http://schema.org/Product" data-productid="@Model.Id">
+            <div class="product-essential">
+                <div class="container">
+                    <div class="essential-group">
+                        @await Html.PartialAsync("_CompareProductsButton", Model)
+                        @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.ProductDetailsBeforePictures, additionalData = Model })
+                        <!--product pictures-->
+                        @await Html.PartialAsync("_ProductDetailsPictures", Model)
+                        @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.ProductDetailsAfterPictures, additionalData = Model })
+                        <div class="overview">
+                            <div class="overview-inn">
+                                @await Html.PartialAsync("_Discontinued", Model)
+                                <!--manufacturers-->
+                                @await Html.PartialAsync("_ProductManufacturers", Model.ProductManufacturers)
+                                <div class="product-name">
+                                    <h1 itemprop="name">
+                                        @Model.Name
+                                    </h1>
+                                </div>
+                                <!--availability-->
+                                @await Html.PartialAsync("_Availability", Model)
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <!--product reviews-->
+                                        @await Html.PartialAsync("_ProductReviewOverview", Model.ProductReviewOverview)
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <!--delivery-->
+                                        @await Html.PartialAsync("_DeliveryInfo", Model)
+                                    </div>
+                                </div>
+                                @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.ProductDetailsOverviewTop, additionalData = Model })
+
+                                <!--SKU, MAN, GTIN, vendor-->
+                                @await Html.PartialAsync("_SKU_Man_GTIN_Ven", Model)
+
+                                <!--sample download-->
+                                @await Html.PartialAsync("_DownloadSample", Model)
+                                <!--attributes-->
+                                @{
+                                    var dataDictAttributes = new ViewDataDictionary(ViewData);
+                                    dataDictAttributes.TemplateInfo.HtmlFieldPrefix = $"attributes_{Model.Id}";
+                                    @await Html.PartialAsync("_ProductAttributes", Model.ProductAttributes, dataDictAttributes)
+                                }
+                                <!--gift card-->
+                                @{
+                                    var dataDictGiftCard = new ViewDataDictionary(ViewData);
+                                    dataDictGiftCard.TemplateInfo.HtmlFieldPrefix = $"giftcard_{Model.Id}";
+                                    @await Html.PartialAsync("_GiftCardInfo", Model.GiftCard, dataDictGiftCard)
+                                }
+                                <!--rental info-->
+                                @{
+                                    var dataDictRental = new ViewDataDictionary(ViewData);
+                                    dataDictRental.TemplateInfo.HtmlFieldPrefix = $"rental_{Model.Id}";
+                                    @await Html.PartialAsync("_RentalInfo", Model, dataDictRental)
+                                }
+                                <div class="qty-package">
+                                    <div class="qty-right">
+                                        <div class="insert-qty"></div>
+                                        <script asp-location="Footer"></script>
+                                    </div>
+                                    <div class="package-left">
+                                        @if (!Model.IsHidePlanSelection)
+                                        {
+                                            <div class="device-package">
+                                                <label class="dev-label">@T("ProductDetail.DevicePackage")</label>
+                                                <div class="__flex">
+                                                    <div class="custom-control custom-radio custom-control-inline">
+                                                        <input type="radio" value="DeviceOnly" checked id="radio-DevicePackage" name="radioDevicePackage" class="custom-control-input">
+                                                        <label class="custom-control-label" for="radio-DevicePackage">@T("ProductDetail.DeviceOnly")</label>
+                                                    </div>
+                                                    <div class="custom-control custom-radio custom-control-inline">
+                                                        <input type="radio" value="ChoosePlanwithdevice" id="radio-ChoosePlanwithdevice" name="radioDevicePackage" class="custom-control-input">
+                                                        <label class="custom-control-label" for="radio-ChoosePlanwithdevice">@T("ProductDetail.ChoosePlanwithdevice")</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                        @{
+                                            var dataDictAttributes_DevicePackage = new ViewDataDictionary(ViewData);
+                                            dataDictAttributes_DevicePackage.TemplateInfo.HtmlFieldPrefix = $"attributes_{Model.Id}";
+                                            @await Html.PartialAsync("_ProductAttributes.DevicePackage", Model.ProductAttributes, dataDictAttributes_DevicePackage)
+                                        }
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                                @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.ProductDetailsOverviewBottom, additionalData = Model })
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+                <div class="container" id="divMonthlyPrice" style="display:none;">
+                    <div class="monthly-plan other month-attr">
+                        <div class="monthly-plan-left">
+                            <div class="cust-label">@T("ProductDetail.MonthlyPrices")</div>
+                            <div class="month-right-flex">
+                                @{
+                                    var dataDictAttributesMonthlyPrice = new ViewDataDictionary(ViewData);
+                                    dataDictAttributesMonthlyPrice.TemplateInfo.HtmlFieldPrefix = $"attributes_{Model.Id}";
+                                    @await Html.PartialAsync("_ProductAttributes.MonthlyPrice", Model.ProductAttributes, dataDictAttributesMonthlyPrice)
+                                }
+
+                            </div>
+
+                            @*<div class="monthly-plan-right">
+                                <div class="monthly-radio">
+                                        @if (attribute != null)
+                                        {
+                                            if (attribute.Values != null && attribute.Values.Count() > 0)
+                                            {
+                                                var defaultSelectedValue = attribute.Values.Where(p => p.IsPreSelected).FirstOrDefault();
+                                                if (defaultSelectedValue != null)
+                                                {
+                                                    <input type="hidden" id="hid_attribute_valueId" value="@(controlId)_@(defaultSelectedValue.Id)" />
+                                                }
+                                                foreach (var attributeValue in attribute.Values)
+                                                {
+                                                    var adjPrice = attributeValue.PriceAdjustment;
+                                                    <div class="custom-control custom-radio custom-control-inline">
+                                                        <input class="custom-control-input" id="@(controlId)_@(attributeValue.Id)" type="radio" name="@(controlId)" value="@attributeValue.Id"
+                                                               @(attribute.Values.Any(value => value.CustomerEntersQty) ? Html.Raw($"onclick=\"showHideRadioQuantity('{controlId}')\"") : null) />
+                                                        <label class="custom-control-label" for="@(controlId)_@(attributeValue.Id)">
+                                                            <span>@attributeValue.Name</span>
+                                                            @if (!string.IsNullOrEmpty(attributeValue.PriceAdjustment))
+                                                            {
+                                                                adjPrice = attributeValue.PriceAdjustment.Replace("+", "").Replace("-", "");
+                                                            }
+                                                            <strong>@Html.Raw(adjPrice)</strong>
+                                                        </label>
+                                                    </div>
+                                                    <input type="hidden" id="hid_@(attributeValue.Id)" value="@(adjPrice)" />
+
+                                                }
+                                            }
+                                        }
+                                    </div>
+
+                            </div>*@
+                        </div>
+                    </div>
+                </div>
+                <div class="essential-cart">
+                    <div class="container">
+                        <div class="essential-cart-flex">
+                            <div class="essential-tab">
+                                <ul>
+                                    <li class="active with-arrow"><span>@T("ProductDetail.Device")</span></li>
+                                    <li id="simSelect" class="" style="display:none;"><span>@T("ProductDetail.Sim")</span></li>
+                                </ul>
+                            </div>
+                            <div class="essential-cart-right">
+                                <!--price & add to cart-->
+                                @{
+                                    var dataDictPrice = new ViewDataDictionary(ViewData);
+                                    dataDictPrice.TemplateInfo.HtmlFieldPrefix = $"price_{Model.Id}";
+                                    @await Html.PartialAsync("_ProductPrice", Model.ProductPrice, dataDictPrice)
+
+                                    @await Html.PartialAsync("_ProductTierPrices", Model.TierPrices)
+                                }
+
+                                @{
+                                    var dataDictAddToCart = new ViewDataDictionary(ViewData);
+                                    dataDictAddToCart.TemplateInfo.HtmlFieldPrefix = $"addtocart_{Model.Id}";
+                                }
+                                @await Html.PartialAsync("_AddToCart", Model.AddToCart, dataDictAddToCart)
+                                @*<a href="@Url.RouteUrl("ShoppingCart")" class="btn btn-orange">@T("ProductDetail.Checkout")</a>*@
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="div-DevicePackage" style="display:none;">
+                    <div class="container">
+                        <div class="choose-plan row">
+                            <div class="choose-plan-flex col-md-12">
+                                @*<script asp-location="Footer">
+                function ChangeSimType(selected) {
+                    $("#ul_simType>li.active").removeClass("active");
+                    $(selected).addClass("active");
+                }
+            </script>*@
+                                <div class="choose-plan-left">
+                                    @*<div class="choose-title">@T("ProductDetail.ChoosePlan")</div>*@
+                                    <div class="step">
+                                        @*@{
+                        var dataDictAttributesSimType = new ViewDataDictionary(ViewData);
+                        dataDictAttributesSimType.TemplateInfo.HtmlFieldPrefix = $"attributes_{Model.Id}";
+                        @await Html.PartialAsync("_SimTypeProductAttribute", Model.ProductAttributes, dataDictAttributesSimType)
+                    }*@
+                                        @*<ul id="ul_simType">
+                        <li onclick="ChangeSimType(this)" class="active"><span>@T("ProductDetail.Esim")</span></li>
+                        <li onclick="ChangeSimType(this)"><span>@T("ProductDetail.Sim")</span></li>
+                    </ul>*@
+                                        <div id="divSimType">
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="choose-plan-list">
+                                    @await Component.InvokeAsync("ProductPlan", new { productId = Model.Id, productName = Model.Name, enumProductDetail = EnumProductDetail.Device })
+                                </div>
+                            </div>
+                            @*@await Component.InvokeAsync("SimCardList", new { productId = 0 })*@
+                            <div class="select-sim-number">
+                                <label>@T("ProductDetail.SelectSimCard")</label>
+
+                                <div class="dropdown common-dropdown">
+                                    <input type="hidden" id="simCardNumber" name="simCardNumber" value="0" />
+                                    <div class="dropdown-toggle" id="dropdownSim" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        @T("ProductDetail.SelectSimCardNumber")
+                                    </div>
+                                    <div class="dropdown-menu" id="ddlSimCardList1">
+                                        
+                                    </div>
+                                    <script asp-location="Footer">
+                                        function SetSelectedSimCardValue(selected, dllValue, dllText) {
+                                            $("#simCardNumber").val(dllValue);
+                                            $("#dropdownSim").text(dllText);
+                                            $("#simValidation").hide();
+                                            $(".dropdown-menu>a.selected").removeClass("selected");
+                                            $(selected).addClass("selected");
+                                            @if (userAgentHelper.IsMobileDevice())
+                                            {
+                                                <Text>
+                                                        if (dllValue !== "0") {
+                                                            $('html, body').animate({
+                                                                scrollTop: ($(".overall-payment").offset().top - 200)
+                                                            }, 2000);
+                                                        }
+                                                </Text>
+                                            }
+                                            }
+                                    </script>
+                                </div>
+                            </div>
+                            @*<div class="post-cutom-attr col-md-9">
+            <div class="sim-commitment">
+                <div class="col-md-6">
+                    @{
+                        var dataDictAttributesSim = new ViewDataDictionary(ViewData);
+                        dataDictAttributesSim.TemplateInfo.HtmlFieldPrefix = $"attributes_{Model.Id}";
+                        @await Html.PartialAsync("_SimCartProductAttribute", Model.ProductAttributes, dataDictAttributesSim)
+                    }
+                </div>
+            </div>
+        </div>*@
+                        </div>
+                    </div>
+                    <div class="container">
+                        @await Html.PartialAsync("_ProductPriceDevice", Model)
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.ProductDetailsBeforeCollateral, additionalData = Model })
+                @{
+                    var withImageSpecAttribute = Model.ProductSpecifications.Where(p => p.PictureId != 0).ToList();
+                    var withoutImageSpecAttribute = Model.ProductSpecifications.Where(p => p.PictureId == 0).ToList();
+                }
+                @if (withImageSpecAttribute != null && withImageSpecAttribute.Count > 0)
+                {
+                    @await Html.PartialAsync("_ProductSpecificationsWithImage", withImageSpecAttribute)
+                }
+                <div class="product-collateral">
+                    @await Html.PartialAsync("_ProductSpecifications", withoutImageSpecAttribute)
+                </div>
+                @await Component.InvokeAsync("ProductsAlsoPurchased", new { productId = Model.Id })
+                <div class="smart-tab">
+                    <div class="container">
+                        @await Html.PartialAsync("_ProductDetailTabs", Model)
+                    </div>
+                </div>
+                <div class="arrow-bottom-mobile">
+                    @await Component.InvokeAsync("CustomRelatedProducts", new { productId = Model.Id, productName = Model.Name, enumProductDetail = EnumProductDetail.Device })
+                </div>
+            </div>
+        </div>
+    </form>
+        @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.ProductDetailsBottom, additionalData = Model })
+    </div>
+</div>

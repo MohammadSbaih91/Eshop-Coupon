@@ -1,0 +1,11 @@
+﻿{
+  "Group": "Widgets",
+  "FriendlyName": "Customer Order Review",
+  "SystemName": "Widgets.CustomerOrderReview",
+  "Version": "1",
+  "SupportedVersions": [ "4.10" ],
+  "Author": "QBS",
+  "DisplayOrder": 1,
+  "FileName": "Widgets.CustomerOrderReview.dll",
+  "Description": "This plugin allows you to take customer review on order"
+}

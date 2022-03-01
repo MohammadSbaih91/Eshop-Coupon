@@ -1,0 +1,58 @@
+﻿@model Nop.Web.Customization.Models.Catalog.CategoryProductModel
+@using Nop.Services.Helpers
+@using Nop.Core
+@inject IWorkContext workContext
+@inject IUserAgentHelper userAgentHelper
+
+@if (Model.SubCategories != null && Model.SubCategories.Count() > 0)
+{
+    var prod = Model.SubCategories.FirstOrDefault();
+    <div class="prd-details-tabs" id="prd-details-tabs">
+        <div class="tabs-nav tabing">
+            <ul>
+                @foreach (var item in Model.SubCategories)
+                {
+                    string clsActive = "";
+                    if (item.Id == prod.Id)
+                    {
+                        clsActive = "active";
+                    }
+                    <li data-Id="@item.Id" class="@clsActive"><a href="#tab_@item.Id" data-categoryId="@item.Id">@item.Name</a></li>
+                }
+            </ul>
+        </div>
+        <div class="tabs-content">
+            @foreach (var subcat in Model.SubCategories)
+            {
+                <div id="tab_@subcat.Id">
+
+                </div>
+            }
+            <script>
+                $(document).ready(function () {
+                    $(function () {
+                        $('.tabing a', '#prd-details-tabs').click(function () {
+                            // Check for active
+                            var categoryId = $(this).attr('data-categoryId');
+                            var url = window.location.href;
+                            url = url.split("?")[0];
+                            CatalogProduct(url, categoryId, false, true);
+                            $('.tabs-nav li', '#prd-details-tabs').removeClass('active');
+                            $(this).parent().addClass('active');
+
+                            // Display active tab
+                            let currentTab = $(this).attr('href');
+                            $('.tabs-content > div', '#prd-details-tabs').hide();
+                            $(currentTab).show();
+                            return false;
+                        });
+                    });
+                    var url = window.location.href;
+                    url = url.split("?")[0];
+                    CatalogProduct(url, $(".tabing a").attr("data-categoryId"), false, true);
+                    pushStateUrl($(this).attr('data-state-url'), $(this).text());
+                })
+            </script>
+        </div>
+    </div>
+}

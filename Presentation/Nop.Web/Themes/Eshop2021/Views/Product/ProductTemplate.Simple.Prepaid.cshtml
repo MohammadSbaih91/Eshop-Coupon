@@ -1,0 +1,206 @@
+﻿@model ProductDetailsModel
+@using Nop.Core.Domain.Enum;
+@using Nop.Core.Domain.Seo;
+@inject Nop.Core.IWebHelper webHelper
+@inject SeoSettings seoSettings
+@using Nop.Services.Helpers
+@using Nop.Core
+@inject IWorkContext workContext
+@inject IUserAgentHelper userAgentHelper
+
+@{
+    Layout = "_ColumnsOne";
+    var supportRtl = workContext.WorkingLanguage.Rtl;
+    //title
+    Html.AddTitleParts(!string.IsNullOrEmpty(Model.MetaTitle) ? Model.MetaTitle : Model.Name);
+    //meta
+    Html.AddMetaDescriptionParts(Model.MetaDescription);
+    Html.AddMetaKeywordParts(Model.MetaKeywords);
+    //page class
+    Html.AppendPageCssClassParts("html-product-details-page");
+
+    //canonical URL
+    if (seoSettings.CanonicalUrlsEnabled)
+    {
+        var productUrl = UrlStrucutre.UrlDecode(Url.RouteUrl("Product", new { SeName = Model.SeName }, webHelper.CurrentRequestProtocol).ToLowerInvariant());
+        Html.AddCanonicalUrlParts(productUrl, seoSettings.QueryStringInCanonicalUrlsEnabled);
+    }
+
+    //open graph META tags
+    if (seoSettings.OpenGraphMetaTags)
+    {
+        Html.AddHeadCustomParts("<meta property=\"og:type\" content=\"product\" />");
+        Html.AddHeadCustomParts("<meta property=\"og:title\" content=\"" + Model.Name + "\" />");
+        Html.AddHeadCustomParts("<meta property=\"og:description\" content=\"" + Nop.Core.Html.HtmlHelper.StripTags(Model.MetaDescription) + "\" />");
+        Html.AddHeadCustomParts("<meta property=\"og:image\" content=\"" + Model.DefaultPictureModel.ImageUrl + "\" />");
+        Html.AddHeadCustomParts("<meta property=\"og:url\" content=\"" + webHelper.GetThisPageUrl(false) + "\" />");
+        Html.AddHeadCustomParts("<meta property=\"og:site_name\" content=\"" + Model.CurrentStoreName + "\" />");
+    }
+
+    //Twitter META tags
+    if (seoSettings.TwitterMetaTags)
+    {
+        Html.AddHeadCustomParts("<meta property=\"twitter:card\" content=\"summary\" />");
+        Html.AddHeadCustomParts("<meta property=\"twitter:site\" content=\"" + Model.CurrentStoreName + "\" />");
+        Html.AddHeadCustomParts("<meta property=\"twitter:title\" content=\"" + Model.Name + "\" />");
+        Html.AddHeadCustomParts("<meta property=\"twitter:description\" content=\"" + Nop.Core.Html.HtmlHelper.StripTags(Model.MetaDescription) + "\" />");
+        Html.AddHeadCustomParts("<meta property=\"twitter:image\" content=\"" + Model.DefaultPictureModel.ImageUrl + "\" />");
+        Html.AddHeadCustomParts("<meta property=\"twitter:url\" content=\"" + webHelper.GetThisPageUrl(false) + "\" />");
+    }
+}
+@await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.ProductDetailsAfterBreadcrumb, additionalData = Model })
+<div class="page product-details-page back-reapeat">
+    <div class="page-body">
+        <div class="container">
+            <div class="breadcrumb-cmp-prd">
+                <!--product breadcrumb-->
+                @await Html.PartialAsync("_ProductBreadcrumb", Model.Breadcrumb)
+                @await Html.PartialAsync("_CompareProductsButton", Model)
+            </div>
+        </div>
+        @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.ProductDetailsTop, additionalData = Model })
+    <form asp-route="Product" asp-route-sename="@Model.SeName" method="post" id="product-details-form">
+        <input type="hidden" value="" id="hdnPlanProductId" name="PlanProductId" />
+        <input type="hidden" value="" id="hdnSelectedAttributeValuePrice" name="hdnSelectedAttributeValuePrice" />
+        <input type="hidden" value="@EnumProductDetail.Prepaid" id="hdnEnumProductDetail" name="enumProductDetail" />
+        <div itemscope itemtype="http://schema.org/Product" data-productid="@Model.Id">
+            <div class="product-essential">
+                <div class="container">
+                    <div class="essential-group border-left4">
+                        @await Html.PartialAsync("_CompareProductsButton", Model)
+                        @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.ProductDetailsBeforePictures, additionalData = Model })
+                        <div class="overview overview-full-widht">
+                            <div class="overview-inn">
+                                <div class="ovr-without-pic">
+                                    <div class="ovr-left">
+                                        <div class="product-name">
+                                            <h1 itemprop="name">
+                                                @Model.Name
+                                            </h1>
+                                        </div>
+                                        @*<div class="ovr-data-size">23GB</div>*@
+                                    </div>
+                                    <div class="ovr-right">
+                                        @{
+                                            var dataDictAttributes = new ViewDataDictionary(ViewData);
+                                            dataDictAttributes.TemplateInfo.HtmlFieldPrefix = $"attributes_{Model.Id}";
+                                            @await Html.PartialAsync("_ProductAttributes", Model.ProductAttributes, dataDictAttributes)
+                                        }
+                                        <div class="desc-list">
+                                            @Html.Raw(Model.FullDescription)
+                                            @*<ul>
+                                                <li>Unlimited ** flexible minutes to other local networks and 45 international destinations</li>
+                                                <li>Unlimited calls to Ooredoo Palestine***</li>
+                                                <li>Why data is corructed</li>
+                                                <li>Why data is corructed</li>
+                                                <li>Why data is corructed</li>
+                                                <li>Why data is corructed</li>
+                                                <li>Why data is corructed</li>
+                                            </ul>*@
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="choose-plan with-sim prepaid-choose-plan oneline">
+                                    <div class="choose-plan-flex">
+                                        <div class="choose-plan-left">
+                                            @*<div class="choose-title">@T("ProductDetail.ChooseSimtype")</div>*@
+                                            <div class="step">
+                                                @*<ul>
+                                                    <li><span>@T("ProductDetail.Esim")</span></li>
+                                                    <li class="active"><span>@T("ProductDetail.Sim")</span></li>
+                                                </ul>*@
+                                                @{
+                                                    var dataDictAttributesSimType = new ViewDataDictionary(ViewData);
+                                                    dataDictAttributesSimType.TemplateInfo.HtmlFieldPrefix = $"attributes_{Model.Id}";
+                                                    @await Html.PartialAsync("_SimTypeProductAttribute", Model.ProductAttributes, dataDictAttributesSimType)
+                                                }
+                                            </div>
+                                        </div>
+                                        <div class="post-cutom-attr">
+                                            @await Component.InvokeAsync("SimCardList", new { productId = Model.Id })
+                                            @*<div class="sim-commitment">
+                                                @{
+                                                    var dataDictAttributesSim = new ViewDataDictionary(ViewData);
+                                                    dataDictAttributesSim.TemplateInfo.HtmlFieldPrefix = $"attributes_{Model.Id}";
+                                                    @await Html.PartialAsync("_SimCartProductAttribute", Model.ProductAttributes, dataDictAttributesSim)
+                                                }
+                                            </div>*@
+                                        </div>
+                                        @*<div class="radio-number">
+                                            @await Component.InvokeAsync("SimCardList")
+                                        </div>*@
+                                    </div>
+                                </div>
+                                @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.ProductDetailsOverviewBottom, additionalData = Model })
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+                <div class="essential-cart">
+                    <div class="container">
+                        <div class="essential-cart-flex">
+                            <div class="essential-tab">
+                                <ul>
+                                    <li class="active with-arrow wide"><span>@T("ProductDetail.PrepaidLine")</span></li>
+                                    @*<li><span>@T("ProductDetail.Device")</span></li>*@
+                                </ul>
+                            </div>
+                            <div class="essential-cart-right">
+                                <!--price & add to cart-->
+                                @{
+                                    var dataDictPrice = new ViewDataDictionary(ViewData);
+                                    dataDictPrice.TemplateInfo.HtmlFieldPrefix = $"price_{Model.Id}";
+                                    @await Html.PartialAsync("_ProductPrice", Model.ProductPrice, dataDictPrice)<strong>/ @T("HomePage.ProductBox.StartFormMonth")</strong>
+
+                                    @await Html.PartialAsync("_ProductTierPrices", Model.TierPrices)
+                                }
+                                @{
+                                    var dataDictAddToCart = new ViewDataDictionary(ViewData);
+                                    dataDictAddToCart.TemplateInfo.HtmlFieldPrefix = $"addtocart_{Model.Id}";
+                                }
+                                @await Html.PartialAsync("_AddToCart", Model.AddToCart, dataDictAddToCart)
+
+                                @*<a href="@Url.RouteUrl("ShoppingCart")" class="btn btn-orange">@T("ProductDetail.Checkout")</a>*@
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @{
+                    var dataAttributes = new ViewDataDictionary(ViewData);
+                    dataAttributes.TemplateInfo.HtmlFieldPrefix = $"attributes_{Model.Id}";
+                }
+                <div class="common-margin-bottom100">
+                    <div class="container">
+                        <div class="monthly-plan">
+                            <div class="monthly-plan-left">
+                                <div class="cust-label">@T("ProductDetail.MonthlyPrices")</div>
+                                <div class="monthly-plan-right">
+                                    <div class="monthly-price">
+                                        <div class="monthly-price-info">
+                                            <h3>@Html.Raw(Model.ProductPrice.Price)<b>/@T("HomePage.ProductBox.StartFormMonth")</b></h3>
+                                        </div>
+                                    </div>
+                                    <div class="tax-desc">
+                                        @T("ProductDetail.Attribute.MonthlyPriceTaxDesc")
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    @await Html.PartialAsync("_ProductDetailTabs", Model)
+                </div>
+                @await Html.PartialAsync("_OfferDetails", Model)
+                <div class="container arrow-top-mobile">
+                    @await Component.InvokeAsync("CustomRelatedProducts", new { productId = Model.Id, productName = Model.Name, enumProductDetail = EnumProductDetail.Prepaid })
+                </div>
+                @await Html.PartialAsync("_WhyBuyOnline")
+            </div>
+        </div>
+    </form>
+        @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.ProductDetailsBottom, additionalData = Model })
+    </div>
+</div>
+@await Html.PartialAsync("_CartDrawer")

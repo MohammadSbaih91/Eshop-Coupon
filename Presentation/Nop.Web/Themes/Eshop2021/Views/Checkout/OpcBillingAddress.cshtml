@@ -1,0 +1,136 @@
+﻿@model CheckoutBillingAddressModel
+<div class="step-flex">
+    <div class="flex-left">
+        <div class="step-title">
+            <h2 class="title sm-mrb">@T("Checkout.CustomerDetails")</h2>
+        </div>
+        <div class="checkout-data">
+            @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.OpCheckoutBillingAddressTop })
+            @if (Model.ShipToSameAddressAllowed)
+            {
+                @*<div class="section ship-to-same-address">
+                        <div class="custom-control custom-checkbox">
+                            <p class="selector">
+                                <input class="custom-control-input" asp-for="ShipToSameAddress" />
+                                <label class="custom-control-label" asp-for="ShipToSameAddress">@T("Checkout.ShipToSameAddress")</label>
+                            </p>
+                        </div>
+                    </div>*@
+            }
+            @if (Model.ExistingAddresses.Count > 0)
+            {
+                <div class="section select-billing-address form-ui">
+                    <div class="form-group">
+                        <div class="grp-label">
+                            <label for="billing-address-select">@T("Checkout.SelectBillingAddressOrEnterNewOne")</label>
+                        </div>
+                        <div>
+                            <div class="dropdown common-dropdown">
+                                <input type="hidden" name="billing_address_id" id="billing-address-select" />
+                                <div class="dropdown-toggle" id="ddladdresstext" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    @T("Checkout.NewAddress")
+                                </div>
+                                <div class="dropdown-menu" id="dropaddress">
+
+                                    @foreach (var address in Model.ExistingAddresses)
+                                    {
+                                        var addressLine = "";
+                                        addressLine += address.FirstName;
+                                        addressLine += " " + address.LastName;
+                                        if (address.StreetAddressEnabled && !string.IsNullOrEmpty(address.Address1))
+                                        {
+                                            addressLine += ", " + address.Address1;
+                                        }
+                                        if (address.CityEnabled && !string.IsNullOrEmpty(address.City))
+                                        {
+                                            addressLine += ", " + address.City;
+                                        }
+                                        if (address.CountyEnabled && !string.IsNullOrEmpty(address.County))
+                                        {
+                                            addressLine += ", " + address.County;
+                                        }
+                                        if (address.StateProvinceEnabled && !string.IsNullOrEmpty(address.StateProvinceName))
+                                        {
+                                            addressLine += ", " + address.StateProvinceName;
+                                        }
+                                        if (address.ZipPostalCodeEnabled && !string.IsNullOrEmpty(address.ZipPostalCode))
+                                        {
+                                            addressLine += " " + address.ZipPostalCode;
+                                        }
+                                        if (address.CountryEnabled && !string.IsNullOrWhiteSpace(address.CountryName))
+                                        {
+                                            addressLine += ", " + address.CountryName;
+                                        }
+                                        <a onclick="SetSelectedAddressValue(this,'@(address.Id)', '@(addressLine)')" class="dropdown-item">@addressLine</a>
+                                    }
+                                    <a onclick="SetSelectedAddressValue(this,null, '@T("Checkout.NewAddress")')" class="dropdown-item">@T("Checkout.NewAddress")</a>
+                                </div>
+                                <script asp-location="Footer">
+                                    function SetSelectedAddressValue(selected, dllValue, dllText) {
+                                        $("#billing-address-select").val(dllValue);
+                                        $("#ddladdresstext").html(dllText);
+                                        if (selected) {
+                                            $("#dropaddress>a.selected").removeClass("selected");
+                                            $(selected).addClass("selected");
+                                        }
+                                        Billing.newAddress(!dllValue);
+                                    }
+                                </script>
+                                @{
+                                    var firstAddress = Model.ExistingAddresses.FirstOrDefault();
+                                    var firstAddressLine = "";
+                                    firstAddressLine += firstAddress.FirstName;
+                                    firstAddressLine += " " + firstAddress.LastName;
+                                    if (firstAddress.StreetAddressEnabled && !string.IsNullOrEmpty(firstAddress.Address1))
+                                    {
+                                        firstAddressLine += ", " + firstAddress.Address1;
+                                    }
+                                    if (firstAddress.CityEnabled && !string.IsNullOrEmpty(firstAddress.City))
+                                    {
+                                        firstAddressLine += ", " + firstAddress.City;
+                                    }
+                                    if (firstAddress.CountyEnabled && !string.IsNullOrEmpty(firstAddress.County))
+                                    {
+                                        firstAddressLine += ", " + firstAddress.County;
+                                    }
+                                    if (firstAddress.StateProvinceEnabled && !string.IsNullOrEmpty(firstAddress.StateProvinceName))
+                                    {
+                                        firstAddressLine += ", " + firstAddress.StateProvinceName;
+                                    }
+                                    if (firstAddress.ZipPostalCodeEnabled && !string.IsNullOrEmpty(firstAddress.ZipPostalCode))
+                                    {
+                                        firstAddressLine += " " + firstAddress.ZipPostalCode;
+                                    }
+                                    if (firstAddress.CountryEnabled && !string.IsNullOrWhiteSpace(firstAddress.CountryName))
+                                    {
+                                        firstAddressLine += ", " + firstAddress.CountryName;
+                                    }
+                                    <script asp-location="Footer">
+                                            SetSelectedAddressValue(null, '@(firstAddress.Id)', '@(firstAddressLine)')
+                                    </script>
+                                }
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            }
+            @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.OpCheckoutBillingAddressMiddle })
+            <div class="section new-billing-address">
+                <div class="enter-address">
+                    <div asp-validation-summary="ModelOnly" class="message-error"></div>
+                    @{
+                        var dataDictAddress = new ViewDataDictionary(ViewData);
+                        dataDictAddress.TemplateInfo.HtmlFieldPrefix = "BillingNewAddress";
+                        Model.BillingNewAddress.PickUpInStore = Model.PickUpInStore;
+                        @await Html.PartialAsync("_CartCustomerDetails", Model.BillingNewAddress, dataDictAddress)
+                    }
+                </div>
+            </div>
+            @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.OpCheckoutBillingAddressBottom })
+        </div>
+    </div>
+    <div class="flex-right">
+        @await Component.InvokeAsync("OrderTotals", new { isEditable = true })
+    </div>
+</div>

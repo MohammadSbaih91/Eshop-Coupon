@@ -1,0 +1,136 @@
+﻿@model StoreDetailModel
+@using Nop.Core
+@inject IWorkContext workContext
+@{
+    var supportRtl = workContext.WorkingLanguage.Rtl;
+    var rtl = supportRtl ? "true" : "false";
+}
+<div class="appointment-content">
+    <div class="back-btn">
+        @*<button class="btn btn-outline-secondary" type="button" onclick="LoadStoreDetail(@Model.Branch.CityId, @Model.Branch.DepartmentId, @Model.Branch.Distance, '@Model.Branch.Id', '@Model.Branch.Identity', @Model.Branch.IsWorkingNow.ToString().ToLower(), @Model.Branch.Latitude, @Model.Branch.Longitude, '@Model.Branch.Name','@Model.OpenUntil')"><i class="fas fa-angle-left"></i>@T("Plugins.Misc.AppointmentBooking.Back")</button>*@
+        <button type="button" class="btn btn-outline-dark" onclick="LoadStoreList()"><i class="angle-left"></i>@T("Plugins.Misc.AppointmentBooking.Back")</button>
+    </div>
+    @if (Model.Code != 0)
+    {
+        @Html.Raw(Model.Description)
+    }
+    else
+    {
+        @*<form asp-route="appointmentbooking.BookAppointmentCompleted" method="post" id="appointment-completed-form">*@
+        <input type="hidden" name="OrderId" id="OrderId" value="@Model.OrderId" />
+        <input type="hidden" name="AppointmentDay" id="AppointmentDay" value="@Model.SelectAppointmentDate" />
+        <input type="hidden" name="BranchID" id="BranchID" value="@Model.Branch.Id" />
+        <input type="hidden" name="ServiceID" id="ServiceID" value="@Model.ServiceId" />
+        <input type="hidden" name="SelectedStoreName" id="SelectedStoreName" value="@Model.Branch.Name" />
+        <input type="hidden" name="x_wassup_msisdn" id="x_wassup_msisdn" />
+        <input type="hidden" name="SelectedAppointmentTime" id="SelectedAppointmentTime" />
+
+        <div class="appointment-body">
+            <div class="appointment-date-popup">
+                <div class="flex_row">
+                    <div class="flex-md-5 xs-width">
+                        <div class="date-title">@T("Plugins.Misc.AppointmentBooking.SelectDate")</div>
+                        <div class="datepicker-in">
+                            <div id="calendar"></div>
+                        </div>
+                        <script>
+                                @{
+                                    var dateString = Model.SelectAppointmentDate; // Oct 23
+
+                                    var dateParts = dateString.Split("/");
+                                }
+                                var myArray = [];
+
+                                @foreach (var d in Model.AvailableDaysToTakeAppointment.ValidAppointmentDays)
+                                {
+                                    @:myArray.push("@d");
+                                }
+
+                                $(document).ready(function () {
+                                    var enableDays = myArray;
+                                    if (!@(rtl)) {
+                                        $("#calendar").datepicker({
+                                            onSelect: function (date) {
+                                                LoadTime(@Model.Branch.CityId, @Model.Branch.DepartmentId, @Model.Branch.Distance, '@Model.Branch.Id', '@Model.Branch.Identity', @Model.Branch.IsWorkingNow.ToString().ToLower(), @Model.Branch.Latitude, @Model.Branch.Longitude, '@Model.Branch.Name', '' + date + '')
+                                            },
+                                            dateFormat: 'dd/mm/yy',
+                                            language: "nl",
+                                            dayNamesMin: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
+                                            calendarWeeks: true,
+                                            beforeShowDay: function (dt) {
+                                                var datestring = $.datepicker.formatDate('dd/mm/yy', dt);
+                                                if ($.inArray(datestring, enableDays) != -1) {
+                                                    return [true];
+                                                }
+                                                else {
+                                                    return [false];
+                                                }
+                                            }
+                                        });
+                                    }
+                                    else {
+                                        $("#calendar").datepicker({
+                                            onSelect: function (date) {
+                                                LoadTime(@Model.Branch.CityId, @Model.Branch.DepartmentId, @Model.Branch.Distance, '@Model.Branch.Id', '@Model.Branch.Identity', @Model.Branch.IsWorkingNow.ToString().ToLower(), @Model.Branch.Latitude, @Model.Branch.Longitude, '@Model.Branch.Name', '' + date + '')
+                                            },
+                                            dateFormat: 'dd/mm/yy',
+                                            language: "ar",
+                                            monthNames: ['كانون الثاني', 'شباط', 'اذار', 'نيسان', 'أيار', 'حزيران', 'تموز', 'اب', 'أيلول', 'تشرين الأول', 'تشرين الثاني', 'كانون الأول'],
+                                            dayNamesMin: ['احد', 'اثنين', 'ثلاثاء', 'اربعاء', 'خميس', 'جمعة', 'سبت'],
+                                            calendarWeeks: true,
+                                            beforeShowDay: function (dt) {
+                                                var datestring = $.datepicker.formatDate('dd/mm/yy', dt);
+                                                if ($.inArray(datestring, enableDays) != -1) {
+                                                    return [true];
+                                                }
+                                                else {
+                                                    return [false];
+                                                }
+                                            }
+                                        });
+                                    }
+                                    $('#calendar').datepicker("setDate", new Date(+@(dateParts[2]), @(dateParts[1])-1, +@(dateParts[0])));
+                                })
+                        </script>
+                    </div>
+                    <div class="flex-md-7">
+                        <div class="select-time">
+                            <ul>
+                                @foreach (var time in Model.AvailableTimesToTakeAppointment.ValidDayAppointmentTimes)
+                                {
+                                    <li data-selectedtime="@time"><span>@time</span></li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="date-btn">
+                    <button id="btnBookNow" onclick="BookAppointment(@Model.OrderId,'@Model.SelectAppointmentDate',@Model.Branch.Id,@Model.ServiceId,'@Model.Branch.Name')" class="btn btn-orange btn-xx" type="button"> @T("Plugins.Misc.AppointmentBooking.SelectDate.BookNow")</button>
+                </div>
+            </div>
+        </div>
+        @*</form>*@
+    }
+</div>
+<script>
+    $(document).ready(function () {
+        $('ul li').click(function () {
+            $('ul li.selected').removeClass('selected');
+            $(this).addClass("selected");
+            $("#SelectedAppointmentTime").val((this).dataset.selectedtime);
+        });
+
+        @*$('form').submit(function () {
+
+            // Get the Login Name value and trim it
+            var timeSlot = $.trim($('#SelectedAppointmentTime').val());
+
+            // Check if empty of not
+            if (timeSlot === '') {
+                alert('@T("Plugins.Misc.AppointmentBooking.ErrorMessage.TimeSloftRequired")');
+                return false;
+            }
+        });*@
+    });
+
+</script>

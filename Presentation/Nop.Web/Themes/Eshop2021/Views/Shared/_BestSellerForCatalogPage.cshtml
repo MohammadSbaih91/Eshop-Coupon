@@ -1,0 +1,7 @@
+﻿@model Nop.Web.Customization.Models.Catalog.BestSellerFilterModel
+
+@foreach (var tag in Model.FilterTagModel)
+{
+
+    <a class="dropdown-item @(tag.IsSelected ? "active" : "")" onclick="CatalogFilterProduct('@(tag.URL)')">@tag.ProductTagName</a>
+}

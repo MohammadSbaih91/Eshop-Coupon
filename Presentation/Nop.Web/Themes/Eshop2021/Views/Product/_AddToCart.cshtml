@@ -1,0 +1,167 @@
+﻿@model ProductDetailsModel.AddToCartModel
+@using Nop.Core.Domain.Orders
+@if (Model.UpdatedShoppingCartItemId > 0)
+{
+    <input asp-for="UpdatedShoppingCartItemId" type="hidden" />
+}
+@if (!Model.DisableBuyButton || Model.CustomerEntersPrice)
+{
+    <div class="add-to-cart">
+        @if (Model.CustomerEntersPrice)
+        {
+            <div class="customer-entered-price">
+                <div class="price-input">
+                    <label asp-for="CustomerEnteredPrice" asp-postfix=":" class="enter-price-label"></label>
+                    @*round price*@
+                    <input asp-for="CustomerEnteredPrice" value="@Convert.ToInt32(Math.Ceiling(Model.CustomerEnteredPrice))" class="enter-price-input form-control" />
+                </div>
+                <div class="price-range">
+                    @Model.CustomerEnteredPriceRange
+                </div>
+            </div>
+        }
+    
+
+@if (!string.IsNullOrEmpty(Model.MinimumQuantityNotification))
+{
+    <div class="min-qty-notification">@Model.MinimumQuantityNotification</div>
+}
+@if (!Model.DisableBuyButton)
+{
+    <div class="add-to-cart-panel">
+        <div class="add-to-cart-qty" id="product_parent_@Model.ProductId">
+            <label asp-for="EnteredQuantity" asp-postfix=":" class="qty-label"></label>
+            @if (Model.AllowedQuantities.Count > 0)
+            {
+                <select asp-for="EnteredQuantity" asp-items="Model.AllowedQuantities" class="qty-dropdown custom-select"></select>
+            }
+            else
+            {
+                <div class="qty-control">
+                    <span class="minus" data-quantity="minus" data-field="quantity"><i class="icon-android-remove"></i></span>
+                    <input asp-for="EnteredQuantity" number-only id="product_enteredQuantity_@Model.ProductId" class="qty-input form-control" number-only type="text" />
+                    <span class="plus" data-quantity="plus" data-field="quantity"><i class="icon-android-add"></i></span>
+                </div>
+
+                <script asp-location="Footer">
+                    //when a customer clicks 'Enter' button we submit the "add to cart" button (if visible)
+                    $(document).ready(function() {
+                        $("#@Html.IdFor(model => model.EnteredQuantity)").on("keydown", function(event) {
+                            if (event.keyCode == 13) {
+                                $("#add-to-cart-button-@Model.ProductId").trigger("click");
+                                return false;
+                            }
+                        });
+
+
+                        // This button will increment the value
+                        $('[data-quantity="plus"]',"#product_parent_@Model.ProductId").click(function (e) {
+                            // Stop acting like a button
+                            e.preventDefault();
+                            // Get the field name
+                            fieldName = $(this).attr('data-field');
+                            // Get its current value
+                            var currentVal = parseInt($('#product_enteredQuantity_@Model.ProductId').val());
+                            // If is not undefined
+                            if (!isNaN(currentVal)) {
+                                // Increment
+                                $('#product_enteredQuantity_@Model.ProductId').val(currentVal + 1);
+                            } else {
+                                // Otherwise put a 0 there
+                                $('#product_enteredQuantity_@Model.ProductId').val(0);
+                            }
+                        });
+
+                        // This button will decrement the value till 0
+                        $('[data-quantity="minus"]',"#product_parent_@Model.ProductId").click(function (e) {
+                            // Stop acting like a button
+                            e.preventDefault();
+                            // Get the field name
+                            fieldName = $(this).attr('data-field');
+                            // Get its current value
+                            var currentVal = parseInt($('#product_enteredQuantity_@Model.ProductId').val());
+                            // If it isn't undefined or its greater than 0
+                            if (!isNaN(currentVal) && currentVal > 0) {
+                                // Decrement one
+                                $('#product_enteredQuantity_@Model.ProductId').val(currentVal - 1);
+                            } else {
+                                // Otherwise put a 0 there
+                                $('#product_enteredQuantity_@Model.ProductId').val(0);
+                            }
+                        });
+                    });
+                </script>
+            }
+        </div>
+
+        @{
+            var addToCartText = "";
+            if (Model.UpdatedShoppingCartItemId > 0 && Model.UpdateShoppingCartItemType.HasValue && Model.UpdateShoppingCartItemType.Value == ShoppingCartType.ShoppingCart)
+            {
+                addToCartText = T("ShoppingCart.AddToCart.Update").Text;
+            }
+            else
+            {
+                addToCartText = T("ShoppingCart.AddToCart").Text;
+                if (Model.IsRental)
+                {
+                    addToCartText = T("ShoppingCart.Rent").Text;
+                }
+                if (Model.AvailableForPreOrder)
+                {
+                    addToCartText = T("ShoppingCart.PreOrder").Text;
+                }
+            }
+            <div id="add-to-cart-button-@Model.ProductId" class="button-1 add-to-cart-button btn btn-outline-white @(@Model.OutOfStock ? "bt-disabled" : "")" value="@addToCartText" data-productid="@Model.ProductId" onclick="addtocart()"><span>@addToCartText</span><i></i></div>
+        }
+
+    </div>
+    if (!string.IsNullOrEmpty(Model.PreOrderAvailabilityStartDateTimeUserTime))
+    {
+        <div class="pre-order-availability-date">
+            <label>@T("ShoppingCart.PreOrderAvailability"):</label>
+            @Html.Raw(Model.PreOrderAvailabilityStartDateTimeUserTime)
+        </div>
+    }
+}
+@await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.ProductDetailsAddInfo, additionalData = Model })
+</div>
+
+
+        <div id="add-to-cart-button-@Model.ProductId" class="btn btn-orange @(@Model.OutOfStock ? "bt-disabled" : "")" value="@T("ProductDetail.Checkout")" data-productid="@Model.ProductId" onclick="addtocart(@Model.ProductId)"><span>@T("ProductDetail.Checkout")</span></div> @*<a href="@Url.RouteUrl("ShoppingCart")" class="btn btn-orange">@T("ProductDetail.Checkout")</a>*@
+    
+    
+
+}
+
+<script>
+    var isLatLngSet = false;
+    var ValidateLocationBasedService = '@Model.ValidateLocationBasedService';
+    var OutOfStock='@Model.OutOfStock';
+    function addtocart(x) {
+        if (ValidateLocationBasedService == 'True' && isLatLngSet == false) {
+            if (AjaxCart.usepopupnotifications == true) {
+                displayPopupNotification("@T("Product.Addtocart.Select.Location")", 'error', true);
+                $('html, body').animate({
+        scrollTop: $("#serviceLocationMap").offset().top
+    }, 2000);
+            }
+            else {
+                //no timeout for errors
+                displayBarNotification("@T("Product.Addtocart.Select.Location")", 'error', 0);
+                 $('html, body').animate({
+        scrollTop: $("#serviceLocationMap").offset().top
+    }, 2000);
+            }
+        }
+        else
+        {
+    
+            if(OutOfStock=='False')
+            {
+                AjaxCart.addproducttocart_details_checkout('@Url.RouteUrl("AddProductToCart-Details", new {productId = Model.ProductId, shoppingCartTypeId = (int) ShoppingCartType.ShoppingCart})', '#product-details-form',true);return false;
+            }
+            
+        }
+    }
+</script>

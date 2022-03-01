@@ -1,0 +1,459 @@
+﻿@using Nop.Core.Domain.Orders
+@using Nop.Services.Catalog
+@using Nop.Core.Domain.Catalog
+@using Nop.Web.Factories
+@using Nop.Core.Domain.Seo;
+@using Nop.Core
+
+@model CompareProductsModel
+
+@inject ICategoryService categoryService
+@inject IProductService productService
+@inject ISpecificationAttributeGroupModelFactory specificationAttributeGroupModelFactory
+@inject SeoSettings seoSettings
+@inject IWorkContext workContext
+@inject IStoreContext storeContext
+@{
+    var supportRtl = workContext.WorkingLanguage.Rtl;
+
+    //canonical URL
+    if (seoSettings.CanonicalUrlsEnabled)
+    {
+        Html.AddCanonicalUrlParts(storeContext.CurrentStore.Url + workContext.WorkingLanguage.UniqueSeoCode + "/compareproducts", seoSettings.QueryStringInCanonicalUrlsEnabled);
+    }
+}
+@{
+    Layout = "_ColumnsOne";
+
+    //title
+    Html.AddTitleParts(T("PageTitle.CompareProducts").Text);
+    //page class
+    Html.AppendPageCssClassParts("html-compare-products-page");
+}
+@{
+    var columnWidth = "";
+    if (Model.Products.Count > 0)
+    {
+        columnWidth = Math.Round((decimal)(90M / Model.Products.Count), 0).ToString() + "%";
+    }
+
+    var groups = specificationAttributeGroupModelFactory.getSpecificationAttributeWithSpecAttrib();
+
+    var specificationAttributes = new List<ProductSpecificationModel>();
+    foreach (var product in Model.Products)
+    {
+        foreach (var attribute in product.SpecificationAttributeModels)
+        {
+            if (specificationAttributes.FirstOrDefault(sa => sa.SpecificationAttributeId == attribute.SpecificationAttributeId) == null)
+            {
+                specificationAttributes.Add(attribute);
+
+                if (groups.Where(p => p.SpecificationIds.Contains(attribute.SpecificationAttributeId)).Any())
+                {
+                    groups.Where(p => p.SpecificationIds.Contains(attribute.SpecificationAttributeId)).FirstOrDefault().SpecificationAttributeModels.Add(attribute);
+                }
+                else
+                {
+                    groups.Where(p => p.Id == -1).FirstOrDefault().SpecificationAttributeModels.Add(attribute);
+                }
+
+            }
+        }
+    }
+
+    var productCategory = new ProductCategory();
+    foreach (var product in Model.Products)
+    {
+        var category = categoryService.GetProductCategoriesByProductId(product.Id);
+        if (category.Count > 0)
+        {
+            productCategory = category.LastOrDefault();
+            break;
+        }
+    }
+}
+<nop-antiforgery-token />
+<div class="page compare-products-page">
+    <div class="container">
+        <div class="compare-new-page">
+            <div class="breadcrumb-cmp-prd">
+                <div class="breadcrumb">
+                    <ul itemscope itemtype="http://schema.org/BreadcrumbList">
+                        @if (Model.CategoryModel != null && !string.IsNullOrEmpty(Model.CategoryModel.SeName))
+                        {
+                            <li class="brd-back"><a href="@UrlStrucutre.UrlDecode(Url.RouteUrl("Category", new { SeName = Model.CategoryModel.SeName }))">@T("CompareProducts.Backto") @Model.CategoryModel.Name</a></li>
+                        }
+                        else
+                        {
+                            <li class="brd-back"><a href="\">@T("CompareProducts.Backto")</a></li>
+                        }
+
+                        @*<li>
+                                <span>
+                                    <a href="@Url.RouteUrl("HomePage")">
+                                        <span>@T("Products.Breadcrumb.Top")</span>
+                                    </a>
+                                </span>
+                                <span class="delimiter"></span>
+                            </li>*@
+                        <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                            <span>
+                                <a href="@T("HomePageTopMenu.TopMenu1.Personal.URL")" itemprop="item">
+                                    <span>@T("CompareProducts.Personal")</span>
+                                </a>
+                            </span>
+                            <span class="delimiter"></span>
+                            <meta itemprop="position" />
+                        </li>
+                        <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                            <span>
+                                <a href="/" itemprop="item">
+                                    <span>
+                                        @T("CompareProducts.eShop")
+                                    </span>
+                                </a>
+                            </span>
+                            <span class="delimiter"></span>
+                        </li>
+                        @*@if (Model.CategoryModel != null && !string.IsNullOrEmpty(Model.CategoryModel.Name))
+                            {
+                                <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                                    <span>
+                                        <a href="@UrlStrucutre.UrlDecode(Url.RouteUrl("Category", new { SeName = Model.CategoryModel.SeName }))" itemprop="item">
+                                            <span>
+                                                @Model.CategoryModel.Name
+                                            </span>
+                                        </a>
+                                    </span>
+                                    <span class="delimiter"></span>
+                                </li>
+                            }*@
+                        <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                            <strong class="current-item" itemprop="name">@T("CompareProducts.Comparator")</strong>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @if (Model.Products.Count > 0)
+    {
+        <div class="compare-data-wrapper">
+            <div class="compare-new-page page-body">
+                <div class="comp-back"></div>
+                @*new Code*@
+                <div class="container">
+                    <div class="comp-product">
+                        <div class="comp-product-data">
+                            <div class="comp-common-grid">
+                                <div class="other name">
+                                    <h1><span>@Model.CategoryModel.Name</span>@T("CompareProducts.Comparator")</h1>
+                                    <a href="javascript:void(0)" onclick="setLocation('@Url.RouteUrl("ClearCompareList")', event)" class="clear-list">@T("CompareProducts.Clear")</a>
+                                </div>
+                                <div class="grid-group">
+                                    <div class="owl-carousel" id="cmp-product-slider">
+                                        @{int productListed = 0;}
+                                        @foreach (var product in Model.Products)
+                                        {
+                                            productListed++;
+                                            var shoppingCartTypeId = (int)ShoppingCartType.ShoppingCart;
+                                            var quantity = 1;
+                                            var buyNow = Url.RouteUrl("AddProductToCart-Catalog", new { productId = product.Id, shoppingCartTypeId = shoppingCartTypeId, quantity = quantity, forceredirection = true });
+                                            var addtocartlink = Url.RouteUrl("AddProductToCart-Catalog", new { productId = product.Id, shoppingCartTypeId = shoppingCartTypeId, quantity = quantity });
+                                            var prd = productService.GetProductById(product.Id);
+                                            <div class="other">
+                                                <div class="product-grid">
+                                                    <div class="item-box">
+                                                        @await Html.PartialAsync("_ProductBox", product)
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                        @for (int i = productListed; i < 3; i++)
+                                        {
+                                            <div class="other cmp-add-common">
+                                                <div class="comp-item comp-add-product">
+                                                    <div class="comp-pic">
+                                                        <div class="add-prd" onclick="AddProductPopup()"></div>
+                                                        <div class="cmp-add" onclick="AddProductPopup()">@T("Admin.Catalog.ComparePage.AddProduct")</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                    </div>
+                                    @{
+                                        if (supportRtl)
+                                        {
+                                            <script asp-location="Footer">
+                                                $(document).ready(function () {
+                                                    $('#cmp-product-slider').owlCarousel({
+                                                        loop: false,
+                                                        margin: 15,
+                                                        nav: false,
+                                                        autoWidth: true,
+                                                        dots: false,
+                                                        rtl: true,
+                                                        responsive: {
+                                                            0: {
+                                                                margin: 15,
+                                                            },
+                                                            991: {
+                                                                margin: 15,
+                                                            },
+                                                            992: {
+                                                                margin: 15,
+                                                            },
+                                                            1024: {
+                                                                margin: 5,
+                                                            },
+                                                            1280: {
+                                                                margin: 15,
+                                                            },
+                                                            1366: {
+                                                                margin: 15,
+                                                            },
+                                                            1400: {
+                                                                margin: 15,
+                                                            }
+                                                        }
+                                                    })
+                                                });
+                                            </script>
+                                        }
+                                        else
+                                        {
+                                            <script asp-location="Footer">
+                                                $(document).ready(function () {
+                                                    $('#cmp-product-slider').owlCarousel({
+                                                        loop: false,
+                                                        margin: 15,
+                                                        nav: false,
+                                                        autoWidth: true,
+                                                        dots: false,
+                                                        rtl: false,
+                                                        responsive: {
+                                                            0: {
+                                                                margin: 15,
+                                                            },
+                                                            991: {
+                                                                margin: 15,
+                                                            },
+                                                            992: {
+                                                                margin: 15,
+                                                            },
+                                                            1024: {
+                                                                margin: 5,
+                                                            },
+                                                            1280: {
+                                                                margin: 15,
+                                                            },
+                                                            1366: {
+                                                                margin: 15,
+                                                            },
+                                                            1400: {
+                                                                margin: 15,
+                                                            }
+                                                        }
+                                                    })
+                                                });
+                                            </script>
+                                        }
+                                    }
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="comp-according">
+                    <ul>
+                        @foreach (var grp in groups)
+                        {
+                            <li>
+                                <a class="toggleData"><i class="fas fa-caret-down"></i>@grp.Name</a>
+                                <div class="inner">
+                                    @foreach (var specificationAttribute in grp.SpecificationAttributeModels)
+                                    {
+                                        <div class="comp-common-grid comp-common-grid-sepc">
+                                            <div class="other spec-name">@specificationAttribute.SpecificationAttributeName</div>
+                                            <div class="grid-group">
+                                                @foreach (var product in Model.Products)
+                                                {
+                                                    var foundProductSpec = product.SpecificationAttributeModels.FirstOrDefault(psa => psa.SpecificationAttributeId == specificationAttribute.SpecificationAttributeId);
+                                                    if (foundProductSpec != null)
+                                                    {
+                                                        <div class="spec-other">@Html.Raw(foundProductSpec.ValueRaw)</div>
+                                                    }
+                                                    else
+                                                    {
+                                                        <div class="spec-other"></div>
+                                                    }
+                                                }
+                                                @{ var count = Model.Products.Count;}
+                                                @if (count < 3)
+                                                {
+                                                    for (int i = 0; i < 3 - count; i++)
+                                                    {
+                                                        <div class="spec-other empty"></div>
+                                                    }
+                                                }
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="container">
+            <div class="no-data">
+                @T("Products.Compare.NoItems")
+            </div>
+        </div>
+    }
+    <div class="compare-prd-popup">
+        <div class="compare-prd-popup-body">
+            <div class="compare-prd-popup-data">
+                <div id="compareAddProductPopup">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="comp-layer"></div>
+<div class="loading-popup"><i></i></div>
+<script asp-location="Footer">
+    function AddProductPopup() {
+        $(".loading-popup").css("display", "block");
+        //var postData = { categoryId: @(productCategory != null ? productCategory.CategoryId : 0)};
+
+        //addAntiForgeryToken(postData);
+        $.ajax({
+            cache: false,
+            type: "POST",
+            //url: "/CustomProduct/AddProductToCompare",
+            url: "@(Url.RouteUrl("AddToCompareCategory",new { categoryId= (productCategory != null ? productCategory.CategoryId : 0)}))",
+            //data: postData,
+            dataType: 'json',
+            success: function (response) {
+                $("#compareAddProductPopup").html(response.html);
+                $(".compare-prd-popup").addClass("active-prd-popup");
+                $(".comp-layer").addClass("active-comp-layer-popup");
+                $("body").addClass("enable-popup-prd");
+                $(".loading-popup").css("display", "none");
+
+                $(".widget-zone").insertBefore('.column-two-zone');
+                $(".cat-transfer").insertBefore('.column-res');
+
+                var onClickShowCatalog = function () {
+                    $('body').toggleClass("scroll-lock");
+                    $('.side-2', '.html-category-page').toggleClass('active');
+                };
+                $(".catalog-drawer").click(onClickShowCatalog);
+
+                $('input:radio[name=OfferRadioInline]').change(function () {
+                    var url = updateQueryStringParameter('ofr', this.value)
+                    CatalogFilterProduct(url);
+                });
+
+                CatalogFilterProduct();
+            },
+            failure: function (response) {
+                alert(response);
+            }
+        });
+    }
+</script>
+<script>
+    $(document).ready(function () {
+        $('.toggleData', ".comp-according").click(function (e) {
+            e.preventDefault();
+            var $this = $(this);
+            $('.toggleData', ".comp-according").removeClass('according-active');
+            if ($this.next().hasClass('show')) {
+                $this.next().removeClass('show');
+                $this.next().slideUp(350);
+                $this.removeClass('according-active');
+            } else {
+                $this.parent().parent().find('li .inner').removeClass('show');
+                $this.parent().parent().find('li .inner').slideUp(350);
+                $this.toggleClass('according-active');
+                $this.next().slideToggle(350);
+                $this.next().addClass('show');
+            }
+        });
+
+        $('.show-label', ".show-more").click(function (e) {
+            e.preventDefault();
+            var $this = $(this);
+            $this.toggleClass('enable');
+            $this.next().toggle();
+        });
+
+        @*$('.add-prd').click(function (e) {
+            e.preventDefault();
+            $(".loading-popup").css("display","block");
+            var postData = {
+                categoryid: @(productCategory != null ? productCategory.CategoryId : 0)
+            };
+
+            addAntiForgeryToken(postData);
+            $.ajax({
+                cache: false,
+                type: "POST",
+                url: "/Product/AddProductToCompare",
+                data: postData,
+                dataType: 'json',
+                success: function (response) {
+                    $("#compareAddProductPopup").html(response.html);
+                    $(".compare-prd-popup").addClass("active-prd-popup");
+                    $(".comp-layer").addClass("active-comp-layer-popup");
+                    $("body").addClass("enable-popup-prd");
+                    $(".loading-popup").css("display", "none");
+                },
+                failure: function (response) {
+                    alert(response);
+                }
+            });
+        });*@
+
+        //$('.close-add-prd').on("click", function (e) {
+        //    alert(1);
+        //    e.preventDefault();
+        //    $(".compare-prd-popup").removeClass("active-prd-popup");
+        //    $(".comp-layer").removeClass("active-comp-layer-popup");
+        //    $("body").removeClass("enable-popup-prd");
+        //});
+    });
+
+    function AddToCompare(url) {
+        $('.close-add-prd').click();
+        $(".loading-popup").css("display", "block");
+        $.ajax({
+            cache: false,
+            type: "POST",
+            url: url,
+            dataType: 'json',
+            success: function (response) {
+                if (response.success == true)
+                {
+                    window.location.href = '@Url.RouteUrl("CompareProducts")';
+                };
+                //$(".loading-popup").css("display", "none");
+            },
+            failure: function (response) {
+                $(".loading-popup").css("display", "none");
+            }
+        });
+}
+</script>

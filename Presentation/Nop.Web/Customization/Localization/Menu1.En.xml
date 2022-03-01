@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Language Name="English">
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.Myaccount.Billspaymentandrecharge.Paymentmethods.URL">
+		<Value>https://www.orange.jo/en/myaccount/pages/payment-methods.aspx</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.Myaccount.Rewards.OrangeDeals.URL">
+		<Value>https://www.rewards.orange.jo/webviews/deals/en</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.eShop.Mobile.MobileGovernoratesoffers.URL">
+		<Value>https://www.orange.jo/EN/offers/mobilepostpaidoffers/Mobilegovernoratesoffers/Pages/default.aspx</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.eShop.Internet.ADSLoffers.URL">
+		<Value>https://www.orange.jo/EN/offers/ADSLOffers/Pages/default.aspx</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.eShop.Fiber.OrangeFiberFastInternet.URL">
+		<Value>https://www.orange.jo/en/offers/fiber-offers/pages/default.aspx</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.eShop.Internet.ADSLoffers.URL">
+		<Value>https://eshop.orange.jo/en/internet/adsl-offer</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.eShop.Fiber.OrangeFiberFastInternet.URL">
+		<Value>https://eshop.orange.jo/en/internet/fiber-offers</Value>
+	</LocaleResource>
+</Language>
+

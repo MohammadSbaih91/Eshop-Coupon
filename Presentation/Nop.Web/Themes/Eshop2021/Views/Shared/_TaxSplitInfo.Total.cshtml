@@ -1,0 +1,27 @@
+@using Nop.Core
+@using Nop.Core.Domain.Tax
+@using Nop.Services.Catalog
+@model Nop.Web.Models.TaxSplitInfoModel
+@inject IPriceFormatter priceFormatter
+@inject IWorkContext workContext
+
+@if (Model.IsTaxSpitEnable && !Model.Is100PercentOff)
+{
+    @*
+    @if (workContext.TaxDisplayType == TaxDisplayType.ExcludingTax && Model.AmountWithTax > decimal.Zero)
+    {
+        @Html.Raw(priceFormatter.FormatPrice(Model.AmountWithTax, true, false))
+    }
+    @if (workContext.TaxDisplayType == TaxDisplayType.IncludingTax && Model.AmountWithoutTax > decimal.Zero)
+    {
+        @Html.Raw(@priceFormatter.FormatPrice(Model.AmountWithoutTax, true, false))
+    }*@
+    if (Model.AmountWithoutTax > decimal.Zero || Model.AmountWithTax > decimal.Zero)
+    {
+        var tax = Model.AmountWithTax - Model.AmountWithoutTax;
+        if (tax > decimal.Zero)
+        {
+            @Html.Raw(priceFormatter.FormatPrice(tax, true, false))
+        }
+    }
+}

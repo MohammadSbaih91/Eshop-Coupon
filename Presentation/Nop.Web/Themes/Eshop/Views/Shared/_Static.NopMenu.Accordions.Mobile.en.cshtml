@@ -1,0 +1,191 @@
+﻿@using Nop.Core
+@inject IStoreContext storeContext
+<li class="mobile-root-menu">
+    <a href="/">
+        eShop
+        <i class="fas fa-angle-right"></i>
+    </a>
+    <div class="sublist-toggle"></div>
+    <ul class="sublist first-level">
+        <li class="back-menu">
+            @*<i class="fas fa-angle-left"></i>*@
+            eShop
+        </li>
+        <li>
+            <a href="https://eshop.orange.jo/en/">
+                Shop home <i class="fas fa-angle-right"></i>
+            </a>
+        </li>
+        <li class="has-child">
+            <a href="javascript:void(0);">
+                Mobile
+                <i class="fas fa-sort-down"></i>
+            </a>
+            <div class="sublist-toggle"></div>
+            <ul class="sublist ">
+
+                <li>
+                    <a href="https://www.orange.jo/en/offers/Mobilepostpaidoffers/">
+                        Mobile postpaid lines
+                        <i class="fas fa-angle-right"></i>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="https://www.orange.jo/en/offers/Mobileprepaidoffers/">
+                        Mobile prepaid lines
+                        <i class="fas fa-angle-right"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="@(Nop.Services.Common.UrlStrucutre.UrlDecode("/yo-lines"))">
+                        YO Lines<i class="fas fa-angle-right"></i>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="@(Nop.Services.Common.UrlStrucutre.UrlDecode("en/mobile/governorate-lines"))">
+                        Mobile Governorates offers
+                        <i class="fas fa-angle-right"></i>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="@(Nop.Services.Common.UrlStrucutre.UrlDecode("en/mobile/mobile-phone"))">
+                        Mobile phones
+                        <i class="fas fa-angle-right"></i>
+                    </a>
+                </li>
+
+                @*<li>
+            <a href="/mobile-packages">
+                Mobile packages
+                <i class="fas fa-angle-right"></i>
+            </a>
+        </li>*@
+            </ul>
+        </li>
+
+        <li class="has-child">
+            <a href="javascript:void(0);">
+                Internet
+                <i class="fas fa-sort-down"></i>
+            </a>
+
+            <div class="sublist-toggle"></div>
+            <ul class="sublist ">
+                <li>
+                    <a href="https://www.orange.jo/en/offers/ADSLOffers/">
+                        ADSL offers
+                        <i class="fas fa-angle-right"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="@(Nop.Services.Common.UrlStrucutre.UrlDecode("en/upgrade"))">
+                        ADSL Speed upgrade
+                        <i class="fas fa-angle-right"></i>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="@(Nop.Services.Common.UrlStrucutre.UrlDecode("en/4g-flybox-offer"))">
+                        4G Flybox offers
+                        <i class="fas fa-angle-right"></i>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="@(Nop.Services.Common.UrlStrucutre.UrlDecode("/prepaid-orange-net-offers"))">
+                        Prepaid Orange net offers
+                        <i class="fas fa-angle-right"></i>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="@(Nop.Services.Common.UrlStrucutre.UrlDecode("/bait-al-aileh-offers"))">
+                        Bait Al Aileh offers
+                        <i class="fas fa-angle-right"></i>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <li class="has-child">
+            <a href="javascript:void(0);">
+                Fiber
+                <i class="fas fa-sort-down"></i>
+            </a>
+            <div class="sublist-toggle"></div>
+            <ul class="sublist ">
+                <li>
+                    <a href="https://www.orange.jo/en/offers/fiber-offers/pages/default.aspx">
+                        Orange Fiber Fast Internet
+                        <i class="fas fa-angle-right"></i>
+                    </a>
+                </li>
+
+                @*<li>
+                    <a href="/fiber-speed-upgrade">
+                        Fiber speed upgrade
+                        <i class="fas fa-angle-right"></i>
+                    </a>
+                </li>*@
+            </ul>
+        </li>
+        <li class="">
+            <a href="javascript:void(0);">
+                Fixed line <i class="fas fa-sort-down"></i>
+            </a>
+            <div class="sublist-toggle"></div>
+            <ul class="sublist ">
+                <li>
+                    <a href="@(Nop.Services.Common.UrlStrucutre.UrlDecode("/fixed-postpaid-lines"))">
+                        Fixed postpaid lines
+                        <i class="fas fa-angle-right"></i>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="">
+            <a href="javascript:void(0);">
+                Accessories <i class="fas fa-sort-down"></i>
+            </a>
+            <div class="sublist-toggle"></div>
+            <ul class="sublist ">
+                <li>
+                    <a href="@(Nop.Services.Common.UrlStrucutre.UrlDecode("en/accessories/mobile-accessories"))">
+                        Mobile accessories
+                        <i class="fas fa-angle-right"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="@(Nop.Services.Common.UrlStrucutre.UrlDecode("/internet-accessories"))">
+                        Internet accessories
+                        <i class="fas fa-angle-right"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="@(Nop.Services.Common.UrlStrucutre.UrlDecode("/fixed-phones"))">
+                        Fixed phones
+                        <i class="fas fa-angle-right"></i>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="">
+            <a href="@(Nop.Services.Common.UrlStrucutre.UrlDecode("/en/eshop-promotions"))">
+                Promotions<i class="fas fa-angle-right"></i>
+            </a>
+        </li>
+        <li class="">
+            <a href="https://www.orange.jo/en/myaccount/pages/pay-bills-and-recharge-online.aspx">
+                Pay bills and recharge<i class="fas fa-angle-right"></i>
+            </a>
+        </li>
+        <li>
+            <a href="@Url.RouteUrl("CompareProducts")">
+                @T("Products.Compare.List") <i class="fas fa-angle-right"></i>
+            </a>
+        </li>
+    </ul>
+</li>

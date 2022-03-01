@@ -1,0 +1,53 @@
+﻿@model SimCardListModel
+@using Microsoft.AspNetCore.Http
+@using Nop.Web.Models.SimCard;
+@using Nop.Core
+@using Nop.Services.Helpers
+
+@inject IWebHelper webHelper
+@inject IHttpContextAccessor httpContextAccessor
+@inject IUserAgentHelper userAgentHelper
+
+<div class="select-sim-number">
+    <label>@T("ProductDetail.SelectSimCard")</label>
+
+    <div class="dropdown common-dropdown">
+        <input type="hidden" id="simCardNumber" name="simCardNumber" value="0" />
+        <div class="dropdown-toggle" id="dropdownSim" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            @T("ProductDetail.SelectSimCardNumber")
+        </div>
+        <div class="dropdown-menu" id="ddlSimCardList">
+            <a onclick="SetSelectedSimCardValue(this,'0', '@T("ProductDetail.SelectSimCardNumber")')" class="dropdown-item selected">@T("ProductDetail.SelectSimCardNumber")</a>
+            @if (Model.SimCard != null && Model.SimCard.Count > 0)
+            {
+                @foreach (var item in Model.SimCard)
+                {
+                    <a onclick="SetSelectedSimCardValue(this,'@item.Value', '@item.Text')" class="dropdown-item">@item.Text</a>
+                }
+            }
+        </div>
+        <script asp-location="Footer">
+            function SetSelectedSimCardValue(selected, dllValue, dllText) {
+                $("#simCardNumber").val(dllValue);
+                $("#dropdownSim").text(dllText);
+                $("#simValidation").hide();
+                $(".dropdown-menu>a.selected").removeClass("selected");
+                $(selected).addClass("selected");
+            @if (userAgentHelper.IsMobileDevice())
+            {
+                <Text>
+                        if (dllValue !== "0") {
+                            $('html, body').animate({
+                                scrollTop: ($(".overall-payment").offset().top - 200)
+                            }, 2000);
+                        }
+                </Text>
+            }
+                }
+        </script>
+    </div>
+</div>
+
+<div class="simvalid">
+    <span id="simValidation" style="display:none;" class="field-validation-error">@T("ProductDetail.PhoneNumber.SelectSimNumber")</span>
+</div>

@@ -1,0 +1,142 @@
+﻿@model BranchList
+@{
+    var latitude = 31.964272;
+    var longitude = 35.905087;
+    //1	1365.0	Amman	35.905087	31.964272
+    var firstStore = Model.Branches.FirstOrDefault();
+    if (firstStore != null)
+    {
+        latitude = firstStore.Latitude;
+        longitude = firstStore.Longitude;
+    }
+    var searchTitle = T("Plugins.Misc.AppointmentBooking.StoreList.StoreSearch");
+    var selectedStoreName = "";
+}
+
+<div class="search-content">
+    <div class="search-inp">
+        <div class="flex">
+            <div class="inp-grop small-inp">
+                <div id="around_me" class="inp-icon right-space" onclick="AroundMe()">
+                    <input type="button" class="form-control" value="@T("AppointmentBooking.AroundMe")" />
+                    <div class="icon-right">
+                        <i></i>
+                    </div>
+                </div>
+            </div>
+            <div class="view-map">
+                <i></i>
+                <span>@T("AppointmentBooking.viewMap")</span>
+            </div>
+        </div>
+        <div class="inp-grop">
+            <div class="inp-icon">
+                @{
+                    var selectedStore = Model.AvailableAppointmentBranch.Where(p => p.Selected).FirstOrDefault();
+                    if (selectedStore == null)
+                    {
+                        selectedStore = Model.AvailableAppointmentBranch.FirstOrDefault();
+                    }
+                }
+                <div class="dropdown common-dropdown pickupinStore">
+                    <input type="hidden" name="pickup_id" id="pickup_id" />
+                    <div class="dropdown-toggle" id="pickup_Text" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        @selectedStore.Text
+                    </div>
+                    <div class="dropdown-menu" id="dropStore">
+                        @foreach (var store in Model.AvailableAppointmentBranch)
+                        {
+                            <a onclick="SetSelectedStore(this,'@(store.Value)', '@(store.Text)')" class="dropdown-item @(selectedStore.Value == store.Value?"selected":"")">@store.Text</a>
+                        }
+                    </div>
+                    <script>
+                        function SetSelectedStore(selected, dllValue, dllText) {
+                            $("#pickup_id").val(dllValue);
+                            $("#pickup_Text").text(dllText);
+                            if (selected) {
+                                $("#dropStore>a.selected").removeClass("selected");
+                                $(selected).addClass("selected");
+                                ChangePickupBranch(dllValue)
+                            }
+                        }
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="count-store">@(string.Format(searchTitle.ToString(), Model.Branches.Count.ToString(), selectedStoreName))</div>
+<div class="appointment-list">
+    <ul>
+        @{
+            int count = 0;
+        }
+        @foreach (var branch in Model.Branches)
+        {
+            var workingfirst = new TodayWorkingShift();
+            if (branch.TodayWorkingShifts != null)
+            {
+                workingfirst = branch.TodayWorkingShifts.FirstOrDefault();
+            }
+
+            count++;
+            <li>
+                <div class="appointment-list-left">
+                    <h3>@count. @branch.Name</h3>
+                    @if (branch.IsWorkingNow)
+                    {
+                        @if (workingfirst != null)
+                        {
+                            <p><i class="fa fa-circle"></i>@T("Plugins.Misc.AppointmentBooking.OpenUntil") @workingfirst.To</p>
+                        }
+                    }
+                    else
+                    {
+                        <p class="circle-red"><i class="fa fa-circle"></i>@T("Plugins.Misc.AppointmentBooking.storeClosed")</p>
+                    }
+
+                    @*<p><i class="fa fa-map-marker-alt"></i>Abdali - Boulevard Amman (Static)</p>
+                        <p><i class="fa fa-phone"></i> +777 8458 454 (Static)</p>*@
+                </div>
+                <div class="appointment-list-right">
+                    @*<button class="btn btn-primary btn-block" type="button" onclick="LoadStoreDetail(@branch.CityId, @branch.DepartmentId, @branch.Distance, '@branch.Id', '@branch.Identity', @branch.IsWorkingNow.ToString().ToLower(), @branch.Latitude, @branch.Longitude, '@branch.Name','@workingfirst.To')">@T("Plugins.Misc.AppointmentBooking.StoreList.Access")</button>*@
+                    <button class="btn btn-orange btn-block" type="button" onclick="LoadTime(@branch.CityId, @branch.DepartmentId, @branch.Distance, '@branch.Id', '@branch.Identity', @branch.IsWorkingNow.ToString().ToLower(), @branch.Latitude, @branch.Longitude, '@branch.Name')">@T("Plugins.Misc.AppointmentBooking.StoreList.Access")</button>
+                    @*<a href="mailto:eshopjordan@orange.jo" class="btn btn-outline-dark btn-block">@T("Plugins.Misc.AppointmentBooking.StoreList.Contactus")</a>*@
+                </div>
+            </li>
+        }
+
+    </ul>
+</div>
+<script type="text/javascript">
+
+    var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 12,
+        center: new google.maps.LatLng(@latitude, @longitude),
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    });
+
+    var infowindow = new google.maps.InfoWindow();
+
+    var marker, i;
+
+    @foreach (var branch in Model.Branches)
+    {
+        <text>
+            marker = new google.maps.Marker({
+                position: new google.maps.LatLng(@branch.Latitude, @branch.Longitude),
+                map: map
+            });
+
+            google.maps.event.addListener(marker, 'click', (function (marker, i) {
+                return function () {
+                    infowindow.setContent('@branch.Name');
+                    infowindow.open(map, marker);
+                }
+            })(marker, i));
+        </text>
+    }
+
+
+
+</script>

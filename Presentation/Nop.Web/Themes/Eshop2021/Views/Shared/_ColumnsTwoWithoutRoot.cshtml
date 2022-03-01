@@ -1,0 +1,145 @@
+﻿@using Nop.Services.Catalog
+@inject ICategoryService categoryService
+@{
+    string categoryName = "";
+    //current category ID
+    var currentCategoryId = 0;
+    if ((Url.ActionContext.RouteData.Values["controller"].ToString().Equals("catalog", StringComparison.InvariantCultureIgnoreCase) &&
+        Url.ActionContext.RouteData.Values["action"].ToString().Equals("category", StringComparison.InvariantCultureIgnoreCase)) ||
+        Url.ActionContext.RouteData.Values["controller"].ToString().Equals("CustomProduct", StringComparison.InvariantCultureIgnoreCase) &&
+        Url.ActionContext.RouteData.Values["action"].ToString().Equals("AddProductToCompare", StringComparison.InvariantCultureIgnoreCase))
+    {
+        currentCategoryId = Convert.ToInt32(Url.ActionContext.RouteData.Values["categoryId"].ToString());
+        var category = categoryService.GetCategoryById(currentCategoryId);
+        if (category != null)
+        {
+            categoryName = category.Name;
+        }
+    }
+
+
+    //current manufacturer ID
+    var currentManufacturerId = 0;
+    if (Url.ActionContext.RouteData.Values["controller"].ToString().Equals("catalog", StringComparison.InvariantCultureIgnoreCase) &&
+        Url.ActionContext.RouteData.Values["action"].ToString().Equals("manufacturer", StringComparison.InvariantCultureIgnoreCase))
+    {
+        currentManufacturerId = Convert.ToInt32(Url.ActionContext.RouteData.Values["manufacturerId"].ToString());
+    }
+
+
+    //current product ID
+    var currentProductId = 0;
+    if (Url.ActionContext.RouteData.Values["controller"].ToString().Equals("product", StringComparison.InvariantCultureIgnoreCase) &&
+        Url.ActionContext.RouteData.Values["action"].ToString().Equals("productdetails", StringComparison.InvariantCultureIgnoreCase))
+    {
+        currentProductId = Convert.ToInt32(Url.ActionContext.RouteData.Values["productId"].ToString());
+    }
+}
+@if (IsSectionDefined("Breadcrumb"))
+{
+    @section Breadcrumb {
+        @RenderSection("Breadcrumb")
+    }
+}
+
+<div class="ajax-left-filter">
+    <div class="row">
+        <div class="col-lg-3">
+            <div class="cmp-side">
+                <h3 class="cmp-title">@T("CompareProducts.Add") @(categoryName)</h3>
+                <div class="compare-prd-popup-head">
+                    <i class="close-add-prd"></i>
+                </div>
+            </div>
+            <div class="side-2">
+                <div class="filter-title">
+                    <h3>@T("CatalogPage.Filter")</h3>
+                    <div class="close-catalog-filter catalog-drawer"></div>
+                    <div class="clearfix"></div>
+                </div>
+
+                @if (IsSectionDefined("left"))
+                {
+                    @RenderSection("left")
+                }
+                else
+                {
+                    @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.LeftSideColumnBefore })
+                    @*@await Component.InvokeAsync("CategoryNavigation", new { currentCategoryId = currentCategoryId, currentProductId = currentProductId })*@
+                    @await Component.InvokeAsync("CustomCategoryNavigation", new { currentCategoryId = currentCategoryId })
+                    @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.LeftSideColumnAfterCategoryNavigation })
+                    @*@await Component.InvokeAsync("ManufacturerNavigation", new { currentManufacturerId = currentManufacturerId })*@
+                    @await Component.InvokeAsync("VendorNavigation")
+                    @*@await Component.InvokeAsync("RecentlyViewedProductsBlock", new { productThumbPictureSize = 64 })*@
+                    @*@await Component.InvokeAsync("PopularProductTags")*@
+                    @await Component.InvokeAsync("PollBlock", new { systemKeyword = "LeftColumnPoll" })
+                    @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.LeftSideColumnAfter })
+
+                    <div class="block block-price-navigation" id="price-range-filter">
+                        @await Component.InvokeAsync("CustomPriceRange", new { currentCategoryId = currentCategoryId })
+                    </div>
+                    <div class="clearfix"></div>
+                    <div id="ProductSpecificationAttribureFilter" class="prd-specification-attr-filter">
+                        @*@await Html.PartialAsync("_ProductSpecificationAttribureFilter");*@
+                    </div>
+
+
+                    <div class="block block-radio-navigation">
+                        <div class="title">
+                            <strong>@T("CatalogPage.Offer")</strong>
+                        </div>
+                        <div class="listbox">
+                            <ul class="list">
+                                <li>
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" value="1" id="customRadioInline1" name="OfferRadioInline" class="custom-control-input">
+                                        <label class="custom-control-label" for="customRadioInline1">@T("CatalogPage.Offer.New")</label>
+                                    </div>
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" value="2" id="customRadioInline2" name="OfferRadioInline" class="custom-control-input">
+                                        <label class="custom-control-label" for="customRadioInline2">@T("CatalogPage.Offer.OnSale")</label>
+                                    </div>
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" value="3" id="customRadioInline3" name="OfferRadioInline" class="custom-control-input">
+                                        <label class="custom-control-label" for="customRadioInline3">@T("CatalogPage.Offer.SpecialOffer")</label>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <script asp-location="Footer">
+                        $(document).ready(function () {
+                            $('.block .title').on('click', function () {
+                                $(this).toggleClass("de-active");
+                                $(this).siblings('.listbox').slideToggle('slow');
+                            });
+                        });
+                    </script>
+
+                }
+            </div>
+        </div>
+        <div class="col-lg-9">
+            <div class="center-2">
+                <div class="cmp-top">
+                    <div class="product-compare-search-box compare-search">
+                        @await Html.PartialAsync("ProductCompareSearchBox", new SearchBoxModel
+                        {
+                            AutoCompleteEnabled = true,
+                            SearchTermMinimumLength = 3
+                        })
+                    </div>
+                    <div class="cata-filter-icon catalog-drawer">Filter</div>
+                    <div class="compare-prd-popup-head">
+                        <i class="close-add-prd"></i>
+                    </div>
+                </div>
+
+                @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.MainColumnBefore })
+                @RenderBody()
+                @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.MainColumnAfter })
+            </div>
+        </div>
+    </div>
+</div>

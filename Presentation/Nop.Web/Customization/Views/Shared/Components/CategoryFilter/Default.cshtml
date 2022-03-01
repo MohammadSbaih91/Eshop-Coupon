@@ -1,0 +1,16 @@
+﻿@using Nop.Web.Customization.Models.Catalog
+
+@model CategoryFilterModel
+
+
+<div class="block block-category-navigation">
+    <div class="filter-product">
+        <b>@T("Product.Filter.Label")</b>
+        @Html.DropDownList("category-filter", Model.Category, new { onchange = "setLocation(this.value,event);", aria_label = T("Category.Filter.AreaLabel") })
+    </div>
+    <div class="filter-category">
+        <b>@T("Category.Filter.Label")</b>
+        @Html.DropDownList("subcategory-filter", Model.SubCategory, new { onchange = "setLocation(this.value, event);", aria_label = T("Category.Filter.AreaLabel") })
+    </div>
+</div>
+

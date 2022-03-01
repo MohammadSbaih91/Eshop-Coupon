@@ -1,0 +1,240 @@
+﻿@model ProductDetailsModel
+@using Microsoft.AspNetCore.Http.Extensions
+@using Nop.Core.Domain.Seo;
+@inject Nop.Core.IWebHelper webHelper
+@inject SeoSettings seoSettings
+@using Nop.Services.Helpers
+@using Nop.Core
+@inject IWorkContext workContext
+@inject IUserAgentHelper userAgentHelper
+
+@{
+    Layout = "_ColumnsOne";
+
+    var supportRtl = workContext.WorkingLanguage.Rtl;
+
+    //title
+    Html.AddTitleParts(!string.IsNullOrEmpty(Model.MetaTitle) ? Model.MetaTitle : Model.Name);
+    //meta
+    Html.AddMetaDescriptionParts(Model.MetaDescription);
+    Html.AddMetaKeywordParts(Model.MetaKeywords);
+    //page class
+    Html.AppendPageCssClassParts("html-product-details-page");
+
+    //canonical URL
+    if (seoSettings.CanonicalUrlsEnabled)
+    {
+        var productUrl = UrlStrucutre.UrlDecode(Url.RouteUrl("Product", new { SeName = Model.SeName }, webHelper.CurrentRequestProtocol).ToLowerInvariant());
+        Html.AddCanonicalUrlParts(productUrl, seoSettings.QueryStringInCanonicalUrlsEnabled);
+    }
+
+    //open graph META tags
+    if (seoSettings.OpenGraphMetaTags)
+    {
+        Html.AddHeadCustomParts("<meta property=\"og:type\" content=\"product\" />");
+        Html.AddHeadCustomParts("<meta property=\"og:title\" content=\"" + Model.Name + "\" />");
+        Html.AddHeadCustomParts("<meta property=\"og:description\" content=\"" + Nop.Core.Html.HtmlHelper.StripTags(Model.MetaDescription) + "\" />");
+        Html.AddHeadCustomParts("<meta property=\"og:image\" content=\"" + Model.DefaultPictureModel.ImageUrl + "\" />");
+        Html.AddHeadCustomParts("<meta property=\"og:url\" content=\"" + webHelper.GetThisPageUrl(false) + "\" />");
+        Html.AddHeadCustomParts("<meta property=\"og:site_name\" content=\"" + Model.CurrentStoreName + "\" />");
+    }
+
+    //Twitter META tags
+    if (seoSettings.TwitterMetaTags)
+    {
+        Html.AddHeadCustomParts("<meta property=\"twitter:card\" content=\"summary\" />");
+        Html.AddHeadCustomParts("<meta property=\"twitter:site\" content=\"" + Model.CurrentStoreName + "\" />");
+        Html.AddHeadCustomParts("<meta property=\"twitter:title\" content=\"" + Model.Name + "\" />");
+        Html.AddHeadCustomParts("<meta property=\"twitter:description\" content=\"" + Nop.Core.Html.HtmlHelper.StripTags(Model.MetaDescription) + "\" />");
+        Html.AddHeadCustomParts("<meta property=\"twitter:image\" content=\"" + Model.DefaultPictureModel.ImageUrl + "\" />");
+        Html.AddHeadCustomParts("<meta property=\"twitter:url\" content=\"" + webHelper.GetThisPageUrl(false) + "\" />");
+    }
+}
+@await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.ProductDetailsAfterBreadcrumb, additionalData = Model })
+<div class="page product-details-page back-reapeat">
+    <div class="page-body">
+        <div class="container">
+            <div class="breadcrumb-cmp-prd">
+                <!--product breadcrumb-->
+                @await Html.PartialAsync("_ProductBreadcrumb", Model.Breadcrumb)
+                @await Html.PartialAsync("_CompareProductsButton", Model)
+            </div>
+        </div>
+        @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.ProductDetailsTop, additionalData = Model })
+        <form asp-route="Product" asp-route-sename="@Model.SeName" method="post" id="product-details-form">
+            <div itemscope itemtype="http://schema.org/Product" data-productid="@Model.Id">
+                <div class="product-essential">
+                    <div class="container">
+                        <div class="essential-group border-left4">
+                            @await Html.PartialAsync("_CompareProductsButton", Model)
+                            @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.ProductDetailsBeforePictures, additionalData = Model })
+                            <div class="overview overview-full-widht">
+                                <div class="overview-inn">
+                                    <div class="ovr-without-pic fixed-line">
+                                        <div class="ovr-left">
+                                            <div class="product-name">
+                                                <h1 itemprop="name">
+                                                    @Model.Name
+                                                </h1>
+                                            </div>
+                                            <div class="ovr-data-size">Flexible local and national calls</div>
+                                        </div>
+                                        <div class="ovr-right">
+                                            <div class="desc-list desc-list-full">
+                                                <ul>
+                                                    <li>
+                                                        High quality connection
+                                                    </li>
+                                                    <li>Clear and uninterrupted communication.</li>
+                                                    <li>Discounts on fixed phone</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="qty-package">
+                                        <div class="package-left">
+                                            @if (!Model.IsHidePlanSelection)
+                                            {
+                                                <div class="device-package">
+                                                    <label class="dev-label">@T("ProductDetail.FixedLinePackage")</label>
+                                                    <div class="custom-control custom-radio custom-control-inline">
+                                                        <input type="radio" id="customRadioInline1" name="customRadioInline" class="custom-control-input">
+                                                        <label class="custom-control-label" for="customRadioInline1">@T("ProductDetail.ChoosePlan")</label>
+                                                    </div>
+                                                    <div class="custom-control custom-radio custom-control-inline">
+                                                        <input type="radio" id="customRadioInline2" name="customRadioInline" class="custom-control-input">
+                                                        <label class="custom-control-label" for="customRadioInline2">@T("ProductDetail.FixedLineOnly")</label>
+                                                    </div>
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                    @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.ProductDetailsOverviewBottom, additionalData = Model })
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                    <div class="essential-cart">
+                        <div class="container">
+                            <div class="essential-cart-flex">
+                                <div class="essential-tab">
+                                    <ul>
+                                        <li class="active with-arrow wide"><span>@T("ProductDetail.FixedLine.FixedPlan")</span></li>
+                                        <li><span>@T("ProductDetail.Device")</span></li>
+                                    </ul>
+                                </div>
+                                <div class="essential-cart-right">
+                                    <!--price & add to cart-->
+                                    @{
+                                        var dataDictPrice = new ViewDataDictionary(ViewData);
+                                        dataDictPrice.TemplateInfo.HtmlFieldPrefix = $"price_{Model.Id}";
+                                        @await Html.PartialAsync("_ProductPrice", Model.ProductPrice, dataDictPrice)
+
+                                        @await Html.PartialAsync("_ProductTierPrices", Model.TierPrices)
+                                    }
+
+                                    @{
+                                        var dataDictAddToCart = new ViewDataDictionary(ViewData);
+                                        dataDictAddToCart.TemplateInfo.HtmlFieldPrefix = $"addtocart_{Model.Id}";
+                                    }
+                                    @await Html.PartialAsync("_AddToCart", Model.AddToCart, dataDictAddToCart)
+                                    @*<a href="@Url.RouteUrl("ShoppingCart")" class="btn btn-orange">@T("ProductDetail.Checkout")</a>*@
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="common-margin-bottom100">
+                        <div class="container">
+                            <div class="monthly-plan">
+                                <div class="monthly-plan-left">
+                                    <div class="cust-label">Monthly Prices</div>
+                                    <div class="monthly-plan-right">
+                                        <div class="monthly-radio">
+                                            <div class="custom-control custom-radio custom-control-inline">
+                                                <input type="radio" id="month12" name="customRadioInline" class="custom-control-input">
+                                                <label class="custom-control-label" for="month12">12 Month</label>
+                                            </div>
+                                            <div class="custom-control custom-radio custom-control-inline">
+                                                <input type="radio" id="month24" name="customRadioInline" class="custom-control-input">
+                                                <label class="custom-control-label" for="month24">24 Month</label>
+                                            </div>
+                                        </div>
+                                        <div class="monthly-price">
+                                            <div class="monthly-price-info basic-prices">
+                                                <p>Basic Prices</p>
+                                                <h3>JOD 1360</h3>
+                                            </div>
+                                            <div class="monthly-price-info">
+                                                <h3><span>JO</span>81<span>.00</span><b>/month</b></h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="container">
+                        <div class="product-collateral other-table other-table-service">
+                            <div class="product-specs-box">
+                                <div class="title"><strong>Service included</strong></div>
+                                <div class="table-wrapper">
+                                    <table class="data-table">
+                                        <thead>
+                                            <tr class="hidden-row">
+                                                <th width="25%">
+                                                    <span>Destination</span>
+                                                </th>
+                                                <th>
+                                                    <span>Peak * (JOD/Min)</span>
+                                                </th>
+                                                <th>
+                                                    <span>
+                                                        Off-Peak * (JOD/Min)
+                                                    </span>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="spec-name">Local</td>
+                                                <td class="spec-value">1.25</td>
+                                                <td class="spec-value">0.99</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="spec-name">Local</td>
+                                                <td class="spec-value">1.25</td>
+                                                <td class="spec-value">0.99</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="spec-name">Local</td>
+                                                <td class="spec-value">1.25</td>
+                                                <td class="spec-value">0.99</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="spec-name">Local</td>
+                                                <td class="spec-value">1.25</td>
+                                                <td class="spec-value">0.99</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="smart-tab">
+                        <div class="container">
+                            @await Html.PartialAsync("_ProductDetailTabs", Model)
+                        </div>
+                    </div>
+                    @await Html.PartialAsync("_RecommendedProduct")
+
+                    @await Html.PartialAsync("_WhyBuyOnline")
+                </div>
+            </div>
+        </form>
+        @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.ProductDetailsBottom, additionalData = Model })
+    </div>
+</div>
+@await Html.PartialAsync("_CartDrawer")

@@ -1,0 +1,173 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Language Name="English">
+  <LocaleResource Name="Widgets.AnywhereSlider">
+    <Value>Anywhere Slider</Value>
+  </LocaleResource>
+
+  <LocaleResource Name="Widgets.AnywhereSlider.BackToList">
+    <Value>back to list</Value>
+  </LocaleResource>
+  <LocaleResource Name="Widgets.AnywhereSlider.AddNew">
+    <Value>Add a new Slider</Value>
+  </LocaleResource>
+  <LocaleResource Name="Widgets.AnywhereSlider.Edit">
+    <Value>Edit a new Slider</Value>
+  </LocaleResource>
+
+  <LocaleResource Name="Widgets.AnywhereSlider.SearchName">
+    <Value>Name</Value>
+  </LocaleResource>
+  <LocaleResource Name="Widgets.AnywhereSlider.SearchName.Hint">
+    <Value>Name</Value>
+  </LocaleResource>
+
+  <LocaleResource Name="Widgets.AnywhereSlider.Fields.Name">
+    <Value>Name</Value>
+  </LocaleResource>
+  <LocaleResource Name="Widgets.AnywhereSlider.Fields.Name.Hint">
+    <Value>Name of slider</Value>
+  </LocaleResource>
+  <LocaleResource Name="Widgets.AnywhereSlider.Fields.WidgetZone">
+    <Value>Widget zone</Value>
+  </LocaleResource>
+  <LocaleResource Name="Widgets.AnywhereSlider.Fields.WidgetZone.Hint">
+    <Value>Select Widget zone to display the slider</Value>
+  </LocaleResource>
+  <LocaleResource Name="Widgets.AnywhereSlider.Fields.Published">
+    <Value>Publish</Value>
+  </LocaleResource>
+  <LocaleResource Name="Widgets.AnywhereSlider.Fields.Published.Hint">
+    <Value>Determines whether the slider is published (visible) in your store.</Value>
+  </LocaleResource>
+  
+  <LocaleResource Name="Widgets.AnywhereSlider.Accordingly.Fields.Html">
+    <Value>Html</Value>
+  </LocaleResource>
+  <LocaleResource Name="Widgets.AnywhereSlider.Accordingly.Fields.Html.Hint">
+    <Value>Html to show on the on the page</Value>
+  </LocaleResource>
+  <LocaleResource Name="Widgets.AnywhereSlider.Accordingly.Fields.MobileHtml">
+    <Value>Mobile Html</Value>
+  </LocaleResource>
+  <LocaleResource Name="Widgets.AnywhereSlider.Accordingly.Fields.MobileHtml.Hint">
+    <Value>Html to show on the on the mobile view only</Value>
+  </LocaleResource>
+  <LocaleResource Name="Widgets.AnywhereSlider.Accordingly.Fields.DisplayOrder">
+    <Value>Display Order</Value>
+  </LocaleResource>
+  <LocaleResource Name="Widgets.AnywhereSlider.Accordingly.Fields.DisplayOrder.Hint">
+    <Value>Display Order</Value>
+  </LocaleResource>
+
+  <LocaleResource Name="Widgets.AnywhereSlider.Slider.Added">
+    <Value>Slider added successfully</Value>
+  </LocaleResource>
+  <LocaleResource Name="Widgets.AnywhereSlider.Slider.Updated">
+    <Value>Slider updated successfully</Value>
+  </LocaleResource>
+  <LocaleResource Name="Widgets.AnywhereSlider.Slider.Deleted">
+    <Value>Slider deleted successfully</Value>
+  </LocaleResource>
+
+  <LocaleResource Name="Widgets.AnywhereSlider.Accordingly.AddNew">
+    <Value>Add Slider detail</Value>
+  </LocaleResource>
+  <LocaleResource Name="Widgets.AnywhereSlider.Accordingly.Edit">
+    <Value>Edit Slider detail</Value>
+  </LocaleResource>
+  <LocaleResource Name="Widgets.AnywhereSlider.Tab.Info">
+    <Value>Info</Value>
+  </LocaleResource>
+  <LocaleResource Name="Widgets.AnywhereSlider.Tab.Accordingly">
+    <Value>Accordingly</Value>
+  </LocaleResource>
+  <LocaleResource Name="Widgets.AnywhereSlider.Tab.Accordingly.SaveBeforeEdit">
+    <Value>You need to save the slide before you can add Accordingly for this slider page.</Value>
+  </LocaleResource>
+	<LocaleResource Name="Widgets.AnywhereSlider.Accordingly.Fields.TabletHtml">
+		<Value>Tablet Html</Value>
+	</LocaleResource>
+	<LocaleResource Name="Widgets.AnywhereSlider.Accordingly.Fields.TabletHtml.Hint">
+		<Value>Html to show on the on the tablet view only</Value>
+	</LocaleResource>
+
+	<LocaleResource Name="Widgets.AnywhereSlider.SliderGroup.AddNew">
+		<Value>Add Slider group detail</Value>
+	</LocaleResource>
+	<LocaleResource Name="Widgets.AnywhereSlider.SliderGroup.Edit">
+		<Value>Edit Slider group detail</Value>
+	</LocaleResource>
+	<LocaleResource Name="Widgets.AnywhereSlider.Tab.SliderGroup">
+		<Value>Slider Group</Value>
+	</LocaleResource>
+	<LocaleResource Name="Widgets.AnywhereSlider.SliderGroup.Fields.Title">
+		<Value>Title</Value>
+	</LocaleResource>
+	<LocaleResource Name="Widgets.AnywhereSlider.SliderGroup.Fields.Title.Hint">
+		<Value>Slider group title</Value>
+	</LocaleResource>
+	<LocaleResource Name="Widgets.AnywhereSlider.SliderGroup.Fields.Descrption">
+		<Value>Descrption</Value>
+	</LocaleResource>
+	<LocaleResource Name="Widgets.AnywhereSlider.SliderGroup.Fields.Descrption.Hint">
+		<Value>Slider group description</Value>
+	</LocaleResource>
+	<LocaleResource Name="Widgets.AnywhereSlider.Tab.Accordingly.SaveBeforeEdit">
+		<Value>You need to save the slide before you can add Accordingly for this slider page.</Value>
+	</LocaleResource>
+	<LocaleResource Name="Widgets.AnywhereSlider.SliderGroup.Added">
+		<Value>Slider group added successfully</Value>
+	</LocaleResource>
+	<LocaleResource Name="Widgets.AnywhereSlider.SliderGroup.Updated">
+		<Value>Slider group updated successfully</Value>
+	</LocaleResource>
+	<LocaleResource Name="Widgets.AnywhereSlider.SliderGroup.Deleted">
+		<Value>Slider group deleted successfully</Value>
+	</LocaleResource>
+	<LocaleResource Name="Widgets.AnywhereSlider.SliderGroup.AddNew">
+		<Value>Add a new Slider Group</Value>
+	</LocaleResource>
+	<LocaleResource Name="Widgets.AnywhereSlider.SliderGroup.Edit">
+		<Value>Edit a new Slider Group</Value>
+	</LocaleResource>
+	<LocaleResource Name="Widgets.AnywhereSlider.Accordingly.Fields.Position">
+		<Value>Position</Value>
+	</LocaleResource>
+	<LocaleResource Name="Widgets.AnywhereSlider.Accordingly.Fields.Position.Hint">
+		<Value>Set position of slider</Value>
+	</LocaleResource>
+	<LocaleResource Name="Widgets.AnywhereSlider.Accordingly.Fields.Alignment">
+		<Value>Alignment</Value>
+	</LocaleResource>
+	<LocaleResource Name="Widgets.AnywhereSlider.Accordingly.Fields.Alignment.Hint">
+		<Value>Set alignment of slider</Value>
+	</LocaleResource>
+	<LocaleResource Name="Widgets.AnywhereSlider.Accordingly.Fields.ClickToAction">
+		<Value>Click To Action</Value>
+	</LocaleResource>
+	<LocaleResource Name="Widgets.AnywhereSlider.Accordingly.Fields.ClickToAction.Hint">
+		<Value>Click to action URL</Value>
+	</LocaleResource>
+
+	<LocaleResource Name="Widgets.AnywhereSlider.Accordingly.Fields.Picture">
+		<Value>Web Picture</Value>
+	</LocaleResource>
+	<LocaleResource Name="Widgets.AnywhereSlider.Accordingly.Fields.Picture.Hint">
+		<Value>Web Picture</Value>
+	</LocaleResource>
+	<LocaleResource Name="Widgets.AnywhereSlider.Accordingly.Fields.MobilePictureId">
+		<Value>Mobile Picture</Value>
+	</LocaleResource>
+	<LocaleResource Name="Widgets.AnywhereSlider.Accordingly.Fields.MobilePictureId.Hint">
+		<Value>Mobile Picture</Value>
+	</LocaleResource>
+	<LocaleResource Name="Widgets.AnywhereSlider.Accordingly.Fields.TabletPictureId">
+		<Value>Tablet Picture</Value>
+	</LocaleResource>
+	<LocaleResource Name="Widgets.AnywhereSlider.Accordingly.Fields.TabletPictureId.Hint">
+		<Value>Tablet Picture</Value>
+	</LocaleResource>
+	<LocaleResource Name="Widgets.AnywhereSlider.Accordingly.Exploremore">
+		<Value>Explore more</Value>
+	</LocaleResource>
+</Language>

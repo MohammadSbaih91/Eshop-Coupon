@@ -1,0 +1,28 @@
+@inject IThemeContext themeContext
+@{
+    var imagesPath = $"/Themes/{themeContext.WorkingThemeName}/Content/Images";
+}
+<div class="st-service-container">
+    <div class="bg-color-full"></div>
+    <section class="st-service">
+        <h2 class="st-headline"><strong>Services</strong></h2>
+        <div class="st-content">
+            <div>
+                <img alt="Pay bills and recharge online" src="@imagesPath/orange_pay_bill.jpg">
+                <a href="https://www.orange.jo/en/myaccount/pages/pay-bills-and-recharge-online.aspx">Pay bills and recharge online</a>
+            </div>
+            <div>
+                <img alt="track your order" src="@imagesPath/track_order.jpg">
+                @*<a asp-route="AnonymousOrderTrackByIdByEmail">Track your order</a>*@
+                <a asp-route="AramexTrackingInfo">Track your order</a>
+            </div>
+            <div>
+                <img alt="orange coverage map" src="@imagesPath/orange_coverage.jpg">
+                <a href="https://www.orange.jo/en/pages/coverage.aspx">Orange coverage map</a>
+            </div>
+        </div>
+    </section>
+</div>
+
+
+@await Html.PartialAsync("_static.shopwithconfident.new.en")

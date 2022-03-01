@@ -1,0 +1,265 @@
+﻿@using System.Linq
+@using Nop.Plugin.Shipping.Aramex.Models.Responce
+@using Nop.Plugin.Shipping.Aramex
+@using Nop.Core
+@using Nop.Web.Framework.UI
+@inject IWorkContext workContext
+
+@model Nop.Plugin.Shipping.Aramex.Models.TrackingDetailModel
+@{
+    var supportRtl = workContext.WorkingLanguage.Rtl;
+
+    Layout = "_ColumnsOne";
+    //page class
+    Html.AppendPageCssClassParts("html-track-page");
+
+    if (supportRtl)
+    {
+        Html.AppendCssFileParts($"~/Plugins/Shipping.Aramex/Content/css/track.rtl.css");
+    }
+    else
+    {
+        Html.AppendCssFileParts($"~/Plugins/Shipping.Aramex/Content/css/track.ltr.css");
+    }
+
+    Html.AppendCssFileParts($"~/Plugins/Shipping.Aramex/Content/css/track.css");
+
+
+
+    var isOrderComplete = false;
+    var isOrderCancellled = false;
+
+    var processedClass = "";
+    var readyToShipClass = "";
+    var outfordeliveryClass = "";
+    var deliveredClass = "";
+    var cancelledClass = "";
+
+    var trackingInfo = new List<TrackingResult>();
+    if (Model.ShipmentTrackingResponse.TrackingResults != null)
+    {
+        if (Model.ShipmentTrackingResponse.TrackingResults.KeyValueOfstringArrayOfTrackingResultmFAkxlpY != null)
+        {
+            trackingInfo = Model.ShipmentTrackingResponse.TrackingResults.KeyValueOfstringArrayOfTrackingResultmFAkxlpY.Value.TrackingResult;
+        }
+    }
+
+    if (trackingInfo != null)
+    {
+        isOrderComplete = trackingInfo.Where(p =>
+            p.UpdateCode == "SH005" ||
+            p.UpdateCode == "SH006" ||
+            p.UpdateCode == "SH007" ||
+            p.UpdateCode == "SH154" ||
+            p.UpdateCode == "SH234" ||
+            p.UpdateCode == "SH496").Any();
+
+        isOrderCancellled = trackingInfo.Where(p => p.UpdateCode == "SH069").Any();
+    }
+
+
+    if (Model.Order.OrderStatus == Nop.Core.Domain.Orders.OrderStatus.Processing)
+    {
+        processedClass = "step-completed";
+    }
+    if (Model.Order.Shipments != null && Model.Order.Shipments.Count > 0)
+    {
+        processedClass = "step-completed";
+        readyToShipClass = "step-completed";
+    }
+    if (trackingInfo != null)
+    {
+        if (trackingInfo.Where(p =>
+            p.UpdateCode == "SH003" ||
+            p.UpdateCode == "SH004" ||
+            p.UpdateCode == "SH073" ||
+            p.UpdateCode == "SH252").Any())
+        {
+            processedClass = "step-completed";
+            readyToShipClass = "step-completed";
+            outfordeliveryClass = "step-completed";
+        }
+    }
+    if (isOrderComplete)
+    {
+        processedClass = "step-completed";
+        readyToShipClass = "step-completed";
+        outfordeliveryClass = "step-completed";
+        deliveredClass = "step-completed";
+    }
+    else if (isOrderCancellled || Model.Order.OrderStatus == Nop.Core.Domain.Orders.OrderStatus.Cancelled)
+    {
+        processedClass = "step-completed";
+        readyToShipClass = "step-completed";
+        outfordeliveryClass = "step-completed";
+        deliveredClass = "step-completed";
+        cancelledClass = "step-cancelled";
+        isOrderCancellled = true;
+    }
+
+}
+
+<div class="track-page">
+
+    <div class="track-head">
+        <div class="track-title">
+            <h2>@T("Shipping.Aramex.Shipment.Trackyourorder.Title")</h2>
+        </div>
+        <a class="_close" href="@Url.RouteUrl("HomePage")">
+            <i></i>
+        </a>
+    </div>
+    <div class="breadcrumb-hide">
+        <partial name="@(AramexDefault.ViewPath)_AramexBreadcrumb.cshtml" />
+    </div>
+    
+
+    @if (Model.Order.OrderStatus == Nop.Core.Domain.Orders.OrderStatus.Unreachable)
+    {
+        <div class="container">
+            <div class="track-shadow">
+                <div class="track-third-step">
+                    <div class="track-order-select">
+                        &nbsp;
+                    </div>
+                    <div class="cut-order-step">
+                        <div class="activity-out-delivery">
+                            @T("Shipping.Aramex.Shipment.OrderUnreachable")
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="container">
+            <div class="track-shadow">
+                <div class="track-title hide-m">
+                    <h2>@T("Shipping.Aramex.Shipment.Trackyourorder.Title")</h2>
+                </div>
+                <div class="back-btn-link">
+                    <a href="@Url.RouteUrl("AramexTrackingInfo")">
+                        <span>@T("Common.Back")</span>
+                    </a>
+                </div>
+                <div class="track-third-step">
+                    <div class="track-order-select">
+                        <ul>
+                            <li class="first">
+                                <div class="text">
+                                    <span>@T("Shipping.Aramex.Shipment.Trackyourorder.OrderNumber")</span>
+                                    <p><i class="order-icon"></i>@Model.Order.Id.ToString()</p>
+                                </div>
+                            </li>
+                            <li class="second">
+                                <div class="text">
+                                    <span>@T("Shipping.Aramex.Shipment.Trackyourorder.Airwaybill")</span>
+                                    @if (!string.IsNullOrEmpty(Model.TrackingNumber))
+                                    {
+                                        <p><i class="bill-icon"></i>@Model.TrackingNumber</p>
+                                    }
+                                    else
+                                    {
+                                        <p><i class="bill-icon"></i><span class="order-tracking-null"></span></p>
+                                    }
+                                </div>
+                            </li>
+                            <li class="third">
+                                <div class="text">
+                                    <span>@T("Shipping.Aramex.Shipment.Trackyourorder.Deliverydate")</span>
+                                    @if (Model.DeliveryDate != null)
+                                    {
+                                        <p><i class="date-icon"></i>@(Model.DeliveryDate.Value.ToString("dddd dd MMMM yyyy"))</p>
+                                    }
+                                    else
+                                    {
+                                        <p><i class="date-icon"></i><span class="order-tracking-null"></span></p>
+                                    }
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="cut-order-step">
+                        <ul>
+                            <li class="step-completed">
+                                <div class="step-box">
+                                    1
+                                </div>
+                                <div class="text">
+                                    <h6>@T("Shipping.Aramex.Shipment.Trackyourorder.OrderConfirmed")</h6>
+                                    <p>@T("Shipping.Aramex.Shipment.Trackyourorder.OrderConfirmed.Detail") @Model.OrderDate.ToString("dd MMM yyyy")</p>
+                                </div>
+                            </li>
+                            <li class="@processedClass">
+                                <div class="step-box">
+                                    2
+                                </div>
+                                <div class="text">
+                                    <h6>@T("Shipping.Aramex.Shipment.Trackyourorder.OrderProceeded")</h6>
+                                    <p>@T("Shipping.Aramex.Shipment.Trackyourorder.OrderProceeded.Detail")</p>
+                                </div>
+                            </li>
+                            <li class="@readyToShipClass">
+                                <div class="step-box">
+                                    3
+                                </div>
+                                <div class="text">
+                                    <h6>@T("Shipping.Aramex.Shipment.Trackyourorder.ReadytoShip")</h6>
+                                    <p>@T("Shipping.Aramex.Shipment.Trackyourorder.ReadytoShip.Detail")</p>
+                                </div>
+                            </li>
+                            <li class="@outfordeliveryClass">
+                                <div class="step-box">
+                                    4
+                                </div>
+                                <div class="text">
+                                    <h6>@T("Shipping.Aramex.Shipment.Trackyourorder.OutforDelivery")</h6>
+                                    <p>@T("Shipping.Aramex.Shipment.Trackyourorder.OutforDelivery.Detail")</p>
+                                </div>
+                            </li>
+                            @if (isOrderCancellled)
+                            {
+                                <li class="@cancelledClass">
+                                    <div class="step-box">
+                                        5
+                                    </div>
+                                    <div class="text">
+                                        <h6>@T("Shipping.Aramex.Shipment.Trackyourorder.Cancelled")</h6>
+                                        <p>@T("Shipping.Aramex.Shipment.Trackyourorder.Cancelled.Detail")</p>
+                                    </div>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="@deliveredClass">
+                                    <div class="step-box">
+                                        5
+                                    </div>
+                                    <div class="text">
+                                        <h6>@T("Shipping.Aramex.Shipment.Trackyourorder.Delivered")</h6>
+                                        <p>@T("Shipping.Aramex.Shipment.Trackyourorder.Delivered.Detail")</p>
+                                    </div>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+
+                    @if (isOrderCancellled)
+                    {
+                        <partial name="@(AramexDefault.ViewPath)_AramexOrderCancelled.cshtml" />
+                    }
+                    else if (isOrderComplete)
+                    {
+                        <partial name="@(AramexDefault.ViewPath)_AramexOrderActivity.cshtml" model="trackingInfo" />
+                    }
+                    else
+                    {
+                        <partial name="@(AramexDefault.ViewPath)_AramexOrderDetail.cshtml" model="Model" />
+                    }
+
+                </div>
+            </div>
+        </div>
+    }
+</div>

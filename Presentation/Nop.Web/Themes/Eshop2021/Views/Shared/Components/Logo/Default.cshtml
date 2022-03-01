@@ -1,0 +1,9 @@
+﻿@model LogoModel
+@inject IThemeContext themeContext
+@{
+    var themeName = themeContext.WorkingThemeName;
+}
+<a href="@T("HomePageTopMenu.Logo")">
+    <img class="desktop-logo" title="" alt="@Model.StoreName" src="/Themes/@themeName/Content/images/logo.svg" />
+    <img class="mobile-logo" title="" alt="@Model.StoreName" src="/Themes/@themeName/Content/images/mobile-logo.svg" />
+</a>

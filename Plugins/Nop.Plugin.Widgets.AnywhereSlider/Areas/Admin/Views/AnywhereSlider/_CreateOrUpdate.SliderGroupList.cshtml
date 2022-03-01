@@ -1,0 +1,106 @@
+﻿@model SliderModel
+
+<div class="panel-group">
+    @if (Model.Id > 0)
+    {
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div id="slidergroup-grid"></div>
+                <script>
+                    $(document).ready(function() {
+                        $("#slidergroup-grid").kendoGrid({
+                            dataSource: {
+                                type: "json",
+                                transport: {
+                                    read: {
+                                        url: "@Html.Raw(Url.Action("SliderGroupList", "AnywhereSlider", new { sliderId = Model.Id}))",
+                                        type: "POST",
+                                        dataType: "json",
+                                        data: addAntiForgeryToken
+                                    },
+                                     destroy: {
+                                            url: "@Html.Raw(Url.Action("DeleteSliderGroup", "AnywhereSlider"))",
+                                            type: "POST",
+                                            dataType: "json",
+                                            data: addAntiForgeryToken
+                                        }
+                                },
+                                schema: {
+                                    data: "Data",
+                                    total: "Total",
+                                    errors: "Errors",
+                                    model: {
+                                        id: "Id"
+                                    }
+                                },
+                                requestEnd: function(e) {
+                                    if (e.type == "update") {
+                                        this.read();
+                                    }
+                                },
+                                error: function(e) {
+                                    display_kendoui_grid_error(e);
+                                    // Cancel the changes
+                                    this.cancelChanges();
+                                },
+                                serverPaging: false,
+                                serverFiltering: true,
+                                serverSorting: true
+                            },
+                            pageable: false,
+                            editable: {
+                                confirmation: "@T("Admin.Common.DeleteConfirmation")",
+                                mode: "inline"
+                            },
+                            scrollable: false,
+                            columns: [
+                                {
+                                    field: "DisplayOrder",
+                                    title: "@T("Widgets.AnywhereSlider.Accordingly.Fields.DisplayOrder")",
+                                    width: 200
+                                },
+                                {
+                                    field: "Title",
+                                    title: "@T("Widgets.AnywhereSlider.SliderGroup.Fields.Title")",
+                                    width: 200
+                                },
+
+                                 {
+                                    field: "Id",
+                                    title: "@T("Admin.Common.Edit")",
+                                    width: 100,
+                                    headerAttributes: { style: "text-align:center" },
+                                    attributes: { style: "text-align:center" },
+                                     template: '<a class="btn btn-default" href="/Admin/AnywhereSlider/EditSliderGroup/#=Id#"><i class="fa fa-pencil"></i>@T("Admin.Common.Edit")</a>'
+                                }, {
+                                    title: "@T("Admin.Common.Delete")",
+                                    width: 100,
+                                    headerAttributes: { style: "text-align:center" },
+                                    command: [
+                                        {
+                                            name: "destroy",
+                                            text: "@T("Admin.Common.Delete")"
+                                        }
+                                    ]
+                                }
+                            ]
+                        });
+                    });
+                </script>
+            </div>
+            <div class="panel-footer">
+                <a class="btn btn-primary" href="@Url.Action("CreateSliderGroup", "AnywhereSlider", new { sliderId = Model.Id })">
+                    @T("Widgets.AnywhereSlider.SliderGroup.AddNew")
+                </a>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="panel panel-default">
+            <div class="panel-body">
+                @T("Widgets.AnywhereSlider.Tab.Accordingly.SaveBeforeEdit")
+            </div>
+        </div>
+    }
+</div>

@@ -1,0 +1,137 @@
+﻿@model SliderGroupModel
+
+<div class="panel-group">
+    @if (Model.Id > 0)
+    {
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div id="accordingly-grid"></div>
+                <script>
+                    $(document).ready(function() {
+                        $("#accordingly-grid").kendoGrid({
+                            dataSource: {
+                                type: "json",
+                                transport: {
+                                    read: {
+                                        url: "@Html.Raw(Url.Action("AccordinglyList", "AnywhereSlider"))",
+                                        type: "POST",
+                                        dataType: "json",
+                                         data: function() {
+                                                var data = {
+                                                    sliderGroupId: @Model.Id
+                                                };
+                                                addAntiForgeryToken(data);
+                                                return data;
+                                            }
+                                    },
+                                     destroy: {
+                                            url: "@Html.Raw(Url.Action("AccordinglyDelete", "AnywhereSlider"))",
+                                            type: "POST",
+                                            dataType: "json",
+                                            data: addAntiForgeryToken
+                                        }
+                                },
+                                schema: {
+                                    data: "Data",
+                                    total: "Total",
+                                    errors: "Errors",
+                                    model: {
+                                        id: "Id"
+                                    }
+                                },
+                                requestEnd: function(e) {
+                                    if (e.type == "update") {
+                                        this.read();
+                                    }
+                                },
+                                error: function(e) {
+                                    display_kendoui_grid_error(e);
+                                    // Cancel the changes
+                                    this.cancelChanges();
+                                },
+                                serverPaging: false,
+                                serverFiltering: true,
+                                serverSorting: true
+                            },
+                            pageable: false,
+                            editable: {
+                                confirmation: "@T("Admin.Common.DeleteConfirmation")",
+                                mode: "inline"
+                            },
+                            scrollable: false,
+                            columns: [
+                                {
+                                    field: "DisplayOrder",
+                                    title: "@T("Widgets.AnywhereSlider.Accordingly.Fields.DisplayOrder")",
+                                    width: 200
+                                },
+                                {
+                                    field: "PictureUrl",
+                                    title: "@T("Admin.Catalog.Products.Pictures.Fields.Picture")",
+                                    template: '<a href="#=PictureUrl#" target="_blank"><img alt="#=PictureId#" src="#=PictureUrl#" width="150" /></a>',
+                                    width: 200
+                                },
+                                {
+                                    field: "strPosition",
+                                    title: "@T("Widgets.AnywhereSlider.Accordingly.Fields.Position")",
+                                    width: 200
+                                },
+                                {
+                                    field: "strAlignment",
+                                    title: "@T("Widgets.AnywhereSlider.Accordingly.Fields.Alignment")",
+                                    width: 200
+                                },
+                                 {
+                                    field: "Id",
+                                    title: "@T("Admin.Common.Edit")",
+                                    width: 100,
+                                    headerAttributes: { style: "text-align:center" },
+                                    attributes: { style: "text-align:center" },
+                                    template: "<button onclick=\"javascript:OpenWindow('@Url.Content("~/Admin/AnywhereSlider/AccordinglyEditPopup/")#=Id#?btnId=btnRefreshImages&formId=anywhereSliderGroup-form', 1000, 610, true); return false;\" class='btn btn-default'><i class=\"fa fa-pencil\"></i>@T("Admin.Common.Edit")</button>"
+                                }, {
+                                    title: "@T("Admin.Common.Delete")",
+                                    width: 100,
+                                    headerAttributes: { style: "text-align:center" },
+                                    command: [
+                                        {
+                                            name: "destroy",
+                                            text: "@T("Admin.Common.Delete")"
+                                        }
+                                    ]
+                                }
+                            ]
+                        });
+                    });
+                </script>
+            </div>
+            <div class="panel-footer">
+                <button type="submit" id="btnAddNewAccordingly"
+                        onclick="javascript:OpenWindow('@(Url.Action("AccordinglyAddPopup", "AnywhereSlider", new {sliderGroupId = Model.Id, btnId = "btnRefreshImages", formId = "anywhereSliderGroup-form"}))', 1000, 610, true); return false;"
+                        class="btn btn-primary">
+                    @T("Widgets.AnywhereSlider.Accordingly.AddNew")
+                </button>
+                <input type="submit" id="btnRefreshImages" style="display: none" />
+                <script type="text/javascript">
+                $(document).ready(function () {
+                    $('#btnRefreshImages').click(function () {
+                        //refresh grid
+                        var grid = $("#accordingly-grid").data('kendoGrid');
+                        grid.dataSource.read();
+
+                        //return false to don't reload a page
+                        return false;
+                    });
+                });
+                </script>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="panel panel-default">
+            <div class="panel-body">
+                @T("Widgets.AnywhereSlider.Tab.Accordingly.SaveBeforeEdit")
+            </div>
+        </div>
+    }
+</div>

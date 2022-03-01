@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="13.5" height="16.256" viewBox="0 0 13.5 16.256">
+    <defs>
+        <style>
+            .cls-1{fill:rgba(255,255,255,0);stroke:#fff;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10}
+        </style>
+    </defs>
+    <g id="noun_Moon" transform="translate(.5 .5)">
+        <path id="Path_998" d="M29 24.5a7.54 7.54 0 0 1-4.862 1.752 7.628 7.628 0 1 1 0-15.256" class="cls-1" data-name="Path 998" transform="translate(-16.5 -11)"/>
+        <path id="Path_999" d="M51.264 25.125c-3.8.059-6.319-3.307-6.87-7.165a7.576 7.576 0 0 1 1.988-6.26" class="cls-1" data-name="Path 999" transform="translate(-38.843 -11.562)"/>
+    </g>
+</svg>

@@ -1,0 +1,6 @@
+@model OrderTotalsModel
+
+@if(!string.IsNullOrEmpty(Model.OrderTotal))
+{
+    @Html.Raw(EShopHelper.GetPriceFormatting(Model.OrderTotal))
+}

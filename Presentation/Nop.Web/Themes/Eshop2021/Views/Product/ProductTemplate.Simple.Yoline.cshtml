@@ -1,0 +1,333 @@
+﻿@model ProductDetailsModel
+@using Nop.Core.Domain.Enum;
+@using Nop.Core.Domain.Seo;
+@inject Nop.Core.IWebHelper webHelper
+@inject SeoSettings seoSettings
+@using Nop.Services.Helpers
+@using Nop.Services
+@using Nop.Core
+@using Nop.Services.Configuration;
+@inject IWorkContext workContext
+@inject IUserAgentHelper userAgentHelper
+@inject ISettingService settingService
+
+@{
+    Layout = "_ColumnsOne";
+
+    var supportRtl = workContext.WorkingLanguage.Rtl;
+
+    //title
+    Html.AddTitleParts(!string.IsNullOrEmpty(Model.MetaTitle) ? Model.MetaTitle : Model.Name);
+    //meta
+    Html.AddMetaDescriptionParts(Model.MetaDescription);
+    Html.AddMetaKeywordParts(Model.MetaKeywords);
+    //page class
+    Html.AppendPageCssClassParts("html-product-details-page yo-product-details-page");
+
+    //canonical URL
+    if (seoSettings.CanonicalUrlsEnabled)
+    {
+        var productUrl = UrlStrucutre.UrlDecode(Url.RouteUrl("Product", new { SeName = Model.SeName }, webHelper.CurrentRequestProtocol).ToLowerInvariant());
+        Html.AddCanonicalUrlParts(productUrl, seoSettings.QueryStringInCanonicalUrlsEnabled);
+    }
+
+    //open graph META tags
+    if (seoSettings.OpenGraphMetaTags)
+    {
+        Html.AddHeadCustomParts("<meta property=\"og:type\" content=\"product\" />");
+        Html.AddHeadCustomParts("<meta property=\"og:title\" content=\"" + Model.Name + "\" />");
+        Html.AddHeadCustomParts("<meta property=\"og:description\" content=\"" + Nop.Core.Html.HtmlHelper.StripTags(Model.MetaDescription) + "\" />");
+        Html.AddHeadCustomParts("<meta property=\"og:image\" content=\"" + Model.DefaultPictureModel.ImageUrl + "\" />");
+        Html.AddHeadCustomParts("<meta property=\"og:url\" content=\"" + webHelper.GetThisPageUrl(false) + "\" />");
+        Html.AddHeadCustomParts("<meta property=\"og:site_name\" content=\"" + Model.CurrentStoreName + "\" />");
+    }
+
+    //Twitter META tags
+    if (seoSettings.TwitterMetaTags)
+    {
+        Html.AddHeadCustomParts("<meta property=\"twitter:card\" content=\"summary\" />");
+        Html.AddHeadCustomParts("<meta property=\"twitter:site\" content=\"" + Model.CurrentStoreName + "\" />");
+        Html.AddHeadCustomParts("<meta property=\"twitter:title\" content=\"" + Model.Name + "\" />");
+        Html.AddHeadCustomParts("<meta property=\"twitter:description\" content=\"" + Nop.Core.Html.HtmlHelper.StripTags(Model.MetaDescription) + "\" />");
+        Html.AddHeadCustomParts("<meta property=\"twitter:image\" content=\"" + Model.DefaultPictureModel.ImageUrl + "\" />");
+        Html.AddHeadCustomParts("<meta property=\"twitter:url\" content=\"" + webHelper.GetThisPageUrl(false) + "\" />");
+    }
+
+    // Monthly Price Attribute
+    var monthlyPriceAttrId = settingService.GetSettingByKey<int>(EShopHelperService.MonthlyPriceAttribute);
+    var attribute = Model.ProductAttributes.Where(p => p.ProductAttributeId == monthlyPriceAttrId).FirstOrDefault();
+    var controlId = "";
+    if (attribute != null)
+    {
+        controlId = $"product_attribute_{attribute.Id}";
+    }
+    var attributeChangeHandlerFuncName = $"attribute_change_handler_{Model.Id}";
+
+    //Advanced Payment Amount Attribute
+    var advancedPaymentAmountAttrId = settingService.GetSettingByKey<int>(EShopHelperService.AdvancedPaymentAmountAttribute);
+    var advancedPaymentAmountAttribute = Model.ProductAttributes.Where(p => p.ProductAttributeId == advancedPaymentAmountAttrId).FirstOrDefault();
+    var advancedPaymentcontrolId = "";
+    if (advancedPaymentAmountAttribute != null)
+    {
+        advancedPaymentcontrolId = $"product_attribute_{advancedPaymentAmountAttribute.Id}";
+    }
+}
+
+<script asp-location="Footer">
+    $(document).ready(function () {
+        var advancedPaymentcontrolId = "@(advancedPaymentcontrolId)";
+        var controlId = '@(controlId)';
+        if (advancedPaymentcontrolId != null && advancedPaymentcontrolId != "") {
+            $("input[type=radio][name=@(advancedPaymentcontrolId)").prop('checked', true);
+        }
+        $('input[type=radio][name=radioDevicePackage]').change(function () {
+            if (this.value == 'DeviceOnly') {
+                $("#div-devicePackege").hide();
+                $("#div-PriceDetail").hide();
+                $("#divMonthlyPrice").hide();
+                $("#selectDevice").hide();
+                $("#selectDevice").removeClass("active with-arrow wide");
+                var attribId = $("#hid_attribute_valueId").val();
+                $('#' + attribId).prop('checked', false);
+                if (advancedPaymentcontrolId != null && advancedPaymentcontrolId != "") {
+                    $("input[type=radio][name=@(advancedPaymentcontrolId)").prop('checked', false);
+                    @(attributeChangeHandlerFuncName)();
+                }
+                productTemplate.fnProductDevice("", 0, 0);
+            }
+            else if (this.value == 'ChoosePlanwithdevice') {
+                $("#div-devicePackege").show();
+                $("#div-PriceDetail").show();
+                $("#divMonthlyPrice").show();
+                $("#selectDevice").show();
+                $("#selectDevice").addClass("active with-arrow wide");
+                if (controlId != null && controlId != "") {
+                    $("input[type=radio][name=@(controlId)").prop('checked', true);
+                    @(attributeChangeHandlerFuncName)();
+                }
+                if (advancedPaymentcontrolId != null && advancedPaymentcontrolId != "") {
+                    $("input[type=radio][name=@(advancedPaymentcontrolId)").prop('checked', true);
+                    @(attributeChangeHandlerFuncName)();
+                }
+                var selectedAttrName = $('input[type=radio].attr-monthlyprice:checked').data('attributename');
+                if (selectedAttrName != null && selectedAttrName != undefined && selectedAttrName != "")
+                    $("#lblPaymentInstallments").html(selectedAttrName);
+
+            }
+        });
+    });
+</script>
+@await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.ProductDetailsAfterBreadcrumb, additionalData = Model })
+<div class="page product-details-page back-reapeat">
+    <div class="page-body">
+        <div class="container">
+            <div class="breadcrumb-cmp-prd">
+                <!--product breadcrumb-->
+                @await Html.PartialAsync("_ProductBreadcrumb", Model.Breadcrumb)
+                @await Html.PartialAsync("_CompareProductsButton", Model)
+            </div>
+        </div>
+        @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.ProductDetailsTop, additionalData = Model })
+        <form asp-route="Product" asp-route-sename="@Model.SeName" method="post" id="product-details-form">
+            <input type="hidden" value="" id="hdnPlanProductId" name="PlanProductId" />
+            <input type="hidden" value="" id="hdnSelectedAttributeValuePrice" name="hdnSelectedAttributeValuePrice" />
+            <input type="hidden" value="@EnumProductDetail.YolinePostpaid" id="hdnEnumProductDetail" name="enumProductDetail" />
+            <div itemscope itemtype="http://schema.org/Product" data-productid="@Model.Id">
+                <div class="product-essential">
+                    <div class="container">
+                        <div class="essential-group border-left4">
+                            @await Html.PartialAsync("_CompareProductsButton", Model)
+                            @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.ProductDetailsBeforePictures, additionalData = Model })
+                            <div class="overview overview-full-widht">
+                                <div class="overview-inn">
+                                    <div class="ovr-without-pic">
+                                        <div class="ovr-left">
+                                            <div class="product-name">
+                                                <h1 itemprop="name">
+                                                    @Model.Name
+                                                </h1>
+                                            </div>
+                                            @*<div class="ovr-data-size">Unlimited</div>*@
+                                        </div>
+                                        <div class="ovr-right">
+                                            <div class="desc-list">
+                                                @Html.Raw(Model.FullDescription)
+                                                @*<ul>
+                                                        <li>
+                                                            Unlimited ** flexible minutes to other local
+                                                            networks and 45 international destinations
+                                                        </li>
+                                                        <li>Unlimited calls to Ooredoo Palestine***</li>
+                                                        <li>Why data is corructed</li>
+                                                        <li>Why data is corructed</li>
+                                                        <li>Why data is corructed</li>
+                                                        <li>Why data is corructed</li>
+                                                        <li>Why data is corructed</li>
+                                                    </ul>*@
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="qty-package">
+                                        <div class="package-left">
+                                            @if (!Model.IsHidePlanSelection)
+                                            {
+                                                <div class="device-package not-break">
+                                                    <label class="dev-label">@T("ProductDetail.SelectOffer")</label>
+                                                    <div class="custom-control custom-radio custom-control-inline">
+                                                        <input type="radio" checked id="radio-DevicePackage" value="DeviceOnly" name="radioDevicePackage" class="custom-control-input">
+                                                        <label class="custom-control-label" for="radio-DevicePackage">@T("ProductDetail.SimorEsimOnly")</label>
+                                                    </div>
+                                                    <div class="custom-control custom-radio custom-control-inline">
+                                                        <input type="radio" id="radio-ChoosePlanwithdevice" value="ChoosePlanwithdevice" name="radioDevicePackage" class="custom-control-input">
+                                                        <label class="custom-control-label" for="radio-ChoosePlanwithdevice">@T("ProductDetail.ChooseDeviceWithPlan")</label>
+                                                    </div>
+                                                </div>
+                                            }
+                                        </div>
+
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.ProductDetailsOverviewBottom, additionalData = Model })
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="essential-cart">
+                        <div class="container">
+                            <div class="essential-cart-flex">
+                                <div class="essential-tab">
+                                    <ul>
+                                        <li class="active with-arrow wide"><span>@T("ProductDetail.YoLine.YOPostpaidSim")</span></li>
+                                        <li id="selectDevice" class="" style="display:none;"><span>@T("ProductDetail.Device")</span></li>
+                                    </ul>
+                                </div>
+                                <div class="essential-cart-right">
+                                    <!--price & add to cart-->
+                                    @{
+                                        var dataDictPrice = new ViewDataDictionary(ViewData);
+                                        dataDictPrice.TemplateInfo.HtmlFieldPrefix = $"price_{Model.Id}";
+                                        @await Html.PartialAsync("_ProductPrice", Model.ProductPrice, dataDictPrice)<strong>/ @T("HomePage.ProductBox.StartFormMonth")</strong>
+
+                                        @await Html.PartialAsync("_ProductTierPrices", Model.TierPrices)
+                                    }
+
+                                    @{
+                                        var dataDictAddToCart = new ViewDataDictionary(ViewData);
+                                        dataDictAddToCart.TemplateInfo.HtmlFieldPrefix = $"addtocart_{Model.Id}";
+                                    }
+                                    @await Html.PartialAsync("_AddToCart", Model.AddToCart, dataDictAddToCart)
+
+                                    @*<a href="@Url.RouteUrl("ShoppingCart")" class="btn btn-orange">@T("ProductDetail.Checkout")</a>*@
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container">
+                        <div class="choose-plan same-box with-sim oneline">
+                            <div class="choose-plan-flex">
+                                <div class="choose-plan-left">
+                                    @*<div class="choose-title">@T("ProductDetail.ChooseSimtype")</div>*@
+                                    <div class="step">
+                                        @*<ul>
+                                                <li><span>@T("ProductDetail.Esim")</span></li>
+                                                <li class="active"><span>@T("ProductDetail.Sim")</span></li>
+                                            </ul>*@
+                                        @{
+                                            var dataDictAttributesSimType = new ViewDataDictionary(ViewData);
+                                            dataDictAttributesSimType.TemplateInfo.HtmlFieldPrefix = $"attributes_{Model.Id}";
+                                            @await Html.PartialAsync("_SimTypeProductAttribute", Model.ProductAttributes, dataDictAttributesSimType)
+                                        }
+                                    </div>
+                                </div>
+                                <div class="post-cutom-attr">
+                                    @await Component.InvokeAsync("SimCardList", new { productId = Model.Id })
+                                    <div class="sim-commitment">
+                                        @{
+                                            var dataDictAttributes = new ViewDataDictionary(ViewData);
+                                            dataDictAttributes.TemplateInfo.HtmlFieldPrefix = $"attributes_{Model.Id}";
+                                            @await Html.PartialAsync("_ProductAttributes", Model.ProductAttributes, dataDictAttributes)
+                                        }
+                                        @*@{
+                                            var dataDictAttributesSim = new ViewDataDictionary(ViewData);
+                                            dataDictAttributesSim.TemplateInfo.HtmlFieldPrefix = $"attributes_{Model.Id}";
+                                            @await Html.PartialAsync("_SimCartProductAttribute", Model.ProductAttributes, dataDictAttributesSim)
+                                        }*@
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container" id="divMonthlyPrice"  style="display:none;">
+                        <div class="monthly-plan other">
+                            <div class="monthly-plan-left">
+                                <div class="cust-label">@T("ProductDetail.MonthlyPrices")</div>
+                                <div class="monthly-plan-right">
+                                    <div class="monthly-radio">
+                                        @if (attribute != null)
+                                        {
+                                            if (attribute.Values != null && attribute.Values.Count > 0)
+                                            {
+                                                var defaultSelectedValue = attribute.Values.Where(p => p.IsPreSelected).FirstOrDefault();
+                                                if (defaultSelectedValue != null)
+                                                {
+                                                    <input type="hidden" id="hid_attribute_valueId" value="@(controlId)_@(defaultSelectedValue.Id)" />
+                                                }
+                                                @foreach (var attributeValue in attribute.Values)
+                                                {
+                                                    var adjPrice = attributeValue.PriceAdjustment;
+                                                    <div class="custom-control custom-radio custom-control-inline">
+                                                        <input class="custom-control-input attr-monthlyprice planwithproductchange" id="@(controlId)_@(attributeValue.Id)" type="radio" name="@(controlId)" value="@attributeValue.Id" checked="@attributeValue.IsPreSelected"
+                                                               @(attribute.Values.Any(value => value.CustomerEntersQty) ? Html.Raw($"onclick=\"showHideRadioQuantity('{controlId}')\"") : null) data-attributePriceValue="@attributeValue.PriceAdjustmentValue" data-attributename="@attributeValue.Name" />
+                                                        <label class="custom-control-label" for="@(controlId)_@(attributeValue.Id)">
+                                                            <span>@attributeValue.Name</span>
+                                                            @if (!string.IsNullOrEmpty(attributeValue.PriceAdjustment))
+                                                            {
+                                                                adjPrice = attributeValue.PriceAdjustment.Replace("+", "").Replace("-", "");
+                                                            }
+                                                            <strong>@Html.Raw(adjPrice)</strong>
+                                                        </label>
+                                                    </div>
+                                                    <input type="hidden" id="hid_@(attributeValue.Id)" value="@(adjPrice)" />                                                   
+                                                }
+                                            }
+                                        }
+                                    </div>
+                                    @*<div class="monthly-price">
+                                            <div class="monthly-price-info">
+                                                <h3><span>JO</span>81<span>.00</span><b>/month</b></h3>
+                                            </div>
+                                        </div>*@
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cmn-mrb" id="div-devicePackege" style="display:none;">
+                        <div class="container">
+                            <div class="choose-products-grid product-grid small-prd-bx">
+                                <div class="title title-mb title-show">
+                                    <span>@T("ProductDetail.Choosedevice")</span>
+                                </div>
+                                @await Component.InvokeAsync("ProductPlan", new { productId = Model.Id, productName = Model.Name, enumProductDetail = EnumProductDetail.YolinePostpaid })
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="container" id="div-PriceDetail" style="display:none;">
+                        @await Html.PartialAsync("_ProductPriceYolinePostpaid", Model)
+                    </div>
+
+                    <div class="container">
+                        @await Html.PartialAsync("_ProductDetailTabs", Model)
+                    </div>
+                    @await Html.PartialAsync("_OfferDetails", Model)
+                    @await Html.PartialAsync("_WhyBuyOnline")
+                </div>
+            </div>
+        </form>
+        @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.ProductDetailsBottom, additionalData = Model })
+    </div>
+</div>
+@await Html.PartialAsync("_CartDrawer")

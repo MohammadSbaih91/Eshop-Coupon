@@ -1,0 +1,34 @@
+@using Nop.Core
+@using Nop.Core.Domain.Tax
+@using Nop.Services.Catalog
+@model Nop.Web.Models.TaxSplitInfoModel
+@inject IPriceFormatter priceFormatter
+@inject IWorkContext workContext
+
+@if (Model.IsTaxSpitEnable && !Model.Is100PercentOff && (workContext.TaxDisplayType == TaxDisplayType.ExcludingTax && Model.AmountWithTax > decimal.Zero || workContext.TaxDisplayType == TaxDisplayType.IncludingTax && Model.AmountWithoutTax > decimal.Zero))
+{
+    <div class="tax-split">
+        <hr class="tax-hr">
+        <div class="tax-split-info price">
+            <span class="price-label">@T("Tax.Split.Price")</span> :
+            @if (workContext.TaxDisplayType == TaxDisplayType.ExcludingTax)
+            {
+                <span class="price-excluding">@priceFormatter.FormatPrice(Model.AmountWithTax, true, false)</span>
+            }
+            @if (workContext.TaxDisplayType == TaxDisplayType.IncludingTax)
+            {
+                <span class="price-including">@priceFormatter.FormatPrice(Model.AmountWithoutTax, true, false)</span>
+            }
+        </div>
+        <div class="tax-split-info split">
+            <span class="split-label">@T("Tax.Split.InfoText")</span> :
+            <span class="split-value-1">@Model.SplitInfoFormatted</span> +
+            <span class="split-value-2">@Model.SplitInfoFormatted2</span>
+        </div>
+
+        <div class="tax-split-info tax">
+            <span class="tax-label">@T("Tax.Split.TaxAmount")</span> :
+            <span class="tax-value">@priceFormatter.FormatPrice(Model.TaxAmount, true, false)</span>
+        </div>
+    </div>
+}

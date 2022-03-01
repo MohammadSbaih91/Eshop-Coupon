@@ -1,0 +1,46 @@
+﻿@model IList<CategoryModel>
+@using Nop.Core
+@inject IWorkContext workContext
+@inject IStoreContext storeContext
+@{
+    var supportRtl = workContext.WorkingLanguage.Rtl;
+}
+@foreach (var item in Model)
+{
+    var imageName = "";
+    switch (item.Id)
+    {
+        case 1:
+            imageName = "Mobile.svg";
+            break;
+        case 55:
+            imageName = "internet.svg";
+            break;
+        case 110:
+            imageName = "devices.svg";
+            break;
+        case 78:
+            imageName = "Smart life.svg";
+            break;
+        case 103:
+            imageName = "Fixed.svg";
+            break;
+    }
+    var imagePath = EShopHelper.GetSvgUrl(item.PictureModel.ImageUrl, imageName);
+    <li class="nav-item">
+        <div class="item-box">
+            <div class="category-item">
+                <a class="next-category nav-link" title="@item.PictureModel.Title" href="#scroll-spy-@item.Id">
+                    <div class="picture">
+                        <div class="pic">
+                            <img alt="@item.PictureModel.AlternateText" src="@(imagePath)" title="@item.PictureModel.Title" />
+                        </div>
+                    </div>
+                    <h2 class="title">
+                        @item.Name
+                    </h2>
+                </a>
+            </div>
+        </div>
+    </li>
+}

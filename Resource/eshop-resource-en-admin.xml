@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Language Name="English">
+    <LocaleResource Name="Admin.Catalog.Products.Taxes"><Value>Taxes</Value></LocaleResource>
+    <LocaleResource Name="Admin.Catalog.Products.Fields.TaxCategory2"><Value>2nd Tax Category</Value></LocaleResource>
+    <LocaleResource Name="Admin.Catalog.Products.Fields.TaxCategory2.Hint"><Value>Tax Category for 2nd split amount</Value></LocaleResource>
+    <LocaleResource Name="Admin.Catalog.Products.Fields.TaxSplit"><Value>Tax Split</Value></LocaleResource>
+    <LocaleResource Name="Admin.Catalog.Products.Fields.TaxSplit.Hint"><Value>Enable TaxSplit</Value></LocaleResource>
+    <LocaleResource Name="Admin.Catalog.Products.Fields.SplitAmount"><Value>Split Amount 1</Value></LocaleResource>
+    <LocaleResource Name="Admin.Catalog.Products.Fields.SplitAmount.Hint"><Value>Split Amount for first part of amount</Value></LocaleResource>
+    <LocaleResource Name="Admin.Catalog.Products.Fields.SplitAmount2"><Value>Split Amount 2</Value></LocaleResource>
+    <LocaleResource Name="Admin.Catalog.Products.Fields.SplitAmount2.Hint"><Value>Split Amount for second part of amount</Value></LocaleResource>
+    <LocaleResource Name="Admin.Catalog.Products.Deposit.AdvancePayment"><Value>Diposit and Advance Payment</Value></LocaleResource>
+    <LocaleResource Name="Admin.Catalog.Products.Fields.Deposit"><Value>Diposit</Value></LocaleResource>
+    <LocaleResource Name="Admin.Catalog.Products.Label.Deposit"><Value>Diposit</Value></LocaleResource>
+    <LocaleResource Name="Admin.Catalog.Products.Label.AdvancePayment"><Value>Advance Payment</Value></LocaleResource>
+    <LocaleResource Name="Admin.Catalog.Products.Label.None"><Value>None</Value></LocaleResource>
+    <LocaleResource Name="Admin.Catalog.Products.Fields.Deposit.Hint"><Value>Deposit amount</Value></LocaleResource>
+    <LocaleResource Name="Admin.Catalog.Products.Fields.AdvancePayment"><Value>Advance Payment</Value></LocaleResource>
+    <LocaleResource Name="Admin.Catalog.Products.Fields.AdvancePaymentMonth"><Value>Month</Value></LocaleResource>
+    <LocaleResource Name="Admin.Catalog.Products.Fields.AdvancePaymentMonth.Hint"><Value>Advance Payment Month</Value></LocaleResource>
+    <LocaleResource Name="Admin.Catalog.Products.Fields.AdvancePayment.Hint"><Value>Advance Payment</Value></LocaleResource>
+    <LocaleResource Name="Admin.Catalog.Products.RequireAnyOneFromOtherProducts"><Value>Require Any One Product From Other</Value></LocaleResource>
+
+    <!-- override -->
+    <LocaleResource Name="Admin.Catalog.Products.ProductAttributes.Attributes.Values.Fields.PriceAdjustmentUsePercentage.Hint"><Value>Determines whether to apply a percentage to the product. If not enabled, or if you provide split value for tax a system will iggnore percentage calculation and fixed value is used.</Value></LocaleResource>
+    <!-- override -->
+</Language>

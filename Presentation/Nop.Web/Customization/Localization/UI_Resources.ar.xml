@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Language Name="English">
+  <LocaleResource Name="HomePage.Category.Title">
+	  <Value>عن ماذا تبحث ؟</Value>
+  </LocaleResource>
+  <LocaleResource Name="HomePage.Category.Title.Description">
+	  <Value>استمتع بتجربة التسوق الخاصة بك</Value>
+  </LocaleResource>
+	<LocaleResource Name="HomePage.Category.Item.Exploremore">
+		<Value>اكتشف المزيد</Value>
+	</LocaleResource>
+
+	<LocaleResource Name="Admin.Catalog.Attributes.SpecificationAttributesGroup.Fields.Name">
+    <Value>أسم المجموعة</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Catalog.Attributes.SpecificationAttributesGroup.Fields.Name.Hint">
+    <Value>المواصفات اسم مجموعة السمات</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Catalog.Attributes.SpecificationAttributesGroup.Fields.Name.Required">
+    <Value>اسم المجموعة مطلوب</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Catalog.Attributes.SpecificationAttributesGroup.Fields.DisplayOrder">
+    <Value>ترتيب العرض</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Catalog.Attributes.SpecificationAttributesGroup.Fields.DisplayOrder.Hint">
+    <Value>ترتيب العرض</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Catalog.Attributes.SpecificationAttributesGroup.AddNew">
+    <Value>إضافة مجموعة سمات مواصفات جديدة</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Catalog.Attributes.SpecificationAttributesGroup.BackToList">
+    <Value>العودة إلى قائمة مجموعة سمات المواصفات</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Catalog.Attributes.SpecificationAttributesGroup.Added">
+    <Value>تمت إضافة مجموعة السمات الجديدة بنجاح.</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Catalog.Attributes.SpecificationAttributesGroup.Updated">
+    <Value>تم تحديث مجموعة السمات بنجاح.</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Catalog.Attributes.SpecificationAttributesGroup.Deleted">
+    <Value>تم حذف مجموعة السمات بنجاح.</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Catalog.Attributes.SpecificationAttributesGroup">
+    <Value>مجموعة سمات المواصفات</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Catalog.Attributes.SpecificationAttributes.Fields.SpecificationAttributeGroup">
+    <Value>مجموعة سمات المواصفات</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Catalog.Attributes.SpecificationAttributes.Fields.SpecificationAttributeGroup.hint">
+    <Value>مجموعة سمات المواصفات</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Catalog.Attributes.SpecificationAttributes.Fields.SpecificationAttributeGroup.Default">
+    <Value>غير متاح</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Catalog.Attributes.SpecificationAttributes.SpecificationAttributeGroup.Other">
+    <Value>مواصفات</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Catalog.ComparePage.EmptyButton">
+    <Value>إفراغ المقارنة</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Catalog.ComparePage.AddProduct">
+    <Value>أضف منتج</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Catalog.ComparePage.FreeShipping">
+    <Value>الشحن مجانا</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Catalog.ComparePage.ShowMore">
+    <Value>أظهر المزيد</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Catalog.ComparePage.AddToCart">
+    <Value>أضف إلى السلة</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Catalog.ComparePage.Buynow">
+    <Value>اشتري الآن</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Catalog.ComparePage.AddToCompare">
+    <Value>أضف إلى قائمة المقارنة</Value>
+  </LocaleResource>
+	<LocaleResource Name="Admin.Orders.Shipments.ExpectedDeliveryDate">
+		<Value>تاريخ التسليم المتوقع</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.Orders.Shipments.ExpectedDeliveryDate.Hint">
+		<Value>تاريخ التسليم المتوقع</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.Orders.Shipments.ExpectedDeliveryDate.Button">
+		<Value>حدد تاريخ التسليم المتوقع</Value>
+	</LocaleResource>
+  <LocaleResource Name="Address.Fields.PhoneNumber.MissMatch">
+    <Value>رقم الهاتف غير صحيح</Value>
+  </LocaleResource>
+</Language>

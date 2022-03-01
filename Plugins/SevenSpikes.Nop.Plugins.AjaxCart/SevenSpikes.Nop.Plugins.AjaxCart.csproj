@@ -1,0 +1,167 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp2.1</TargetFramework>
+        <Copyright>Copyright © </Copyright>
+        <Company></Company>
+        <Authors>Uttam Ughareja</Authors>
+        <RepositoryType>Git</RepositoryType>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+        <OutputPath>..\..\Presentation\Nop.Web\Plugins\SevenSpikes.Nop.Plugins.AjaxCart\</OutputPath>
+        <OutDir>$(OutputPath)</OutDir>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+        <OutputPath>..\..\Presentation\Nop.Web\Plugins\SevenSpikes.Nop.Plugins.AjaxCart\</OutputPath>
+        <OutDir>$(OutputPath)</OutDir>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\Presentation\Nop.Web\Nop.Web.csproj">
+          <Private>false</Private>
+        </ProjectReference>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Reference Include="SevenSpikes.Nop.Core, Version=4.1.584.28743, Culture=neutral, PublicKeyToken=null">
+        <HintPath>lib\SevenSpikes.Nop.Core.dll</HintPath>
+      </Reference>
+      <Reference Include="SevenSpikes.Nop.Framework">
+        <HintPath>lib\SevenSpikes.Nop.Framework.dll</HintPath>
+      </Reference>
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Update="Areas\Admin\Views\NopAjaxCartAdmin\Settings.cshtml">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Areas\Admin\Views\NopAjaxCartAdmin\_Settings.Availability.cshtml">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Areas\Admin\Views\NopAjaxCartAdmin\_Settings.General.cshtml">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Areas\Admin\Views\NopAjaxCartAdmin\_Settings.ProductAddedToCartPopup.cshtml">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Areas\Admin\Views\NopAjaxCartAdmin\_Settings.Selectors.cshtml">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Areas\Admin\Views\_ViewImports.cshtml">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="logo.jpg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="plugin.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Resources\Resources.en-us.xml">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Scripts\AjaxCart.js">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Scripts\AjaxCart.min.js">
+        <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      </None>
+      <None Update="Settings.xml">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="SupportedWidgetZones.xml">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Themes\DefaultClean\Content\ajaxCart.css">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Themes\DefaultClean\Content\ajaxCart.rtl.css">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Themes\DefaultClean\Content\img\close.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Themes\DefaultClean\Content\img\loader.gif">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Themes\Electronics\Content\ajaxCart.css">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Themes\Electronics\Content\ajaxCart.rtl.css">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Themes\Electronics\Content\img\ajax_loader_big.gif">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Themes\Electronics\Content\img\button-close.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Themes\Electronics\Content\img\separator.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Themes\Electronics\Views\Components\NopAjaxCartAdditionalPanelsToUpdate\AdditionalPanelsToUpdate.cshtml">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Themes\Electronics\Views\_ViewImports.cshtml">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Views\Components\NopAjaxCartAdditionalPanelsToUpdate\AdditionalPanelsToUpdate.cshtml">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Views\Components\NopAjaxCartMiniProductDetailsViewAddToCartButton\Default.cshtml">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Views\Components\NopAjaxCartPopupCrossSellProducts\PopupCrossSellProducts.cshtml">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Views\Components\NopAjaxCartPopupRelatedProducts\PopupRelatedProducts.cshtml">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Views\Components\NopAjaxCart\NopAjaxCart.cshtml">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Views\NopAjaxCartCatalog\MiniProductDetailsViewProductAddToCart.cshtml">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Views\NopAjaxCartCatalog\MiniProductDetailsViewProductAddToWishlist.cshtml">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Views\NopAjaxCartCatalog\ProductTemplate.Grouped.cshtml">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Views\NopAjaxCartCatalog\ProductTemplate.Simple.cshtml">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Views\NopAjaxCartCatalog\_AjaxCartProductAttributes.cshtml">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Views\NopAjaxCartCatalog\_AjaxCartRentalInfo.cshtml">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Views\NopAjaxCartCatalog\_ProductVariantOverview.cshtml">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Views\NopAjaxCartShoppingCart\ProductAddedToCartPopupDialog.cshtml">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Views\NopAjaxCartShoppingCart\ProductAddedToWishlistPopupDialog.cshtml">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Views\NopAjaxCart\AddProductToCartAjaxButton.cshtml">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Views\_ViewImports.cshtml">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+
+  
+
+    <!-- This target execute after "Build" target -->
+    <Target Name="NopTarget" AfterTargets="Build">
+        <!-- Delete unnecessary libraries from plugins path -->
+        <MSBuild Projects="$(MSBuildProjectDirectory)\..\..\Build\ClearPluginAssemblies.proj" Properties="PluginPath=$(MSBuildProjectDirectory)\$(OutDir)" Targets="NopClear" />
+    </Target>
+
+</Project>

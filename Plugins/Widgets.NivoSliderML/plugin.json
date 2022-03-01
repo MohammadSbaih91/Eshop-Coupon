@@ -1,0 +1,15 @@
+﻿{
+  "Group": "Widgets",
+  "FriendlyName": "Nivo Slider Multi-Languages",
+  "SystemName": "Widgets.NivoSliderML",
+  "Version": "1.23",
+  "SupportedVersions": [
+    "4.10"
+  ],
+  "Author": "www.edica-soft.es",
+  "DisplayOrder": 1,
+  "FileName": "Nop.Plugin.Widgets.NivoSliderML.dll",
+  "Description": "This plugin allows you to change the contents of main page slider",
+  "LimitedToStores": [],
+  "LimitedToCustomerRoles": []
+}

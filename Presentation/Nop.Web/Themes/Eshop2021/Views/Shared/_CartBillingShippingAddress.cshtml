@@ -1,0 +1,198 @@
+﻿﻿@using Nop.Core
+@using Nop.Core.Domain.Common
+@using Nop.Core.Infrastructure
+@model CheckoutShippingAddressModel
+
+ 
+<script>
+    $(document).ready(function () {
+           var lang = $('html')[0].lang;
+            var lannguage = "en";
+            if (lang == "ar")
+            {
+                lannguage = "ar";
+            }
+        $("#shippingAddressTitle").hide();
+        $("#divShippingAddress").hide();
+        $("#shipping_mpdiv").hide();
+        $('input[type=radio][name=ShipToSameAddress]').change(function () {
+            var shipToSameAddress = $(this).val();
+            if (shipToSameAddress == "true") {
+                $("#shippingAddressTitle").hide();
+                $("#divShippingAddress").hide();
+                $("#shipping_mpdiv").hide();
+            }
+            else if (shipToSameAddress == "false") {
+                $("#shippingAddressTitle").show();
+                $("#divShippingAddress").show();
+                $("#shipping_mpdiv").show();
+                let mobileshipping_map;
+                let mobileshipping_markers = [];
+                let isMobile2 = window.matchMedia("only screen and (max-width:760px)").matches;
+                if (isMobile2) {
+                    $("#shipping_mpdivmob").show();
+                    $("#shipping_mpdiv").hide();
+                    mobileshipping_map = new google.maps.Map($('#serviceLocationMapmobileShipping')[0], {
+                        zoom: 12,
+                        zoomControl: true,
+                        scaleControl: true,
+                        center: new google.maps.LatLng(31.9539, 35.9106),
+                        mapTypeId: google.maps.MapTypeId.ROADMAP
+                    });
+                    google.maps.event.addListener(mobileshipping_map, 'click', function (e) {
+                        if (mobileshipping_markers && mobileshipping_markers.setMap) {
+                            mobileshipping_markers.setMap(null);
+            }
+                        mobileshipping_markers = new google.maps.Marker({
+                            position: e["latLng"],
+                            title: ""
+                        });
+                        mobileshipping_markers.setMap(mobileshipping_map);
+                        var mobilelatlng = e["latLng"].toJSON();
+                        var mobileurld = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + mobilelatlng.lat + '%2C' + mobilelatlng.lng + '&region=JOR' + '&language=' + lannguage + '&key=AIzaSyDJ6S-KUq5dBToqRnpOfZ88TnbPgW_M7ZE';
+                        if (mobilelatlng != null && mobilelatlng != undefined) {
+                            $.ajax({
+                                url: mobileurld,
+                                type: 'GET',
+                                dataType: 'json',
+                                success: function (data) {
+                                    var arr_from_json = data;
+                                    $('#ShippingNewAddress_Address1').val(arr_from_json.results[0].address_components[1].long_name);
+                                    $('#ShippingNewAddress_Address2').val(arr_from_json.results[0].address_components[2].long_name);
+                                    $('#ShippingNewAddress_City').val(arr_from_json.results[0].address_components[3].long_name);
+                                    $('#City_Text').text(arr_from_json.results[0].address_components[3].long_name);
+                                },
+                                error: function (request, error) {
+                                    alert("Request: " + JSON.stringify(request));
+                                }
+                            });
+                        }
+                    });
+                }
+            }
+            else {
+                $("#shippingAddressTitle").show();
+                $("#divShippingAddress").show();
+                $("#shipping_mpdiv").show();
+            }
+        });
+        let mapbill;
+        let markersbill = [];
+        jQuery(document).ready(function () {
+            mapbill = new google.maps.Map($('#serviceLocationMap')[0], {
+                zoom: 12,
+                zoomControl: true,
+                scaleControl: true,
+                center: new google.maps.LatLng(31.9539, 35.9106),
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+    });
+
+            google.maps.event.addListener(mapbill, 'click', function (e) {
+
+                if (markersbill && markersbill.setMap) {
+                    markersbill.setMap(null);
+                }
+                markersbill = new google.maps.Marker({
+                    position: e["latLng"],
+                    title: ""
+                });
+                markersbill.setMap(mapbill);
+                var latlng = e["latLng"].toJSON();
+                var urld = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + latlng.lat + '%2C' + latlng.lng + '&region=JOR' + '&language=' + lannguage + '&key=AIzaSyDJ6S-KUq5dBToqRnpOfZ88TnbPgW_M7ZE';
+                if (latlng != null && latlng != undefined) {
+                    $.ajax({
+                        url: urld,
+                        type: 'GET',
+                        dataType: 'json',
+                        success: function (data) {
+                            var arr_from_json = data;
+                            $('#BillingNewAddress_Address1').val(arr_from_json.results[0].address_components[1].long_name);
+                             $('#BillingNewAddress_Address2').val(arr_from_json.results[0].address_components[2].long_name);
+                             $('#BillingNewAddress_City').val(arr_from_json.results[0].address_components[3].long_name);
+                              $('#City_Text').text(arr_from_json.results[0].address_components[3].long_name);
+    },
+    error : function(request,error)
+    {
+        alert("Request: "+JSON.stringify(request));
+    }
+});
+            }
+        });
+    });
+    });
+</script>
+
+<div class="edit-address">
+    <div class="form-ui">
+        <div class="step-title">
+            <h2 class="title">@T("Checkout.AddressOption.ShippingAddress")</h2>
+        </div>
+        <div class="row" id="divBillingAddress">
+            @{
+                var dataDictAddress = new ViewDataDictionary(ViewData);
+                dataDictAddress.TemplateInfo.HtmlFieldPrefix = "BillingNewAddress";
+                @await Html.PartialAsync("_BillingShippingAddress", Model.BillingNewAddress, dataDictAddress)
+
+                @if (Model.BillingNewAddress.PhoneEnabled)
+                {
+                    <input asp-for="BillingNewAddress.PhoneNumber" type="hidden" />
+                }
+            }
+        </div>
+        @if (!Model.PickUpInStore)
+        {
+            <div class="row">
+                <div class="col-6 div-DifferentShippingAddress">
+                    <div class="form-group">
+                        <div class="custom-control custom-radio-button">
+                            <input asp-for="ShipToSameAddress" checked="@(Model.ShipToSameAddress)" value="true" name="ShipToSameAddress" class="custom-control-input" type="radio" id="same-as-billing-address" />
+                            <label for="same-as-billing-address" class="custom-control-label"><span class="mx-w">@T("Checkout.AddressOption.SameAsBillingAddress")</span></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 div-DifferentShippingAddress">
+                    <div class="form-group">
+                        <div class="custom-control custom-radio-button">
+                            <input asp-for="ShipToSameAddress" checked="@(!Model.ShipToSameAddress)" value="false" name="ShipToSameAddress" class="custom-control-input" type="radio" id="different-shipping-address" />
+                            <label for="different-shipping-address" class="custom-control-label"><span>@T("Checkout.AddressOption.DifferentShippingAddress")</span></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="step-title" id="shippingAddressTitle">
+                <h2 class="title">@T("Checkout.AddressOption.ShippingAddress")</h2>
+                                                   <div id="shipping_mpdivmob" style="display:none;"  class="col-6">
+                                                <span><b>@T("ProductDetail.Internet.Fiber.Map.LocateAddress")</b></span>
+                                                <hr />
+                                                <div class="form-group">
+                                                    <div class="fiber-map">
+                                                        <div>
+                                                            <div class="map-container">
+                                                                <div class="map" id="serviceLocationMapmobileShipping" style="width: 100%; height: 155px; margin: 0px auto; position: relative; overflow: hidden;"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+            </div>
+            <div class="row" id="divShippingAddress">
+                @{
+                    var dataDictShippingAddress = new ViewDataDictionary(ViewData);
+                    dataDictShippingAddress.TemplateInfo.HtmlFieldPrefix = "ShippingNewAddress";
+                    @await Html.PartialAsync("_BillingShippingAddress", Model.ShippingNewAddress, dataDictShippingAddress)
+
+                }
+            </div>
+        }
+        @Html.HiddenFor(model => model.PickUpInStore)
+        @if (Model.ShippingNewAddress.PhoneEnabled)
+        {
+            <input asp-for="ShippingNewAddress.PhoneNumber" type="hidden" />
+        }
+    </div>
+    @*@if (Model.ShippingNewAddress.CustomAddressAttributes.Count > 0)
+        {
+            @await Html.PartialAsync("_AddressAttributes", Model.ShippingNewAddress.CustomAddressAttributes)
+        }*@
+</div>
+

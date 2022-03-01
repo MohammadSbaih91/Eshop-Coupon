@@ -1,0 +1,117 @@
+﻿.marquee {
+    margin-top: -33px;
+    margin-bottom: 15px;
+    overflow: hidden;
+    position: relative;
+    background: #f1f1f1;
+    height: 45px;
+}
+
+.marquee h3 {
+    color: #f16e00;
+    float: left;
+    height: auto;
+    position: relative;
+    position: absolute;
+    margin: 0;
+    line-height: 50px;
+    text-align: center; 
+    font-size: 20px;
+    font-weight: normal;
+}
+
+.marquee.ltr h3 {
+    -moz-transform: translateX(100%);
+    -webkit-transform: translateX(100%);
+    transform: translateX(100%);
+    -moz-animation: scroll-left 25s linear infinite;
+    -webkit-animation: scroll-left 25s linear infinite;
+    animation: scroll-left 25s linear infinite;
+}
+.marquee.rtl h3 {
+    -moz-transform: translateX(100%);
+    -webkit-transform: translateX(100%);
+    transform: translateX(100%);
+    -moz-animation: scroll-right 2s linear infinite;
+    -webkit-animation: scroll-right 2s linear infinite;
+    animation: scroll-right 20s linear infinite;
+}
+
+@-moz-keyframes scroll-left {
+    0% {
+        -moz-transform: translateX(100%);
+    }
+    100% {
+        -moz-transform: translateX(-100%);
+    }
+}
+@-moz-keyframes scroll-right {
+    0% {
+        -moz-transform: translateX(-100%);
+    }
+    100% {
+        -moz-transform: translateX(100%);
+    }
+}
+
+@-webkit-keyframes scroll-left {
+    0% {
+        -webkit-transform: translateX(100%);
+    }
+    100% {
+        -webkit-transform: translateX(-100%);
+    }
+}
+
+@-webkit-keyframes scroll-right {
+    0% {
+        -webkit-transform: translateX(-100%);
+    }
+    100% {
+        -webkit-transform: translateX(100%);
+    }
+}
+
+@keyframes scroll-left {
+    0% {
+        -moz-transform: translateX(100%);
+        -webkit-transform: translateX(100%);
+        transform: translateX(100%);
+    }
+    100% {
+        -moz-transform: translateX(-100%);
+        -webkit-transform: translateX(-100%);
+        transform: translateX(-100%);
+    }
+}
+
+@keyframes scroll-right {
+    0% {
+        -moz-transform: translateX(-100%);
+        -webkit-transform: translateX(-100%);
+        transform: translateX(-100%);
+    }
+    100% {
+        
+        -moz-transform: translateX(100%);
+        -webkit-transform: translateX(100%);
+        transform: translateX(100%);
+    }
+}
+@media (max-width: 768px)
+{
+    .marquee {
+        margin-top: -20px;
+    }
+
+   .ramadan{
+        height: 10px;
+        padding-top: 80px;
+        top: -20px;
+    }
+}
+
+  @-webkit-keyframes slide {
+      from { background-position: 0 0; }
+      to { background-position: -400px 0; }
+  }

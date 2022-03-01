@@ -1,0 +1,113 @@
+﻿@model CheckoutCompletedModel
+
+@using Nop.Core
+@using Nop.Core.Configuration
+@using System.Net
+@using System.Net.Sockets;
+@using Nop.Services.Logging;
+
+@inject IWorkContext _workContext
+@inject NopConfig _nopConfig
+@inject ILogger  _logger
+@*@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor*@
+@inject IJsonHelper Json
+@{
+    Layout = "_ColumnsOne";
+
+    //title
+    Html.AddTitleParts(T("PageTitle.Checkout").Text);
+    //page class
+    Html.AppendPageCssClassParts("html-checkout-page");
+    Html.AppendPageCssClassParts("html-order-completed-page");
+
+
+    //var ipa = "";
+    //var host = Dns.GetHostEntry(Dns.GetHostName());
+    //foreach (var ip in host.AddressList)
+    //{
+    //    if (ip.AddressFamily == AddressFamily.InterNetwork)
+    //    {
+    //        ipa = ip.ToString();
+    //        break;
+    //    }
+    //}
+
+    //var isOrangeEmployee = false;
+    //var ipAddress = ipa;
+    //string partial = ipAddress.Substring(0, ipAddress.LastIndexOf("."));
+    //_logger.InsertLog(Nop.Core.Domain.Logging.LogLevel.Information, ipAddress);
+
+    //if (_nopConfig.EmployeeIpList != null && _nopConfig.EmployeeIpList.Count() > 0)
+    //{
+    //    if (_nopConfig.EmployeeIpList.Contains(partial))
+    //    {
+    //        isOrangeEmployee = true;
+    //    }
+    //}
+}
+
+<script>
+    $.getJSON("https://jsonip.com/", function (data) {
+        debugger;
+        var ipAddress = data.ip;
+        var partial = ipAddress.substring(0, ipAddress.lastIndexOf("."));
+
+        var accessIpList = @(Html.Raw(Json.Serialize(_nopConfig.EmployeeIpList)));
+
+        if (accessIpList != null && accessIpList.length > 0)
+        {
+            if (accessIpList.includes(partial)) {
+                $("#btnorangeemployee").show();
+            }
+            else {
+                $("#btnorangeemployee").hide();
+            }
+        }
+    });
+</script>
+<div class="page checkout-page order-completed-page">
+    @if (!Model.OnePageCheckoutEnabled)
+    {
+        @await Component.InvokeAsync("CheckoutProgress", new { step = CheckoutProgressStep.Complete })
+    }
+    <div class="page-title">
+        <h1>@T("Checkout.ThankYou")</h1>
+    </div>
+    <div class="page-body checkout-data">
+        @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.CheckoutCompletedTop, additionalData = Model })
+        <div class="section order-completed">
+            @if (Model.PaymentStatus == Nop.Core.Domain.Payments.PaymentStatus.Paid)
+            {
+                <div class="title">
+                    <strong>@T("Checkout.YourOrderHasBeenSuccessfullyProcessed")</strong>
+                </div>
+                <div class="details">
+                    <div class="order-number">
+                        <strong>@T("Checkout.OrderNumber"): @Model.CustomOrderNumber</strong>
+                    </div>
+                </div>
+            }
+            <div class="details">
+                <div class="details-link">
+                    <a href="@Url.RouteUrl("OrderDetails", new { orderID = Model.OrderId })">@T("Checkout.PlacedOrderDetails")</a>
+                </div>
+
+                <div class="buttons">
+                    <input type="button" value="@T("Checkout.ThankYou.Continue")" class="button-1 order-completed-continue-button" onclick="setLocation('@Url.RouteUrl("HomePage")')" />
+                </div>
+
+                @*@if (isOrangeEmployee)
+                    {
+                        <div class="buttons">
+                            <a class="button-1 order-completed-continue-button" style="color:#fff !important;" href="@Url.RouteUrl("EmployeeDetail", new { orderId = Model.OrderId })">@T("Checkout.EmployeeDetail")</a>
+                        </div>
+                    }*@
+                <div id="btnorangeemployee" class="buttons" style="display:none;">
+                    <a class="button-1 order-completed-continue-button" style="color:#fff !important;" href="@Url.RouteUrl("EmployeeDetail", new { orderId = Model.OrderId })">@T("Checkout.EmployeeDetail")</a>
+                </div>
+            </div>
+        </div>
+        @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.CheckoutCompletedBottom, additionalData = Model })
+
+    </div>
+</div>

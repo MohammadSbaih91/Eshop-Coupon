@@ -1,0 +1,155 @@
+@model PackagesModel
+
+<div class="panel-group">
+    @if (Model.Id > 0)
+    {
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div id="products-grid"></div>
+
+                <script>
+                    $(document).ready(function() {
+                        $("#products-grid").kendoGrid({
+                            dataSource: {
+                                type: "json",
+                                transport: {
+                                    read: {
+                                        url: "@Html.Raw(Url.Action("PackageProductList", "ProductPackages"))",
+                                        type: "POST",
+                                        dataType: "json",
+                                        data: function() {
+                                            var data = {
+                                                PackageId: '@(Model.Id)'
+                                            };
+                                            addAntiForgeryToken(data);
+                                            return data;
+                                        }
+                                    },
+                                    @*update: {
+                                        url: "@Html.Raw(Url.Action("PackageProductUpdate", "Packages"))",
+                                        type: "POST",
+                                        dataType: "json",
+                                        data: addAntiForgeryToken
+                                    },*@
+                                    destroy: {
+                                        url: "@Html.Raw(Url.Action("PackageProductDelete", "ProductPackages"))",
+                                        type: "POST",
+                                        dataType: "json",
+                                        data: addAntiForgeryToken
+                                    }
+                                },
+                                schema: {
+                                    data: "Data",
+                                    total: "Total",
+                                    errors: "Errors",
+                                    model: {
+                                        id: "Id",
+                                        fields: {
+                                            ProductName: { editable: false, type: "string" },
+                                            IsFeaturedProduct: { editable: true, type: "boolean" },
+                                            DisplayOrder: { editable: true, type: "number" },
+                                            ProductId: { editable: false, type: "number" }
+                                        }
+                                    }
+                                },
+                                requestEnd: function(e) {
+                                    if (e.type == "update") {
+                                        this.read();
+                                    }
+                                },
+                                error: function(e) {
+                                    display_kendoui_grid_error(e);
+                                    // Cancel the changes
+                                    this.cancelChanges();
+                                },
+                                @*pageSize: @(Model.CategoryProductSearchModel.PageSize),*@
+                                serverPaging: true,
+                                serverFiltering: true,
+                                serverSorting: true
+                            },
+                            pageable: {
+                                refresh: true,
+                                @*pageSizes: [@(Model.CategoryProductSearchModel.AvailablePageSizes)],*@
+                                @await Html.PartialAsync("_GridPagerMessages")
+                            },
+                            editable: {
+                                confirmation: "@T("Admin.Common.DeleteConfirmation")",
+                                mode: "inline"
+                            },
+                            scrollable: false,
+                            columns: [
+                                {
+                                    field: "ProductName",
+                                    title: "@T("Admin.Catalog.Categories.Products.Fields.Product")"
+                                }, {
+                                    field: "DiscountName",
+                                    title: "@T("Admin.Packages.Fields.Discount")",
+                                    width: 150,
+                                    headerAttributes: { style: "text-align:center" },
+                                    attributes: { style: "text-align:center" },
+                                }, {
+                                    field: "DisplayOrder",
+                                    title: "@T("Admin.Catalog.Categories.Products.Fields.DisplayOrder")",
+                                    //integer format
+                                    format: "{0:0}",
+                                    width: 150
+                                }, {
+                                    field: "ProductId",
+                                    title: "@T("Admin.Common.View")",
+                                    width: 100,
+                                    headerAttributes: { style: "text-align:center" },
+                                    attributes: { style: "text-align:center" },
+                                    template: '<a class="btn btn-default" href="@Url.Content("~/Admin/ProductPackages/Edit/")#=ProductId#"><i class="fa fa-eye"></i>@T("Admin.Common.View")</a>'
+                                },
+                                {
+                                    field: "Id",
+                                    title: "@T("Admin.Common.Edit")",
+                                    width: 100,
+                                    headerAttributes: { style: "text-align:center" },
+                                    attributes: { style: "text-align:center" },
+                                    template: "<button onclick=\"javascript:OpenWindow('@Url.Content("~/Admin/ProductPackages/PackageProductEditPopup/")#=Id#?btnId=btnRefresh&formId=packages-form', 800, 400, true); return false;\" class='btn btn-default'><i class=\"fa fa-pencil\"></i>@T("Admin.Common.Edit")</button>"
+                                },
+                                {
+                                    command: { name: "destroy", text: "@T("Admin.Common.Delete")" },
+                                    headerAttributes: { style: "text-align:center" },
+                                    attributes: { style: "text-align:center" },
+                                    title: "@T("Admin.Common.Delete")",
+                                    width: 100
+                                }
+                            ]
+                        });
+                    });
+                </script>
+            </div>
+
+            <div class="panel-footer">
+                <button type="submit" id="btnAddNewProduct"
+                        onclick="javascript:OpenWindow('@(Url.Action("PackageProductAddPopup", "ProductPackages", new { packageId = Model.Id, btnId = "btnRefreshProducts", formId = "packages-form" }))', 800, 800, true); return false;"
+                        class="btn btn-primary">
+                    @T("Admin.Catalog.Categories.Products.AddNew")
+                </button>
+                <input type="submit" id="btnRefreshProducts" style="display: none" />
+                <script>
+                    $(document).ready(function () {
+                        $('#btnRefreshProducts').click(function () {
+                            //refresh grid
+                            var grid = $("#products-grid").data('kendoGrid');
+                            grid.dataSource.read();
+
+                            //return false to don't reload a page
+                            return false;
+                        });
+                    });
+                </script>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="panel panel-default">
+            <div class="panel-body">
+                @T("Admin.Package.Products.SaveBeforeEdit")
+            </div>
+        </div>
+    }
+</div>

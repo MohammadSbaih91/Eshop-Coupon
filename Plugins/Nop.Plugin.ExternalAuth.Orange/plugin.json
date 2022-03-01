@@ -1,0 +1,11 @@
+﻿{
+  "Group": "ExternalAuth methods",
+  "FriendlyName": "SSO orage login",
+  "SystemName": "ExternalAuth.Orange",
+  "Version": "1.00",
+  "SupportedVersions": [ "4.10" ],
+  "Author": "QBS",
+  "DisplayOrder": 1,
+  "FileName": "Nop.Plugin.ExternalAuth.Orange.dll",
+  "Description": "SSO orage login"
+}

@@ -1,0 +1,107 @@
+﻿@*@model Nop.Web.Models.Order.OrderDetailsModel*@
+@using Nop.Plugin.Shipping.Aramex.Models
+@using Nop.Services.Catalog
+@using Nop.Web
+@model TrackingDetailModel
+@inject IPackagesService packagesService
+@inject IPriceFormatter priceFormatter
+
+@if (Model.TrackingOrderItemModels != null && Model.TrackingOrderItemModels.Count() > 0)
+{
+    var packageItem = Model.TrackingOrderItemModels.Where(p => p.PackageId != 0).GroupBy(p => p.PackageId).ToList();
+    var modelitem = Model.TrackingOrderItemModels.Where(p => p.PackageId == 0);
+    <div class="track-cart">
+        <div class="cart-list">
+            <div class="cart-bx-title">
+                <div class="title first left-text"><span>@T("Shipping.Aramex.Shipment.OrderItem.OrderDetail")</span></div>
+                <div class="title">@T("Shipping.Aramex.Shipment.OrderItem.Quality")</div>
+                <div class="title">@T("Shipping.Aramex.Shipment.OrderItem.Taxes")</div>
+                <div class="title text-price">@T("Shipping.Aramex.Shipment.OrderItem.Prices")</div>
+            </div>
+            @for (int i = 0; i < packageItem.Count; i++)
+            {
+                var products = packageItem[i];
+                var firstProduct = products.FirstOrDefault();
+                var package = packagesService.GetPackagesById(firstProduct.PackageId);
+                var qty = firstProduct?.Qty;
+                var totalTaxValue = products.Sum(p => p.TaxValue);
+                var totalTax = priceFormatter.FormatPrice(totalTaxValue);
+                var packageTotalValue = products.Sum(p => p.PriceValue);
+                var packageTotal = priceFormatter.FormatPrice(packageTotalValue);
+                <div class="cart-bx">
+                    <div class="cart-flex">
+                        <div class="cart-bun package first">
+                            <h2>@package.Name</h2>
+                        </div>
+                        <div class="cart-bun qty">
+                            @(qty)
+                        </div>
+                        <div class="cart-bun tax">
+                            @Html.Raw(totalTax)
+                        </div>
+                        <div class="cart-bun prices">
+                            @Html.Raw(packageTotal)
+                        </div>
+                    </div>
+                    @foreach (var item in products)
+                    {
+                        <div class="cart-flex">
+                            <div class="cart-bun name first">
+                                <a class="cart-pic"><img src="@item.ImageUrl" /></a>
+                                <div class="prd-details">
+                                    <div class="prd_title">
+                                        <a class="name">@item.ProductName</a>
+                                    </div>
+                                    @if (!string.IsNullOrEmpty(item.AttributeInfo))
+                                    {
+                                        <span>@Html.Raw(item.AttributeInfo)</span>
+                                    }
+                                </div>
+                            </div>
+                            <div class="cart-bun qty">
+                                @*@item.Qty*@
+                            </div>
+                            <div class="cart-bun tax">
+                                @*@Html.Raw(item.Tax)*@
+                            </div>
+                            <div class="cart-bun prices">
+                                @*@Html.Raw(item.Price)*@
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+            @foreach (var item in modelitem)
+            {
+                <div class="cart-bx">
+                    <div class="cart-flex">
+                        <div class="cart-bun name first">
+                            <a class="cart-pic">
+                                <img src="@item.ImageUrl" />
+                            </a>
+                            <div class="prd-details">
+                                <div class="prd_title">
+                                    <a class="name">@item.ProductName</a>
+                                </div>
+                                @if (!string.IsNullOrEmpty(item.AttributeInfo))
+                                {
+                                    <span>@Html.Raw(item.AttributeInfo)</span>
+                                }
+                            </div>
+                        </div>
+                        <div class="cart-bun qty">
+                            @item.Qty
+                        </div>
+                        <div class="cart-bun tax">
+                            @Html.Raw(item.Tax)
+                        </div>
+                        <div class="cart-bun prices">
+                            @Html.Raw(EShopHelper.GetPriceFormatting(item.Price))
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+}
+

@@ -1,0 +1,44 @@
+﻿@model CatalogPagingFilteringModel
+@{
+    //var specModel = Model.SpecificationFilter;
+    var specModel = Model.SpecificationFilter.AllFilteredItems.GroupBy(p => p.SpecificationAttributeName);
+}
+
+@foreach (var item in specModel)
+{
+    var isSelected = item.Where(p => p.IsAlreadyFiltered).Count();
+    var selectedClass = isSelected > 0 ? "active" : "";
+    var displayblock = isSelected > 0 ? "block;" : "none;";
+    <div class="block">
+        <div class="cust-filter-title @(selectedClass)">
+            <strong>@(item.Key)</strong>
+        </div>
+        <div class="listbox" style="display : @(displayblock)">
+            <ul class="list">
+                @foreach (var option in item.ToList())
+                {
+                    var disable = option.IsDisabled ? "disabled" : "";
+
+                    if (option.IsAlreadyFiltered)
+                    {
+                        <li class="@(disable)" onclick="CatalogFilterProduct('@(option.FilterUrl)')">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" checked class="custom-control-input">
+                                <label class="custom-control-label" for="color1">@(option.SpecificationAttributeOptionName)</label>
+                            </div>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="@(disable)" onclick="CatalogFilterProduct('@(option.FilterUrl)')">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input">
+                                <label class="custom-control-label" for="color1">@(option.SpecificationAttributeOptionName)</label>
+                            </div>
+                        </li>
+                    }
+                }
+            </ul>
+        </div>
+    </div>
+}

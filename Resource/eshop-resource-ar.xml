@@ -1,0 +1,122 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Language Name="English">
+  <LocaleResource Name="Logo.Title"><Value>eShop</Value></LocaleResource>
+  <LocaleResource Name="menu.title"><Value>eShop</Value></LocaleResource>
+  <LocaleResource Name="HomePage"><Value>Shop home</Value></LocaleResource>
+  <LocaleResource Name="Filtering.DisplayBy"><Value>عرض بواسطة</Value></LocaleResource>  
+  <LocaleResource Name="Filtering.FilterBy"><Value>مصنف بواسطة</Value></LocaleResource>
+  <LocaleResource Name="checkout.pickuppoints.map"><Value>Show on Map</Value></LocaleResource> 
+  <LocaleResource Name="Tax.Split.infotext"><Value>Tax</Value></LocaleResource>
+  <LocaleResource Name="Tax.Split.Price"><Value>Price</Value></LocaleResource>
+  <LocaleResource Name="Tax.Split.TaxAmount"><Value>Tax amount</Value></LocaleResource>
+  <LocaleResource Name="ShoppingCart.ModifiedMessage"><Value>You have changed you cart! want to continue without updating it? change will be lost</Value></LocaleResource>
+  
+  <LocaleResource Name="AnonymousOrderTrack.Email"><Value>Your email address</Value></LocaleResource>
+  <LocaleResource Name="AnonymousOrderTrack.OrderId"><Value>Your order number</Value></LocaleResource>
+  <LocaleResource Name="AnonymousOrderTrack.OrderNumber"><Value>Order Iteam</Value></LocaleResource>
+
+  <LocaleResource Name="AnonymousOrderTrack.Button.Back"><Value>Back to eShop</Value></LocaleResource>
+  <LocaleResource Name="AnonymousOrderTrack.Button.Submit"><Value>View status</Value></LocaleResource>
+  <LocaleResource Name="PageTitle.AnonymousOrderTrack"><Value>Track your order</Value></LocaleResource>
+  <LocaleResource Name="AnonymousOrderTrack.WrongOrderId"><Value>Wrong Order number</Value></LocaleResource>
+  <LocaleResource Name="AnonymousOrderTrack.NoRecord"><Value>This order does not exist!</Value></LocaleResource>
+
+  <LocaleResource Name="AnonymousOrderTrack.ShippingMethod.PickUpInStore"><Value>Pick up in Shop</Value></LocaleResource>
+  <LocaleResource Name="AnonymousOrderTrack.ShippingMethod.HomeDelivery"><Value>Home Delivery</Value></LocaleResource>
+  <LocaleResource Name="AnonymousorderTrack.OrderSummary"><Value>Summary</Value></LocaleResource>
+  <LocaleResource Name="AnonymousorderTrack.OrderHistory"><Value>Status History</Value></LocaleResource>
+  <LocaleResource Name="AnonymousorderTrack.OrderDate"><Value>Date</Value></LocaleResource>
+  <LocaleResource Name="AnonymousorderTrack.OrderTime"><Value>Time</Value></LocaleResource>
+  <LocaleResource Name="AnonymousorderTrack.PaymentMethod.HomeDelivery.Cod"><Value>Cash on Home Delivery</Value></LocaleResource>
+  <LocaleResource Name="AnonymousorderTrack.PaymentMethod.PickUpInStore.Cod"><Value>Cash on pickup payment</Value></LocaleResource>
+  <LocaleResource Name="AnonymousorderTrack.OrderTotal"><Value>To pay, taxes included </Value></LocaleResource>
+  <LocaleResource Name="AnonymousorderTrack.ItemList"><Value>Items</Value></LocaleResource>
+
+  <LocaleResource Name="AnonymousOrderTrack.OrderStatus.Pending"><Value>Pending</Value></LocaleResource>
+  <LocaleResource Name="AnonymousOrderTrack.OrderStatus.Processing"><Value>Processing</Value></LocaleResource>
+  <LocaleResource Name="AnonymousOrderTrack.OrderStatus.Complete"><Value>Complete</Value></LocaleResource>
+  <LocaleResource Name="AnonymousOrderTrack.OrderStatus.Cancelled"><Value>Cancelled</Value></LocaleResource>
+
+<!-- EmailAFriend -->
+  <LocaleResource Name="Products.EmailAFriend.FailedToSend"><Value>Something went wrong, Please try after sometime</Value></LocaleResource>
+  <LocaleResource Name="Products.EmailAFriend.FullName"><Value>Full Name</Value></LocaleResource>
+  <LocaleResource Name="Products.EmailAFriend.FullName.Hint"><Value>Enter your full name</Value></LocaleResource>
+  <LocaleResource Name="Products.EmailAFriend.FullName.Required"><Value>Full name is required</Value></LocaleResource>
+  <LocaleResource Name="Products.EmailAFriend.YourEmailAddress"><Value>Your email</Value></LocaleResource>
+  <LocaleResource Name="Products.EmailAFriend.FriendEmail"><Value>Email of friend</Value></LocaleResource>
+  <LocaleResource Name="Products.EmailAFriend.PersonalMessage"><Value>Message for your friend</Value></LocaleResource>
+  
+  <LocaleResource Name="Products.EmailAFriend.Title"><Value>Send to friend</Value></LocaleResource>
+  <LocaleResource Name="Products.EmailAFriend.Description"><Value>Thank you to specify the required information below to send the product to a friend</Value></LocaleResource>
+  <LocaleResource Name="Products.EmailAFriend.Button.Close"><Value>Cancel</Value></LocaleResource>
+  <LocaleResource Name="Products.EmailAFriend.Button"><Value>Confirm</Value></LocaleResource>
+<!-- /EmailAFriend -->
+
+<!-- OnePageCheckout  -->
+  <LocaleResource Name="Address.Fields.Nationality"><Value>Nationality</Value></LocaleResource>
+  <LocaleResource Name="Address.Fields.NationalityType"><Value>Type ID</Value></LocaleResource>
+  <LocaleResource Name="Address.Fields.IdentityCardOrPassport"><Value>N° of identity card / passport</Value></LocaleResource>
+  <LocaleResource Name="Address.Fields.Civility"><Value>Civility</Value></LocaleResource>
+  <LocaleResource Name="Address.Fields.Civility.Mr"><Value>Mr</Value></LocaleResource>
+  <LocaleResource Name="Address.Fields.Civility.Mrs"><Value>Mrs</Value></LocaleResource>
+  <LocaleResource Name="Address.Fields.Civility.Miss"><Value>Miss</Value></LocaleResource>
+  <LocaleResource Name="Address.Fields.EmailConfirm"><Value>Confirm your e-mail</Value></LocaleResource>
+  <LocaleResource Name="Address.Fields.SubscribeNewsletter"><Value>I want to receive Orange offers.</Value></LocaleResource>
+  <LocaleResource Name="Address.Fields.NationalityType.Select"><Value>Select Type</Value></LocaleResource>
+  <LocaleResource Name="Address.Fields.NationalityType.NationalId"><Value>National Id</Value></LocaleResource>
+  <LocaleResource Name="Address.Fields.NationalityType.ResidentCard"><Value>Resident Card</Value></LocaleResource>
+  <LocaleResource Name="Address.Fields.NationalityType.Passport"><Value>Passport</Value></LocaleResource>
+  <LocaleResource Name="Address.Fields.Nationality.Select"><Value>Select Nationality</Value></LocaleResource>
+  <LocaleResource Name="Address.Fields.Nationality.Jordanian"><Value>Jordanian</Value></LocaleResource>
+  <LocaleResource Name="Address.Fields.Nationality.JordanResident"><Value>Jordan Resident</Value></LocaleResource>
+  <LocaleResource Name="Address.Fields.Nationality.Other"><Value>Other</Value></LocaleResource>
+
+  <LocaleResource Name="Address.Fields.PhoneNumber"><Value>Contact number</Value></LocaleResource>
+  <LocaleResource Name="Address.Fields.Address1"><Value>Address</Value></LocaleResource>
+  <LocaleResource Name="Address.Fields.Address2"><Value>Additional address (optional)</Value></LocaleResource>
+  <LocaleResource Name="checkout.billingaddress"><Value>Information</Value></LocaleResource>
+  <LocaleResource Name="Checkout.ShippingAddress"><Value>Delivery</Value></LocaleResource>
+  <LocaleResource Name="Checkout.ShippingMethod"><Value>Delivery Method</Value></LocaleResource>
+  <LocaleResource Name="Checkout.ConfirmOrder"><Value>Summary</Value></LocaleResource>
+
+  <LocaleResource Name="checkout.deliveryoption.description"><Value>Choose a delivery method</Value></LocaleResource>
+  <LocaleResource Name="checkout.deliveryoption.homedelivery"><Value>Home Delivery</Value></LocaleResource>
+  <LocaleResource Name="checkout.deliveryoption.homedelivery.description"><Value>Receive your purchase within 48 hours during working days</Value></LocaleResource>
+  <LocaleResource Name="checkout.deliveryoption.pickupinstore"><Value>Pick up in shop</Value></LocaleResource>
+  <LocaleResource Name="checkout.address.section.address"><Value>Your billing address</Value></LocaleResource>
+  <LocaleResource Name="checkout.address.section.contact"><Value>To contact you</Value></LocaleResource>
+  <LocaleResource Name="checkout.address.section.personal"><Value>Personal information</Value></LocaleResource>
+  <LocaleResource Name="address.fields.identitycardorpassport.required"><Value>Identity cardord/passport required</Value></LocaleResource>
+  <LocaleResource Name="address.fields.emailconfirm.missmatch"><Value>Confirm email doesn't match</Value></LocaleResource>
+<!-- /OnePageCheckout  -->
+
+<!-- AnonymousOrderTrack -->
+  <LocaleResource Name="AnonymousOrderTrack.OrderStatus"><Value>Status</Value></LocaleResource>
+  <LocaleResource Name="AnonymousOrderTrack.ShippingStatus"><Value>Shipping Status</Value></LocaleResource>
+  <LocaleResource Name="AnonymousOrderTrack.PaymentStatus"><Value>Payment Status</Value></LocaleResource>  
+  <LocaleResource Name="AnonymousOrderTrack.PaymentStatus.Pending"><Value>Pending</Value></LocaleResource>
+  <LocaleResource Name="AnonymousOrderTrack.PaymentStatus.Authorized"><Value>Authorized</Value></LocaleResource>
+  <LocaleResource Name="AnonymousOrderTrack.PaymentStatus.Paid"><Value>Paid</Value></LocaleResource>
+  <LocaleResource Name="AnonymousOrderTrack.PaymentStatus.PartiallyRefunded"><Value>Partially Refunded</Value></LocaleResource>
+  <LocaleResource Name="AnonymousOrderTrack.PaymentStatus.Refunded"><Value>Refunded</Value></LocaleResource>
+  <LocaleResource Name="AnonymousOrderTrack.PaymentStatus.Voided"><Value>Voided</Value></LocaleResource>
+  <LocaleResource Name="AnonymousOrderTrack.ShippingStatus.PartiallyShipped"><Value>Partially Shipped</Value></LocaleResource>
+  <LocaleResource Name="AnonymousOrderTrack.ShippingStatus.NotYetShipped"><Value>Not Shipped Yet</Value></LocaleResource>
+  <LocaleResource Name="AnonymousOrderTrack.ShippingStatus.ShippingNotRequired"><Value>Shipping is Not Required</Value></LocaleResource>
+  <LocaleResource Name="AnonymousOrderTrack.ShippingStatus.Shipped"><Value>Shipped</Value></LocaleResource>
+<!-- /AnonymousOrderTrack -->
+ 
+  <LocaleResource Name="Checkout.Address.Section.Personal"><Value>معلومات شخصية</Value></LocaleResource>
+  <LocaleResource Name="Checkout.Address.Section.Contact"><Value>معلومات شخصية</Value></LocaleResource>
+  <LocaleResource Name="Checkout.Address.Section.Address"><Value>العنوان</Value></LocaleResource>
+  <LocaleResource Name="Address.Fields.nationality.jordanian"><Value>اردني</Value></LocaleResource>
+  <LocaleResource Name="Address.Fields.nationality.jordanresident"><Value>بطاقة الإقامة </Value></LocaleResource>
+  <LocaleResource Name="Address.Fields.nationality.other"><Value>اخرى</Value></LocaleResource>
+  <LocaleResource Name="Filtering.PriceRangeFilter"><Value>التصنيف حسب السعر </Value></LocaleResource>
+  <LocaleResource Name="Filtering.DisplayBy"><Value>طريقة العرض</Value></LocaleResource> 
+ <LocaleResource Name="Product.Addtocart.Select.Location"><Value>الرجاء اختيار الموقع</Value></LocaleResource>
+  <LocaleResource Name="Product.Addtocart.Select.Location"><Value>الموقع مطلوب</Value></LocaleResource>
+  <LocaleResource Name="Available.Service.Popup.Title"><Value>الخدمات المتاحة بحسب الموقع </Value></LocaleResource>
+  <LocaleResource Name="Available.Service.Popup.4G.Information"><Value>نت وين ما كان سوبر 4G لسهولة الاتصال بالإنترنت مهما مان موقعك عروض نت وين ما كان المدفوعة لاحقا هي الخيار الأنسب لك</Value></LocaleResource>
+  <LocaleResource Name="Available.Service.Popup.fiber.Information"><Value>تغطية معتدله   خدمة الجوال متوفرة. أطلب خدمة جديدة أو حدث سرعة الإنترنت الحالية</Value></LocaleResource>
+</Language>

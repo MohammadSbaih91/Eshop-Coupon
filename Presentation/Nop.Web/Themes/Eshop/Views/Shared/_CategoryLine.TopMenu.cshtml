@@ -1,0 +1,49 @@
+﻿@model TopMenuModel.CategoryLineModel
+
+@{
+    //subcategories
+    var subCategories = Model.ResponsiveMobileMenu ?
+    //responsive (all categories)
+    Model.Category.SubCategories :
+    //standard design (only categories with "IncludeInTopMenu")
+    Model.Category.SubCategories.Where(x => x.IncludeInTopMenu).ToList();
+    var hasChild = subCategories.Any();
+    var hasChildClass = hasChild ? "has-child" : "";
+    var levelClass = "";
+    //if (Model.Level == 0)
+    //{
+    //    levelClass = "first-level";
+    //}
+}
+<li class='@hasChildClass'>
+
+    <a href="@UrlStrucutre.UrlDecode(Url.RouteUrl("Category", new { SeName = Model.Category.SeName }))">
+        @Model.Category.Name
+        @if (hasChild)
+        {
+            <i class="fas fa-sort-down"></i>
+        }
+        else
+        {
+            <i class="fas fa-angle-right"></i>
+        }
+    </a>
+
+    @if (hasChild)
+    {
+        <div class="sublist-toggle"></div>
+        <ul class="sublist @levelClass">
+            @foreach (var subCategory in subCategories)
+            {
+                var categoryLineModel = new TopMenuModel.CategoryLineModel
+                {
+                    Category = subCategory,
+                    Level = Model.Level + 1,
+                    ResponsiveMobileMenu = Model.ResponsiveMobileMenu
+                };
+                @await Html.PartialAsync("_CategoryLine.TopMenu", categoryLineModel)
+            }
+        </ul>
+    }
+
+</li>

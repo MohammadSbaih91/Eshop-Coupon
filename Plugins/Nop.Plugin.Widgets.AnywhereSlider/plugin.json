@@ -1,0 +1,11 @@
+﻿{
+  "Group": "Widgets",
+  "FriendlyName": "Anywhere Slider",
+  "SystemName": "Widgets.AnywhereSlider",
+  "Version": "1.00",
+  "SupportedVersions": [ "4.10" ],
+  "Author": "QBS",
+  "DisplayOrder": 1,
+  "FileName": "Nop.Plugin.Widgets.AnywhereSlider.dll",
+  "Description": ""
+}

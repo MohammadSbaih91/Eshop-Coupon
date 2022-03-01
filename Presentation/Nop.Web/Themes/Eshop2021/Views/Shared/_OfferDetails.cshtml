@@ -1,0 +1,17 @@
+﻿@model ProductDetailsModel
+<div class="container">
+    <div class="offer-details">
+        <div class="offer-left">
+            <b>@T("ProductDetail.OfferDetails")</b>
+            <h4>@T("ProductDetail.ForMoreOfferDetails")</h4>
+        </div>
+        <div class="offer-right">
+            <div class="btn btn-orange" onclick="fnOffer()">@T("ProductDetail.ClickHere")</div>
+        </div>
+    </div>
+</div>
+<script>
+    function fnOffer() {
+        window.location = "@(Model.OfferDetailsCTA)";
+    }
+</script>

@@ -1,0 +1,30 @@
+﻿@model AccordinglyModel
+@{
+    Layout = "_AdminPopupLayout";
+
+
+    //page title
+    ViewBag.Title = T("Widgets.AnywhereSlider.Accordingly.AddNew").Text;
+}
+@if (ViewBag.RefreshPage == true)
+{
+    <script>
+        try {window.opener.document.forms['@(Context.Request.Query["formId"])'].@(Context.Request.Query["btnId"]).click();}
+        catch (e){}
+        window.close();
+    </script>
+}
+
+<form asp-controller="AnywhereSlider" asp-action="AccordinglyAddPopup"
+      asp-route-btnId="@Context.Request.Query["btnId"]"
+      asp-route-formId="@Context.Request.Query["formId"]">
+    <div class="content-header clearfix">
+        <h1 class="pull-left">
+            @T("Widgets.AnywhereSlider.Accordingly.AddNew")
+        </h1>
+        <div class="pull-right">
+            &nbsp;
+        </div>
+    </div>
+    @await Html.PartialAsync("_CreateOrUpdateAccordingly", Model)
+</form>

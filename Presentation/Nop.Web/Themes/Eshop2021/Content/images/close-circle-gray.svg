@@ -1,0 +1,8 @@
+<svg id="Group_10116" data-name="Group 10116" xmlns="http://www.w3.org/2000/svg" width="65" height="65" viewBox="0 0 65 65">
+  <path id="Path_27233" data-name="Path 27233" d="M32.5,0A32.5,32.5,0,1,1,0,32.5,32.5,32.5,0,0,1,32.5,0Z" fill="#d9d9d9"/>
+  <g id="add-alarm-button" transform="translate(20.201 20.201)">
+    <g id="add-alarm" transform="translate(0)">
+      <path id="Path_153689" data-name="Path 153689" d="M37.144,23.525H31.763v9.609H22.154v5.381h9.609v9.609h5.381V38.514h9.609V33.133H37.144Z" transform="translate(-22.154 -23.525)" fill="#fff"/>
+    </g>
+  </g>
+</svg>

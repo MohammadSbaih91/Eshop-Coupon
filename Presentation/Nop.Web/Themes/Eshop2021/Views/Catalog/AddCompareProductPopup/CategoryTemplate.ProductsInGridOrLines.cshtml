@@ -1,0 +1,229 @@
+﻿@model CategoryModel
+@using Nop.Core.Domain.Common
+@using Nop.Core.Domain.Seo
+@using Nop.Core
+@using Nop.Core.Domain.Catalog
+@using Nop.Web.Framework.UI
+@using Nop.Services.Helpers
+
+
+@inject IWorkContext workContext
+@inject IUserAgentHelper userAgentHelper
+
+@inject IWorkContext workContext
+@inject IWebHelper webHelper
+@inject SeoSettings seoSettings
+@inject CommonSettings commonSettings
+@inject CatalogSettings  catalogSettings
+
+@{
+    Layout = "_ColumnsTwoWithoutRoot";
+
+    //title
+    Html.AddTitleParts(!string.IsNullOrEmpty(Model.MetaTitle) ? Model.MetaTitle : Model.Name);
+    //meta
+    Html.AddMetaDescriptionParts(Model.MetaDescription);
+    Html.AddMetaKeywordParts(Model.MetaKeywords);
+    //page class
+    Html.AppendPageCssClassParts("html-category-page");
+
+    Html.AppendPageCssClassParts("breadcrumb-black");
+
+    if (seoSettings.CanonicalUrlsEnabled)
+    {
+        var categoryUrl = Url.RouteUrl("Category", new { SeName = Model.SeName }, webHelper.CurrentRequestProtocol).ToLowerInvariant();
+        Html.AddCanonicalUrlParts(categoryUrl, seoSettings.QueryStringInCanonicalUrlsEnabled);
+    }
+
+    var breadcrumbDelimiter = commonSettings.BreadcrumbDelimiter;
+}
+
+
+<script>
+    $(document).ready(function () {
+        $(".widget-zone").insertBefore('.column-two-zone');
+        $(".cat-transfer").insertBefore('.column-res');
+
+        var onClickShowCatalog = function () {
+            $('body').toggleClass("scroll-lock");
+            $('.active-prd-popup').toggleClass("enable-lock");
+            $('.side-2', '.ajax-left-filter').toggleClass('active');
+        };
+        $(".catalog-drawer").click(onClickShowCatalog);
+        $('input:radio[name=OfferRadioInline]').change(function () {
+            var url = updateQueryStringParameter('ofr', this.value)
+            CatalogFilterProduct(url);
+        });
+
+        CatalogFilterProduct();
+    });
+    function CatalogFilterProduct(url = window.location.href, loadMore = false) {
+        var manufacturerId = Number(GetQueryStringParameter('mId', url));
+        $("#load-more-btn").hide();
+        var pageIndex = Number(GetQueryStringParameter('pi'));
+        if (!loadMore) {
+            if (pageIndex > 0) {
+                pageIndex = 0;
+                url = updateQueryStringParameter('pi', pageIndex, url)
+            }
+        }
+
+        url = updateQueryStringParameter('q', $("#nop-small-searchterms").val());
+
+
+        if (url !== '') {
+            if (typeof (history.pushState) != "undefined") {
+                var obj = { Page: "catalog", Url: url };
+                history.replaceState(obj, obj.Page, obj.Url);
+            } else {
+                alert("Browser does not support HTML5.");
+            }
+        }
+
+        var postData = {
+            categoryId: @(Model.Id),
+            loadmore: loadMore
+        };
+
+        if (!loadMore) {
+            $("#catalog-filter-product").html('<div id="tmpLoader" class="col-md-12"><div class="ajax-loading-productload" style=""></div></div>');
+        } else {
+            $("#catalog-filter-product").append('<div id="tmpLoader" class="col-md-12"><div class="ajax-loading-productload" style=""></div></div>');
+        }
+
+        addAntiForgeryToken(postData);
+        $.ajax({
+            cache: false,
+            type: "POST",
+            url: "/CustomProduct/CatalogFilterProduct",
+            data: postData,
+            dataType: 'json',
+            success: function (response) {
+                if (loadMore) {
+                    $("#tmpLoader").remove();
+                    $("#catalog-filter-product").append(response.html);
+                }
+                else {
+                    $("#catalog-filter-product").html(response.html);
+                    //$("#bestsellerlist-@(Model.Id)").html(response.filterhtml);
+                    $("#ProductSpecificationAttribureFilter").html(response.specFilter);
+
+                    SelectedBrand(manufacturerId);
+
+                    if (manufacturerId === 0) {
+                        $("#manufacturerBox").show();
+                    }
+                    else {
+                        $("#manufacturerBox").hide();
+                    }
+                    $('.block .cust-filter-title').on('click', function () {
+                        $(this).toggleClass("active");
+                        $(this).siblings('.listbox').slideToggle('slow');
+                    });
+                }
+                if (response.hideLoadMore) {
+                    $("#load-more-btn").hide();
+                } else {
+                    $("#load-more-btn").show();
+                }
+            },
+            failure: function (response) {
+                alert(response);
+                $("#catalog-filter-product").html('');
+            }
+        });
+    }
+
+    function LoadMoreProduct() {
+        var pageIndex = Number(GetQueryStringParameter('pi'));
+        if (pageIndex === 0) {
+            pageIndex = 1
+        }
+        pageIndex = pageIndex + 1;
+        var url = updateQueryStringParameter('pi', pageIndex)
+        CatalogFilterProduct(url, true)
+    }
+
+    function CatalogManufactureFilter(manufacturerId = 0) {
+        var url = updateQueryStringParameter('mId', manufacturerId)
+        CatalogFilterProduct(url);
+    }
+
+    function SelectedBrand(manufacturerId) {
+        if ($(".brand-selector")) {
+            var spa = $("#selected-" + manufacturerId).attr("data-attr");
+            $("#dropdownBrand").text(spa);
+        }
+    }
+
+    function updateQueryStringParameter(key, value, uri = window.location.href) {
+        var re = new RegExp("([?&])" + key + "=.*?(&|$)", "i");
+        var separator = uri.indexOf('?') !== -1 ? "&" : "?";
+        if (uri.match(re)) {
+            return uri.replace(re, '$1' + key + "=" + value + '$2');
+        }
+        else {
+            return uri + separator + key + "=" + value;
+        }
+    }
+
+    function GetQueryStringParameter(name, uri = window.location.href) {
+        name = name.replace(/[\[\]]/g, '\\$&');
+        var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+            results = regex.exec(uri);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, ' '));
+    }
+
+</script>
+
+<div class="page category-page">
+
+    <div class="brand-list">
+        @await Component.InvokeAsync("CustomManufacturerNavigation", new { categoryid = Model.Id })
+        <div class="clearfix"></div>
+    </div>
+
+    <div class="page-body">
+        <input type="hidden" value="0" id="hidProductTag" />
+        <input type="hidden" value="" id="hidPriceRange" />
+        @*description*@
+        @if (!string.IsNullOrWhiteSpace(Model.Description))
+        {
+            <div class="category-description">
+                @Html.Raw(Model.Description)
+            </div>
+        }
+        @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.CategoryDetailsBeforeSubcategories, additionalData = Model })
+        
+        @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.CategoryDetailsBeforeFeaturedProducts, additionalData = Model })
+        
+        @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.CategoryDetailsAfterFeaturedProducts, additionalData = Model })
+        
+        @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.CategoryDetailsBeforeFilters, additionalData = Model })
+        
+        @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.CategoryDetailsBeforeProductList, additionalData = Model })
+
+        <div class="@(Model.PagingFilteringContext.ViewMode == "list" ? "product-list" : "product-grid")">
+            <div class="item-grid resp-row">
+                <div id="catalog-filter-product" class="row">
+                    @*Load Product by jquery*@
+                </div>
+            </div>
+        </div>
+        <div class="load-more-btn text-center" id="load-more-btn">
+            <input type="hidden" id="pageindex" value="1" />
+            <div class="btn btn-outline-dark" onclick="LoadMoreProduct()">@T("HomePage.Catalog.LoadMore")</div>
+        </div>
+        @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.CategoryDetailsBottom, additionalData = Model })
+    </div>
+</div>
+<script>
+    $('.close-add-prd').on("click", function (e) {
+        e.preventDefault();
+        $(".compare-prd-popup").removeClass("active-prd-popup");
+        $(".comp-layer").removeClass("active-comp-layer-popup");
+        $("body").removeClass("enable-popup-prd");
+    });
+</script>

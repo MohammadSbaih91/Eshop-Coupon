@@ -1,0 +1,113 @@
+﻿@model Nop.Plugin.Shipping.Aramex.Models.AramexConfigureModel
+
+@{
+    Layout = "_ConfigurePlugin";
+}
+
+<form asp-controller="AramexConfigure" asp-action="Configure" method="post">
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <nop-override-store-checkbox asp-for="UseSandbox_OverrideForStore" asp-input="UseSandbox" asp-store-scope="@Model.ActiveStoreScopeConfiguration" />
+                        <nop-label asp-for="UseSandbox" />
+                    </div>
+                    <div class="col-md-9">
+                        <nop-editor asp-for="UseSandbox" />
+                        <span asp-validation-for="UseSandbox"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <nop-override-store-checkbox asp-for="UserName_OverrideForStore" asp-input="UserName" asp-store-scope="@Model.ActiveStoreScopeConfiguration" />
+                        <nop-label asp-for="UserName" />
+                    </div>
+                    <div class="col-md-9">
+                        <nop-editor asp-for="UserName" />
+                        <span asp-validation-for="UserName"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <nop-override-store-checkbox asp-for="Password_OverrideForStore" asp-input="Password" asp-store-scope="@Model.ActiveStoreScopeConfiguration" />
+                        <nop-label asp-for="Password" />
+                    </div>
+                    <div class="col-md-9">
+                        <nop-editor asp-for="Password" />
+                        <span asp-validation-for="Password"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <nop-override-store-checkbox asp-for="Version_OverrideForStore" asp-input="Version" asp-store-scope="@Model.ActiveStoreScopeConfiguration" />
+                        <nop-label asp-for="Version" />
+                    </div>
+                    <div class="col-md-9">
+                        <nop-editor asp-for="Version" />
+                        <span asp-validation-for="Version"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <nop-override-store-checkbox asp-for="AccountNumber_OverrideForStore" asp-input="AccountNumber" asp-store-scope="@Model.ActiveStoreScopeConfiguration" />
+                        <nop-label asp-for="AccountNumber" />
+                    </div>
+                    <div class="col-md-9">
+                        <nop-editor asp-for="AccountNumber" />
+                        <span asp-validation-for="AccountNumber"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <nop-override-store-checkbox asp-for="AccountPin_OverrideForStore" asp-input="AccountPin" asp-store-scope="@Model.ActiveStoreScopeConfiguration" />
+                        <nop-label asp-for="AccountPin" />
+                    </div>
+                    <div class="col-md-9">
+                        <nop-editor asp-for="AccountPin" />
+                        <span asp-validation-for="AccountPin"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <nop-override-store-checkbox asp-for="AccountEntity_OverrideForStore" asp-input="AccountEntity" asp-store-scope="@Model.ActiveStoreScopeConfiguration" />
+                        <nop-label asp-for="AccountEntity" />
+                    </div>
+                    <div class="col-md-9">
+                        <nop-editor asp-for="AccountEntity" />
+                        <span asp-validation-for="AccountEntity"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <nop-override-store-checkbox asp-for="AccountCountryCode_OverrideForStore" asp-input="AccountCountryCode" asp-store-scope="@Model.ActiveStoreScopeConfiguration" />
+                        <nop-label asp-for="AccountCountryCode" />
+                    </div>
+                    <div class="col-md-9">
+                        <nop-editor asp-for="AccountCountryCode" />
+                        <span asp-validation-for="AccountCountryCode"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <nop-override-store-checkbox asp-for="Source_OverrideForStore" asp-input="Source" asp-store-scope="@Model.ActiveStoreScopeConfiguration" />
+                        <nop-label asp-for="Source" />
+                    </div>
+                    <div class="col-md-9">
+                        <nop-editor asp-for="Source" />
+                        <span asp-validation-for="Source"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        &nbsp;
+                    </div>
+                    <div class="col-md-9">
+                        <input type="submit" name="save" class="btn bg-blue" value="@T("Admin.Common.Save")" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

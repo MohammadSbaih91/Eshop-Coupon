@@ -1,0 +1,16 @@
+@model DiscountModel
+
+<div class="panel-group">
+    <div class="panel panel-default">
+        @if (Model.RequiresCouponCode)
+        {
+            @await Component.InvokeAsync("DiscountCouponCode", new { discountId = Model.Id })
+        }
+        else
+        {
+            <div class="panel-body" id="pnlAddCouponCodeMessage">
+                @T("Admin.Promotions.Discounts.AddCouponCode.SelectRequireCouponCode")
+            </div>
+        }
+    </div>
+</div>

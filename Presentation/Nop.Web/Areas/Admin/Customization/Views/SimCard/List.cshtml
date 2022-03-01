@@ -1,0 +1,253 @@
+@model Nop.Web.Areas.Admin.Models.Card.SimCardSearchModel
+
+@{
+    //page title
+    ViewBag.Title = T("Admin.SimCard.Title").Text;
+    //active menu item (system name)
+    Html.SetActiveMenuItemSystemName("Admin.SimCard");
+}
+
+<nop-antiforgery-token />
+<div class="content-header clearfix">
+    <h1 class="pull-left">
+        @T("Admin.SimCard.Title")
+    </h1>
+    <div class="pull-right">
+        <button type="button" name="importexcel" class="btn bg-olive" data-toggle="modal" data-target="#importexcel-window">
+            <i class="fa fa-upload"></i>
+            @T("Admin.Common.Import")
+        </button>
+    </div>
+</div>
+
+<div class="content">
+    <div class="form-horizontal">
+        <div class="panel-group">
+            <div class="panel panel-default panel-search">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <div class="col-md-3">
+                                    <nop-label asp-for="CardNumber" />
+                                </div>
+                                <div class="col-md-9">
+                                    <nop-editor asp-for="CardNumber" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-3">
+                                    <nop-label asp-for="Group" />
+                                </div>
+                                <div class="col-md-9">
+                                    <nop-editor asp-for="Group" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-9 col-md-offset-4">
+                                    <button type="button" id="search-simcard" class="btn btn-primary btn-search">
+                                        <i class="fa fa-search"></i>
+                                        @T("Admin.Common.Search")
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div id="simcard-grid"></div>
+                    <script>
+                          $(document).ready(function() {
+                              $("#simcard-grid").kendoGrid({
+                                  dataSource: {
+                                      type: "json",
+                                      transport: {
+                                          read: {
+                                              url: "@Html.Raw(Url.Action("List", "SimCard"))",
+                                              type: "POST",
+                                              dataType: "json",
+                                              data: function() {
+                                                  var data = {
+                                                      CardNumber: $('#@Html.IdFor(model => model.CardNumber)').val(),
+                                                      Group: $('#@Html.IdFor(model => model.Group)').val()
+                                                  };
+                                                  addAntiForgeryToken(data);
+                                                  return data;
+                                              }
+                                          },
+                                          create: {
+                                              url: "@Html.Raw(Url.Action("SimCardAdd", "SimCard"))",
+                                              type: "POST",
+                                              dataType: "json",
+                                              data: addAntiForgeryToken
+                                          },
+                                          update: {
+                                              url: "@Html.Raw(Url.Action("SimCardUpdate", "SimCard"))",
+                                              type: "POST",
+                                              dataType: "json",
+                                              data: addAntiForgeryToken
+                                          },
+                                          destroy: {
+                                              url: "@Html.Raw(Url.Action("SimCardDelete", "SimCard"))",
+                                              type: "POST",
+                                              dataType: "json",
+                                              data: addAntiForgeryToken
+                                          }
+                                      },
+                                      schema: {
+                                          data: "Data",
+                                          total: "Total",
+                                          errors: "Errors",
+                                          model: {
+                                              id: "Id",
+                                              fields: {
+                                                  CardNumber: { editable: true, type: "string" },
+                                                  Group: { editable: true, type: "string" },
+                                                  DisplayOrder: { editable: true, type: "number" },
+                                                  Id: { editable: false, type: "number" }
+                                              }
+                                          }
+                                      },
+                                      requestEnd: function(e) {
+                                          if (e.type == "create" || e.type == "update") {
+                                              this.read();
+                                          }
+                                      },
+                                      error: function(e) {
+                                          display_kendoui_grid_error(e);
+                                          // Cancel the changes
+                                          this.cancelChanges();
+                                      },
+                                      pageSize: @(Model.PageSize),
+                                      serverPaging: true,
+                                      serverFiltering: true,
+                                      serverSorting: true
+                                  },
+                                  pageable: {
+                                      refresh: true,
+                                      pageSizes: [@(Model.AvailablePageSizes)],
+                        @await Html.PartialAsync("_GridPagerMessages")
+                                  },
+                                  toolbar: [{ name: "create", text: "@T("Admin.Common.AddNewRecord")" }],
+                                  editable: {
+                                      confirmation: "@T("Admin.Common.DeleteConfirmation")",
+                                      mode: "inline"
+                                  },
+                                  scrollable: false,
+                                  columns: [
+                                      {
+                                          field: "CardNumber",
+                                          title: "@T("Admin.SimCard.Fields.CardNumber")",
+                                          width: 300
+                                      },
+                                      {
+                                          field: "Group",
+                                          title: "@T("Admin.SimCard.Fields.Group")",
+                                          width: 300
+                                      }, {
+                                          field: "DisplayOrder",
+                                          title: "@T("Admin.SimCard.Fields.DisplayOrder")",
+                                          width: 300
+
+                                      }, {
+
+                                          command: [
+                                              {
+                                                  name: "edit",
+                                                  text: {
+                                                      edit: "@T("Admin.Common.Edit")",
+                                                      update: "@T("Admin.Common.Update")",
+                                                      cancel: "@T("Admin.Common.Cancel")"
+                                                  }
+                                              }, {
+                                                  name: "destroy",
+                                                  text: "@T("Admin.Common.Delete")"
+                                              }
+                                          ],
+                                          width: 200
+                                      }
+                                  ],
+                                  dataBound: function() {
+                      	var grid = this;
+                        var trs = this.tbody.find('tr').each(function(){
+                            debugger;
+                            var item = grid.dataItem($(this));
+                            if( item.IsSale) {
+                                $(this).find('.k-grid-delete').hide();
+                                $(this).find('.k-grid-edit').hide();
+                            }
+                        }); 
+                      }
+                              });
+                          });
+                    </script>
+
+                    <script>
+                        $(document).ready(function() {
+                            $('#search-simcard').click(function() {
+                                var grid = $('#simcard-grid').data('kendoGrid');
+                                grid.dataSource.page(1);
+                                return false;
+                            });
+                        });
+
+                        $("".concat("#@Html.IdFor(model => model.CardNumber),",
+                            "#@Html.IdFor(model => model.CardNumber)")).keydown(function(event) {
+                            if (event.keyCode === 13) {
+                                $("#search-simcard").click();
+                                return false;
+                            }
+                        });
+                    </script>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@*import sim cards*@
+<div id="importexcel-window" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="importexcel-window-title">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="importexcel-window-title">@T("Admin.Common.ImportFromExcel")</h4>
+            </div>
+            <form asp-controller="SimCard" asp-action="ImportFromXlsx" method="post" enctype="multipart/form-data">
+                <div class="form-horizontal">
+                    <div class="modal-body">
+                        <ul class="common-list">
+                            <li>
+                                <em>@T("Admin.Catalog.Categories.List.ImportFromExcelTip")</em>
+                            </li>
+                            <li>
+                                <em>@T("Admin.Common.ImportFromExcel.ManyRecordsWarning")</em>
+                            </li>
+                        </ul>
+                        <div class="form-group">
+                            <div class="col-md-2">
+                                <div class="label-wrapper">
+                                    <label class="control-label">
+                                        @T("Admin.Common.ExcelFile")
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-10">
+                                <input type="file" id="importexcelfile" name="importexcelfile" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">
+                            @T("Admin.Common.ImportFromExcel")
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

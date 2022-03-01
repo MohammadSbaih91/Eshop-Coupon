@@ -1,0 +1,75 @@
+﻿@using Nop.Core
+@using Nop.Services.Helpers
+@using Nop.Web.Framework.UI
+@inject IWorkContext workContext
+@inject IThemeContext themeContext
+@inject IUserAgentHelper userAgentHelper
+@{
+    var supportRtl = workContext.WorkingLanguage.Rtl;
+    var themeName = themeContext.WorkingThemeName;
+    var isIe8 = userAgentHelper.IsIe8();
+
+    //add browser specific CSS files
+    if (isIe8)
+    {
+        Html.AppendCssFileParts($"~/Themes/{themeName}/Content/css/ie8.css");
+    }
+
+
+
+    //add main CSS file
+
+    if (supportRtl)
+    {
+        Html.AppendCssFileParts($"~/Themes/{themeName}/Content/css/tablet.rtl.css");
+        Html.AppendCssFileParts($"~/Themes/{themeName}/Content/css/767.rtl.css");
+        Html.AppendCssFileParts($"~/Themes/{themeName}/Content/css/mobile.rtl.css");
+        Html.AppendCssFileParts($"~/Themes/{themeName}/Content/css/1024.rtl.css");
+        Html.AppendCssFileParts($"~/Themes/{themeName}/Content/css/1280.rtl.css");
+        Html.AppendCssFileParts($"~/Themes/{themeName}/Content/css/1366.rtl.css");
+        Html.AppendCssFileParts($"~/Themes/{themeName}/Content/css/styles.rtl.css");
+
+        Html.AddScriptParts(ResourceLocation.Footer, $"~/Themes/{themeName}/Content/js/owl.carousel.min.rtl.js");
+
+        ////Eid
+        //Html.AppendCssFileParts($"~/Themes/{themeName}/Content/css/style_Eid.rtl.css");
+
+        //BlackFriday
+        @*<link rel="stylesheet" href="@($"/Themes/{themeName}/Content/css/style_BlackFriday.rtl.css")">*@
+    }
+    else
+    {
+        Html.AppendCssFileParts($"~/Themes/{themeName}/Content/css/tablet.css");
+        Html.AppendCssFileParts($"~/Themes/{themeName}/Content/css/767.css");
+        Html.AppendCssFileParts($"~/Themes/{themeName}/Content/css/mobile.css");
+        Html.AppendCssFileParts($"~/Themes/{themeName}/Content/css/1024.css");
+        Html.AppendCssFileParts($"~/Themes/{themeName}/Content/css/1280.css");
+        Html.AppendCssFileParts($"~/Themes/{themeName}/Content/css/1366.css");
+        Html.AppendCssFileParts($"~/Themes/{themeName}/Content/css/styles.css");
+
+        Html.AddScriptParts(ResourceLocation.Footer, $"~/Themes/{themeName}/Content/js/owl.carousel.min.js");
+        ////Eid
+        //Html.AppendCssFileParts($"~/Themes/{themeName}/Content/css/style_Eid.css");
+
+        //BlackFriday
+        @*<link rel="stylesheet" href="@($"/Themes/{themeName}/Content/css/style_BlackFriday.css")">*@
+    }
+
+    Html.AppendCssFileParts($"~/Themes/{themeName}/Content/css/icons.css");
+
+    Html.AppendCssFileParts($"~/Themes/{themeName}/Content/css/bootstrap.css");
+
+    Html.AppendCssFileParts($"~/Themes/{themeName}/Content/css/owl.carousel.css");
+
+    //add jQuery UI css file
+    Html.AppendCssFileParts("~/lib/jquery-ui/jquery-ui-1.10.3/jquery-ui-themes/smoothness/jquery-ui-1.10.3.custom.min.css");
+    Html.AddScriptParts(ResourceLocation.Footer, $"~/Themes/{themeName}/Content/js/bootstrap.bundle.js");
+
+
+    //add browser specific JS files
+    if (isIe8)
+    {
+        Html.AddScriptParts(ResourceLocation.Footer, "~/lib/selectivizr.min.js");
+        Html.AddScriptParts(ResourceLocation.Footer, "~/lib/respond.min.js");
+    }
+}

@@ -1,0 +1,423 @@
+﻿@using Nop.Core
+@inject IStoreContext storeContext
+<li class="mobile-root-menu">
+    <a href="https://www.orange.jo/en/offers/">Offers and services <i class="fas fa-angle-right"></i></a>
+
+    <div class="sublist-toggle"></div>
+    <ul class="sublist first-level">
+        <li class="back-menu">
+
+            <i class="fas fa-angle-left"></i> Offers and services
+        </li>
+        <li>
+            <a href="javascript:void(0);">
+                Mobile <i class="fas fa-sort-down"></i>
+            </a>
+            <div class="sublist-toggle"></div>
+            <ul class="sublist">
+                <li>
+                    <a href="https://www.orange.jo/en/offers/Mobilepostpaidoffers/">
+                        Mobile postpaid Offers<i class="fas fa-angle-right"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.orange.jo/en/offers/Mobileprepaidoffers/">
+                        Mobile prepaid lines<i class="fas fa-angle-right"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.orange.jo/en/offers/Mobileprepaidoffers/">
+                        Mobile prepaid lines<i class="fas fa-angle-right"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="@(Nop.Services.Common.UrlStrucutre.UrlDecode("/yo-lines"))">
+                        YO Lines<i class="fas fa-angle-right"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="@(Nop.Services.Common.UrlStrucutre.UrlDecode("/en/mobile/governorate-lines"))">
+                        Mobile Governorates offers<i class="fas fa-angle-right"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.orange.jo/en/services/MobileServices/Pages/default.aspx">
+                        Mobile Services<i class="fas fa-angle-right"></i>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="https://www.orange.jo/en/pages/feed-w-estafeed-for-prepaid-lines.aspx">
+                        Feed W Estafeed service<i class="fas fa-angle-right"></i>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a href="javascript:void(0);">
+                Internet <i class="fas fa-sort-down"></i>
+            </a>
+
+            <div class="sublist-toggle"></div>
+            <ul class="sublist">
+
+                @*<li>
+                    <a href="https://eshop.orange.jo/en/internet/upgrade-speed.html">
+                        Upgrade your speed<i class="fas fa-angle-right"></i>
+                    </a>
+                </li>*@
+
+                <li>
+                    <a href="https://www.orange.jo/en/offers/ADSLOffers/">
+                        ADSL offers<i class="fas fa-angle-right"></i>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="https://www.orange.jo/en/offers/fiber-offers/pages/default.aspx">
+                        Fiber offers<i class="fas fa-angle-right"></i>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="https://www.orange.jo/en/offers/baitalailehoffers/">
+                        Bait Al Aileh offers<i class="fas fa-angle-right"></i>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="https://eshop.orange.jo/en/4g-flybox-offer">
+                        4G Flybox offers<i class="fas fa-angle-right"></i>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="@(Nop.Services.Common.UrlStrucutre.UrlDecode("/en/internet/prepaid-orange-net-offers"))">
+                        Prepaid Orange net<i class="fas fa-angle-right"></i>
+                    </a>
+                </li>
+
+                @*<li>
+                    <a href="https://eshop.orange.jo/en/internet/adsl-offers/east-amman-internet.html">
+                        Internet for East Amman<i class="fas fa-angle-right"></i>
+                    </a>
+                </li>*@
+
+                <li>
+                    <a href="https://www.orange.jo/en/services/pages/internet-services.aspx">
+                        Internet services<i class="fas fa-angle-right"></i>
+                    </a>
+                </li>
+
+                @*<li>
+                    <a href="https://www.orange.jo/en/pages/orange-fiber-family.aspx">
+                        Orange fiber family<i class="fas fa-angle-right"></i>
+                    </a>
+                </li>*@
+
+                @*<li>
+                    <a href="https://www.orange.jo/en/offers/pages/iew-pay-monthly-army.aspx">
+                        IEW Pay Monthly Humat al Watan<i class="fas fa-angle-right"></i>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="https://www.orange.jo/en/offers/pages/4g-orange-net-prepaid-humat-al-watan.aspx">
+                        4G Orange Net Prepaid Humat al Watan<i class="fas fa-angle-right"></i>
+                    </a>
+                </li>*@
+            </ul>
+
+        </li>
+
+        <li>
+            <a href="javascript:void(0);">
+                International and Roaming <i class="fas fa-sort-down"></i>
+            </a>
+
+            <div class="sublist-toggle"></div>
+            <ul class="sublist">
+                <li>
+                    <a href="https://internationalandroaming.orange.jo/">
+                        International and Roaming services<i class="fas fa-angle-right"></i>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        @*<li>
+            <a href="javascript:void(0);">
+                Family Offers <i class="fas fa-sort-down"></i>
+            </a>
+
+            <div class="sublist-toggle"></div>
+            <ul class="sublist ">
+                <li>
+                    <a href="https://eshop.orange.jo/en/internet/bait-al-aileh-adsl.html">
+                        Bait Al Aileh ADSL<i class="fas fa-angle-right"></i>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="https://eshop.orange.jo/en/internet/bait-al-aileh/bait-al-aileh-fiber-offers.html">
+                        Bait Al Aileh Fiber<i class="fas fa-angle-right"></i>
+                    </a>
+                </li>
+            </ul>
+        </li>*@
+
+        <li>
+            <div class="es-submenu-footer-mobile">
+                <ul>
+
+                    <li>
+                        <a href="https://www.orange.jo/en/pages/orange-premium.aspx">
+                            @*<img src="/Themes/eshop/content/images/premiumicon.png">*@
+                            <span>Orange Premium</span><i class="fas fa-angle-right"></i>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="https://www.orange.jo/en/pages/elite-plus.aspx">
+                            @*<img src="/Themes/eshop/content/images/eliteicon.png">*@
+                            <span> Elite + </span><i class="fas fa-angle-right"></i>
+                        </a>
+                    </li>
+                </ul>
+                <ul class="imgs">
+                    <li>
+                        <a href="https://www.orange.jo/en/beinconnect/pages/getvoucher.aspx">
+                            <img src="/Themes/eshop/content/images/en/bein_en.png"><span></span>
+                        </a>
+                    </li>
+
+                    @*<li>
+                        <a href="https://www.orange.jo/en/starzplay/pages/getvoucher.aspx">
+                            <img src="/Themes/eshop/content/images/en/starz_en.png"><span></span>
+                        </a>
+                    </li>*@
+                </ul>
+
+            </div>
+        </li>
+    </ul>
+
+</li>
+
+<li class="mobile-root-menu">
+    <a href="https://www.orange.jo/en/myaccount/pages/default.aspx">
+        My account
+        <i class="fas fa-angle-right"></i>
+    </a>
+    <div class="sublist-toggle"></div>
+    <ul class="sublist first-level">
+        <li class="back-menu">
+
+            <i class="fas fa-angle-left"></i> My account
+        </li>
+        <li>
+
+            <a href="javascript:void(0);">
+                Login and register<i class="fas fa-sort-down"></i>
+            </a>
+
+            <div class="sublist-toggle"></div>
+            <ul class="sublist ">
+                <li>
+                    <a href="https://www.orange.jo/en/myaccount/pages/default.aspx">
+
+                        Login <i class="fas fa-angle-right"></i>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="https://www.orange.jo/en/myaccount/pages/registration.aspx">
+                        Register <i class="fas fa-angle-right"></i>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="https://www.eservices.orange.jo/OTRC/IEW/faces/pages/login.xhtml">
+                        Update IEW prepaid info <i class="fas fa-angle-right"></i>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li>
+
+            <a href="javascript:void(0);">
+                Bills payment and recharge<i class="fas fa-sort-down"></i>
+            </a>
+
+            <div class="sublist-toggle"></div>
+            <ul class="sublist">
+                <li>
+                    <a href="https://www.orange.jo/en/myaccount/pages/pay-bills-and-recharge-online.aspx">
+                        Pay bills and recharge online <i class="fas fa-angle-right"></i>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="https://www.orange.jo/en/pages/e-sh7anli.aspx">
+                        e-sh7anli <i class="fas fa-angle-right"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.orange.jo/en/myaccount/pages/payment-methods.aspx">
+                        Payment methods<i class="fas fa-angle-right"></i>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <li>
+
+            <a href="javascript:void(0);">
+                Order tracking<i class="fas fa-sort-down"></i>
+
+            </a>
+
+            <div class="sublist-toggle"></div>
+            <ul class="sublist">
+                <li>
+                    <a asp-route="AramexTrackingInfo">
+                        Check eShop order status <i class="fas fa-angle-right"></i>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="https://www.orange.jo/en/pages/ordertracking.aspx">
+                        Fiber line order tracking <i class="fas fa-angle-right"></i>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <li>
+
+            <a href="javascript:void(0);">
+                Rewards<i class="fas fa-sort-down"></i>
+            </a>
+
+            <div class="sublist-toggle"></div>
+            <ul class="sublist">
+                <li>
+                    <a href="https://www.rewards.orange.jo/deals.aspx">
+                        Orange Deals <i class="fas fa-angle-right"></i>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="https://www.rewards.orange.jo/en/Account/Login">
+                        Tikram Points <i class="fas fa-angle-right"></i>
+                    </a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</li>
+
+<li class="mobile-root-menu">
+    <a href="javascript:void(0);">
+        Help
+        <i class="fas fa-angle-right"></i>
+    </a>
+    <div class="sublist-toggle"></div>
+    <ul class="sublist first-level">
+        <li class="back-menu">
+
+            <i class="fas fa-angle-left"></i> Help
+        </li>
+        <li>
+
+            <a href="javascript:void(0);">
+                Help topics<i class="fas fa-sort-down"></i>
+            </a>
+
+            <div class="sublist-toggle"></div>
+            <ul class="sublist">
+
+                <li>
+                    <a href="https://www.orange.jo/en/chat/pages/infochat.aspx">
+                        Online chat<i class="fas fa-angle-right"></i>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="https://www.orange.jo/en/pages/contact-us.aspx">
+                        Contact us<i class="fas fa-angle-right"></i>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="https://store.orange.jo/">
+                        Store locator<i class="fas fa-angle-right"></i>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="https://www.orange.jo/en/pages/djingo-chatbot.aspx">
+                        Djingo-chatbot<i class="fas fa-angle-right"></i>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="https://www.orange.jo/en/help/internet/pages/guide-to-best-fiber-experience.aspx">
+                        Your guide to the best fiber experience<i class="fas fa-angle-right"></i>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="https://www.orange.jo/en/pages/4g-plus.aspx">
+                        4G+<i class="fas fa-angle-right"></i>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <li>
+
+            <a href="javascript:void(0);">
+                FAQ's<i class="fas fa-sort-down"></i>
+            </a>
+
+            <div class="sublist-toggle"></div>
+            <ul class="sublist ">
+                <li>
+                    <a href="https://www.orange.jo/en/help/pages/internet-faq.aspx">
+                        Internet<i class="fas fa-angle-right"></i>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="https://www.orange.jo/en/help/pages/mobile-faq.aspx">
+                        Mobile<i class="fas fa-angle-right"></i>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="https://www.orange.jo/en/help/pages/fixed-faq.aspx">
+                        Fixed line<i class="fas fa-angle-right"></i>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <li>
+            <a href="https://www.orange.jo/en/pages/coverage.aspx">
+                Coverage map<i class="fas fa-angle-right"></i>
+            </a>
+        </li>
+        <li>
+            @*"https://eshop.orange.jo/en/promotions/"*@
+            <a href="@(Nop.Services.Common.UrlStrucutre.UrlDecode("/en/eshop-promotions"))">
+                Promotions<i class="fas fa-angle-right"></i>
+            </a>
+        </li>
+        <li>
+            <a href="https://www.orange.jo/en/myaccount/pages/pay-bills-and-recharge-online.aspx">
+                Pay bills and recharge<i class="fas fa-angle-right"></i>
+            </a>
+        </li>
+    </ul>
+</li>

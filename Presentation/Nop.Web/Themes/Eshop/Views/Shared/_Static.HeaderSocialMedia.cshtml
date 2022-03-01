@@ -1,0 +1,48 @@
+﻿<div class="follow-accordions-wrapper" style="display: none">
+    <div class="es-hr full-width clear-fix"></div>
+    <div class="follow-accordions">
+        <ul class="social-network">
+            <li>
+                <a href="https://www.facebook.com/OrangeJordan" target="_blank" class="" title="Facebook" style="padding: 8px 11.9px;">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+            </li>
+            <li>
+                <a href="https://twitter.com/orangejo" target="_blank" class="" title="Twitter" style="padding: 7.6px 9px;">
+                    <i class="fab fa-twitter"></i>
+                </a>
+            </li>
+            <li>
+                <a href="https://instagram.com/orangejo" target="_blank" class="" title="Instagram" style="padding: 8px 10.3px;">
+                    <i class="fab fa-instagram"></i>
+                </a>
+            </li>
+            <li>
+                <a href="https://www.youtube.com/user/OrangeMobjordan" target="_blank" class="" title="Youtube">
+                    <i class="fab fa-youtube"></i>
+                </a>
+            </li>
+            <li>
+                <a href="https://www.pinterest.com/orangejordan/" target="_blank" class="" title="Pinterest" style="padding: 8px 9.6px;">
+                    <i class="fab fa-pinterest"></i>
+                </a>
+            </li>
+            <li>
+                <a href="https://linkedin.com/company/orange-jordan" target="_blank" class="" title="Linkedin" style="padding: 8px 10.2px;">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+            </li>
+        </ul>
+        <div class="close">
+            <i class="fas fa-times"></i>
+        </div>
+    </div>
+</div>
+
+<script asp-location="Footer">
+    $(document).ready(function () {
+        $('#follow-us, .follow-accordions .close').on('click', function () {
+            $('.follow-accordions-wrapper').toggle();
+        });
+    });
+</script>

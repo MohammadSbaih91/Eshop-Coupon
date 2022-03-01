@@ -1,0 +1,32 @@
+@model PackagesModel
+@{
+    Layout = "_AdminLayout";
+
+    //page title
+    ViewBag.Title = T("Admin.Packages.AddNew").Text;
+    //active menu item (system name)
+    Html.SetActiveMenuItemSystemName("Packages");
+}
+
+<form asp-controller="ProductPackages" asp-action="Create" method="post" id="packages-form">
+    <div class="content-header clearfix">
+        <h1 class="pull-left">
+            @T("Admin.Packages.AddNew")
+            <small>
+                <i class="fa fa-arrow-circle-left"></i>
+                <a asp-action="List">@T("Admin.Employee.BackTolist")</a>
+            </small>
+        </h1>
+        <div class="pull-right">
+            <button type="submit" name="save" class="btn bg-blue">
+                <i class="fa fa-floppy-o"></i>
+                @T("Admin.Common.Save")
+            </button>
+            <button type="submit" name="save-continue" class="btn bg-blue">
+                <i class="fa fa-floppy-o"></i>
+                @T("Admin.Common.SaveContinue")
+            </button>
+        </div>
+    </div>
+    @await Html.PartialAsync("_CreateOrUpdate", Model)
+</form>

@@ -1,0 +1,108 @@
+@model Nop.Plugin.Misc.eShopSMS.Areas.Admin.Models.SmsTemplateSearchModel
+
+@{
+    Layout = "_AdminLayout";
+
+    //page title
+    ViewBag.Title = T("Plugins.Misc.eShopSMS.SmsTemplates").Text;
+
+    //active menu item (system name)
+    Html.SetActiveMenuItemSystemName("eshop.SMSTemplate");
+}
+
+<nop-antiforgery-token />
+<div class="content-header clearfix">
+    <h1 class="pull-left">
+        @T("Plugins.Misc.eShopSMS.SmsTemplates")
+    </h1>
+</div>
+
+<div class="content">
+    <div class="form-horizontal">
+        <div class="panel-group">
+           
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div id="templates-grid"></div>
+
+                    <script>
+                        $(document).ready(function () {
+                            $("#templates-grid").kendoGrid({
+                                dataSource: {
+                                    type: "json",
+                                    transport: {
+                                        read: {
+                                            url: "@Html.Raw(Url.Action("List", "SMSTemplate"))",
+                                            type: "POST",
+                                            dataType: "json",
+                                            data: function() {
+                                                var data = {};
+                                                addAntiForgeryToken(data);
+                                                return data;
+                                            }
+                                        }
+                                    },
+                                    schema: {
+                                        data: "Data",
+                                        total: "Total",
+                                        errors: "Errors"
+                                    },
+                                    error: function (e) {
+                                        display_kendoui_grid_error(e);
+                                        // Cancel the changes
+                                        this.cancelChanges();
+                                    },
+                                    pageSize: @(Model.PageSize),
+                                    serverPaging: true,
+                                    serverFiltering: true,
+                                    serverSorting: true
+                                },
+                                pageable: {
+                                    refresh: true,
+                                    pageSizes: [@(Model.AvailablePageSizes)],
+                                    @await Html.PartialAsync("_GridPagerMessages")
+                                },
+                                editable: {
+                                    confirmation: "@T("Admin.Common.DeleteConfirmation")",
+                                    mode: "inline"
+                                },
+                                scrollable: false,
+                                columns: [
+                                    {
+                                        field: "TemplateName",
+                                        title: "@T("Plugins.Misc.eShopSMS.Fields.TemplateName")"
+                                    }, {
+                                        field: "IsActive",
+                                        title: "@T("Plugins.Misc.eShopSMS.Fields.IsActive")",
+                                        width: 100,
+                                        headerAttributes: { style: "text-align:center" },
+                                        attributes: { style: "text-align:center" },
+                                        template: '# if(IsActive) {# <i class="fa fa-check true-icon"></i> #} else {# <i class="fa fa-close false-icon"></i> #} #'
+                                    }, {
+                                        field: "Id",
+                                        title: "@T("Admin.Common.Edit")",
+                                        width: 100,
+                                        headerAttributes: { style: "text-align:center" },
+                                        attributes: { style: "text-align:center" },
+                                        template: '<a class="btn btn-default" href="Edit/#=Id#"><i class="fa fa-pencil"></i>@T("Admin.Common.Edit")</a>'
+                                    }
+                                ]
+                            });
+                        });
+                    </script>
+
+                    <script>
+                        $(document).ready(function () {
+                            //search button
+                            $('#search-templates').click(function () {
+                                //search
+                                var grid = $('#templates-grid').data('kendoGrid');
+                                grid.dataSource.read();
+                            });
+                        });
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

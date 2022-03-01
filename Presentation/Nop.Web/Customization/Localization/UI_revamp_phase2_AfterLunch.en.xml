@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Language Name="English">
+	<LocaleResource Name="MobileExNumber">
+		<Value>Ex: Enter the number with the format 962000000</Value>
+	</LocaleResource>
+  <LocaleResource Name="Reviews.AlreadyAdded">
+    <Value>Product review is already added.</Value>
+  </LocaleResource>
+	<LocaleResource Name="Admin.Promotions.Campaigns.SendMassEmail.Confirm">
+		<Value>Are you sure you want to send mass email ?</Value>
+	</LocaleResource>
+	<LocaleResource Name="HeaderLinkes.Logout">
+		<Value>Logout</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.ProductDetail.SubsidyProducts">
+		<Value>Subsidy Products</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.SimCard.Field.Group">
+		<Value>Group</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.SimCard.Field.Group.Hint">
+		<Value>Group</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.SimCard.Imported">
+		<Value>Simcards have been imported successfully.</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.SimCard.SelectSimCard">
+		<Value>Select Sim card</Value>
+	</LocaleResource>
+
+	<!--Discount coupon code-->
+	<LocaleResource Name="Admin.DiscountCouponCodes.Fields.NoOfCodes">
+		<Value>No of codes</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.DiscountCouponCodes.Fields.NoOfCodes.Hint">
+		<Value>No of codes</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.DiscountCouponCodes.Fields.NoOfCodes.Required">
+		<Value>No of codes is required</Value>
+	</LocaleResource>
+
+	<LocaleResource Name="Admin.DiscountCouponCodes.Fields.CodeLength">
+		<Value>Code length</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.DiscountCouponCodes.Fields.CodeLength.Hint">
+		<Value>Code length</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.DiscountCouponCodes.Fields.CodeLength.Required">
+		<Value>Code length is required</Value>
+	</LocaleResource>
+
+	<LocaleResource Name="Admin.DiscountCouponCodes.Fields.Prefix">
+		<Value>Prefix</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.DiscountCouponCodes.Fields.Prefix.Hint">
+		<Value>Prefix</Value>
+	</LocaleResource>
+
+	<LocaleResource Name="Admin.DiscountCouponCodes.Fields.Suffix">
+		<Value>Suffix</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.DiscountCouponCodes.Fields.Suffix.Hint">
+		<Value>Suffix</Value>
+	</LocaleResource>
+
+	<LocaleResource Name="Admin.DiscountCouponCodes.Fields.CharacterSet">
+		<Value>Character set</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.DiscountCouponCodes.Fields.CharacterSet.Hint">
+		<Value>Character set</Value>
+	</LocaleResource>
+
+	<LocaleResource Name="Admin.DiscountCouponCodes.Fields.CouponCode">
+		<Value>Coupon code</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.Promotions.Discounts.AddCouponCode.SaveBeforeEdit">
+		<Value>You need to save the discount before you can add discount coupon codes for this discount page.</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.Promotions.Discounts.AddCouponCode.SelectRequireCouponCode">
+		<Value>First select requires coupon code.</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.Promotions.Discounts.GenerateCode">
+		<Value>Generate Coupon</Value>
+	</LocaleResource>
+</Language>

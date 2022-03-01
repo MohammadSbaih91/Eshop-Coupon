@@ -1,0 +1,232 @@
+﻿@model ShoppingCartModel
+@using Nop.Core.Domain.Orders
+@inject OrderSettings orderSettings
+@{
+    Layout = "_ColumnsOne";
+
+    //title
+    Html.AddTitleParts(T("PageTitle.ShoppingCart").Text);
+    //page class
+    Html.AppendPageCssClassParts("html-shopping-cart-page");
+}
+@if (!Model.OnePageCheckoutEnabled)
+{
+    @await Component.InvokeAsync("CheckoutProgress", new { step = CheckoutProgressStep.Cart })
+}
+@*<div class="page shopping-cart-page">
+        <div class="container">
+            <div class="page-title">
+                <h1>@T("ShoppingCart")</h1>
+            </div>
+            <div class="page-body">
+                @await Component.InvokeAsync("OrderSummary", new { overriddenModel = Model })
+            </div>
+        </div>
+    </div>*@
+
+<div class="container">
+    <div class="breadcrumb">
+        <ul>
+            <li class="brd-back"><a href="/">@T("Breadcrumb.Eshop")</a></li>
+            @*<li>
+                    <span>
+                        <a href="#">
+                            <span>Personal </span>
+                        </a>
+                    </span>
+                    <span class="delimiter"></span>
+                </li>
+                <li>
+                    <a href="#">
+                        <span>Eshop</span>
+                    </a>
+                    <span class="delimiter"></span>
+                </li>
+                <li>
+                    <a href="#">
+                        <span>Devices</span>
+                    </a>
+                    <span class="delimiter"></span>
+                </li>
+                <li>
+                    <a href="#">
+                        <span>Iphone 11 Pro</span>
+                    </a>
+                    <span class="delimiter"></span>
+                </li>*@
+            <li>
+                <strong class="current-item">@T("ShoppingCart")</strong>
+            </li>
+        </ul>
+    </div>
+    <div class="cart-step">
+        <h2>@T("Checkout")</h2>
+        <div class="step-bx">
+            <ul>
+                <li class="active"><span>1</span><b>@T("Checkout.Mycart")</b><strong class="line"></strong></li>
+                <li><span>2</span><b>@T("Checkout.CustomerDetails")</b><strong class="line"></strong></li>
+                <li><span>3</span><b>@T("Checkout.ShippingAndBilling")</b><strong class="line"></strong></li>
+                <li><span>4</span><b>@T("Checkout.DeliveryAndPayment")</b></li>
+            </ul>
+        </div>
+    </div>
+    @if (Model.Items.Count > 0)
+    {  
+        <div id="cart-page-data" class="shopping-cart shopping-cart-listmodel">
+            <form asp-route="ShoppingCart" method="post" enctype="multipart/form-data" id="shopping-cart-form">
+                <div class="shopping-cart">
+                    <div class="cart-body">
+                        <div class="cart-list">
+                            <div class="cart-bx-title">
+                                <div class="title first"></div>
+                                <div class="title">@T("Products.Qty")</div>
+                                <div class="title">@T("CartDrawer.Taxes")</div>
+                                <div class="title text-price">@T("CartDrawer.Price")</div>
+                                <div class="title empty"><div class="clear-btn"><i></i><span onclick="emptyBasket()">@T("CartDrawer.EmptyBasket")</span></div></div>
+                            </div>
+                            <partial name="_ProductList" model="Model" />
+                        </div>
+                    </div>
+                </div>
+                @if (Model.IsEditable)
+                {
+                    @if (Model.TermsOfServiceOnShoppingCartPage)
+                    {
+                        <div id="terms-of-service-warning-box" title="@T("Checkout.TermsOfService")" style="display: none;">
+                            <p>@T("Checkout.TermsOfService.PleaseAccept")</p>
+                        </div>
+                        <div class="terms-of-service cart-team">
+                            <div class="custom-control custom-control-inline">
+                                <input class="custom-control-input" id="termsofservice" type="checkbox" name="termsofservice" />
+                                <label class="custom-control-label" for="termsofservice">@T("Checkout.TermsOfService.IAccept")</label>
+
+                                @if (Model.TermsOfServicePopup)
+                                {
+                                    <a class="read" id="read-terms">@T("Checkout.TermsOfService.Read")</a>
+                                    <script>
+                                        $(document).ready(function() {
+                                            $('#read-terms').on('click',
+                                                function(e) {
+                                                    e.preventDefault();
+                                                    displayPopupContentFromUrl(
+                                                        '@Url.RouteUrl("TopicPopup", new { SystemName = "conditionsofuse" })',
+                                                        '@T("Checkout.TermsOfService")');
+                                            });
+                                        });
+                                    </script>
+                                }
+                                else
+                                {
+                                    <a class="read" id="read-terms" href="@Url.RouteUrl("Topic", new { SeName = Html.GetTopicSeName("conditionsofuse") })">@T("Checkout.TermsOfService.Read")</a>
+                                }
+                            </div>
+                        </div>
+                        <div id="cart-alert" class="cust-alert" style="display:none;">@T("Checkout.TermsOfService.PleaseAccept")</div>
+                    }
+                    <div class="shop-cart-bottom">
+                        @if (string.IsNullOrEmpty(Model.MinOrderSubtotalWarning) && !Model.HideCheckoutButton)
+                        {
+                            <script>
+                                $(document).ready(function () {
+                                    $('#checkout').on('click', function () {
+                                        //terms of service
+                                        var termOfServiceOk = true;
+                                        if ($('#termsofservice').length > 0) {
+                                            //terms of service element exists
+                                            if (!$('#termsofservice').is(':checked')) {
+                                                //$("#terms-of-service-warning-box").dialog();
+                                                $("#cart-alert").show();
+                                                $("#cart-alert-drawer").show();
+                                                termOfServiceOk = false;
+                                            } else {
+                                                termOfServiceOk = true;
+                                            }
+                                        }
+                                        return termOfServiceOk;
+                                    });
+                                });
+                            </script>
+                            <div class="left_flex">
+                                <a class="btn cut-out-btn ml_0" href="/">@T("Checkout.ReturntotheShop")</a>
+                                @*For mobile view*@
+                                <div class="prices hide-desk">
+                                    @await Component.InvokeAsync("CustomOrderTotals", new { isEditable = true })
+                                </div>
+                            </div>
+                            <div class="right_flex">
+                                <div class="price-and-next">
+                                    <div class="prices hide-cart">
+                                        @await Component.InvokeAsync("CustomOrderTotals", new { isEditable = true })
+                                    </div>
+                                    <div class="next-step mt">
+                                        @T("Checkout.Nextstep"): <b>@T("Checkout.CustomerDetails")</b>
+                                    </div>
+                                </div>
+                                @if (orderSettings.CheckoutDisabled)
+                                {
+                                    <div class="checkout-disabled">
+                                        @T("Checkout.Disabled")
+                                    </div>
+                                }
+                                else
+                                {
+                                    <input type="submit" id="checkout" name="checkout" title="@T("Checkout.Next")" class="button-1 new-address-next-step-button btn btn-orange" value="@T("Checkout.Next")" />
+                                    @*<span id="shipping-please-wait" class="please-wait" style="display: none;"> @T("Common.LoadingNextStep")</span>*@
+                                }
+                            </div>
+                        }
+                    </div>
+                }
+                <div class="flex-content">
+                    @await Html.PartialAsync("_DiscountBox", Model.DiscountBox)
+                    @await Html.PartialAsync("_GiftCardBox.cshtml", Model.GiftCardBox)
+                </div>
+            </form>
+            @if (Model.IsEditable)
+            {
+                <script>
+                    function checkCartValues() {
+                        var cartValues = [];
+                        $("input[id^=removefromcart]").each(function () {
+                            var item = { id: $(this).prop("id"), value: $(this).prop("checked") };
+                            cartValues.push(item);
+                        });
+                        $("input[id^=itemquantity]").each(function () {
+                            var item = { id: $(this).prop("id"), value: $(this).val() };
+                            cartValues.push(item);
+                        });
+                        return cartValues;
+                    }
+
+                    var iniCartValues = checkCartValues();
+                    var isCartModified = false;
+                    var $cartValues = $("#shopping-cart-form .cart-body input");
+                    $cartValues.on('change', function () {
+                        isCartModified = true
+                    });
+
+                    $("#shopping-cart-form [type=submit]").on('click', function (event) {
+                        if (isCartModified && $(this).prop('name') !== "updatecart") {
+                            var currentCartValues = checkCartValues();
+                            for (var item in currentCartValues) {
+                                if (iniCartValues[item].id === currentCartValues[item].id
+                                    && iniCartValues[item].value !== currentCartValues[item].value
+                                    && !confirm("@T("ShoppingCart.ModifiedMessage")")) {
+                                    event.preventDefault();
+                                    event.stopImmediatePropagation();
+                                    return false;
+                                }
+                            }
+                        }
+                    });
+                </script>
+            }
+        </div>
+        
+       
+    }
+    else
+    {
+        @T("ShoppingCart.CartIsEmpty")
+    }
+</div>

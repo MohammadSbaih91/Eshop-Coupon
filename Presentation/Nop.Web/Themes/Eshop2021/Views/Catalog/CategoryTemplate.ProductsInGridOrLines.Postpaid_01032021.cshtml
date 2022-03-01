@@ -1,0 +1,1234 @@
+﻿@model CategoryModel
+@using Nop.Core.Domain.Common
+@using Nop.Core.Domain.Seo
+@inject Nop.Core.IWebHelper webHelper
+@inject SeoSettings seoSettings
+@inject CommonSettings commonSettings
+@using Nop.Services.Helpers
+@using Nop.Core
+@inject IUserAgentHelper userAgentHelper
+@inject IWorkContext workContext
+
+@{
+    var supportRtl = workContext.WorkingLanguage.Rtl;
+
+    Layout = "_ColumnsOne";
+
+    //title
+    Html.AddTitleParts(!string.IsNullOrEmpty(Model.MetaTitle) ? Model.MetaTitle : Model.Name);
+    //meta
+    Html.AddMetaDescriptionParts(Model.MetaDescription);
+    Html.AddMetaKeywordParts(Model.MetaKeywords);
+
+    Html.AppendPageCssClassParts("slider-mask");
+
+    Html.AppendPageCssClassParts("breadcrumb-black");
+
+    if (seoSettings.CanonicalUrlsEnabled)
+    {
+        var categoryUrl = Url.RouteUrl("Category", new { SeName = Model.SeName }, webHelper.CurrentRequestProtocol).ToLowerInvariant();
+        Html.AddCanonicalUrlParts(categoryUrl, seoSettings.QueryStringInCanonicalUrlsEnabled);
+    }
+
+    var breadcrumbDelimiter = commonSettings.BreadcrumbDelimiter;
+}
+@*category breadcrumb*@
+@section Breadcrumb
+    {
+    @if (Model.DisplayCategoryBreadcrumb)
+    {
+
+        <div class="breadcrumb">
+            <ul itemscope itemtype="http://schema.org/BreadcrumbList">
+                <li>
+                    <a href="@Url.RouteUrl("HomePage")" title="@T("Categories.Breadcrumb.Top")">@T("Categories.Breadcrumb.Top")</a>
+                    <span class="delimiter"></span>
+                </li>
+                @{ int position = 1; }
+                @foreach (var cat in Model.CategoryBreadcrumb)
+                {
+                    var isLastCategory = cat.Id == Model.Id;
+                    <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                        @if (isLastCategory)
+                        {
+                            <strong class="current-item" itemprop="name">@cat.Name</strong>
+                            <span itemprop="item" itemscope itemtype="http://schema.org/Thing">
+                                <link itemprop="url" href="@Url.RouteUrl("Category", new {SeName = cat.SeName})" />
+                            </span>
+                        }
+                        else
+                        {
+                            <a href="@Url.RouteUrl("Category", new { SeName = cat.SeName })" title="@cat.Name" itemprop="item">
+                                <span itemprop="name">@cat.Name</span>
+                            </a>
+                            <span class="delimiter"></span>
+                        }
+                        <meta itemprop="position" content="@position" />
+                    </li>
+                    position++;
+                }
+            </ul>
+        </div>
+
+        @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.CategoryDetailsAfterBreadcrumb, additionalData = Model })
+    }
+}
+
+@await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.CategoryDetailsTop, additionalData = Model })
+
+<div class="page category-page catalog-mask">
+    <div class="page-body">
+        <div class="catalog-post-pre-yo">
+            <div class="container no-pd-right">
+                @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.CategoryDetailsBeforeSubcategories, additionalData = Model })
+
+                @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.CategoryDetailsBeforeFeaturedProducts, additionalData = Model })
+
+                @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.CategoryDetailsBeforeFilters, additionalData = Model })
+
+                @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.CategoryDetailsBeforeProductList, additionalData = Model })
+                <div class="page-title page-title-catalog">
+                    <h1 class="res-float-none">@Model.Name</h1>
+                    <div class="other-link mobile-show-text">
+                        <ul>
+                            <li><a href="/eshop-promotions"><i class="cir"></i><span>@T("HomePage.Category.Promotions")</span></a></li>
+                            <li class="best-seller-icon">
+                                <div class="dropdown">
+                                    <div class="dropdown-toggle" id="catadropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="cir"></i><span>@T("HomePage.Category.BestSeller")</span>
+                                    </div>
+                                    <div class="dropdown-menu" aria-labelledby="catadropdownMenuButton" id="bestsellerlist-@(Model.Id)">
+                                        @*Add filter list by json*@
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="compare-icon"><a href="/compareproducts"><i class="cir"></i><span>@T("HomePage.Category.Compare")</span></a></li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+
+                <div class="catalog-with-tab" id="catalog-tab">
+                    <div class="catalog-left">
+                        <div class="tabs-nav tabs-block no-pd">
+                            <ul>
+                                <li class="active"><a href="#tab100">Postpaid plans</a></li>
+                                <li><a href="#tab101">Prepaid plans</a></li>
+                                <li><a href="#tab102">YO Lines</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="tabs-content">
+                        <div id="tab100">
+                            <div class="product-grid mobile-plan-product">
+                                <div class="item-grid">
+                                    @if (userAgentHelper.IsMobileDevice())
+                                    {
+
+                                    <div class="owl-carousel prd-auto-width prd-arrow-right" id="catalog-postpaid-owl">
+                                        <div class="item-box">
+                                            <div class="product-item" data-productid="401">
+                                                <div class="product-top">
+                                                    <div class="picture no-margin-picture">
+                                                        <a href="/mobile/postpaid-lines/welcome-packpostpaid-3g-2" title="Show details for Welcome Pack/Postpaid / 3G+">
+                                                            <img alt="Picture of Welcome Pack/Postpaid / 3G+" src="https://localhost:44321/app-images/thumbs/default-image_415.png" title="Show details for Welcome Pack/Postpaid / 3G+">
+                                                        </a>
+                                                    </div>
+                                                    <h2 class="product-title">
+                                                        <a href="/mobile/postpaid-lines/welcome-packpostpaid-3g-2">Welcome Pack/Postpaid / 3G+</a>
+                                                    </h2>
+                                                    <div class="triangle-up"></div>
+                                                </div>
+                                                <div class="details">
+
+                                                    <div class="description">
+                                                        You can also choose from monthly 4G Flybox offers with subscriptions starting from 13 JD/month.
+                                                        so you can experience the strongest internet with the new Orange FlyBox.
+                                                    </div>
+
+
+
+                                                    <div class="prices">
+                                                        <div class="prices-flex">
+                                                            <div class="tooltip-check" data-toggle="tooltip" data-placement="bottom" title="Tax exclusive">
+                                                            </div>
+                                                            <div class="prices-group">
+                                                                <div class="start-form">Starting from</div>
+                                                                <div class="prices-list">
+                                                                    <span class="price actual-price">282.000 JOD </span> <span class="pad-top15 startFormMonth">/ Month</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="add-info">
+
+                                                        <div class="buttons">
+                                                            <button type="button" value="Details" class="button-1 product-box-detail-button btn btn-primary btn-block text-left lg" onclick="setLocation('/mobile/postpaid-lines/welcome-packpostpaid-3g-2')">View Offers<i class="fas fa-chevron-right"></i></button>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="item-box">
+                                            <div class="product-item" data-productid="401">
+                                                <div class="product-top">
+                                                    <div class="picture no-margin-picture">
+                                                        <a href="/mobile/postpaid-lines/welcome-packpostpaid-3g-2" title="Show details for Welcome Pack/Postpaid / 3G+">
+                                                            <img alt="Picture of Welcome Pack/Postpaid / 3G+" src="https://localhost:44321/app-images/thumbs/default-image_415.png" title="Show details for Welcome Pack/Postpaid / 3G+">
+                                                        </a>
+                                                    </div>
+                                                    <h2 class="product-title">
+                                                        <a href="/mobile/postpaid-lines/welcome-packpostpaid-3g-2">Welcome Pack/Postpaid / 3G+</a>
+                                                    </h2>
+                                                    <div class="triangle-up"></div>
+                                                </div>
+                                                <div class="details">
+
+                                                    <div class="description">
+                                                        You can also choose from monthly 4G Flybox offers with subscriptions starting from 13 JD/month.
+                                                        so you can experience the strongest internet with the new Orange FlyBox.
+                                                    </div>
+
+
+
+                                                    <div class="prices">
+                                                        <div class="prices-flex">
+                                                            <div class="tooltip-check" data-toggle="tooltip" data-placement="bottom" title="Tax exclusive">
+                                                            </div>
+                                                            <div class="prices-group">
+                                                                <div class="start-form">Starting from</div>
+                                                                <div class="prices-list">
+                                                                    <span class="price actual-price">282.000 JOD </span> <span class="pad-top15 startFormMonth">/ Month</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="add-info">
+
+                                                        <div class="buttons">
+                                                            <button type="button" value="Details" class="button-1 product-box-detail-button btn btn-primary btn-block text-left lg" onclick="setLocation('/mobile/postpaid-lines/welcome-packpostpaid-3g-2')">View Offers<i class="fas fa-chevron-right"></i></button>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="item-box">
+                                            <div class="product-item" data-productid="401">
+                                                <div class="product-top">
+                                                    <div class="picture no-margin-picture">
+                                                        <a href="/mobile/postpaid-lines/welcome-packpostpaid-3g-2" title="Show details for Welcome Pack/Postpaid / 3G+">
+                                                            <img alt="Picture of Welcome Pack/Postpaid / 3G+" src="https://localhost:44321/app-images/thumbs/default-image_415.png" title="Show details for Welcome Pack/Postpaid / 3G+">
+                                                        </a>
+                                                    </div>
+                                                    <h2 class="product-title">
+                                                        <a href="/mobile/postpaid-lines/welcome-packpostpaid-3g-2">Welcome Pack/Postpaid / 3G+</a>
+                                                    </h2>
+                                                    <div class="triangle-up"></div>
+                                                </div>
+                                                <div class="details">
+
+                                                    <div class="description">
+                                                        You can also choose from monthly 4G Flybox offers with subscriptions starting from 13 JD/month.
+                                                        so you can experience the strongest internet with the new Orange FlyBox.
+                                                    </div>
+
+
+
+                                                    <div class="prices">
+                                                        <div class="prices-flex">
+                                                            <div class="tooltip-check" data-toggle="tooltip" data-placement="bottom" title="Tax exclusive">
+                                                            </div>
+                                                            <div class="prices-group">
+                                                                <div class="start-form">Starting from</div>
+                                                                <div class="prices-list">
+                                                                    <span class="price actual-price">282.000 JOD </span> <span class="pad-top15 startFormMonth">/ Month</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="add-info">
+
+                                                        <div class="buttons">
+                                                            <button type="button" value="Details" class="button-1 product-box-detail-button btn btn-primary btn-block text-left lg" onclick="setLocation('/mobile/postpaid-lines/welcome-packpostpaid-3g-2')">View Offers<i class="fas fa-chevron-right"></i></button>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                        if (supportRtl)
+                                        {
+                                <script asp-location="Footer">
+                                                $(document).ready(function () {
+                                                    $('#catalog-postpaid-owl').owlCarousel({
+                                                        loop: false,
+                                                        margin: 15,
+                                                        dots: false,
+                                                        autoWidth: true,
+                                                        nav: true,
+                                                        rtl: true,
+
+                                                        //for animation
+                                                        navText: ["", "<div class='timer'><span class='mask'><span class='rotator' style='transform: rotate(1deg);'></span></span></div>"],
+                                                    });
+
+                                                    //for animation
+                                                    var parentID = "#catalog-postpaid-owl";
+                                                    var animationspeed = @(Nop.Web.EShopHelper.Animationspeed);
+
+                                                    //function for animation
+                                                    AnimationCircling(animationspeed, parentID);
+                                                });
+                                </script>
+                                        }
+                                        else
+                                        {
+                                <script asp-location="Footer">
+                                                $(document).ready(function () {
+                                                    $('#catalog-postpaid-owl').owlCarousel({
+                                                        loop: false,
+                                                        margin: 15,
+                                                        dots: false,
+                                                        autoWidth: true,
+                                                        rtl: false,
+                                                        nav: true,
+
+                                                        //for animation
+                                                        navText: ["", "<div class='timer'><span class='mask'><span class='rotator' style='transform: rotate(1deg);'></span></span></div>"],
+                                                    });
+
+                                                    //for animation
+                                                    var parentID = "#catalog-postpaid-owl";
+                                                    var animationspeed = @(Nop.Web.EShopHelper.Animationspeed);
+
+                                                    //function for animation
+                                                    AnimationCircling(animationspeed, parentID);
+
+                                                });
+                                </script>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <div class="row">
+                                            <div class="col-xl-4 col-lg-6 col-md-4 col-sm-6">
+                                                <div class="item-box">
+                                                    <div class="product-item" data-productid="401">
+                                                        <div class="product-top">
+                                                            <div class="picture no-margin-picture">
+                                                                <a href="/mobile/postpaid-lines/welcome-packpostpaid-3g-2" title="Show details for Welcome Pack/Postpaid / 3G+">
+                                                                    <img alt="Picture of Welcome Pack/Postpaid / 3G+" src="https://localhost:44321/app-images/thumbs/default-image_415.png" title="Show details for Welcome Pack/Postpaid / 3G+">
+                                                                </a>
+                                                            </div>
+                                                            <h2 class="product-title">
+                                                                <a href="/mobile/postpaid-lines/welcome-packpostpaid-3g-2">Welcome Pack/Postpaid / 3G+</a>
+                                                            </h2>
+                                                            <div class="triangle-up"></div>
+                                                        </div>
+                                                        <div class="details">
+
+                                                            <div class="description">
+                                                                You can also choose from monthly 4G Flybox offers with subscriptions starting from 13 JD/month.
+                                                                so you can experience the strongest internet with the new Orange FlyBox.
+                                                            </div>
+
+
+
+                                                            <div class="prices">
+                                                                <div class="prices-flex">
+                                                                    <div class="tooltip-check" data-toggle="tooltip" data-placement="bottom" title="Tax exclusive">
+                                                                    </div>
+                                                                    <div class="prices-group">
+                                                                        <div class="start-form">Starting from</div>
+                                                                        <div class="prices-list">
+                                                                            <span class="price actual-price">282.000 JOD </span> <span class="pad-top15 startFormMonth">/ Month</span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="add-info">
+
+                                                                <div class="buttons">
+                                                                    <button type="button" value="Details" class="button-1 product-box-detail-button btn btn-primary btn-block text-left lg" onclick="setLocation('/mobile/postpaid-lines/welcome-packpostpaid-3g-2')">View Offers<i class="fas fa-chevron-right"></i></button>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-4 col-lg-6 col-md-4 col-sm-6">
+                                                <div class="item-box">
+                                                    <div class="product-item" data-productid="401">
+                                                        <div class="product-top">
+                                                            <div class="picture no-margin-picture">
+                                                                <a href="/mobile/postpaid-lines/welcome-packpostpaid-3g-2" title="Show details for Welcome Pack/Postpaid / 3G+">
+                                                                    <img alt="Picture of Welcome Pack/Postpaid / 3G+" src="https://localhost:44321/app-images/thumbs/default-image_415.png" title="Show details for Welcome Pack/Postpaid / 3G+">
+                                                                </a>
+                                                            </div>
+                                                            <h2 class="product-title">
+                                                                <a href="/mobile/postpaid-lines/welcome-packpostpaid-3g-2">Welcome Pack/Postpaid / 3G+</a>
+                                                            </h2>
+                                                            <div class="triangle-up"></div>
+                                                        </div>
+                                                        <div class="details">
+
+                                                            <div class="description">
+                                                                You can also choose from monthly 4G Flybox offers with subscriptions starting from 13 JD/month.
+                                                                so you can experience the strongest internet with the new Orange FlyBox.
+                                                            </div>
+
+
+
+                                                            <div class="prices">
+                                                                <div class="prices-flex">
+                                                                    <div class="tooltip-check" data-toggle="tooltip" data-placement="bottom" title="Tax exclusive">
+                                                                    </div>
+                                                                    <div class="prices-group">
+                                                                        <div class="start-form">Starting from</div>
+                                                                        <div class="prices-list">
+                                                                            <span class="price actual-price">282.000 JOD </span> <span class="pad-top15 startFormMonth">/ Month</span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="add-info">
+
+                                                                <div class="buttons">
+                                                                    <button type="button" value="Details" class="button-1 product-box-detail-button btn btn-primary btn-block text-left lg" onclick="setLocation('/mobile/postpaid-lines/welcome-packpostpaid-3g-2')">View Offers<i class="fas fa-chevron-right"></i></button>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-4 col-lg-6 col-md-4 col-sm-6">
+                                                <div class="item-box">
+                                                    <div class="product-item" data-productid="401">
+                                                        <div class="product-top">
+                                                            <div class="picture no-margin-picture">
+                                                                <a href="/mobile/postpaid-lines/welcome-packpostpaid-3g-2" title="Show details for Welcome Pack/Postpaid / 3G+">
+                                                                    <img alt="Picture of Welcome Pack/Postpaid / 3G+" src="https://localhost:44321/app-images/thumbs/default-image_415.png" title="Show details for Welcome Pack/Postpaid / 3G+">
+                                                                </a>
+                                                            </div>
+                                                            <h2 class="product-title">
+                                                                <a href="/mobile/postpaid-lines/welcome-packpostpaid-3g-2">Welcome Pack/Postpaid / 3G+</a>
+                                                            </h2>
+                                                            <div class="triangle-up"></div>
+                                                        </div>
+                                                        <div class="details">
+
+                                                            <div class="description">
+                                                                You can also choose from monthly 4G Flybox offers with subscriptions starting from 13 JD/month.
+                                                                so you can experience the strongest internet with the new Orange FlyBox.
+                                                            </div>
+
+
+
+                                                            <div class="prices">
+                                                                <div class="prices-flex">
+                                                                    <div class="tooltip-check" data-toggle="tooltip" data-placement="bottom" title="Tax exclusive">
+                                                                    </div>
+                                                                    <div class="prices-group">
+                                                                        <div class="start-form">Starting from</div>
+                                                                        <div class="prices-list">
+                                                                            <span class="price actual-price">282.000 JOD </span> <span class="pad-top15 startFormMonth">/ Month</span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="add-info">
+
+                                                                <div class="buttons">
+                                                                    <button type="button" value="Details" class="button-1 product-box-detail-button btn btn-primary btn-block text-left lg" onclick="setLocation('/mobile/postpaid-lines/welcome-packpostpaid-3g-2')">View Offers<i class="fas fa-chevron-right"></i></button>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                        <div id="tab101">
+                            <div class="product-grid mobile-plan-product">
+                                <div class="item-grid">
+                                    @if (userAgentHelper.IsMobileDevice())
+                                    {
+
+                                        <div class="owl-carousel prd-auto-width prd-arrow-right" id="catalog-prepaid-owl">
+                                            <div class="item-box">
+                                                <div class="product-item" data-productid="401">
+                                                    <div class="product-top">
+                                                        <div class="picture no-margin-picture">
+                                                            <a href="/mobile/postpaid-lines/welcome-packpostpaid-3g-2" title="Show details for Welcome Pack/Postpaid / 3G+">
+                                                                <img alt="Picture of Welcome Pack/Postpaid / 3G+" src="https://localhost:44321/app-images/thumbs/default-image_415.png" title="Show details for Welcome Pack/Postpaid / 3G+">
+                                                            </a>
+                                                        </div>
+                                                        <h2 class="product-title">
+                                                            <a href="/mobile/postpaid-lines/welcome-packpostpaid-3g-2">Welcome Pack/Postpaid / 3G+</a>
+                                                        </h2>
+                                                        <div class="triangle-up"></div>
+                                                    </div>
+                                                    <div class="details">
+
+                                                        <div class="description">
+                                                            You can also choose from monthly 4G Flybox offers with subscriptions starting from 13 JD/month.
+                                                            so you can experience the strongest internet with the new Orange FlyBox.
+                                                        </div>
+
+
+
+                                                        <div class="prices">
+                                                            <div class="prices-flex">
+                                                                <div class="tooltip-check" data-toggle="tooltip" data-placement="bottom" title="Tax exclusive">
+                                                                </div>
+                                                                <div class="prices-group">
+                                                                    <div class="start-form">Starting from</div>
+                                                                    <div class="prices-list">
+                                                                        <span class="price actual-price">282.000 JOD </span> <span class="pad-top15 startFormMonth">/ Month</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="add-info">
+
+                                                            <div class="buttons">
+                                                                <button type="button" value="Details" class="button-1 product-box-detail-button btn btn-primary btn-block text-left lg" onclick="setLocation('/mobile/postpaid-lines/welcome-packpostpaid-3g-2')">View Offers<i class="fas fa-chevron-right"></i></button>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="item-box">
+                                                <div class="product-item" data-productid="401">
+                                                    <div class="product-top">
+                                                        <div class="picture no-margin-picture">
+                                                            <a href="/mobile/postpaid-lines/welcome-packpostpaid-3g-2" title="Show details for Welcome Pack/Postpaid / 3G+">
+                                                                <img alt="Picture of Welcome Pack/Postpaid / 3G+" src="https://localhost:44321/app-images/thumbs/default-image_415.png" title="Show details for Welcome Pack/Postpaid / 3G+">
+                                                            </a>
+                                                        </div>
+                                                        <h2 class="product-title">
+                                                            <a href="/mobile/postpaid-lines/welcome-packpostpaid-3g-2">Welcome Pack/Postpaid / 3G+</a>
+                                                        </h2>
+                                                        <div class="triangle-up"></div>
+                                                    </div>
+                                                    <div class="details">
+
+                                                        <div class="description">
+                                                            You can also choose from monthly 4G Flybox offers with subscriptions starting from 13 JD/month.
+                                                            so you can experience the strongest internet with the new Orange FlyBox.
+                                                        </div>
+
+
+
+                                                        <div class="prices">
+                                                            <div class="prices-flex">
+                                                                <div class="tooltip-check" data-toggle="tooltip" data-placement="bottom" title="Tax exclusive">
+                                                                </div>
+                                                                <div class="prices-group">
+                                                                    <div class="start-form">Starting from</div>
+                                                                    <div class="prices-list">
+                                                                        <span class="price actual-price">282.000 JOD </span> <span class="pad-top15 startFormMonth">/ Month</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="add-info">
+
+                                                            <div class="buttons">
+                                                                <button type="button" value="Details" class="button-1 product-box-detail-button btn btn-primary btn-block text-left lg" onclick="setLocation('/mobile/postpaid-lines/welcome-packpostpaid-3g-2')">View Offers<i class="fas fa-chevron-right"></i></button>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="item-box">
+                                                <div class="product-item" data-productid="401">
+                                                    <div class="product-top">
+                                                        <div class="picture no-margin-picture">
+                                                            <a href="/mobile/postpaid-lines/welcome-packpostpaid-3g-2" title="Show details for Welcome Pack/Postpaid / 3G+">
+                                                                <img alt="Picture of Welcome Pack/Postpaid / 3G+" src="https://localhost:44321/app-images/thumbs/default-image_415.png" title="Show details for Welcome Pack/Postpaid / 3G+">
+                                                            </a>
+                                                        </div>
+                                                        <h2 class="product-title">
+                                                            <a href="/mobile/postpaid-lines/welcome-packpostpaid-3g-2">Welcome Pack/Postpaid / 3G+</a>
+                                                        </h2>
+                                                        <div class="triangle-up"></div>
+                                                    </div>
+                                                    <div class="details">
+
+                                                        <div class="description">
+                                                            You can also choose from monthly 4G Flybox offers with subscriptions starting from 13 JD/month.
+                                                            so you can experience the strongest internet with the new Orange FlyBox.
+                                                        </div>
+
+
+
+                                                        <div class="prices">
+                                                            <div class="prices-flex">
+                                                                <div class="tooltip-check" data-toggle="tooltip" data-placement="bottom" title="Tax exclusive">
+                                                                </div>
+                                                                <div class="prices-group">
+                                                                    <div class="start-form">Starting from</div>
+                                                                    <div class="prices-list">
+                                                                        <span class="price actual-price">282.000 JOD </span> <span class="pad-top15 startFormMonth">/ Month</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="add-info">
+
+                                                            <div class="buttons">
+                                                                <button type="button" value="Details" class="button-1 product-box-detail-button btn btn-primary btn-block text-left lg" onclick="setLocation('/mobile/postpaid-lines/welcome-packpostpaid-3g-2')">View Offers<i class="fas fa-chevron-right"></i></button>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                        if (supportRtl)
+                                        {
+                                <script asp-location="Footer">
+                                                $(document).ready(function () {
+                                                    $('#catalog-prepaid-owl').owlCarousel({
+                                                        loop: false,
+                                                        margin: 15,
+                                                        dots: false,
+                                                        autoWidth: true,
+                                                        nav: true,
+                                                        rtl: true,
+
+                                                        //for animation
+                                                        navText: ["", "<div class='timer'><span class='mask'><span class='rotator' style='transform: rotate(1deg);'></span></span></div>"],
+                                                    });
+
+                                                    //for animation
+                                                    var parentID = "#catalog-prepaid-owl";
+                                                    var animationspeed = @(Nop.Web.EShopHelper.Animationspeed);
+
+                                                    //function for animation
+                                                    AnimationCircling(animationspeed, parentID);
+                                                });
+                                </script>
+                                        }
+                                        else
+                                        {
+                                <script asp-location="Footer">
+                                                $(document).ready(function () {
+                                                    $('#catalog-prepaid-owl').owlCarousel({
+                                                        loop: false,
+                                                        margin: 15,
+                                                        dots: false,
+                                                        autoWidth: true,
+                                                        rtl: false,
+                                                        nav: true,
+
+                                                        //for animation
+                                                        navText: ["", "<div class='timer'><span class='mask'><span class='rotator' style='transform: rotate(1deg);'></span></span></div>"],
+                                                    });
+
+                                                    //for animation
+                                                    var parentID = "#catalog-prepaid-owl";
+                                                    var animationspeed = @(Nop.Web.EShopHelper.Animationspeed);
+
+                                                    //function for animation
+                                                    AnimationCircling(animationspeed, parentID);
+
+                                                });
+                                </script>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <div class="row">
+                                            <div class="col-xl-4 col-lg-6 col-md-4 col-sm-6">
+                                                <div class="item-box">
+                                                    <div class="product-item" data-productid="401">
+                                                        <div class="product-top">
+                                                            <div class="picture no-margin-picture">
+                                                                <a href="/mobile/postpaid-lines/welcome-packpostpaid-3g-2" title="Show details for Welcome Pack/Postpaid / 3G+">
+                                                                    <img alt="Picture of Welcome Pack/Postpaid / 3G+" src="https://localhost:44321/app-images/thumbs/default-image_415.png" title="Show details for Welcome Pack/Postpaid / 3G+">
+                                                                </a>
+                                                            </div>
+                                                            <h2 class="product-title">
+                                                                <a href="/mobile/postpaid-lines/welcome-packpostpaid-3g-2">Welcome Pack/Postpaid / 3G+</a>
+                                                            </h2>
+                                                            <div class="triangle-up"></div>
+                                                        </div>
+                                                        <div class="details">
+
+                                                            <div class="description">
+                                                                You can also choose from monthly 4G Flybox offers with subscriptions starting from 13 JD/month.
+                                                                so you can experience the strongest internet with the new Orange FlyBox.
+                                                            </div>
+
+
+
+                                                            <div class="prices">
+                                                                <div class="prices-flex">
+                                                                    <div class="tooltip-check" data-toggle="tooltip" data-placement="bottom" title="Tax exclusive">
+                                                                    </div>
+                                                                    <div class="prices-group">
+                                                                        <div class="start-form">Starting from</div>
+                                                                        <div class="prices-list">
+                                                                            <span class="price actual-price">282.000 JOD </span> <span class="pad-top15 startFormMonth">/ Month</span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="add-info">
+
+                                                                <div class="buttons">
+                                                                    <button type="button" value="Details" class="button-1 product-box-detail-button btn btn-primary btn-block text-left lg" onclick="setLocation('/mobile/postpaid-lines/welcome-packpostpaid-3g-2')">View Offers<i class="fas fa-chevron-right"></i></button>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-4 col-lg-6 col-md-4 col-sm-6">
+                                                <div class="item-box">
+                                                    <div class="product-item" data-productid="401">
+                                                        <div class="product-top">
+                                                            <div class="picture no-margin-picture">
+                                                                <a href="/mobile/postpaid-lines/welcome-packpostpaid-3g-2" title="Show details for Welcome Pack/Postpaid / 3G+">
+                                                                    <img alt="Picture of Welcome Pack/Postpaid / 3G+" src="https://localhost:44321/app-images/thumbs/default-image_415.png" title="Show details for Welcome Pack/Postpaid / 3G+">
+                                                                </a>
+                                                            </div>
+                                                            <h2 class="product-title">
+                                                                <a href="/mobile/postpaid-lines/welcome-packpostpaid-3g-2">Welcome Pack/Postpaid / 3G+</a>
+                                                            </h2>
+                                                            <div class="triangle-up"></div>
+                                                        </div>
+                                                        <div class="details">
+
+                                                            <div class="description">
+                                                                You can also choose from monthly 4G Flybox offers with subscriptions starting from 13 JD/month.
+                                                                so you can experience the strongest internet with the new Orange FlyBox.
+                                                            </div>
+
+
+
+                                                            <div class="prices">
+                                                                <div class="prices-flex">
+                                                                    <div class="tooltip-check" data-toggle="tooltip" data-placement="bottom" title="Tax exclusive">
+                                                                    </div>
+                                                                    <div class="prices-group">
+                                                                        <div class="start-form">Starting from</div>
+                                                                        <div class="prices-list">
+                                                                            <span class="price actual-price">282.000 JOD </span> <span class="pad-top15 startFormMonth">/ Month</span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="add-info">
+
+                                                                <div class="buttons">
+                                                                    <button type="button" value="Details" class="button-1 product-box-detail-button btn btn-primary btn-block text-left lg" onclick="setLocation('/mobile/postpaid-lines/welcome-packpostpaid-3g-2')">View Offers<i class="fas fa-chevron-right"></i></button>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-4 col-lg-6 col-md-4 col-sm-6">
+                                                <div class="item-box">
+                                                    <div class="product-item" data-productid="401">
+                                                        <div class="product-top">
+                                                            <div class="picture no-margin-picture">
+                                                                <a href="/mobile/postpaid-lines/welcome-packpostpaid-3g-2" title="Show details for Welcome Pack/Postpaid / 3G+">
+                                                                    <img alt="Picture of Welcome Pack/Postpaid / 3G+" src="https://localhost:44321/app-images/thumbs/default-image_415.png" title="Show details for Welcome Pack/Postpaid / 3G+">
+                                                                </a>
+                                                            </div>
+                                                            <h2 class="product-title">
+                                                                <a href="/mobile/postpaid-lines/welcome-packpostpaid-3g-2">Welcome Pack/Postpaid / 3G+</a>
+                                                            </h2>
+                                                            <div class="triangle-up"></div>
+                                                        </div>
+                                                        <div class="details">
+
+                                                            <div class="description">
+                                                                You can also choose from monthly 4G Flybox offers with subscriptions starting from 13 JD/month.
+                                                                so you can experience the strongest internet with the new Orange FlyBox.
+                                                            </div>
+
+
+
+                                                            <div class="prices">
+                                                                <div class="prices-flex">
+                                                                    <div class="tooltip-check" data-toggle="tooltip" data-placement="bottom" title="Tax exclusive">
+                                                                    </div>
+                                                                    <div class="prices-group">
+                                                                        <div class="start-form">Starting from</div>
+                                                                        <div class="prices-list">
+                                                                            <span class="price actual-price">282.000 JOD </span> <span class="pad-top15 startFormMonth">/ Month</span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="add-info">
+
+                                                                <div class="buttons">
+                                                                    <button type="button" value="Details" class="button-1 product-box-detail-button btn btn-primary btn-block text-left lg" onclick="setLocation('/mobile/postpaid-lines/welcome-packpostpaid-3g-2')">View Offers<i class="fas fa-chevron-right"></i></button>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                        <div id="tab102">
+                            <div class="product-grid plan-whoutpic-product">
+                                <div class="item-grid">
+                                    @if (userAgentHelper.IsMobileDevice())
+                                    {
+
+                                    <div class="owl-carousel prd-auto-width prd-arrow-right" id="catalog-yo-owl">
+                                        <div class="item-box">
+                                            <input name="__RequestVerificationToken" type="hidden" value="CfDJ8Euc4PPq9htMnXUWexoyakpT4eoiVaqGCNpVZUpGopQRUcDxKMNeKeNWKFp--J6QXDAb7lYVGZlD5sY3RtZYUkxfnKCfBGj8XsBG715ZaOpAeGgtgzgSXycPIS8P6E9384P_yMbjlJFlMZw09WnbYBrYYGS-L46oBy2dO-HeFVMmQcCpk5VbzI6wyT60rRRmFw">
+                                            <div class="product-item" data-productid="100">
+
+                                                <div class="int-plan-top">
+                                                    <h2 class="product-title">
+                                                        <a href="/internet/adsl-offer/adsl-west-amman/internet-for-all-jordan-max-plus">Internet for all of Jordan Max+</a>
+                                                    </h2>
+                                                </div>
+
+                                                <div class="int-plan-bottom">
+                                                    <div class="description">
+                                                        • Internet up to 24Mbps speed<br>
+                                                        • Unlimited terabytes*<br>
+                                                        • Unlimited local and national calls*<br>
+                                                        <p style="margin-top:20px;">
+                                                            <a class="btn CartBTN" href="https://www.orange.jo/EN/offers/ADSLOffers/Pages/West-Amman.aspx?utm_source=eshop&amp;utm_medium=link&amp;utm_campaign=eshopreferral&amp;utm_term=westamman&amp;utm_content=westamman">Offer Details</a>
+                                                        </p>
+                                                    </div>
+                                                    <div class="view-and-compare">
+                                                        <a value="Details" class="button-1 product-box-detail-button" onclick="setLocation('/internet/adsl-offer/adsl-west-amman/internet-for-all-jordan-max-plus')"><span>View Details</span><i class="fas fa-chevron-right"></i></a>
+                                                        <a value="Add to compare list" title="Add to compare list" class="button-2 compare-button" onclick="AjaxCart.addproducttocomparelist('/compareproducts/add/100');return false;"><span>Compare</span><i></i></a>
+                                                    </div>
+                                                </div>
+
+                                                <div class="details">
+
+
+
+                                                    <div class="prices">
+                                                        <div class="prices-flex">
+                                                            <div class="tooltip-check" data-toggle="tooltip" data-placement="bottom" title="Tax exclusive">
+                                                            </div>
+                                                            <div class="prices-group">
+                                                                <div class="prices-list">
+                                                                    <span class="price actual-price">25.000 JOD</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="add-info">
+                                                        <div class="buttons">
+                                                            <button type="button" value="Buy now" class="btn btn-primary btn btn-block lg" onclick="AjaxCart.addproducttocart_catalog('/addproducttocart/catalog/100/1/1');return false;">Buy now</button>
+                                                            <button type="button" value="Buy now" class="btn btn-outline-dark button-2 product-box-add-to-cart-button lg" onclick="AjaxCart.addproducttocart_catalog('/addproducttocart/catalog/100/1/1');return false;"><i></i></button>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="item-box">
+                                            <input name="__RequestVerificationToken" type="hidden" value="CfDJ8Euc4PPq9htMnXUWexoyakpT4eoiVaqGCNpVZUpGopQRUcDxKMNeKeNWKFp--J6QXDAb7lYVGZlD5sY3RtZYUkxfnKCfBGj8XsBG715ZaOpAeGgtgzgSXycPIS8P6E9384P_yMbjlJFlMZw09WnbYBrYYGS-L46oBy2dO-HeFVMmQcCpk5VbzI6wyT60rRRmFw">
+                                            <div class="product-item" data-productid="100">
+
+                                                <div class="int-plan-top">
+                                                    <h2 class="product-title">
+                                                        <a href="/internet/adsl-offer/adsl-west-amman/internet-for-all-jordan-max-plus">Internet for all of Jordan Max+</a>
+                                                    </h2>
+                                                </div>
+
+                                                <div class="int-plan-bottom">
+                                                    <div class="description">
+                                                        • Internet up to 24Mbps speed<br>
+                                                        • Unlimited terabytes*<br>
+                                                        • Unlimited local and national calls*<br>
+                                                        <p style="margin-top:20px;">
+                                                            <a class="btn CartBTN" href="https://www.orange.jo/EN/offers/ADSLOffers/Pages/West-Amman.aspx?utm_source=eshop&amp;utm_medium=link&amp;utm_campaign=eshopreferral&amp;utm_term=westamman&amp;utm_content=westamman">Offer Details</a>
+                                                        </p>
+                                                    </div>
+                                                    <div class="view-and-compare">
+                                                        <a value="Details" class="button-1 product-box-detail-button" onclick="setLocation('/internet/adsl-offer/adsl-west-amman/internet-for-all-jordan-max-plus')"><span>View Details</span><i class="fas fa-chevron-right"></i></a>
+                                                        <a value="Add to compare list" title="Add to compare list" class="button-2 compare-button" onclick="AjaxCart.addproducttocomparelist('/compareproducts/add/100');return false;"><span>Compare</span><i></i></a>
+                                                    </div>
+                                                </div>
+
+                                                <div class="details">
+
+
+
+                                                    <div class="prices">
+                                                        <div class="prices-flex">
+                                                            <div class="tooltip-check" data-toggle="tooltip" data-placement="bottom" title="Tax exclusive">
+                                                            </div>
+                                                            <div class="prices-group">
+                                                                <div class="prices-list">
+                                                                    <span class="price actual-price">25.000 JOD</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="add-info">
+                                                        <div class="buttons">
+                                                            <button type="button" value="Buy now" class="btn btn-primary btn btn-block lg" onclick="AjaxCart.addproducttocart_catalog('/addproducttocart/catalog/100/1/1');return false;">Buy now</button>
+                                                            <button type="button" value="Buy now" class="btn btn-outline-dark button-2 product-box-add-to-cart-button lg" onclick="AjaxCart.addproducttocart_catalog('/addproducttocart/catalog/100/1/1');return false;"><i></i></button>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="item-box">
+                                            <input name="__RequestVerificationToken" type="hidden" value="CfDJ8Euc4PPq9htMnXUWexoyakpT4eoiVaqGCNpVZUpGopQRUcDxKMNeKeNWKFp--J6QXDAb7lYVGZlD5sY3RtZYUkxfnKCfBGj8XsBG715ZaOpAeGgtgzgSXycPIS8P6E9384P_yMbjlJFlMZw09WnbYBrYYGS-L46oBy2dO-HeFVMmQcCpk5VbzI6wyT60rRRmFw">
+                                            <div class="product-item" data-productid="100">
+
+                                                <div class="int-plan-top">
+                                                    <h2 class="product-title">
+                                                        <a href="/internet/adsl-offer/adsl-west-amman/internet-for-all-jordan-max-plus">Internet for all of Jordan Max+</a>
+                                                    </h2>
+                                                </div>
+
+                                                <div class="int-plan-bottom">
+                                                    <div class="description">
+                                                        • Internet up to 24Mbps speed<br>
+                                                        • Unlimited terabytes*<br>
+                                                        • Unlimited local and national calls*<br>
+                                                        <p style="margin-top:20px;">
+                                                            <a class="btn CartBTN" href="https://www.orange.jo/EN/offers/ADSLOffers/Pages/West-Amman.aspx?utm_source=eshop&amp;utm_medium=link&amp;utm_campaign=eshopreferral&amp;utm_term=westamman&amp;utm_content=westamman">Offer Details</a>
+                                                        </p>
+                                                    </div>
+                                                    <div class="view-and-compare">
+                                                        <a value="Details" class="button-1 product-box-detail-button" onclick="setLocation('/internet/adsl-offer/adsl-west-amman/internet-for-all-jordan-max-plus')"><span>View Details</span><i class="fas fa-chevron-right"></i></a>
+                                                        <a value="Add to compare list" title="Add to compare list" class="button-2 compare-button" onclick="AjaxCart.addproducttocomparelist('/compareproducts/add/100');return false;"><span>Compare</span><i></i></a>
+                                                    </div>
+                                                </div>
+
+                                                <div class="details">
+
+
+
+                                                    <div class="prices">
+                                                        <div class="prices-flex">
+                                                            <div class="tooltip-check" data-toggle="tooltip" data-placement="bottom" title="Tax exclusive">
+                                                            </div>
+                                                            <div class="prices-group">
+                                                                <div class="prices-list">
+                                                                    <span class="price actual-price">25.000 JOD</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="add-info">
+                                                        <div class="buttons">
+                                                            <button type="button" value="Buy now" class="btn btn-primary btn btn-block lg" onclick="AjaxCart.addproducttocart_catalog('/addproducttocart/catalog/100/1/1');return false;">Buy now</button>
+                                                            <button type="button" value="Buy now" class="btn btn-outline-dark button-2 product-box-add-to-cart-button lg" onclick="AjaxCart.addproducttocart_catalog('/addproducttocart/catalog/100/1/1');return false;"><i></i></button>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                        if (supportRtl)
+                                        {
+                                <script asp-location="Footer">
+                                                $(document).ready(function () {
+                                                    $('#catalog-yo-owl').owlCarousel({
+                                                        loop: false,
+                                                        margin: 15,
+                                                        dots: false,
+                                                        autoWidth: true,
+                                                        nav: true,
+                                                        rtl: true,
+
+                                                        //for animation
+                                                        navText: ["", "<div class='timer'><span class='mask'><span class='rotator' style='transform: rotate(1deg);'></span></span></div>"],
+                                                    });
+
+                                                    //for animation
+                                                    var parentID = "#catalog-yo-owl";
+                                                    var animationspeed = @(Nop.Web.EShopHelper.Animationspeed);
+
+                                                    //function for animation
+                                                    AnimationCircling(animationspeed, parentID);
+                                                });
+                                </script>
+                                        }
+                                        else
+                                        {
+                                <script asp-location="Footer">
+                                                $(document).ready(function () {
+                                                    $('#catalog-yo-owl').owlCarousel({
+                                                        loop: false,
+                                                        margin: 15,
+                                                        dots: false,
+                                                        autoWidth: true,
+                                                        rtl: false,
+                                                        nav: true,
+
+                                                        //for animation
+                                                        navText: ["", "<div class='timer'><span class='mask'><span class='rotator' style='transform: rotate(1deg);'></span></span></div>"],
+                                                    });
+
+                                                    //for animation
+                                                    var parentID = "#catalog-yo-owl";
+                                                    var animationspeed = @(Nop.Web.EShopHelper.Animationspeed);
+
+                                                    //function for animation
+                                                    AnimationCircling(animationspeed, parentID);
+
+                                                });
+                                </script>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <div class="row">
+                                            <div class="col-xl-4 col-lg-6 col-md-4 col-sm-6">
+                                                <div class="item-box">
+                                                    <input name="__RequestVerificationToken" type="hidden" value="CfDJ8Euc4PPq9htMnXUWexoyakpT4eoiVaqGCNpVZUpGopQRUcDxKMNeKeNWKFp--J6QXDAb7lYVGZlD5sY3RtZYUkxfnKCfBGj8XsBG715ZaOpAeGgtgzgSXycPIS8P6E9384P_yMbjlJFlMZw09WnbYBrYYGS-L46oBy2dO-HeFVMmQcCpk5VbzI6wyT60rRRmFw">
+                                                    <div class="product-item" data-productid="100">
+
+                                                        <div class="int-plan-top">
+                                                            <h2 class="product-title">
+                                                                <a href="/internet/adsl-offer/adsl-west-amman/internet-for-all-jordan-max-plus">Internet for all of Jordan Max+</a>
+                                                            </h2>
+                                                        </div>
+
+                                                        <div class="int-plan-bottom">
+                                                            <div class="description">
+                                                                • Internet up to 24Mbps speed<br>
+                                                                • Unlimited terabytes*<br>
+                                                                • Unlimited local and national calls*<br>
+                                                                <p style="margin-top:20px;">
+                                                                    <a class="btn CartBTN" href="https://www.orange.jo/EN/offers/ADSLOffers/Pages/West-Amman.aspx?utm_source=eshop&amp;utm_medium=link&amp;utm_campaign=eshopreferral&amp;utm_term=westamman&amp;utm_content=westamman">Offer Details</a>
+                                                                </p>
+                                                            </div>
+                                                            <div class="view-and-compare">
+                                                                <a value="Details" class="button-1 product-box-detail-button" onclick="setLocation('/internet/adsl-offer/adsl-west-amman/internet-for-all-jordan-max-plus')"><span>View Details</span><i class="fas fa-chevron-right"></i></a>
+                                                                <a value="Add to compare list" title="Add to compare list" class="button-2 compare-button" onclick="AjaxCart.addproducttocomparelist('/compareproducts/add/100');return false;"><span>Compare</span><i></i></a>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="details">
+
+
+
+                                                            <div class="prices">
+                                                                <div class="prices-flex">
+                                                                    <div class="tooltip-check" data-toggle="tooltip" data-placement="bottom" title="Tax exclusive">
+                                                                    </div>
+                                                                    <div class="prices-group">
+                                                                        <div class="prices-list">
+                                                                            <span class="price actual-price">25.000 JOD</span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+
+                                                            <div class="add-info">
+                                                                <div class="buttons">
+                                                                    <button type="button" value="Buy now" class="btn btn-primary btn btn-block lg" onclick="AjaxCart.addproducttocart_catalog('/addproducttocart/catalog/100/1/1');return false;">Buy now</button>
+                                                                    <button type="button" value="Buy now" class="btn btn-outline-dark button-2 product-box-add-to-cart-button lg" onclick="AjaxCart.addproducttocart_catalog('/addproducttocart/catalog/100/1/1');return false;"><i></i></button>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-4 col-lg-6 col-md-4 col-sm-6">
+                                                <div class="item-box">
+                                                    <input name="__RequestVerificationToken" type="hidden" value="CfDJ8Euc4PPq9htMnXUWexoyakpT4eoiVaqGCNpVZUpGopQRUcDxKMNeKeNWKFp--J6QXDAb7lYVGZlD5sY3RtZYUkxfnKCfBGj8XsBG715ZaOpAeGgtgzgSXycPIS8P6E9384P_yMbjlJFlMZw09WnbYBrYYGS-L46oBy2dO-HeFVMmQcCpk5VbzI6wyT60rRRmFw">
+                                                    <div class="product-item" data-productid="100">
+
+                                                        <div class="int-plan-top">
+                                                            <h2 class="product-title">
+                                                                <a href="/internet/adsl-offer/adsl-west-amman/internet-for-all-jordan-max-plus">Internet for all of Jordan Max+</a>
+                                                            </h2>
+                                                        </div>
+
+                                                        <div class="int-plan-bottom">
+                                                            <div class="description">
+                                                                • Internet up to 24Mbps speed<br>
+                                                                • Unlimited terabytes*<br>
+                                                                • Unlimited local and national calls*<br>
+                                                                <p style="margin-top:20px;">
+                                                                    <a class="btn CartBTN" href="https://www.orange.jo/EN/offers/ADSLOffers/Pages/West-Amman.aspx?utm_source=eshop&amp;utm_medium=link&amp;utm_campaign=eshopreferral&amp;utm_term=westamman&amp;utm_content=westamman">Offer Details</a>
+                                                                </p>
+                                                            </div>
+                                                            <div class="view-and-compare">
+                                                                <a value="Details" class="button-1 product-box-detail-button" onclick="setLocation('/internet/adsl-offer/adsl-west-amman/internet-for-all-jordan-max-plus')"><span>View Details</span><i class="fas fa-chevron-right"></i></a>
+                                                                <a value="Add to compare list" title="Add to compare list" class="button-2 compare-button" onclick="AjaxCart.addproducttocomparelist('/compareproducts/add/100');return false;"><span>Compare</span><i></i></a>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="details">
+
+
+
+                                                            <div class="prices">
+                                                                <div class="prices-flex">
+                                                                    <div class="tooltip-check" data-toggle="tooltip" data-placement="bottom" title="Tax exclusive">
+                                                                    </div>
+                                                                    <div class="prices-group">
+                                                                        <div class="prices-list">
+                                                                            <span class="price actual-price">25.000 JOD</span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+
+                                                            <div class="add-info">
+                                                                <div class="buttons">
+                                                                    <button type="button" value="Buy now" class="btn btn-primary btn btn-block lg" onclick="AjaxCart.addproducttocart_catalog('/addproducttocart/catalog/100/1/1');return false;">Buy now</button>
+                                                                    <button type="button" value="Buy now" class="btn btn-outline-dark button-2 product-box-add-to-cart-button lg" onclick="AjaxCart.addproducttocart_catalog('/addproducttocart/catalog/100/1/1');return false;"><i></i></button>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-4 col-lg-6 col-md-4 col-sm-6">
+                                                <div class="item-box">
+                                                    <input name="__RequestVerificationToken" type="hidden" value="CfDJ8Euc4PPq9htMnXUWexoyakpT4eoiVaqGCNpVZUpGopQRUcDxKMNeKeNWKFp--J6QXDAb7lYVGZlD5sY3RtZYUkxfnKCfBGj8XsBG715ZaOpAeGgtgzgSXycPIS8P6E9384P_yMbjlJFlMZw09WnbYBrYYGS-L46oBy2dO-HeFVMmQcCpk5VbzI6wyT60rRRmFw">
+                                                    <div class="product-item" data-productid="100">
+
+                                                        <div class="int-plan-top">
+                                                            <h2 class="product-title">
+                                                                <a href="/internet/adsl-offer/adsl-west-amman/internet-for-all-jordan-max-plus">Internet for all of Jordan Max+</a>
+                                                            </h2>
+                                                        </div>
+
+                                                        <div class="int-plan-bottom">
+                                                            <div class="description">
+                                                                • Internet up to 24Mbps speed<br>
+                                                                • Unlimited terabytes*<br>
+                                                                • Unlimited local and national calls*<br>
+                                                                <p style="margin-top:20px;">
+                                                                    <a class="btn CartBTN" href="https://www.orange.jo/EN/offers/ADSLOffers/Pages/West-Amman.aspx?utm_source=eshop&amp;utm_medium=link&amp;utm_campaign=eshopreferral&amp;utm_term=westamman&amp;utm_content=westamman">Offer Details</a>
+                                                                </p>
+                                                            </div>
+                                                            <div class="view-and-compare">
+                                                                <a value="Details" class="button-1 product-box-detail-button" onclick="setLocation('/internet/adsl-offer/adsl-west-amman/internet-for-all-jordan-max-plus')"><span>View Details</span><i class="fas fa-chevron-right"></i></a>
+                                                                <a value="Add to compare list" title="Add to compare list" class="button-2 compare-button" onclick="AjaxCart.addproducttocomparelist('/compareproducts/add/100');return false;"><span>Compare</span><i></i></a>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="details">
+
+
+
+                                                            <div class="prices">
+                                                                <div class="prices-flex">
+                                                                    <div class="tooltip-check" data-toggle="tooltip" data-placement="bottom" title="Tax exclusive">
+                                                                    </div>
+                                                                    <div class="prices-group">
+                                                                        <div class="prices-list">
+                                                                            <span class="price actual-price">25.000 JOD</span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+
+                                                            <div class="add-info">
+                                                                <div class="buttons">
+                                                                    <button type="button" value="Buy now" class="btn btn-primary btn btn-block lg" onclick="AjaxCart.addproducttocart_catalog('/addproducttocart/catalog/100/1/1');return false;">Buy now</button>
+                                                                    <button type="button" value="Buy now" class="btn btn-outline-dark button-2 product-box-add-to-cart-button lg" onclick="AjaxCart.addproducttocart_catalog('/addproducttocart/catalog/100/1/1');return false;"><i></i></button>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.CategoryDetailsBottom, additionalData = Model })
+            </div>
+        </div>
+        @await Html.PartialAsync("_WhyBuyOnline")
+    </div>
+</div>
+
+<script asp-location="Footer">
+    $(document).ready(function () {
+        $(function () {
+            $('.tabs-nav a', '#catalog-tab').click(function () {
+
+                // Check for active
+                $('.tabs-nav li', '#catalog-tab').removeClass('active');
+                $(this).parent().addClass('active');
+
+                // Display active tab
+                let currentTab = $(this).attr('href');
+                $('.tabs-content > div', '#catalog-tab').hide();
+                $(currentTab).show();
+
+                return false;
+            });
+        });
+    })
+</script>

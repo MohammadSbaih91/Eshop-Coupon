@@ -1,0 +1,103 @@
+﻿@model Nop.Web.Models.Employees.EmployeeModel
+
+@{
+    Layout = "_ColumnsOne";
+
+    //title
+    Html.AddTitleParts(T("PageTitle.Employee").Text);
+
+    //page class
+    Html.AppendPageCssClassParts("html-checkout-page");
+    Html.AppendPageCssClassParts("html-order-completed-page");
+
+}
+<div class="container">
+    <div class="page checkout-page">
+        <div class="page-body checkout-data">
+            <h1>@T("Employee.Title")</h1>
+            <form asp-route="EmployeeDetail">
+                <div class="form-ui">
+                    <div asp-validation-summary="ModelOnly" class="message-error"></div>
+                    <div class="row">
+                        @if (!string.IsNullOrEmpty(Model.Message))
+                        {
+                            var message = T("Employee.EmployeeDetailAdded");
+
+                            <div class="col-md-12">
+                                <div class="form-fields text-bold">
+                                    @Html.Raw(Model.Message)
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="col-md-6">
+                                <div class="inputs form-group">
+                                    <div class="grp-label">
+                                        <label asp-for="EmployeeName"></label>
+                                        <nop-required />
+                                    </div>
+                                    <input tabindex="1" class="form-control" asp-for="EmployeeName" />
+                                    <span asp-validation-for="EmployeeName"></span>
+                                </div>
+                                <div class="inputs form-group">
+                                    <div class="grp-label">
+                                        <label asp-for="EmployeeId"></label>
+                                        <nop-required />
+                                    </div>
+                                    <input tabindex="3" class="form-control" asp-for="EmployeeId" />
+                                    <span asp-validation-for="EmployeeId"></span>
+                                </div>
+                                <div class="inputs form-group">
+                                    <div class="grp-label">
+                                        <label asp-for="EmployeeContactNumber"></label>
+                                        <nop-required />
+                                    </div>
+                                    <input tabindex="5" class="form-control" asp-for="EmployeeContactNumber" />
+                                    <span asp-validation-for="EmployeeContactNumber"></span>
+                                </div>
+                                <div class="inputs form-group">
+                                    <div class="grp-label">
+                                        <label asp-for="OrderNumber"></label>
+                                        <nop-required />
+                                    </div>
+                                    <input tabindex="7" class="form-control" asp-for="OrderNumber" />
+                                    <span asp-validation-for="OrderNumber"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="inputs form-group">
+                                    <div class="grp-label">
+                                        <label asp-for="Email"></label>
+                                        <nop-required />
+                                    </div>
+                                    <input tabindex="2" class="form-control" asp-for="Email" />
+                                    <span asp-validation-for="Email"></span>
+                                </div>
+                                <div class="inputs form-group">
+                                    <div class="grp-label">
+                                        <label asp-for="Months"></label>
+                                        <nop-required />
+                                    </div>
+                                    <input tabindex="4" class="form-control" asp-for="Months" />
+                                    <span asp-validation-for="Months"></span>
+                                </div>
+                                <div class="inputs form-group">
+                                    <div class="grp-label">
+                                        <label asp-for="Amount"></label>
+                                        <nop-required />
+                                    </div>
+                                    <input tabindex="6" class="form-control" asp-for="Amount" />
+                                    <span asp-validation-for="Amount"></span>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <input type="submit" value="@T("Employee.Save")" class="btn btn-sm btn-orange" />
+                            </div>
+                        }
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

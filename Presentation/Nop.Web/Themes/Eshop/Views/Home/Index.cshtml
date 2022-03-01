@@ -1,0 +1,74 @@
+﻿@using Nop.Core
+@inject IWorkContext workContext
+@{
+    Layout = "_ColumnsOne";
+
+    //page class
+    Html.AppendPageCssClassParts("html-home-page");
+    var lang = workContext.WorkingLanguage.UniqueSeoCode;
+}
+
+<div class="page home-page">
+    <div class="page-body">
+        @await Component.InvokeAsync("TopicBlock", new { systemName = "HomePageText" })
+        @*<div style="width:100%;display:flex;justify-content:center;background:black;margin:15px 0;">
+            <video id="orange-video" autoplay height="350" muted="false">
+              <source src="~/images/orange.mp4" type="video/mp4">
+            </video>
+        </div>*@
+        @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.HomePageTop })
+        @await Html.PartialAsync($"_static.beforeproduct.{lang}")
+        @await Component.InvokeAsync("TopicBlock", new { systemName = "HomePageText2" })
+        @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.HomePageBeforeCategories })
+        @await Component.InvokeAsync("HomepageCategories")
+        @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.HomePageBeforeProducts })
+
+
+
+        @*@await Component.InvokeAsync("HomepageProducts")*@
+        <div id="div_homepageproduct">
+
+        </div>
+        @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.HomePageBeforeBestSellers })
+        @await Component.InvokeAsync("HomepageBestSellers")
+
+        @await Html.PartialAsync($"_static.afterproduct.{lang}")
+
+        @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.HomePageBeforeNews })
+        @await Component.InvokeAsync("HomepageNews")
+        @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.HomePageBeforePoll })
+        @await Component.InvokeAsync("HomepagePolls")
+        @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.HomePageBottom })
+    </div>
+</div>
+<script asp-location="Footer">
+    $(document).ready(function () {
+        GetHomePageProduct(0, false);
+    });
+    function GetHomePageProduct(pageIndex,isScroll = true) {
+            var postData = {
+                pageIndex: pageIndex
+            };
+
+            addAntiForgeryToken(postData);
+            $.ajax({
+                cache: false,
+                type: "POST",
+                url: "/Product/GetHomePageProduct",
+                data: postData,
+                dataType: 'json',
+                success: function (response) {
+                    $("#div_homepageproduct").html(response.html);
+                    if (isScroll) {
+                        $('html, body').animate({
+                            scrollTop: $("#div_homepageproduct").offset().top - 110
+                        }, 0);
+                    }
+                    
+                },
+                failure: function (response) {
+                    alert(response);
+                }
+            });
+    }
+</script>

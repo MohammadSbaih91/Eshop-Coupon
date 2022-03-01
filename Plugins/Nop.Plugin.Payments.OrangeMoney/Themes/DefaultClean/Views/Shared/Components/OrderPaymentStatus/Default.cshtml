@@ -1,0 +1,28 @@
+﻿@using Nop.Plugin.Payments.Eskadenia.Models
+@model PaymentStatusModel
+@{
+    Layout = null;
+}
+<div class="section order-completed">
+    <div class="details">
+        @if (Model.IsPaid)
+        {
+            <h4>@T("Plugins.Payments.Eskadenia.PaymentStatus.Success")</h4>
+        }
+        else
+        {
+            <h4>@T("Plugins.Payments.Eskadenia.PaymentStatus.Fail")</h4>
+            if (!string.IsNullOrWhiteSpace(Model.FailStatusMessage))
+            {
+                <h4>@Model.FailStatusMessage</h4>
+            }
+            @if (Model.CanRePostProcessPayment)
+            {
+                <p class="title">
+                    <strong>@T("Order.RetryPayment.Hint")</strong>
+                </p>
+                <a href="@Url.RouteUrl("RetryPayment", new { orderId= Model.OrderId})" class="button-1 re-order-button">@T("Order.RetryPayment")</a>
+            }
+        }
+    </div>
+</div>

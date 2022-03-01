@@ -1,0 +1,272 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <OutputPath>..\..\Presentation\Nop.Web\Plugins\Misc.AppointmentBooking</OutputPath>
+    <OutDir>$(OutputPath)</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <OutputPath>..\..\Presentation\Nop.Web\Plugins\Misc.AppointmentBooking</OutputPath>
+    <OutDir>$(OutputPath)</OutDir>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Domain\**" />
+    <Content Remove="Domain\**" />
+    <EmbeddedResource Remove="Domain\**" />
+    <None Remove="Domain\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="logo.jpg" />
+    <None Remove="plugin.json" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <EnableDefaultItems>false</EnableDefaultItems>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="AppointmentBookingPlugin.cs" />
+    <Compile Include="AppointmentBookingSettings.cs" />
+    <Compile Include="Areas\Admin\Controllers\AppbookconfigController.cs" />
+    <Compile Include="Areas\Admin\Controllers\AppointmentBranchController.cs" />
+    <Compile Include="Areas\Admin\Factories\AppointmentBranchModelFactory.cs" />
+    <Compile Include="Areas\Admin\Infrastructure\DependencyRegistrar.cs" />
+    <Compile Include="Areas\Admin\Models\ConfigurationModel.cs" />
+    <Compile Include="Areas\Admin\Models\AppointmentBranchListModel.cs" />
+    <Compile Include="Areas\Admin\Models\AppointmentBranchModel.cs" />
+    <Compile Include="Areas\Admin\Models\AppointmentBranchSearchModel.cs" />
+    <Compile Include="Components\WidgetsAppointmentBookingDrawer.cs" />
+    <Compile Include="Components\CompleteTicket.cs" />
+    <Compile Include="Components\WidgetsAppointmentBookingViewComponent.cs" />
+    <Compile Include="Controllers\AppointmentBookingController.cs" />
+    <Compile Include="Data\AppointmentBookingObjectContext.cs" />
+    <Compile Include="Data\AppointmentBranchMap.cs" />
+    <Compile Include="Data\BookedAppointmentMap.cs" />
+    <Compile Include="Domains\AppointmentBranch.cs" />
+    <Compile Include="Domains\BookedAppointment.cs" />
+    <Compile Include="Infrastructure\DependencyRegistrar.cs" />
+    <Compile Include="Infrastructure\PluginNopStartup.cs" />
+    <Compile Include="Infrastructure\RouteProvider.cs" />
+    <Compile Include="Infrastructure\ViewLocationExpander.cs" />
+    <Compile Include="Models\AppointmentBranchModel.cs" />
+    <Compile Include="Models\AvailableDaysToTakeAppointment.cs" />
+    <Compile Include="Models\AvailableTimesToTakeAppointment.cs" />
+    <Compile Include="Models\BookAppointmentRequest.cs" />
+    <Compile Include="Models\BookAppointmentResponse.cs" />
+    <Compile Include="Models\Branch.cs" />
+    <Compile Include="Models\BranchDetail.cs" />
+    <Compile Include="Models\BranchList.cs" />
+    <Compile Include="Models\ConfirmAppointment.cs" />
+    <Compile Include="Models\JsonClass.cs" />
+    <Compile Include="Models\StoreDetailModel.cs" />
+    <Compile Include="Models\TodayWorkingShift.cs" />
+    <Compile Include="Services\AppointmentService.cs" />
+    <Compile Include="Services\EventConsumer.cs" />
+    <Compile Include="Services\IAppointmentService.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Localization\ResourceString\ResourceStringAr.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Localization\ResourceString\ResourceStringEn.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="logo.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="obj\Nop.Plugin.Misc.AppointmentBooking.csproj.nuget.dgspec.json" />
+    <Content Include="obj\project.assets.json" />
+    <Content Include="plugin.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Content\css\widget.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Content\css\widget.ltr.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Content\css\widget.rtl.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Presentation\Nop.Web.Framework\Nop.Web.Framework.csproj" />
+    <ProjectReference Include="..\..\Presentation\Nop.Web\Nop.Web.csproj">
+      <Private>false</Private>
+    </ProjectReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Areas\Admin\Views\Appbookconfig\Configure.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="Areas\Admin\Views\_ViewImports.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="Views\AppointmentBooking.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="Views\AppointmentBooking\Appointment.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="Views\AppointmentBooking\BookAppointmentCompleted.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="Views\AppointmentBooking\_AppointmentHeader.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="Views\AppointmentBooking\_AppointmentStoreDetail.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="Views\AppointmentBooking\_AppointmentStoreList.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="Views\AppointmentBooking\_AppointmentTime.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="Views\BuilderProduct\AttributeMappingProduct.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="Views\BuilderProduct\Details.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="Views\BuilderProduct\ProductDetails.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="Views\BuilderProduct\_CatalogSelectors.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="Views\BuilderProduct\_ProductBox.ProductBuilder.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="Views\PickupAddressList.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="Views\_ViewImports.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Areas\Admin\Views\Appbookconfig\Configure.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Areas\Admin\Views\AppointmentBranch\Create.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Areas\Admin\Views\AppointmentBranch\Edit.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Areas\Admin\Views\AppointmentBranch\List.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Areas\Admin\Views\AppointmentBranch\_CreateOrUpdate.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Areas\Admin\Views\_ViewImports.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="obj\Debug\netcoreapp2.1\Nop.Plugin.Misc.AppointmentBooking.assets.cache" />
+    <None Include="obj\Debug\netcoreapp2.1\Nop.Plugin.Misc.AppointmentBooking.csprojAssemblyReference.cache" />
+    <None Include="obj\Nop.Plugin.Misc.AppointmentBooking.csproj.nuget.g.props" />
+    <None Include="obj\Nop.Plugin.Misc.AppointmentBooking.csproj.nuget.g.targets" />
+    <None Include="obj\project.nuget.cache" />
+    <None Include="Views\CompleteTicket.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Views\AppointmentBookingDrawer.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Views\AppointmentBooking.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Views\AppointmentBooking\_AppointmentBooking.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Views\AppointmentBooking\Appointment.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Views\AppointmentBooking\BookAppointmentCompleted.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Views\AppointmentBooking\_AppointmentHeader.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Views\AppointmentBooking\_AppointmentStoreDetail.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Views\AppointmentBooking\_AppointmentStoreList.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Views\AppointmentBooking\_AppointmentTime.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <Content Include="Views\Content\img\angel-left.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Content\img\around-me.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Content\img\calendar-next.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Content\img\calendar-prev.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="Views\Content\img\close-button.svg" />
+    <Content Include="Views\Content\img\map-icon.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="Views\PickupAddressList.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Views\PickupAddressPopup.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Views\_ViewImports.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="RestSharp">
+      <HintPath>RestSharp.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Localization\ResourceString\ResourceStringAr.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Localization\ResourceString\ResourceStringEn.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Views\Content\css\widget.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Views\Content\css\widget.ltr.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Views\Content\css\widget.rtl.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Views\Content\img\close-button.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Views\Content\img\scooter.PNG">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <!-- This target execute after "Build" target -->
+  <Target Name="NopTarget" AfterTargets="Build">
+    <!-- Delete unnecessary libraries from plugins path -->
+    <MSBuild Projects="$(MSBuildProjectDirectory)\..\..\Build\ClearPluginAssemblies.proj" Properties="PluginPath=$(MSBuildProjectDirectory)\$(OutDir)" Targets="NopClear" />
+  </Target>
+</Project>

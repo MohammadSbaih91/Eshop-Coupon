@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Language Name="عربي">
+  <LocaleResource Name="Plugins.Misc.AppointmentBooking.APIUrl">
+    <Value>URL API</Value>
+  </LocaleResource>
+	<LocaleResource Name="Plugins.ExternalAuth.Orange.SSOLogin">
+		<Value>تسجيل الدخول</Value>
+	</LocaleResource>
+	<LocaleResource Name="Plugins.ExternalAuth.Orange.SSOLogin">
+		<Value>تسجيل الدخول</Value>
+	</LocaleResource>
+	<LocaleResource Name="Account.Login.Welcome">
+		<Value>مرحبا, يرجى تسجيل الدخول!</Value>
+	</LocaleResource>
+	<LocaleResource Name="Account.Login.CheckoutAsGuest">
+		<Value>الاستمرار كزائر</Value>
+	</LocaleResource>
+</Language>

@@ -1,0 +1,166 @@
+@using Nop.Core
+@inject IStoreContext storeContext
+<div class="es-menu-accordion" id="nop-menu">
+    @*<h1 class="es-home">
+            <a href="https://eshop.orange.jo/en/">Shop home</a>
+        </h1>*@
+    <ul class="top-menu mega">
+        <li>
+            <h2 class="accordion-title">
+                <a href="javascript:void(0);">Mobile</a>
+            </h2>
+            <div class="sublist-toggle"></div>
+            <ul class="sublist first-level">
+                <li>
+                    <a href="https://www.orange.jo/en/offers/Mobilepostpaidoffers/">
+                        Mobile postpaid lines
+                    </a>
+                </li>
+
+                <li>
+                    <a href="https://www.orange.jo/en/offers/Mobileprepaidoffers/">
+                        Mobile prepaid lines
+                    </a>
+                </li>
+                <li>
+                    <a href="@(Nop.Services.Common.UrlStrucutre.UrlDecode("/yo-lines"))">
+                        YO Lines
+                    </a>
+                </li>
+
+                <li>
+                    <a href="@(Nop.Services.Common.UrlStrucutre.UrlDecode("en/mobile/governorate-lines"))">
+                        Mobile Governorates offers
+                    </a>
+                </li>
+
+                <li>
+                    <a href="@(Nop.Services.Common.UrlStrucutre.UrlDecode("en/mobile/mobile-phone"))">
+                        Mobile phones
+                    </a>
+                </li>
+
+                @*<li>
+            <a href="/mobile-packages">
+                Mobile packages
+            </a>
+        </li>*@
+            </ul>
+        </li>
+        <li>
+            <h2 class="accordion-title">
+                <a href="javascript:void(0);">
+                    Internet
+                </a>
+            </h2>
+            <div class="sublist-toggle"></div>
+            <ul class="sublist first-level">
+                <li>
+                    <a href="https://www.orange.jo/en/offers/ADSLOffers/">
+                        ADSL offers
+                    </a>
+                </li>
+                <li>
+                    <a href="@(Nop.Services.Common.UrlStrucutre.UrlDecode("en/upgrade"))">
+                        ADSL Speed upgrade
+                    </a>
+                </li>
+
+                <li>
+                    <a href="@(Nop.Services.Common.UrlStrucutre.UrlDecode("en/4g-flybox-offer"))">
+                        4G Flybox offers
+                    </a>
+                </li>
+
+                <li>
+                    <a href="@(Nop.Services.Common.UrlStrucutre.UrlDecode("/prepaid-orange-net-offers"))">
+                        Prepaid Orange net offers
+                    </a>
+                </li>
+
+                <li>
+                    <a href="@(Nop.Services.Common.UrlStrucutre.UrlDecode("/bait-al-aileh-offers"))">
+                        Bait Al Aileh offers
+                    </a>
+                </li>
+
+            </ul>
+        </li>
+        <li>
+            <h2 class="accordion-title">
+                <a href="javascript:void(0);">Fiber</a>
+            </h2>
+
+            <div class="sublist-toggle"></div>
+            <ul class="sublist first-level">
+
+                <li>
+                    <a href="https://www.orange.jo/en/offers/fiber-offers/pages/default.aspx">
+                        Orange Fiber Fast Internet
+                    </a>
+                </li>
+
+                @*<li>
+                    <a href="/fiber-speed-upgrade">
+                        Fiber speed upgrade
+                    </a>
+                </li>*@
+            </ul>
+        </li>
+        <li>
+            <h2 class="accordion-title">
+                <a href="javascript:void(0);">Fixed line </a>
+                <ul class="sublist first-level">
+                    <li>
+                        <a href="@(Nop.Services.Common.UrlStrucutre.UrlDecode("/fixed-postpaid-lines"))">
+                            Fixed postpaid lines
+                        </a>
+                    </li>
+                </ul>
+            </h2>
+        </li>
+        <li>
+            <h2 class="accordion-title">
+                <a href="javascript:void(0);">Accessories </a>
+            </h2>
+            <ul class="sublist first-level">
+                <li>
+                    <a href="@(Nop.Services.Common.UrlStrucutre.UrlDecode("/en/accessories/mobile-accessories"))">
+                        Mobile accessories
+                    </a>
+                </li>
+                <li>
+                    <a href="@(Nop.Services.Common.UrlStrucutre.UrlDecode("/internet-accessories"))">
+                        Internet accessories
+                    </a>
+                </li>
+                <li>
+                    <a href="@(Nop.Services.Common.UrlStrucutre.UrlDecode("/fixed-phones"))">
+                        Fixed phones
+                    </a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    <div class="top-menu es-menu-footer">
+        <div>
+            @*https://eshop.orange.jo/en/promotions/*@
+            <a href="@(Nop.Services.Common.UrlStrucutre.UrlDecode("/en/eshop-promotions"))">
+                <span class="icon-discount-white">&nbsp;</span> <span>Promotions</span>
+            </a>
+        </div>
+        <div>
+            <a href="https://www.orange.jo/en/myaccount/pages/quick-pay.aspx" target="_self">
+                <span class="icon-top-up-euro">&nbsp;</span> <span>Pay bills and recharge</span>
+            </a>
+        </div>
+        <div>
+            <a href="@Url.RouteUrl("CompareProducts")">
+                <span class="icon-top-up-euro">&nbsp;</span> <span>@T("Products.Compare.List")</span>
+            </a>
+        </div>
+        <div class="float-right close">
+            <i class="fas fa-times"></i>
+        </div>
+    </div>
+</div>

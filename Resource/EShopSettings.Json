@@ -1,0 +1,9 @@
+﻿[{
+  "EShopSettings.HidePaymentFromOpc":true,
+  "EShopSettings.HideShippingMethodFromOpc":false
+}
+,
+{
+ 
+  "catalogsettings.allowanonymoususerstoemailafriend":true
+}]

@@ -1,0 +1,549 @@
+﻿@using Nop.Core
+@inject IWorkContext workContext
+@inject IThemeContext themeContext
+@using Nop.Web.Framework.UI
+
+@{
+    var lang = workContext.WorkingLanguage.UniqueSeoCode;
+    var themeName = themeContext.WorkingThemeName;
+}
+<style>
+
+/****** ESHOP CONTENT UI ISSUES *******/
+a {
+                color: inherit !important;
+                text-decoration: none !important;
+}
+input {
+                font-size: 14px !important;
+}
+p {
+	color: #000;
+    margin: 0 0 1rem;
+}
+
+input[type="button"], input[type="submit"] {
+	font-weight: bold;
+	font-size: 16px !important;
+	font-family: Arial,sans-serif;
+	padding: 10px 30px;
+}
+.st-shopwith .st-content {
+	    display: block;
+}
+.st-shopwith .st-content>div {
+	width: 23%;
+	display: inline-block;
+	float: left;
+}
+
+
+.zoomPage .es-header-wraper.is-admin+.master-wrapper-content{margin-top:0px;padding-top:210px;}
+
+.pager li {
+	display: inline-block !important;
+}
+.pager li>a:hover {
+	color: #fff !important;
+}
+.pager li span {
+	color: #000;
+}
+.es-header-wraper+.master-wrapper-content {
+    min-height: 65vh;
+}
+.category-description ul h2, .manufacturer-description ul h2, .full-description ul h2, .topic-block ul h2, .topic-page ul h2, .post-body ul h2 {
+color: #ff6600;
+}
+.product-essential p {
+    color: #000;
+}
+.product-essential table p {
+    text-align: center;
+}
+.img-circle {
+    border-radius: 50% !important;
+}
+.breadcrumb {
+    padding: 2px 5px !important;
+    background: #f3f3f3;
+}
+.breadcrumb ul {
+    margin-bottom: 0;
+}
+.breadcrumb li i {
+    position: relative;
+}
+html:not(.html-home-page) .master-column-wrapper {
+    padding-top: 0;
+}
+.bar-notification .content a {
+	text-decoration: underline !important;
+}
+.bar-notification .content {
+    color: #fff;
+}
+.cart .overlay.out-of-stock .overlay-msg, .cart .price, .checkout-cart-index .overlay.out-of-stock .overlay-msg, .checkout-cart-index .price {
+	font-size: 1.2em !important;
+}
+
+.ui-widget.ui-widget-content .ui-widget-header {
+    background: #000 !important;
+}
+.required {
+	color: #ff6600;
+}
+/*.home-page-category-grid .title a {
+	min-height: 135px;
+}*/
+.home-page-category-grid, .sub-category-grid, .manufacturer-grid, .vendor-grid {
+	margin: 0 0 60px 0;
+}
+.slider-wrapper.theme-custom {
+	margin: 0 0 0 0 !important
+}
+.st-onstore .st-content a, .st-service .st-content>div {
+	    margin: 0 .5% 0;
+}
+.st-service .st-content>div{margin-bottom:30px !important;padding: 0 15px;}
+.st-onstore, .st-service {
+	margin: 0 0 40px 0;
+}
+.product-grid .title {
+	padding: 0;
+	margin-bottom: 20px;
+}
+.home-page .product-grid .item-box, .product-details-page .product-grid .item-box, .shopping-cart-page .product-grid .item-box {
+	margin: 0 .5% 40px 0;
+}
+.center-1 {
+    margin: 0 0 50px;
+}
+.product-grid, .product-list {
+    margin: 0 5px 80px 0;
+}
+.st-buystep .st-content>div {
+    text-align: center;
+    line-height: 10px;
+}
+.st-buystep .st-content>div h3 {
+	    margin-bottom: 10px !important;
+}
+.bar-notification.success {
+    background-color: #50BE87;
+}
+.bar-notification.error {
+	background-color: #CD3C14;
+}
+.bar-notification .close {
+	width: 30px;
+	height: 30px;
+	opacity: 0.7;
+    border-radius: 50% !important;
+    display: inline-block;
+}
+.nivo-nav i {
+    color: #fff;
+    font-size: 20px;
+    padding-top: 10px;
+}
+.nivo-nav a {
+    background: rgba(0,0,0,0.5) !important;
+    box-shadow: none !important;
+    border: 1px solid #666;
+}
+.theme-custom .nivo-controlNav a {
+	margin: 0 3px;
+	border-radius: 50% !important;
+}
+.terms-of-service label {
+	display: grid;
+	padding-left: 10px;
+}
+.terms-of-service input {
+	float: left;
+}
+
+.page-title {
+    margin-bottom: 0 !important;
+}
+.page-title>h1 {
+	font-size: 50px;
+}
+.side-2 {
+	margin-top: 67px;
+}
+.block .list a:before {
+	background-color: #ff6600;
+}
+.block .list .sublist a:before {
+	background-color: #ccc;
+}
+.compare-products>input, .email-a-friend>input {
+	font-weight: normal;
+}
+.compare-products-page .clear-list {
+	color: #fff !important;
+	font-weight: bold;
+}
+.product-filter .group li {
+    background-color: #eee;
+    margin: 5px 0;
+    padding: 5px;
+    font-size: 12px;
+    display: block;
+}
+.filtered-items .item {
+    color: #ff6600;
+    background-color: #eee;
+    margin: 5px 0;
+    padding: 5px;
+    font-size: 12px;
+    display: block;
+}
+.remove-filter a {
+	height: 30px;
+	border: 1px solid #000;
+	background-color: #fff;
+	padding: 8px 10px;
+	text-transform: initial;
+}
+.remove-filter a:hover {
+	background-color: #eee;
+}
+.btn-info {
+    color: #fff !important;
+    background-color: #000;
+    border-color: #000;
+}
+.price {
+    color: #FF7900 !important;
+    margin: 15px 0 !important;
+}
+.pager li>a, .pager li>span {
+	padding: 10px 14px !important;
+}
+.anonymous-order-track-page .page-title h1 {
+    background: transparent !important;
+    color: #000 !important;
+    padding: 10px 0 !important;
+}
+.anonymous-order-track-page .button-1 {
+	padding: 10px 30px !important;
+	margin: 20px 0;
+}
+.accordionx {
+    font-size: 18px;
+    font-weight: bold;
+    border: 0;
+    background: transparent;
+    border-bottom: 1px solid #000;
+    padding: 15px 0;
+    width: 100%;
+    text-align: left;
+}
+.price-label {
+	float: none !important;
+}
+.product-title>a {
+	color: #000 !important;
+	font-size: 18px;
+}
+.page-title>h1, .topic-block-body>h2 {
+	font-size: 40px;
+	font-weight: bold;
+    color: #000;
+}
+.page-body .st-headline {
+	font-size: 35px;
+    font-weight: bold;
+    color: #000;
+    text-align: left;
+    padding: 0 0 0;
+}
+.st-shopwith .st-headline{padding-bottom:0;text-align:left;}
+
+.page-body .st-headline strong{position:relative;}
+ .page-body .st-headline strong:after { background: #F16E00; content: ''; position: absolute; bottom: -15px; left: 0; height: 4px; width: 80px; margin-left: 0; margin: 5px auto; }
+
+.item-box {
+    width: 28.33333%;
+    margin: 0 1.5% 30px 1.5%;
+}
+.category-description ul, .manufacturer-description ul, .full-description ul, .topic-block ul, .topic-page ul, .post-body ul {
+	    padding: 0 25px;
+}
+.html-product-details-page, ul.icon, li.icon_item{
+    padding: 0;
+}
+
+.sub-category-grid .title a {
+	font-size: 24px;
+}
+.hdr-H4 {
+	font-size: 24px !important;
+}
+.order-completed-page .page-title {
+	text-align: center;
+	padding-top: 30px !important;
+}
+.order-completed .title {
+	text-align: center;
+}
+.order-completed .details .details-link {
+	color: #ff6600;
+}
+.write-review {
+	border: 0;
+}
+.review-title {
+	text-align: left;
+	padding: 20px 0;
+	margin: 0;
+}
+.review-title h1 {
+	font-size: 30px;
+}
+.write-review .result {
+	background: transparent;
+}
+.write-review .result h3 {
+	font-size: 24px;
+}
+.attributes dt, .attribute-label {
+	font-size: 24px;
+}
+.cart-collaterals .coupon-code input[type="text"], .cart-collaterals .coupon-code input[type="submit"] {
+	height: 40px;
+}
+.subscribe-newsletter label {
+	width: fit-content !important;
+}
+.shopping-cart-page .common-buttons {
+	margin: 0;
+}
+.payment-method .label, .shipping-method .label {
+    font-size: inherit;
+    color: inherit;
+    padding: 0;
+	font-weight: normal;
+}
+.img-responsive {
+    max-width: 100%;
+}
+.cart td {
+    font-size: 12px;
+}
+.pickup-in-store .description {
+	font-size: 20px;
+}
+.opc input[type="text"], .opc select {
+	height: 40px;
+}
+.close i {
+    color: #fff !important;
+}
+.checkout-page .field-validation-error {
+	margin-left: 230px;
+}
+
+@@media (max-width: 768px) {
+.es-header-wraper.is-admin+.master-wrapper-content {
+    margin-top: 20px;
+}
+.zoomPage .es-header-wraper.is-admin+.master-wrapper-content {
+    margin-top: 0px;
+    padding-top:20px;
+}
+.item-box {
+    width: 47%;
+}
+.page-body {
+	text-align: left;
+}
+.quantity>.td-title {
+	vertical-align: middle;
+}
+.cart tr {
+	width: 100%;
+}
+.cart tr label {
+	vertical-align: top;
+}
+.st-shopwith .st-content>div {
+	width: 48% !important;
+}
+.side-2 {
+    margin-top: 0;
+	margin-bottom: 0px;
+}
+.side-2 .block .title {
+    padding: 8px 30px 8px 10px;
+    font-size: 18px;
+	background-position: right 50%;
+}
+.checkout-page .field-validation-error {
+    margin-left: 0;
+}
+.product-essential p {
+    word-break: break-word;
+}
+}
+@@media (max-width: 514px) {
+    .item-box .product-box-add-to-cart-button {
+        font-size: 14px !important;
+        padding: 10px 12px;
+    }
+input[type="button"], input[type="submit"] {
+	font-size: 18px !important;
+	padding: 10px 20px;
+}
+.page-title>h1, .topic-block-body>h2 {
+    font-size: 26px;
+}
+.home-page-category-grid .title, .sub-category-grid .title {
+    font-size: 18px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    height: 55px;
+}
+.page-title>h1, .topic-block-body>h2 {
+	text-align: left;
+	line-height: 44px;
+}
+.order-summary-content table {
+	max-width: 100% !important;
+}
+.table {
+	overflow-x: auto !important;
+	max-width: 320px !important;
+	width: 100% !important;
+	display: block !important;
+}
+#services .table.table-bordered td {
+	min-width: 200px;
+}
+#services .table.table-bordered p {
+    white-space: initial;
+}
+.product-title>a {
+    font-size: 16px;
+}
+.item-box .product-title {
+	height: 55px;
+}
+}
+@@media (max-width: 375px) {
+.product-title>a {
+    font-size: 23px;
+}
+}
+@@media (max-width: 320px) {
+.product-title>a {
+    font-size: 12px;
+}
+}
+</style>
+
+
+<!--
+<link rel="stylesheet" href="https://www.orange.jo/_layouts/15/orange2013master/en/assets/css/OldFinalAllCSS2.css">
+<link rel="stylesheet" href="https://www.orange.jo/en/documents/new_brand/brand_framework_shop.css">
+<link rel="stylesheet" href="https://eshop.orange.jo/en/skin/frontend/eshop/eshop/css/bootstrap-orange2015.min.css">
+<link type="text/css" rel="stylesheet" href="https://www.orange.jo/EN/Documents/new_brand/orange_brand_framework_export.css">
+<link type="text/css" rel="stylesheet" href="https://eshop.orange.jo/en/media/css_secure/29d6f40f74c9a05ca6a337be9ee5cb70.css">
+-->
+
+@*<link type="text/css" rel="stylesheet" href="https://eshop.orange.jo/en/media/css_secure/29d6f40f74c9a05ca6a337be9ee5cb70.css">*@
+
+
+<!-- FOR JavaScript file -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+@{
+    if (workContext.WorkingLanguage.Rtl)
+    {
+        Html.AppendCssFileParts($"~/Themes/{themeName}/Content/css/orange-style.rtl.css");
+    }
+    else
+    {
+        Html.AppendCssFileParts($"~/Themes/{themeName}/Content/css/orange-style.css");
+    }
+
+    Html.AppendCssFileParts($"~/Themes/{themeName}/Content/css/bootstrap-orange2015.min.css");
+    Html.AppendCssFileParts($"https://www.orange.jo/_layouts/15/orange2013master/en/assets/css/OldFinalAllCSS2.css");
+    Html.AppendCssFileParts($"https://www.orange.jo/en/documents/new_brand/brand_framework_shop.css");
+    //Html.AppendCssFileParts($"https://eshop.orange.jo/en/skin/frontend/eshop/eshop/css/bootstrap-orange2015.min.css");
+    Html.AppendCssFileParts($"https://www.orange.jo/EN/Documents/new_brand/orange_brand_framework_export.css");
+    //Html.AppendCssFileParts($"https://eshop.orange.jo/en/media/css_secure/29d6f40f74c9a05ca6a337be9ee5cb70.css");
+
+
+}
+
+<div class="header">
+    @* @await Html.PartialAsync("_OrangeStyles") *@
+    @await Component.InvokeAsync("Widget", new {widgetZone = PublicWidgetZones.HeaderBefore})
+    <div class="header-upper">
+        @*<div class="header-selectors-wrapper">
+            @await Component.InvokeAsync("TaxTypeSelector")
+            @await Component.InvokeAsync("CurrencySelector")
+            @await Component.InvokeAsync("LanguageSelector")
+            @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.HeaderSelectors })
+        </div>*@
+        @await Html.PartialAsync($"_Static.HeaderLinks.{lang}")
+        <div class="header-links-wrapper">
+            @await Component.InvokeAsync("HeaderLinks")
+            @await Component.InvokeAsync("FlyoutShoppingCart")
+        </div>
+    </div>
+    @await Html.PartialAsync("_Static.HeaderSocialMedia")
+    @await Component.InvokeAsync("Widget", new {widgetZone = PublicWidgetZones.HeaderMiddle})
+    <div class="es-hr full-width clear-fix"></div>
+    <div class="header-lower">
+        <div class="header-logo">
+            @await Component.InvokeAsync("Logo")
+        </div>
+        @await Html.PartialAsync($"_Static.Menu.links.{lang}")
+        <div class="hd-lower-right">
+            <div id="topcartlink-mobile">
+                <a href="@Url.RouteUrl("ShoppingCart")" class="ico-cart">
+                    <span class="cart-label">
+                        <i class="fas fa-shopping-cart"></i>
+                    </span>
+                </a>
+            </div>
+            <div class="es-profile-mobile">
+                <a href="@($"https://www.orange.jo/{lang}/myaccount/pages/default.aspx")">
+                    <img alt="Profile" src="~/Themes/Eshop/Content/Images/profile.png" class="margin-top--5 margin-left-5 login-icon-large">
+                </a>
+            </div>
+            <div class="es-search">
+                <div class="search-icon">
+                </div>
+            </div>
+            <div class="es-menu">
+                <span class="es-menu-icon">
+                    <small></small>
+                    <small></small>
+                    <small></small>
+                    <i class="fas fa-times close"></i>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="mobile-header-links">
+        <div class="es-hr full-width clear-fix"></div>
+        @await Component.InvokeAsync("HeaderLinks")
+        <div class="es-hr full-width clear-fix"></div>
+    </div>
+
+    <div class="search-box store-search-box">
+        @await Component.InvokeAsync("SearchBox")
+        <div class="close">
+            <i class="fas fa-times"></i>
+        </div>
+        <div class="es-hr full-width"></div>
+    </div>
+    @await Component.InvokeAsync("Widget", new {widgetZone = PublicWidgetZones.HeaderAfter})
+</div>

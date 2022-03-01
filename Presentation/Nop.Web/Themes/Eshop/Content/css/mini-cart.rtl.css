@@ -1,0 +1,126 @@
+.flyout-cart {
+    position: absolute;
+    top: 40px;
+    left: 0;
+    z-index: 100;
+    width: 300px;
+    box-shadow: 0px 2px 10px 1px rgba(141, 141, 141, 0.25);
+    background-color: #111;
+    color: #ffffff;
+}
+
+    .flyout-cart.active {
+        display: block;
+        max-height: 458px;
+        overflow-y: auto;
+    }
+
+.mini-shopping-cart {
+    padding: 12px;
+    text-align: right;
+    font-size: 12px;
+}
+
+    .mini-shopping-cart .count {
+        padding: 5px 0 15px;
+        color: #ffffff;
+    }
+
+        .mini-shopping-cart .count a {
+            margin: 0 2px;
+            font-weight: bold;
+            color: #ffffff;
+        }
+
+    .mini-shopping-cart .items {
+        border-top: 1px solid #333;
+        border-bottom: 1px solid #333;
+        margin: 0 0 20px;
+    }
+
+    .mini-shopping-cart .item {
+        overflow: hidden;
+        padding: 10px 0;
+    }
+
+    .mini-shopping-cart .picture {
+        float: right;
+        width: 70px;
+        text-align: center;
+    }
+
+        .mini-shopping-cart .picture a {
+            display: block;
+            position: relative;
+            overflow: hidden;
+        }
+
+            .mini-shopping-cart .picture a:before {
+                content: "";
+                display: block;
+                padding-top: 100%;
+            }
+
+        .mini-shopping-cart .picture img {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            margin: auto;
+            max-width: 100%;
+        }
+
+        .mini-shopping-cart .picture + .product {
+            margin: 0 80px 0 0;
+        }
+
+    .mini-shopping-cart .name {
+        margin: 0 0 10px;
+        font-size: 14px;
+    }
+
+        .mini-shopping-cart .name a {
+            color: #F16E00;
+        }
+
+            .mini-shopping-cart .name a:hover {
+                color: #FF4E00;
+            }
+
+    .mini-shopping-cart .attributes {
+        margin: 5px 0;
+        color: #ffffff;
+    }
+
+    .mini-shopping-cart .totals {
+        margin: 0 0 12px;
+        font-size: 14px;
+    }
+
+        .mini-shopping-cart .totals strong {
+            font-size: 16px;
+            color: #ffffff;
+        }
+
+    .mini-shopping-cart .buttons {
+        margin: 0 0 5px;
+    }
+
+    .mini-shopping-cart input[type="button"] {
+        display: inline-block;
+        border: none;
+        background-color: #F16E00;
+        padding: 10px 20px;
+        font-size: 12px;
+        color: #fff;
+        text-transform: uppercase;
+    }
+
+        .mini-shopping-cart input[type="button"]:hover {
+            background-color: #F16E00;
+        }
+        
+        .price {
+            color: #fff;
+        }

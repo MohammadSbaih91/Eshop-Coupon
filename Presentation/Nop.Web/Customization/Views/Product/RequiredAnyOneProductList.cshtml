@@ -1,0 +1,16 @@
+﻿@model IList<Nop.Web.Models.Catalog.ProductOverviewModel>
+@if (Model.Any())
+{
+    <div class="required-products-grid product-grid" id="required-any-one-from-other-products">
+        <div class="title">
+            <strong>@T("Products.RequiredProducts")</strong>
+        </div>
+         <span>@T("Products.RequiredProducts.Note")</span>
+        <div class="item-grid">
+            @foreach (var item in Model)
+            {
+                <div class="item-box">@await Html.PartialAsync("_ProductBox", item)</div>
+            }
+        </div>
+    </div>
+}

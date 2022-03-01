@@ -1,0 +1,73 @@
+﻿@model ProductDetailsModel
+@if (Model.DefaultPictureZoomEnabled)
+{
+    Html.AddScriptParts(ResourceLocation.Footer, "~/Themes/Eshop/Lib/magiczoom/magiczoom.js");
+    Html.AddCssFileParts("~/Themes/Eshop/Lib/magiczoom/magiczoom.css");
+    <div class="gallery app-figure" id="zoom-fig">
+        <div class="picture">
+
+            <a href="@Model.DefaultPictureModel.FullSizeImageUrl" title="@Model.DefaultPictureModel.Title" class="MagicZoom" id="main-product-img-lightbox-anchor-@Model.Id">
+                <img alt="@Model.DefaultPictureModel.AlternateText" src="@Model.DefaultPictureModel.FullSizeImageUrl" title="@Model.DefaultPictureModel.Title" itemprop="image" id="main-product-img-@Model.Id"/>
+            </a>
+        </div>
+
+        @if (Model.PictureModels.Count > 1)
+        {
+            <div class="picture-thumbs selectors">
+                @foreach (var picture in Model.PictureModels)
+                {
+                    <a data-zoom-id="main-product-img-lightbox-anchor-@Model.Id" class="thumb-item"
+                       href="@picture.FullSizeImageUrl" title="@picture.Title"
+                       data-image="@picture.FullSizeImageUrl">
+                        <img srcset="@picture.ThumbImageUrl" src="@picture.ThumbImageUrl" title="@picture.Title"/>
+                    </a>
+                }
+            </div>
+        }
+    </div>
+    <script asp-location="Footer">
+                window.mZoom = {};
+                 var mzOptions = {
+                   //zoomHeight: 500,
+                   zoomPosition: $('html[dir="rtl"]').length?"left":"right",
+                   variableZoom: true
+                 };
+                   $(document).ready(function () {
+                      
+                       $(".catalog-product-details [id^='product_attribute_input_'] input[type='radio']").on('click', function (e) {
+                           if (e.originalEvent == undefined) {
+                               return;
+                           }
+                           observerToUpdateImage();
+                       });
+                   });
+                   
+                   function observerToUpdateImage() {
+                       window.MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver;
+               
+                           var target = document.querySelector('#main-product-img-@Model.Id'),
+                           // create an observer instance
+                               observer = new MutationObserver(function (mutation) {
+                                   var lastindex = mutation.length - 1;
+                                   var newImgUrl=$(mutation[lastindex].target).attr('src')
+                                   MagicZoom.update('main-product-img-@Model.Id', newImgUrl, newImgUrl);
+                                   console.log(newImgUrl);
+                                   $(".mz-figure img").one("load", function () {
+                                   }).each(function () {
+                                       if (this.complete) $(this).load();
+                                   });
+                                   observer.disconnect();
+                           }),
+                           // configuration of the observer:
+                           config = {
+                               attributes: true // this is to watch for attribute changes.
+                           };
+                       // pass in the element you wanna watch as well as the options
+                       observer.observe(target, config);
+                   }
+            </script>
+}
+else
+{
+    @await Html.PartialAsync("~/Views/Product/_ProductDetailsPictures.cshtml", Model)
+}

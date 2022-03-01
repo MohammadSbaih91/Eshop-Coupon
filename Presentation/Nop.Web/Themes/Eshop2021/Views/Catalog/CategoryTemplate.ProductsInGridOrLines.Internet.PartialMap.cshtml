@@ -1,0 +1,11 @@
+@model string
+<div class="title">
+    <strong>@T("ProductDetail.Internet.Map.Coverage")</strong>
+    <h2>@T($"ProductDetail.Internet.Internet.Map.{Model.Replace(" ","")}")</h2>
+</div>
+<div class="row">
+    <div class="col-12">
+        <iframe src="@T("Category.IFrame.Url")" width="1647" height="677" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+    </div>
+</div>
+

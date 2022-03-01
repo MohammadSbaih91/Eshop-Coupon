@@ -1,0 +1,31 @@
+﻿@model IList<ProductDetailsModel.ProductAttributeModel>
+@using Nop.Core.Domain.Catalog
+@using System.Text
+@using Nop.Services.Media
+@using Nop.Services.Configuration;
+
+@inject IDownloadService downloadService
+@inject CatalogSettings catalogSettings
+@inject ISettingService settingService
+@{
+    var simType = settingService.GetSettingByKey<int>(EShopHelper.SimTypeAttribute);
+
+    var attribute = Model.Where(p => p.ProductAttributeId == simType).FirstOrDefault();
+}
+@if (attribute != null)
+{
+    var controlId = $"product_attribute_{attribute.Id}";
+    var textPrompt = !string.IsNullOrEmpty(attribute.TextPrompt) ? attribute.TextPrompt : attribute.Name;
+    <ul id="@($"product_attribute_input_{attribute.Id}")">
+        @foreach (var attributeValue in attribute.Values)
+        {
+            <li>
+                <input checked="@attributeValue.IsPreSelected" class="hidden-radio" type="radio" value="@attributeValue.Id" id="@(controlId)_@(attributeValue.Id)" name="@(controlId)">
+                <span><label for="@(controlId)_@(attributeValue.Id)">@attributeValue.Name</label></span>
+            </li>
+
+        }
+    </ul>
+
+}
+

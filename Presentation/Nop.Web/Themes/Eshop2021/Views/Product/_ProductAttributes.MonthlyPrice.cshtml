@@ -1,0 +1,101 @@
+﻿@model IList<ProductDetailsModel.ProductAttributeModel>
+@using Nop.Core.Domain.Catalog
+@using Nop.Core.Domain.Media
+@using System.Text
+@using Nop.Services.Media
+@using Nop.Services
+@using Nop.Services.Configuration;
+
+@inject IDownloadService downloadService
+@inject CatalogSettings catalogSettings
+@inject ISettingService settingService
+@{
+    var monthlyPriceAttrId = settingService.GetSettingByKey<int>(EShopHelperService.MonthlyPriceAttribute);
+
+
+    var attribute = Model.Where(p => p.ProductAttributeId == monthlyPriceAttrId).FirstOrDefault();
+
+}
+@if (attribute != null)
+{
+    var controlId = $"product_attribute_{attribute.Id}";
+    var textPrompt = !string.IsNullOrEmpty(attribute.TextPrompt) ? attribute.TextPrompt : attribute.Name;
+    var preSelected = attribute.Values.Where(p => p.IsPreSelected).FirstOrDefault();
+    var defaultValue = 0;
+    var defaultText = "";
+    var priceAdj = "";
+
+    if (!attribute.IsRequired)
+    {
+        defaultText = "---";
+    }
+    else
+    {
+        var firstValue = attribute.Values.FirstOrDefault();
+        if (firstValue != null)
+        {
+            var prive = "0";
+            if (!string.IsNullOrEmpty(firstValue.PriceAdjustment))
+            {
+                prive = firstValue.PriceAdjustment.Replace("+", "").Replace("-", "");
+            }
+            defaultValue = firstValue.Id;
+            defaultText = firstValue.Name;
+            priceAdj = EShopHelper.GetPriceFormatting(prive);
+        }
+    }
+    if (preSelected != null)
+    {
+        var prive = "0";
+        if (!string.IsNullOrEmpty(preSelected.PriceAdjustment))
+        {
+            prive = preSelected.PriceAdjustment.Replace("+", "").Replace("-", "");
+        }
+
+        defaultValue = preSelected.Id;
+        defaultText = preSelected.Name;
+        priceAdj = EShopHelper.GetPriceFormatting(prive);
+    }
+
+    <div id="@($"product_attribute_input_{attribute.Id}")">
+        <div class="select-sim-number">
+            <div class="dropdown common-dropdown" id="div_@(controlId)">
+                <input type="hidden" id="@(controlId)" name="@(controlId)" value="@defaultValue" />
+                <div class="dropdown-toggle" id="txt_@(controlId)" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    @defaultText
+                </div>
+                <div class="dropdown-menu">
+                    @if (!attribute.IsRequired)
+                    {
+                        <a onclick="attributeDropDownChange(this,'@(controlId)','0','---','0')" class="dropdown-item">---</a>
+                    }
+                    @foreach (var attributeValue in attribute.Values)
+                    {
+                        var adjPrice = "";
+                        if (attributeValue.PriceAdjustment != null)
+                        {
+                            adjPrice = attributeValue.PriceAdjustment.Replace("+", "").Replace("-", "");
+                            adjPrice = EShopHelper.GetPriceFormatting(adjPrice);
+                        }
+                        <a onclick="attributeDropDownChange(this,'@(controlId)','@(attributeValue.Id)','@(attributeValue.Name)','@(adjPrice)')" class="dropdown-item">@attributeValue.Name</a>
+                    }
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <script>
+        $(document).ready(function () {
+            $("#divdeviceprice").html("@(@Html.Raw(priceAdj))")
+        });
+    </script>
+    <div class="dis-amount" id="div_discAmount">
+        <label>@T("Products.Detail.DevicePriceWithPlan")</label>
+        <div class="prices">
+            <div class="product-price discounted-price">
+                <span itemprop="price" id="productPrice">
+                </span>
+            </div>
+        </div>
+    </div>
+}

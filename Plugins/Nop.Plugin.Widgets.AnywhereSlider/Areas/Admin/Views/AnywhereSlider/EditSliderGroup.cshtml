@@ -1,0 +1,28 @@
+@model SliderGroupModel
+@{
+    Layout = "_AdminLayout";
+
+    //page title
+    ViewBag.Title = T("Widgets.AnywhereSlider.Edit").Text;
+    //active menu item (system name)
+    Html.SetActiveMenuItemSystemName("plugin.AnywhereSlider");
+}
+
+<form asp-controller="AnywhereSlider" asp-action="EditSliderGroup" method="post" id="anywhereSliderGroup-form">
+    <div class="content-header clearfix">
+        <h1 class="pull-left">
+            @T("Widgets.AnywhereSlider.SliderGroup.Edit") - @Model.Title
+            <small>
+                <i class="fa fa-arrow-circle-left"></i>
+                <a href="@Url.Action("Edit", "AnywhereSlider", new { id = Model.SliderId})">@T("Widgets.AnywhereSlider.BackToList")</a>
+            </small>
+        </h1>
+        <div class="pull-right">
+            <button type="submit" name="save" class="btn bg-blue">
+                <i class="fa fa-floppy-o"></i>
+                @T("Admin.Common.Save")
+            </button>
+        </div>
+    </div>
+    @await Html.PartialAsync("_CreateOrUpdate.SliderGroup", Model)
+</form>

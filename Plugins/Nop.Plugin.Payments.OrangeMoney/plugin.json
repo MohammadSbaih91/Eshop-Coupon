@@ -1,0 +1,11 @@
+﻿{
+  "Group": "Payment methods",
+  "FriendlyName": "Orange Money",
+  "SystemName": "Payments.OrangeMoney",
+  "Version": "2.00",
+  "SupportedVersions": [ "4.10" ],
+  "Author": "QBS Team",
+  "DisplayOrder": 1,
+  "FileName": "Nop.Plugin.Payments.OrangeMoney.dll",
+  "Description": "This plugin allows paying with OrangeMoney"
+}

@@ -1,0 +1,6 @@
+﻿.html-product-details-page, ul.icon li {
+    padding-left:40px;
+}
+.html-product-details-page, .scrollbehavior {
+    scroll-behavior: smooth;
+}

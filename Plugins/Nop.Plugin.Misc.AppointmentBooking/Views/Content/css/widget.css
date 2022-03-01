@@ -1,0 +1,356 @@
+.html-appointment-page .appoint-head{margin-top:4.13vh;}
+.appoint-head h2{font-size:3.61vh;font-weight:600;color:#FF7900;margin:0;}
+.appoint-head p { color: #aaa; font-size: 1.65vh; margin: 0; }
+
+.full-layout-appoint { background: #000; color: #fff; padding: 5.16vh 0; }
+
+.appointment-content { padding: 3vh 0; }
+.appointment-content .btn-xx {display: flex; align-items: center;margin: 0 0 0 auto;height: 7.74vh;min-width: 23.74vh; justify-content: center;  font-size: 2.48vh;  font-weight: 500; }
+.appointment-first-popup .appointment-first-left .count-store { font-size: 1.86vh; color: #707070;  margin: 0 0 1vh 0;   font-weight: 400;}
+.appointment-first-popup .appointment-list-left h3 { font-size: 2.58vh; font-weight: 500; padding: 0 0 1vh;color:#000; display: block; }
+.appointment-first-popup .appointment-list-left p { font-size: 2vh; margin: 0 0 2vh; color: #000; line-height:2vh; }
+.appointment-first-popup .appointment-list-left p i { width: 2.37vh; height: 2vh; display: inline-block; position: relative; top: 0; }
+.appointment-first-popup .appointment-list-left p i.fa-circle { color: #51BE87; font-size: 1.65vh; }
+.appointment-first-popup .appointment-list-left p.circle-red i.fa-circle { color: #ff0000; }
+.appointment-first-popup .appointment-list-left p:last-of-type { margin-bottom: 0; }
+
+.appointment-first-popup .appointment-list-right { visibility: hidden; }
+.appointment-first-popup  .btn.btn-orange{height:6.40vh;font-size:2.17vh;min-width:12.69vh;line-height:2.17vh;}
+
+
+.appointment-first-popup .appointment-list { overflow-y: auto; max-height: 47vh; margin: 0 -1.55vh;}
+.appointment-first-popup .appointment-list ul { margin: 0 1.55vh; }
+.appointment-first-popup .appointment-list li {text-align:right; margin: 2.55vh 0; padding: 2.55vh 3vh; box-shadow: 0 1px 30px rgba(0,0,0,0.10); display: flex; justify-content: space-between; align-items: flex-end;}
+.appointment-first-popup .appointment-list li:hover { border: 2px solid #f16e00; }
+.appointment-first-popup .appointment-list li:hover h3 { color: #FF790E;font-weight:600; }
+.appointment-first-popup .appointment-list li:hover .appointment-list-right { visibility: visible; }
+
+.search-inp { display: flex; }
+.search-inp .inp-grop { margin-bottom: 2.58vh;width:100%; }
+.search-inp .inp-grop .inp-icon { position: relative; }
+.search-inp .inp-grop .inp-icon input {padding:0.91vh 1.83vh; height: 7.53vh; background: #fff; border: 1.5px solid #ccc; font-size:1.86vh;color:#000;min-width:22vh;}
+.search-inp .inp-grop .inp-icon.active input { border: 1.5px solid #FF7900;color:#FF7900;}
+.search-inp .inp-grop .inp-icon .icon-right { cursor: pointer; position: absolute; top: 0; height: 7.53vh; width: 4.64vh; text-align: center; line-height:8.67vh;}
+.search-inp .inp-grop .inp-icon .icon-right i{ width: 2.27vh;height:2.27vh;background:url('../img/around-me.svg')no-repeat center center;display:inline-block; background-size:2.27vh;}
+.search-inp select{min-width: 36.12vh; height: 7.53vh;color:#FF7900; border: 1.5px solid #ccc;font-size:1.86vh;font-weight:600;padding:0 2.58vh;}
+
+.appointment-content .back-btn{margin:0 0 6.19vh;}
+.appointment-content .back-btn .btn-outline-dark{font-size:1.86vh;color:#5F5F5F;line-height:0;height:4.95vh;min-width:13.31vh;padding:0 2vh;}
+.appointment-content .back-btn .btn-outline-dark:hover{border-color: #000;color:#5F5F5F;}
+.appointment-content .back-btn .angle-left{width:0.93vh;height:1.44vh;display:inline-flex;background:url('../img/angel-left.svg')no-repeat center center;position:relative;top:0.10vh;background-size:0.92vh;}
+
+.appointment-content .flex_row{display:flex;}
+.appointment-content .flex_row .flex-md-5{min-width:61.92vh;}
+.appointment-content .flex_row .flex-md-5.xs-width{min-width:46.54vh;}
+.appointment-content .flex_row  .flex-md-7{width:100%;}
+
+.checkout-appointment { padding: 2vh; }
+.checkout-appointment h3 { font-size: 1.65vh; color: #313131; padding: 0 0 1vh; display: block; margin: 0; }
+.checkout-appointment .flex_group { display: flex; width: 100%; }
+.checkout-appointment .inp-grop { width: 100%; }
+.checkout-appointment .search-inp .a-btn-group .btn { padding: 1.14vh 2.58vh; border-radius: 4px; }
+
+.view-map{display:none;}
+
+.popup-title { padding: 0 2vh; }
+ .popup-title h3 { font-size: 2vh; color: #313131; margin: 1.55vh 0 0; padding: 0; font-weight: 600; }
+
+.appointment-date-popup .select-time{margin-top: 4.64vh;overflow: hidden; height: 40.76vh; overflow-y: auto;}
+.appointment-date-popup .select-time ul { margin: 0 -2.58vh; padding: 0; list-style-type: none; }
+.appointment-date-popup .select-time ul li { width: 20%; }
+   .appointment-date-popup .select-time ul li span   {cursor: pointer;    margin: 1.05vh 2.58vh;    background: #fff; font-size: 2vh; padding: 1.44vh 1vh 1.55vh;  display: block;  color: #000;   font-weight: 500;    text-align: center;    border: 1px solid #ccc;   }
+   .appointment-date-popup .select-time ul li:hover span { background: #f4f4f4; }
+   .appointment-date-popup .select-time ul li.disabled-time span { background: #f2f2f2; color: #757575; }
+   .appointment-date-popup .select-time ul li:hover span { background-color: #f16e00; color: #fff; }
+   .appointment-date-popup .select-time ul li.disabled-time:hover span { background: #f2f2f2; color: #757575; }
+   .appointment-date-popup .select-time ul li.selected span { background: #f4f4f4; background-color: #f16e00; color: #fff; }
+
+ .appointment-date-popup .date-title { font-size: 2.58vh; margin: 0 0 2vh;color: #FE7500; font-weight: 500;}
+ .appointment-date-popup .date-btn { margin: 3vh 0 0; }
+  .appointment-date-popup .date-btn i { line-height: 0; display: inline-block; position: relative; top: 0.31vh; }
+
+.appointment-book-popup .book-selected h3 { color: #f16e00; font-size: 1.44vh; font-weight: 600 !important; padding: 1.55vh 0 1vh; display: block; }
+.appointment-book-popup .book-selected p { font-size: 1.34vh; margin: 0 0 0.72vh; color: #313131; }
+ .appointment-book-popup .book-selected p i { width: 2.48vh; height: 2vh; display: inline-block; position: relative; top: 0.52vh; }
+  .appointment-book-popup .book-selected p i.fa-circle { color: #51BE87; font-size: 1.24vh; }
+.appointment-book-popup .date-btn { margin-top: 1.55vh; }
+
+.appointment-book-popup .opening-hours { padding-top: 3vh; margin-top: 3vh; border-top: 1px solid #ababab; }
+ .appointment-book-popup .opening-hours h3 { font-size: 1.86vh ; font-weight: 400 !important; color: #000; margin-bottom: 2.58vh !important; }
+ .appointment-book-popup .opening-hours ul { margin: 0 -0.72vh; padding: 0; list-style-type: none; }
+  .appointment-book-popup .opening-hours ul li { width: 33.33%; }
+   .appointment-book-popup .opening-hours ul li .time-day { cursor: pointer; padding: 0.72vh 1vh; background: #fff; margin: 0.72vh; text-align: center; border: 1px solid #dedede; font-size: 1.34vh; }
+   .appointment-book-popup .opening-hours ul li:hover .time-day,
+   .appointment-book-popup .opening-hours ul li.selected .time-day { color: #f16e00; }
+   .appointment-book-popup .opening-hours ul li .time-day strong { display: block; font-weight: 600; font-size: 1.55vh; }
+
+ .appointment-book-popup .direction .store-img { margin: 0 0 3vh; }
+ .appointment-book-popup .direction .store-img img { max-width: 100%; }
+
+  
+.btn.btn-out-black { border: 1px solid #000; color: #000; }
+ .btn.btn-out-black:hover { background: #000; color: #fff !important; }
+
+ .book-completed .ticket{background:#fff;position:relative;text-align:center;max-width: 21.88vh;min-width:21.88vh; height:100%;}
+.book-completed .ticket ._cir { position: absolute; background: #000; height: 2.27vh; width: 2.27vh; border-radius: 180px !important; }
+.book-completed .ticket .c_cir { top: 2.33vh; position: absolute; background: #000; height: 2.27vh; width: 2.27vh; border-radius: 180px !important; }
+ .book-completed .ticket .c_cir.cL { left: -1.14vh; }
+ .book-completed .ticket .c_cir.cR { right: -1.14vh; }
+.book-completed .ticket ._cir.topl { left: -0.93vh; top: -0.72vh; }
+.book-completed .ticket ._cir.topr { right: -0.93vh; top: -0.72vh; }
+.book-completed .ticket ._cir.topbl { left: -0.72vh; bottom: -1.24vh; }
+.book-completed .ticket ._cir.topbr { right: -0.72vh; bottom: -1.24vh; }
+.book-completed .ticket .top { border-bottom: 2px dashed #797777; padding: 0 0 2vh; }
+ .book-completed .ticket .top .org-layer { display: inline-block; padding: 3vh 0 0; }
+ .book-completed .ticket .top .org-layer img{max-width:4.95vh;}
+ .book-completed .ticket .top h4 { color: #000; font-size: 1.44vh; padding: 1vh 0 1vh;  font-weight: bold;  margin: 0;}
+ .book-completed .ticket .top h2 { color: #000; font-size: 3.61vh; font-weight:600;margin:0;}
+.book-completed .ticket .bottom { position: relative; margin: 0 0 2vh; padding:0 0 3.51vh;}
+ .book-completed .ticket .bottom p { color: #000; font-size: 1.44vh; margin: 0.52vh 0 0; line-height:1.44vh;}
+
+ .book-completed .flex-ticket{display:flex;}
+ .book-completed .flex-ticket .btn-group-left{min-width:26.32vh;}
+ .book-completed .flex-ticket .btn-group-left .btn{padding:1vh 0 1.55vh;}
+ .book-completed .flex-ticket .btn-group-left .btn-orange{margin:0 0 2.58vh;}
+ .book-completed .flex-ticket .scooter-img{margin-top:6.19vh;}
+
+.order-confirm-page .appoint-booked .booked-bootom ._flex_data { display: flex; }
+.order-confirm-page .appoint-booked .booked-bootom .booked-img { margin-top: 9vh; }
+ .order-confirm-page .appoint-booked .booked-bootom .booked-img img { max-width: 100%; }
+
+ .order-completed .book-completed .flex-left{max-width: 86vh;}
+
+
+.datepicker-in .ui-datepicker{font-family: 'HelveticaNeueW20-55Roman';}
+.datepicker-in .ui-widget.ui-widget-content { box-shadow: 0 1px 2px rgba(0,0,0,0.2) !important; width: 100%; }
+.datepicker-in .ui-state-disabled, .datepicker-in .ui-widget-content .ui-state-disabled, .datepicker-in .ui-widget-header .ui-state-disabled { opacity: 1; }
+.datepicker-in .ui-datepicker-calendar th span { color: #6F6F6F; font-size: 1.86vh; font-weight: 400; }
+.datepicker-in .ui-datepicker-calendar th { padding: 1vh 0; }
+.datepicker-in .ui-datepicker .ui-datepicker-prev, .datepicker-in .ui-datepicker .ui-datepicker-next { top: 1.13vh !important;cursor:pointer; }
+.datepicker-in .ui-datepicker-title { text-transform: none; font-weight: 500; font-size: 1.65vh; color: #000; }
+.datepicker-in a.ui-datepicker-prev.ui-corner-all:before { content: ''; background: url('../img/calendar-prev.svg')no-repeat center center; height: 3.30vh; width: 2.58vh; background-size: 0.93vh; display: inline-block; }
+.ui-datepicker-header a.ui-datepicker-next:before { content: ''; background: url('../img/calendar-next.svg')no-repeat center center; height: 3.30vh; width: 2.58vh; background-size: 0.93vh; display: inline-block;}
+.datepicker-in .ui-widget.ui-widget-content .ui-widget-header { background: #fff !important; color: #313131 !important; padding: 1.24vh 0 !important; height: 5.88vh; box-shadow: 0 1px 30px 0 rgba(0,0,0,0.06); }
+.datepicker-in .ui-datepicker-calendar thead tr { border-bottom: 1px solid #f5f2f2 !important; }
+.datepicker-in .ui-datepicker-calendar th { background: #fff !important; }
+.datepicker-in .ui-state-default.ui-state-highlight { background: #f5f2f2 !important; }
+.datepicker-in .ui-widget.ui-widget-content { box-shadow: 0 10px 140px 0px rgba(0,0,0,0.05) !important; border: none !important; }
+.datepicker-in .ui-datepicker-calendar th, .datepicker-in .ui-datepicker-calendar td { border: none !important; }
+.datepicker-in .ui-datepicker .ui-state-default {color:#000; border: none !important; height: 3.61vh !important; width: 3.61vh !important; border-radius: 180px !important; font-weight: 400; font-size: 2vh; display: flex; justify-content: center; align-items: center; margin: 1vh auto; background: #f0f0f0; padding-top:0;}
+.datepicker-in .ui-datepicker-calendar .ui-state-active {display: flex;align-items: baseline; background: #F16E00 !important; border-radius: 180px !important; color: #fff !important; outline: 0 !important; box-shadow: none !important; border: none !important; }
+.datepicker-in .ui-datepicker table{box-shadow:0 0 50px rgba(0,0,0,0.06);}
+.ui-datepicker .ui-datepicker-prev span,
+.ui-datepicker .ui-datepicker-next span
+{
+ margin-left: -0.83vh;
+ margin-top: -0.83vh;
+}
+
+.marbottom10 { margin-bottom: 1vh; }
+.pickupinStore .dropdown-toggle{font-size: 2vh;padding: 2vh 3vh;height:7.5vh;}
+.html-checkout-page .pickupinStore .dropdown-toggle{min-width:20.43vh;}
+
+.appointment-first-left .map{height: 60.89vh !important;}
+
+
+@media all and (min-width:768px) and (max-width:991px)
+{
+ .book-completed .ticket{margin:0 !important;}
+ .search-inp .inp-grop{width:100%;}
+ .search-inp .flex{display:flex;align-items:center;}
+ .view-map{text-align:center; min-width:92px;margin-top:-20px;display:block;}
+ .view-map i{width:20px;height:20px;display:inline-block;background:url('../img/map-icon.svg')no-repeat center center;}
+ .view-map span{font-size:14px;color:#000;font-weight:500;display:block;}
+
+ .search-inp .inp-grop{margin:0 0 15px;}
+ .search-inp .inp-grop .inp-icon input{height:47px;font-size: 14px;padding: 0 15px;}
+ .search-inp .inp-grop .inp-icon .icon-right{height:47px;line-height:52px;right:4px;}
+ .search-inp .inp-grop .inp-icon .icon-right i{width: 20px;height: 20px;background-size: 20px !important;}
+ .search-inp select{height: 47px;font-size: 14px;padding: 0 15px;min-width:100%;}
+
+ .appoint-head h2{font-size:16px;}
+
+ .appointment-first-left .map{display:none;}
+ .appointment-first-left .map.active{display:block;}
+
+ .appointment-first-popup .appointment-first-left .count-store{font-size:14px;padding-top:10px;}
+
+ .appointment-first-popup .appointment-list-left h3{font-size:14px;margin:0;}
+ .appointment-first-popup .appointment-list-left p{font-size:14px;}
+ .appointment-first-popup .appointment-list-left p i.fa-circle{font-size:11px;width:17px;}
+ .appointment-first-popup .appointment-list li{padding: 10px 15px;margin:15px 0;}
+ .appointment-first-popup .appointment-list{max-height:278px;}
+
+ .appointment-first-left .map{ margin-top: 15px; }
+
+ .appointment-content .back-btn{margin:0 0 30px;}
+ .appointment-content .back-btn .angle-left{ width: 9px; height: 11px; background-size: 7px;  }
+ .appointment-content .back-btn .btn-outline-dark{font-size: 14px;height: 39px; min-width: 92px; padding: 0 10px;  }
+ .appointment-date-popup .date-title{font-size: 14px;margin: 0 0 10px;font-weight: 600;}
+
+ .appointment-content .flex_row { display: block; }
+.appointment-content .flex_row .flex-md-5{margin-right:0;min-width:100%;}
+.search-inp{display:block;}
+
+ .appointment-date-popup .date-btn{clear: both;text-align: center;}
+ .appointment-content .btn-xx{padding: 5px 10px;height: 60px; font-size: 16px; min-width: 180px;}
+ .datepicker-in { max-width: 400px; margin: 0 auto 30px;  }
+ .datepicker-in .ui-widget.ui-widget-content { margin: 0 auto; }
+ 
+ .checkout-appointment .search-inp { display: block; }
+
+ .appointment-content .flex_row .flex-md-5.xs-width{min-width:100%;}
+ .datepicker-in .ui-datepicker .ui-state-default{height: 26px !important;width: 26px !important;min-height:26px;line-height:23px;font-size:15px;padding-top:0;display: flex;align-items: end;}
+ .datepicker-in .ui-datepicker-calendar th span{font-size:14px;}
+ .appointment-first-popup .btn.btn-orange{height: 37px;font-size: 14px;min-width: 92px;line-height: 0;padding: 0;}
+ 
+ .appointment-date-popup .select-time {margin-top: 30px;height: 152px;}
+ .appointment-date-popup .select-time ul{margin:0 -7px;}
+ .appointment-date-popup .select-time ul li{width:33.33%;}
+ .appointment-date-popup .select-time ul li span{margin: 7px 7px;font-size: 14px;padding: 8px 10px 7px; }
+ .appointment-date-popup .date-btn{padding-top:15px;}
+
+ .appoint-head p { font-size: 13px; }
+ .appointment-content { padding: 20px 0; }
+ .order-confirm-page .appoint-booked .booked-bootom .booked-img { margin-top: 18px; text-align: center; }
+ .order-confirm-page .appoint-booked .booked-bootom ._flex_data { display: block; justify-content: space-between; }
+  .order-confirm-page .appoint-booked .booked-bootom ._flex_data .btn-booked { display: flex; margin: 0 0 20px; }
+  .order-confirm-page .appoint-booked .booked-bootom ._flex_data a { text-align: center; justify-content: center; margin:0;}
+   
+ .order-confirm-page .appoint-booked .booked-bootom { display: block; }
+ .order-confirm-page .appoint-booked .info-desc h2 { font-size: 24px; margin: 0 0 10px !important; line-height: 30px; }
+ .order-confirm-page .appoint-booked .info-desc p { font-size: 13px; }
+ .order-confirm-page .appoint-booked { margin: 0 0 40px; }
+
+ .book-completed .flex-ticket{margin:0 0 35px;}
+  .book-completed .ticket .top h2 { font-size: 23px; padding-top: 0; }
+  .book-completed .ticket .grp { padding: 0 10px; }
+  .book-completed .ticket .top h4 { font-size: 9px; padding: 0; }
+  .book-completed .ticket .top .org-layer { padding: 20px 5px 4px; font-size: 12px; }
+  .book-completed .ticket .bottom p { margin: 0; }
+  .book-completed .ticket .bottom { margin: 0; padding:0;}
+  .book-completed .ticket .c_cir { display: none; }
+  .book-completed .ticket .top { padding: 0; border-bottom: none; }
+  .book-completed { width: 100%; min-width: 100%; margin: 0; }
+   .book-completed .ticket .top { display: flex; padding: 11px 0 12px; align-items: center;width:43%; }
+   .book-completed .ticket .top .org-layer img{max-width:33px;}
+   .book-completed .ticket .top .org-layer{padding:0;}
+   .book-completed .ticket { display: flex; align-items: center; padding: 0 10px; justify-content: space-around; margin:0;max-width:100%;}
+    .book-completed .ticket .bottom p { font-size: 12px; }
+    .order-confirm-page .appoint-booked .booked-bootom .booked-img img { max-width: 50%; }
+     .order-completed .book-completed .flex-left h1{font-size: 20px;line-height: 29px;margin: 0 0 25px;}
+ .order-completed .book-completed .flex-left p{font-size: 14px;margin: 0 0 45px; line-height: 20px; }
+ .book-completed .flex-ticket{display:block;}
+ .book-completed .flex-ticket .btn-group-left{display:flex;margin:0 0 20px;}
+ .book-completed .flex-ticket .btn-group-left .btn{height:40px;font-size:14px;margin-top:0;padding: 10px 0 5px;}
+ .book-completed .ticket .top h4{white-space:nowrap;}
+
+.appointment-booked .order-completed .flex-right h2{font-size:22px;line-height:26px;}
+.appointment-booked .order-completed .flex-right p.head{font-size:16px;line-height:22px;}
+.appointment-booked .order-completed .flex-right .review ul li .name{font-size:12px;} 
+.appointment-booked .order-completed .flex-right .review ul li .icons span{width:22px;height:22px;background-size:22px !important;}
+.appointment-booked .order-completed .flex-right .review ul li .icons .custom-radio .custom-control-input:checked ~ .custom-control-label span{background-size:22px !important;}
+.appointment-booked .order-completed .flex-right .review ul li{height:46px;}
+
+}
+
+@media all and (max-width: 767px)
+{
+ .book-completed .ticket{margin:0 !important;}
+ .search-inp .inp-grop{width:100%;}
+ .search-inp .flex{display:flex;align-items:center;}
+ .view-map{text-align:center; min-width:13.79vh;margin-top:-3vh;display:block;}
+ .view-map i{width:3vh;height:3vh;display:inline-block;background:url('../img/map-icon.svg')no-repeat center center;}
+ .view-map span{font-size:2vh;color:#000;font-weight:500;display:block;}
+
+ .search-inp .inp-grop{margin:0 0 2.25vh;}
+ .search-inp .inp-grop .inp-icon input{height:7vh;font-size: 2vh;padding: 0 2.25vh;}
+ .search-inp .inp-grop .inp-icon .icon-right{height:7vh;line-height:7.79vh;right:0.60vh;}
+ .search-inp .inp-grop .inp-icon .icon-right i{width: 3vh;height: 3vh;background-size: 3vh !important;}
+ .search-inp select{height: 7vh;font-size: 2vh;padding: 0 2.25vh;min-width:100%;}
+
+ .appoint-head h2{font-size:2.40vh;}
+
+ .appointment-first-left .map{display:none;}
+ .appointment-first-left .map.active{display:block;}
+
+ .appointment-first-popup .appointment-first-left .count-store{font-size:2vh;padding-top:1.50vh;}
+
+ .appointment-first-popup .appointment-list-left h3{font-size:2vh;margin:0;}
+ .appointment-first-popup .appointment-list-left p{font-size:2vh;}
+ .appointment-first-popup .appointment-list-left p i.fa-circle{font-size:1.65vh;width:2.55vh;}
+ .appointment-first-popup .appointment-list li{padding: 1.50vh 2.49vh;margin:2.49vh 0;}
+ .appointment-first-popup .appointment-list{max-height:41.68vh;}
+
+ .appointment-first-left .map{ margin-top: 2.49vh; }
+
+ .appointment-content .back-btn{margin:0 0 4.50vh;}
+ .appointment-content .back-btn .angle-left{ width: 1.35vh; height: 1.65vh; background-size: 1vh;  }
+ .appointment-content .back-btn .btn-outline-dark{font-size: 2vh;height: 5.85vh; min-width: 13.79vh; padding: 0 1.50vh;  }
+ .appointment-date-popup .date-title{font-size: 2vh;margin: 0 0 1.50vh;font-weight: 600;}
+
+ .appointment-content .flex_row { display: block; }
+.appointment-content .flex_row .flex-md-5{margin-right:0;min-width:100%;}
+.search-inp{display:block;}
+
+ .appointment-date-popup .date-btn{clear: both;text-align: center;}
+ .appointment-content .btn-xx{padding: 0.75vh 1.50vh;height: 6.19vh; font-size: 2.40vh; min-width: 180px;}
+ .datepicker-in { max-width: 400px; margin: 0 auto 4.50vh;  }
+ .datepicker-in .ui-widget.ui-widget-content { margin: 0 auto; }
+ 
+ .checkout-appointment .search-inp { display: block; }
+
+ .appointment-content .flex_row .flex-md-5.xs-width{min-width:100%;}
+ .datepicker-in .ui-datepicker .ui-state-default{height: 3.90vh !important;width: 3.90vh !important;min-height:3.90vh;line-height:3.45vh;font-size:2.45vh;padding-top:0;display: flex;align-items: end;}
+ .datepicker-in .ui-datepicker-calendar th span{font-size:2vh;}
+ .appointment-first-popup .btn.btn-orange{height: 5.55vh;font-size: 2vh;min-width: 13.79vh;line-height: 0;padding: 0 0 0.5vh;}
+ 
+ .appointment-date-popup .select-time {margin-top: 4.50vh;height: 22.79vh;}
+ .appointment-date-popup .select-time ul{margin:0 -1vh;}
+ .appointment-date-popup .select-time ul li{width:33.33%;}
+ .appointment-date-popup .select-time ul li span{margin: 1vh 1vh;font-size: 2vh;padding: 1.20vh 1.5vh 1vh; }
+ .appointment-date-popup .date-btn{padding-top:15px;}
+
+ .appoint-head p { font-size: 1.95vh; }
+ .appointment-content { padding: 3vh 0; }
+ .order-confirm-page .appoint-booked .booked-bootom .booked-img { margin-top: 2.70vh; text-align: center; }
+ .order-confirm-page .appoint-booked .booked-bootom ._flex_data { display: block; justify-content: space-between; }
+  .order-confirm-page .appoint-booked .booked-bootom ._flex_data .btn-booked { display: flex; margin: 0 0 3vh; }
+  .order-confirm-page .appoint-booked .booked-bootom ._flex_data a { text-align: center; justify-content: center; margin:0;}
+   
+ .order-confirm-page .appoint-booked .booked-bootom { display: block; }
+ .order-confirm-page .appoint-booked .info-desc h2 { font-size: 3.60vh; margin: 0 0 1.50vh !important; line-height: 4.50vh; }
+ .order-confirm-page .appoint-booked .info-desc p { font-size: 1.95vh; }
+ .order-confirm-page .appoint-booked { margin: 0 0 6vh; }
+
+ .book-completed .flex-ticket{margin:0 0 5.25vh;}
+  .book-completed .ticket .top h2 { font-size: 3.45vh; padding-top: 0; }
+  .book-completed .ticket .grp { padding: 0 1.50vh; }
+  .book-completed .ticket .top h4 { font-size: 1.35vh; padding: 0; }
+  .book-completed .ticket .top .org-layer { padding: 3vh 0.75vh 0.60vh; font-size: 1.80vh; }
+  .book-completed .ticket .bottom p { margin: 0; }
+  .book-completed .ticket .bottom { margin: 0; padding:0;}
+  .book-completed .ticket .c_cir { display: none; }
+  .book-completed .ticket .top { padding: 0; border-bottom: none; }
+  .book-completed { width: 100%; min-width: 100%; margin: 0; }
+   .book-completed .ticket .top { display: flex; padding: 1.65vh 0 1.80vh; align-items: center;width:50%; }
+   .book-completed .ticket .top .org-layer img{max-width:4.95vh;}
+   .book-completed .ticket .top .org-layer{padding:0;}
+   .book-completed .ticket { display: flex; align-items: center; padding: 0 1.50vh; justify-content: space-around; margin:0;max-width:100%;}
+    .book-completed .ticket .bottom p { font-size: 1.80vh; }
+    .order-confirm-page .appoint-booked .booked-bootom .booked-img img { max-width: 50%; }
+     .order-completed .book-completed .flex-left h1{font-size: 3vh;line-height: 4.35vh;margin: 0 0 3.75vh;}
+ .order-completed .book-completed .flex-left p{font-size: 2vh;margin: 0 0 6.75vh; line-height: 3vh; }
+ .book-completed .flex-ticket{display:block;}
+ .book-completed .flex-ticket .btn-group-left{display:flex;margin:0 0 3vh;}
+ .book-completed .flex-ticket .btn-group-left .btn{height:6vh;font-size:15px;margin-top:0;padding: 1.10vh 0 0.75vh;}
+ .book-completed .ticket .top h4{white-space:nowrap;}
+
+.appointment-booked .order-completed .flex-right h2{font-size:3.30vh;line-height:3.90vh;}
+.appointment-booked .order-completed .flex-right p.head{font-size:2.40vh;line-height:3.30vh;}
+.appointment-booked .order-completed .flex-right .review ul li .name{font-size:13px;} 
+.appointment-booked .order-completed .flex-right .review ul li .icons span{width:3.30vh;height:3.30vh;background-size:3.30vh !important;}
+.appointment-booked .order-completed .flex-right .review ul li .icons .custom-radio .custom-control-input:checked ~ .custom-control-label span{background-size:3.30vh !important;}
+.appointment-booked .order-completed .flex-right .review ul li{height:6.90vh;}
+
+}

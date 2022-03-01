@@ -1,0 +1,78 @@
+﻿@model LanguageSelectorModel
+@using Microsoft.AspNetCore.Http
+@using System.Net
+@using Nop.Core
+@inject IWebHelper webHelper
+@inject IHttpContextAccessor httpContextAccessor
+@if (Model.AvailableLanguages.Count > 1)
+{
+    var rawUrl = webHelper.GetRawUrl(httpContextAccessor.HttpContext.Request);
+    @foreach (var lang in Model.AvailableLanguages)
+    {
+        var active = lang.Id.Equals(Model.CurrentLanguageId) ? "org-primary" : "";
+        if (lang.Id != Model.CurrentLanguageId)
+        {
+            <li class="es-lang">
+                <a class="@active" href="@webHelper.ModifyQueryString(Url.RouteUrl("ChangeLanguage", new { langid = lang.Id }, webHelper.CurrentRequestProtocol), "returnurl", rawUrl)" title="@lang.Name">
+                    @if (Model.UseImages)
+                    {<img title='@lang.Name' alt='@lang.Name' @(lang.Id == Model.CurrentLanguageId ? " class=selected" : null)
+                          src="@Url.Content("~/images/flags/" + @lang.FlagImageFileName) " />
+                    }
+                    else
+                    {
+                        @lang.Name
+                    }
+                </a>
+            </li>
+        }
+    }
+
+<div class="language-selector">   
+    <div class="dropdown">
+        <div class="dropdown-toggle" type="button" id="dropdownLanguage" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            @T("Footer.Language"):<div class="language-flag"></div>
+        </div>
+        <div class="dropdown-menu" aria-labelledby="dropdownLanguage">
+            <ul class="language-list">
+                @foreach (var lang in Model.AvailableLanguages)
+                {
+                    <li>
+                        <a href="@webHelper.ModifyQueryString(Url.RouteUrl("ChangeLanguage", new {langid = lang.Id}, webHelper.CurrentRequestProtocol), "returnurl", rawUrl)" title="@lang.Name">
+                            <span @(lang.Id == Model.CurrentLanguageId ? " class=selected" : null) data-attr="@lang.Name">@lang.Name</span>
+                        </a>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+</div>
+
+}
+
+<script asp-location="Footer">
+    $(document).ready(function () {
+        getSelectedLanguageFlag();
+
+        var onClickShowLanguageimgList = function () {
+            $(".language-list").toggleClass("active");
+        };
+        $(".language-flag").unbind("click").click(onClickShowLanguageimgList);
+
+        $(".master-wrapper-page").unbind("click").click(function (evt) {
+            if (evt.target.className == "language-flag" || evt.target.className == "images") {
+                return;
+            } else if ($(".language-list").is(".active")) {
+                $(".language-list").removeClass("active");
+            }
+        });
+
+    });
+    var getSelectedLanguageFlag = function () {
+        if ($("img.selected", ".language-selector")) {
+            var spa = $(".selected").attr("data-attr");
+            //var src = $(".selected").attr("src");
+            //$(".language-flag").html("<img class='images' src='" + src + "'>");
+            $(".language-flag").html("<span>" + spa + "</span>");
+        }
+    };
+</script>

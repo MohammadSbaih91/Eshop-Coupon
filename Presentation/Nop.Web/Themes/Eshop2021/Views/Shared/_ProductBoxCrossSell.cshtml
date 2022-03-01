@@ -1,0 +1,119 @@
+﻿@model ProductOverviewModel
+@using Nop.Core
+@using Nop.Core.Domain.Catalog
+@using Nop.Core.Domain.Orders
+@using Nop.Services.Catalog
+@inject CatalogSettings catalogSettings
+@inject IWorkContext workContext
+@inject IManufacturerService manufacturerService
+@{
+    var productColorAttributes = Model.ProductAttributeOverviewModels.Where(p => p.AttributeControlType == AttributeControlType.ColorSquares).FirstOrDefault();
+
+    var manufacturer = manufacturerService.GetProductManufacturersByProductId(Model.Id).FirstOrDefault();
+    var manufacturerName = "";
+    if (manufacturer != null && manufacturer.Manufacturer != null)
+    {
+        manufacturerName = manufacturer.Manufacturer.Name;
+    }
+
+    //prepare "Add to cart" AJAX link
+    var addtocartlink = "";
+    var shoppingCartTypeId = (int)ShoppingCartType.ShoppingCart;
+    var quantity = 1;
+
+    addtocartlink = Url.RouteUrl("AddProductToCart-Catalog", new { productId = Model.Id, shoppingCartTypeId = shoppingCartTypeId, quantity = quantity });
+
+
+    var addtowishlistlink = Url.RouteUrl("AddProductToCart-Catalog", new { productId = Model.Id, shoppingCartTypeId = (int)ShoppingCartType.Wishlist, quantity = quantity });
+    var addtocomparelink = Url.RouteUrl("AddProductToCompare", new { productId = Model.Id });
+
+    var color = Model.SpecificationAttributeModels;
+
+    var producturl = UrlStrucutre.UrlDecode(Url.RouteUrl("Product", new { SeName = Model.SeName }));
+}
+
+<nop-antiforgery-token />
+<div class="product-item" data-productid="@Model.Id">
+    <div class="out-of-stock-label"></div>
+    @if (Model.MarkAsNew)
+    {
+        <div class="new-label"></div>
+    }
+    @if (Model.IsOutOfStock)
+    {
+        <div class="out-of-stock-label"></div>
+    }
+    @if (!Model.ProductPrice.DisableAddToCompareListButton)
+    {
+        <a value="@T("ShoppingCart.AddToCompareList")" title="@T("ShoppingCart.AddToCompareList")" class="button-2 compare-button" onclick="fnCheckProductWhileAddToCompare(@(Model.Id),'@(addtocomparelink)',event)"><i></i></a>
+    }
+    <div class="remove-item" onclick="setLocation('/compareproducts/remove/563', event)"><i></i></div>
+    <div class="picture">
+        <a href="@producturl" title="@Model.DefaultPictureModel.Title">
+            <img alt="@Model.DefaultPictureModel.AlternateText" src="@Model.DefaultPictureModel.ImageUrl" title="@Model.DefaultPictureModel.Title" />
+        </a>
+        <div class="color-available">
+            @if (productColorAttributes != null)
+            {
+                <ul>
+                    @foreach (var item in productColorAttributes.Values)
+                    {
+                        <li style="background:@(item.ColorSquaresRgb);"></li>
+                    }
+                </ul>
+            }
+        </div>
+    </div>
+    <div class="details">
+        <div class="prd-brand-name">
+            @if (!string.IsNullOrEmpty(manufacturerName))
+            {
+                <div class="brand-name">@manufacturerName</div>
+            }
+            else
+            {
+                <div class="brand-name">&nbsp;</div>
+            }
+            
+            <a class="product-title" href="@producturl">@Model.Name</a>
+        </div>
+        <div class="view-and-compare">
+            <a value="@T("Products.Details")" class="button-1 product-box-detail-button" onclick="setLocation('@producturl', event)"><span>@T("HomePage.ProductBox.ViewDetails")</span><i class="fas fa-chevron-right"></i></a>
+        </div>
+        <div class="prices">
+            <div class="prices-flex">
+                <div class="prices-list">
+                    <span class="price actual-price">@Html.Raw(EShopHelper.GetPriceFormatting(Model.ProductPrice.Price))</span>
+                    @if (!string.IsNullOrEmpty(Model.ProductPrice.OldPrice))
+                    {
+                        <span class="price old-price">@Html.Raw(Model.ProductPrice.OldPrice)</span>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="add-info">
+            <div class="buttons">
+                @if (!Model.ProductPrice.DisableBuyButton)
+                {
+                    var addToCartText = T("ShoppingCart.BuyNow").Text;
+                    if (Model.ProductPrice.IsRental)
+                    {
+                        addToCartText = T("ShoppingCart.Rent").Text;
+                    }
+                    if (Model.ProductPrice.AvailableForPreOrder)
+                    {
+                        addToCartText = T("ShoppingCart.PreOrder").Text;
+                    }
+                    <button type="button" value="@(addToCartText)" class="btn btn-primary btn btn-block lg" onclick="productAddToCart()">@(addToCartText)</button>
+                    <button type="button" value="@(addToCartText)" class="btn btn-outline-dark button-2 product-box-add-to-cart-button lg @(Model.IsOutOfStock && Model.ManageInventoryMethod ? "bt-disabled" : "")" onclick="productAddToCart()"><i></i></button>
+                    <script>
+                        function productAddToCart() {
+                            AjaxCart.addproducttocart_catalog('@addtocartlink', true);
+                            $('#suggested-products-popup').modal('toggle');
+                        }
+                    </script>
+                }
+            </div>
+        </div>
+    </div>
+</div>

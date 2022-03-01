@@ -1,0 +1,76 @@
+﻿@model ConfirmAppointment
+@using Nop.Core
+@using System.Globalization;
+@using Nop.Core.Configuration
+
+@inject IWorkContext workContext
+@inject NopConfig _nopConfig
+@{
+    var supportRtl = workContext.WorkingLanguage.Rtl;
+    Layout = "_ColumnsOne";
+    //page class
+
+    @if (supportRtl)
+    {
+        Html.AppendCssFileParts($"~/Plugins/Misc.AppointmentBooking/Views/Content/css/widget.rtl.css");
+    }
+    else
+    {
+        Html.AppendCssFileParts($"~/Plugins/Misc.AppointmentBooking/Views/Content/css/widget.ltr.css");
+    }
+
+    Html.AppendCssFileParts($"~/Plugins/Misc.AppointmentBooking/Views/Content/css/widget.css");
+}
+@{
+    DateTime appDate = DateTime.ParseExact(Model.BookAppointmentResponse.AppointmentTicketInfo.AppointmentDay, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+    //var appDate = Convert.ToDateTime(Model.BookAppointmentResponse.AppointmentTicketInfo.AppointmentDay);
+    var dt = appDate.ToString("dddd, dd MMMM yyyy");
+}
+
+<script>
+    $.getJSON("https://jsonip.com/", function (data) {
+        var ipAddress = data.ip;
+        var partial = ipAddress.substring(0, ipAddress.lastIndexOf("."));
+
+        var accessIpList = @(Html.Raw(Json.Serialize(_nopConfig.EmployeeIpList)));
+
+        if (accessIpList != null && accessIpList.length > 0)
+        {
+            if (accessIpList.includes(partial)) {
+                $("#btnorangeemployee").show();
+            }
+            else {
+                $("#btnorangeemployee").hide();
+            }
+        }
+    });
+</script>
+
+<div class="page checkout-page order-completed-page appointment-booked">
+    <div class="container">
+        <div class="page-body checkout-data">
+            @if (Model.BookAppointmentResponse.TakeAppointmentResult.Code == 0 && Model.BookAppointmentResponse.TakeAppointmentResult.Description != null)
+            {
+                <div class="section order-completed">
+                    <div class="pick-row">
+                        <div class="flex-left-start">
+                            @await Component.InvokeAsync("CompleteTicket", new { orderId = Model.BookAppointmentRequest.OrderId })
+                        </div>
+                        <div class="flex-left-end">
+                            @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.CheckoutCompletedBottom, additionalData = Model })
+                        </div>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="order-confirm-page">
+                    <div class="flex_row">
+                        @Html.Raw(Model.BookAppointmentResponse.TakeAppointmentResult.Description)
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Language Name="English">
+	<LocaleResource Name="Plugins.ExternalAuth.Orange.Instructions">
+		<Value>External Auth Orange Instructions</Value>
+	</LocaleResource>
+	<LocaleResource Name="Plugins.ExternalAuth.Orange.OrnageURL">
+		<Value>Orange URl</Value>
+	</LocaleResource>
+	<LocaleResource Name="Plugins.ExternalAuth.Orange.OrnageURL.Hint">
+		<Value>Orange URl</Value>
+	</LocaleResource>
+	<LocaleResource Name="Plugins.ExternalAuth.Orange.OrnageEnable">
+		<Value>Is Enable</Value>
+	</LocaleResource>
+	<LocaleResource Name="Plugins.ExternalAuth.Orange.OrnageEnable.Hint">
+		<Value>Is Enable</Value>
+	</LocaleResource>
+	<LocaleResource Name="Plugins.ExternalAuth.Orange.SSOLogin">
+		<Value>Login</Value>
+	</LocaleResource>
+	<LocaleResource Name="Account.Login.Welcome">
+		<Value>Welcome, please sign in!</Value>
+	</LocaleResource>
+	<LocaleResource Name="Account.Login.CheckoutAsGuest">
+		<Value>Continue as a guest</Value>
+	</LocaleResource>
+</Language>

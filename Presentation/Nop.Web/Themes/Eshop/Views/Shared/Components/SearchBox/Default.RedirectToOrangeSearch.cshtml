@@ -1,0 +1,30 @@
+﻿@model SearchBoxModel
+@using System.Text.Encodings.Web
+@using Nop.Core
+@inject IWorkContext workContext
+
+    <form method="get" id="small-search-box-form-top">
+        <nop-antiforgery-token/>
+        <inpuut type="hidden" id="currentLanguage" data-lang="@workContext.WorkingLanguage.UniqueSeoCode"></inpuut>
+        <input type="text" class="search-box-text" id="small-searchterms"  name="q" aria-label="@T(" Search.SearchBox.Text.Label")" />
+        @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.SearchBoxBeforeSearchButton })
+        <input type="submit" class="button-1 search-box-button" value="@T(" Search.Button")" />
+        @if (Model.SearchTermMinimumLength > 0)
+        {
+            <script asp-location="Footer">
+            $("#small-search-box-form-top").on("submit", function(event) {
+                    event.preventDefault();
+
+                var term = $("#small-searchterms").val();
+                if (term == "") {
+                    //alert('@Html.Raw(JavaScriptEncoder.Default.Encode(T("Search.EnterSearchTerms").Text))');
+                    $("#small-searchterms").focus();
+                }
+                else {
+                    window.location.href = "http://search.orange.jo/?kw=" + term + "&bhv=store&langue=" + $('#currentLanguage').data('lang');
+                }
+            });
+        </script>
+        }
+        @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.SearchBox })
+    </form>

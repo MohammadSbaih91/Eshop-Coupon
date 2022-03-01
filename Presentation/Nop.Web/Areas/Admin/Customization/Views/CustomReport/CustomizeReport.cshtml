@@ -1,0 +1,242 @@
+﻿@using Nop.Web.Areas.Admin.Customization.Models.Report
+@model CustomReportSearchModel
+
+@{
+    
+    //page title
+    ViewBag.Title = T("Admin.CustomizeReport").Text;
+    //active menu item (system name)
+    Html.SetActiveMenuItemSystemName("CustomizeReport");
+}
+
+
+
+<form asp-controller="CustomReport" asp-action="CustomizeReport" method="post">
+    <div class="content-header clearfix">
+        <h1 class="pull-left">
+            @T("Admin.CustomizeReport")
+        </h1>
+        <div class="pull-right">
+            <div class="btn-group">
+                <button type="submit" name="exportexcel-all" class="btn btn-success">
+                    <i class="fa fa-download"></i>
+                    @T("Admin.Common.ExportToXml.All")
+                </button>
+            </div>
+            @await Component.InvokeAsync("AdminWidget", new { widgetZone = AdminWidgetZones.OrderListButtons })
+        </div>
+    </div>
+    <div class="content">
+        <div class="form-horizontal">
+            <div class="panel-group">
+                <div class="panel panel-default panel-search">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <div class="col-md-4">
+                                        <nop-label asp-for="StartDate" />
+                                    </div>
+                                    <div class="col-md-8">
+                                        <nop-editor asp-for="StartDate" />
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group" @(Model.AvailableOrderStatuses.SelectionIsNotPossible() ? Html.Raw("style=\"display:none\"") : null)>
+                                    <div class="col-md-4">
+                                        <nop-label asp-for="OrderStatusId" />
+                                    </div>
+                                    <div class="col-md-8">
+                                        <nop-select asp-for="OrderStatusId" asp-items="Model.AvailableOrderStatuses" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-7">
+                                <div class="form-group">
+                                    <div class="col-md-4">
+                                        <nop-label asp-for="EndDate" />
+                                    </div>
+                                    <div class="col-md-8">
+                                        <nop-editor asp-for="EndDate" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-4">
+                                        <nop-label asp-for="ProductId" />
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input type="text" id="search-product-name" autocomplete="off" class="form-control" />
+                                        <span id="search-product-friendly-name"></span>
+                                        <button type="button" id="search-product-clear" class="btn bg-gray" style="display: none; margin-top: 5px;">@T("Admin.Common.Clear")</button>
+                                        <input asp-for="ProductId" autocomplete="off" style="display:none;" />
+                                        <script>
+                            $(document).ready(function() {
+                                $('#search-product-name').autocomplete({
+                                    delay: 500,
+                                    minLength: 3,
+                                    source: '@(Url.Action("ProductSearchAutoComplete"))',
+                                    select: function (event, ui) {
+                                        $('#@Html.IdFor(model => model.ProductId)').val(ui.item.productid);
+                                        $('#search-product-friendly-name').text(ui.item.label);
+
+                                        $('#search-product-clear').show();
+                                        return false;
+                                    }
+                                });
+
+                                //remove button
+                                $('#search-product-clear').click(function () {
+                                    $('#@Html.IdFor(model => model.ProductId)').val('0');
+                                    $('#search-product-friendly-name').text('');
+                                    $('#search-product-clear').hide();
+                                    return false;
+                                });
+                                            });;
+                                        </script>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-7 col-md-offset-5">
+                                <button type="button" id="search-orders" class="btn btn-primary btn-search">
+                                    <i class="fa fa-search"></i>
+                                    @T("Admin.Common.Search")
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div id="customReport-grid"></div>
+
+                        <script>
+                            $(document).ready(function() {
+                                $("#customReport-grid").kendoGrid({
+                                    dataSource: {
+                                        type: "json",
+                                        transport: {
+                                            read: {
+                                                url: "@Html.Raw(Url.Action("CustomizeReport", "CustomReport"))",
+                                                type: "POST",
+                                                dataType: "json",
+                                                data: function() {
+                                                    var data = {
+                                                        StartDate: $('#@Html.IdFor(model => model.StartDate)').val(),
+                                                        EndDate: $('#@Html.IdFor(model => model.EndDate)').val(),
+                                                        OrderStatusId: $('#@Html.IdFor(model => model.OrderStatusId)').val(),
+                                                        ProductId: $('#@Html.IdFor(model => model.ProductId)').val()
+                                                    };
+                                                    addAntiForgeryToken(data);
+                                                    return data;
+                                                }
+                                            }
+                                        },
+                                        schema: {
+                                            data: "Data",
+                                            total: "Total",
+                                            errors: "Errors"
+                                        },
+                                        error: function(e) {
+                                            display_kendoui_grid_error(e);
+                                            // Cancel the changes
+                                            this.cancelChanges();
+                                        },
+                                        pageSize: @(Model.PageSize),
+                                        serverPaging: true,
+                                        serverFiltering: true,
+                                        serverSorting: true
+                                    },
+                                    pageable: {
+                                        refresh: true,
+                                        pageSizes: [@(Model.AvailablePageSizes)],
+                                        @await Html.PartialAsync("_GridPagerMessages")
+                                    },
+                                    editable: {
+                                        confirmation: "@T("Admin.Common.DeleteConfirmation")",
+                                        mode: "inline"
+                                    },
+                                    scrollable: false,
+                                    columns: [
+                                         {
+                                            field: "CustomerId",
+                                            title: "@T("Admin.Report.Customization.CustomerId")",
+                                            width: 50
+                                        },
+                                         {
+                                            field: "CustomOrderNumber",
+                                            title: "@T("Admin.Report.Customization.OrderId")",
+                                            width: 50
+                                        },
+                                        {
+                                            field: "OrderStatus",
+                                            title: "@T("Admin.Report.Customization.OrderStatus")",
+                                            width: 80
+                                        },
+                                        {
+                                            field: "OrderProduct",
+                                            title: "@T("Admin.Report.Customization.OrderProduct")",
+                                            width: 80
+                                        },
+                                        {
+                                            field: "Vender",
+                                            title: "@T("Admin.Report.Customization.Vender")",
+                                            width: 80
+                                        },
+                                        {
+                                            field: "CustomerName",
+                                            title: "@T("Admin.Report.Customization.CustomerName")",
+                                            width: 80
+                                        },
+                                        {
+                                            field: "PhoneNumber",
+                                            title: "@T("Admin.Report.Customization.PhoneNumber")",
+                                            width: 80
+                                        },
+                                        {
+                                            field: "CustomerAddress",
+                                            title: "@T("Admin.Report.Customization.CustomerAddress")",
+                                            width: 80
+                                        },
+                                        {
+                                            field: "CustomerEmail",
+                                            title: "@T("Admin.Report.Customization.CustomerEmail")",
+                                            width: 50
+                                        },
+                                        {
+                                            field: "CreatedOn",
+                                            title: "@T("Admin.Report.Customization.CreatedOn")",
+                                            width: 50,
+                                            type: "date",
+                                            format: "{0:G}"
+                                        },
+                                        {
+                                            field: "OrderTotal",
+                                            title: "@T("Admin.Report.Customization.OrderTotal")",
+                                            width: 80
+                                        }
+                                    ]
+                                } );
+                            });
+                        </script>
+
+                        <script>
+                            $(document).ready(function () {
+                                //search button
+                                $('#search-orders').click(function () {
+                                    //search
+                                    var grid = $('#customReport-grid').data('kendoGrid');
+                                    grid.dataSource.page(1); //new search. Set page size to 1
+                                    return false;
+                                });
+                                
+                            });
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

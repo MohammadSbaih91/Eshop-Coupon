@@ -1,0 +1,91 @@
+﻿@model Nop.Web.Models.Catalog.ProductEmailAFriendModel
+@{
+    Layout = "";
+}
+<div class="product-email-friend-dialog" id="product-email-friend-dialog" style="display: none">
+    <div class="page-title">
+        <h2>
+            @T("Products.EmailAFriend.Title")
+        </h2>
+        <div class="description">
+            @T("Products.EmailAFriend.Description")
+            <p class="email-friend-result">
+                @Model.Result
+            </p>
+        </div>
+    </div>
+
+    <form method="post" id="product-email-friend">
+        <nop-antiforgery-token/>
+        <div asp-validation-summary="ModelOnly" class="message-error"></div>
+        <input asp-for="ProductId" type="hidden"/>
+        <div class="inputs">
+            <label asp-for="FullName" asp-postfix=":"></label>
+            <input asp-for="FullName" class="full-name" placeholder="@T("Products.EmailAFriend.FullName.Hint")"/>
+            <nop-required/>
+            <span asp-validation-for="FullName"></span>
+        </div>
+        <div class="inputs">
+            <label asp-for="YourEmailAddress" asp-postfix=":"></label>
+            <input asp-for="YourEmailAddress" class="your-email" placeholder="@T("Products.EmailAFriend.YourEmailAddress.Hint")"/>
+            <nop-required/>
+            <span asp-validation-for="YourEmailAddress"></span>
+        </div>
+        <div class="inputs">
+            <label asp-for="FriendEmail" asp-postfix=":"></label>
+            <input asp-for="FriendEmail" class="friend-email" placeholder="@T("Products.EmailAFriend.FriendEmail.Hint")"/>
+            <nop-required/>
+            <span asp-validation-for="FriendEmail"></span>
+        </div>
+        <div class="inputs">
+            <label asp-for="PersonalMessage" asp-postfix=":"></label>
+            <textarea asp-for="PersonalMessage" class="your-email" placeholder="@T("Products.EmailAFriend.PersonalMessage.Hint")"></textarea>
+            <span asp-validation-for="PersonalMessage"></span>
+        </div>
+        <div class="buttons">
+            <input type="button" name="close" class="button-2 close-email-a-friend" value="@T("Products.EmailAFriend.Button.Close")"/>
+            <input type="submit" name="send-email" class="button-1 send-email-a-friend-button" value="@T("Products.EmailAFriend.Button")"/>
+        </div>
+    </form>
+</div>
+
+<script asp-location="Footer">
+     $(document).ready(function () {
+        var $form=$('#product-email-friend');
+        $form.submit(function (e) {
+            if ($('#product-email-friend').valid()){
+                e.preventDefault();
+                $(".product-email-friend-dialog .page-title ").addClass('sending');
+                $(".email-friend-result").hide();
+                $.ajax({
+                    cache: false,
+                    url:'@Url.Action("ProductEmailAFriendSendWithFullName", "Product")',
+                    type: 'post',
+                    data: $form.serialize(),
+                    success:function(model) {
+                        if (model.SuccessfullySent) {
+                            $(".product-email-friend-dialog").dialog( "close" );
+                            $("#FriendEmail").val("");
+                            $("#result").val("");
+                        }
+                        else {
+                            $(".email-friend-result").text(model.Result).show();
+                        }
+                        $(".product-email-friend-dialog .page-title ").removeClass('sending');
+                    },
+                    error :function(model) {
+                          $(".product-email-friend-dialog").dialog( "close" );
+                          $(".product-email-friend-dialog .page-title ").removeClass('sending');
+                    }
+                })
+            }
+        });
+         $('.email-a-friend-button').on('click',function() {
+            $(".product-email-friend-dialog").dialog({resizable: false,height: "auto",width: 800,modal: true,closeOnEscape: false});
+        });
+         
+        $('.close-email-a-friend').on('click',function() {
+            $(".product-email-friend-dialog").dialog( "close" );
+        });
+     });
+</script>

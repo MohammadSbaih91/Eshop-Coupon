@@ -1,0 +1,11 @@
+﻿{
+  "Group": "eShop",
+  "FriendlyName": "Misc.eShopSMS",
+  "SystemName": "Misc.eShopSMS",
+  "Version": "1.00",
+  "SupportedVersions": [ "4.10" ],
+  "Author": "eShop",
+  "DisplayOrder": 1,
+  "FileName": "Nop.Plugin.Misc.eShopSMS.dll",
+  "Description": "Send SMS"
+}

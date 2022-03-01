@@ -1,0 +1,34 @@
+@model Nop.Plugin.Misc.AppointmentBooking.Areas.Admin.Models.AppointmentBranchModel
+
+@{
+    Layout = "_AdminLayout";
+
+    //page title
+    ViewBag.Title = T("Plugins.Misc.AppointmentBooking.AppointmentBranch").Text;
+    //active menu item (system name)
+    Html.SetActiveMenuItemSystemName("eshop.AppointmentBranch");
+}
+
+<form asp-controller="AppointmentBranch" asp-action="Create" method="post">
+    <div class="content-header clearfix">
+        <h1 class="pull-left">
+            @T("Plugins.Misc.AppointmentBooking.CreateAppointmentBranch")
+            <small>
+                <i class="fa fa-arrow-circle-left"></i>
+                <a asp-action="List">@T("Plugins.Misc.AppointmentBooking.BackToList")</a>
+            </small>
+        </h1>
+        <div class="pull-right">
+            <button type="submit" name="save" class="btn bg-blue">
+                <i class="fa fa-floppy-o"></i>
+                @T("Admin.Common.Save")
+            </button>
+
+            <button type="submit" name="save-continue" class="btn bg-blue">
+                <i class="fa fa-floppy-o"></i>
+                @T("Admin.Common.SaveContinue")
+            </button>
+        </div>
+    </div>
+    @await Html.PartialAsync("_CreateOrUpdate", Model)
+</form>

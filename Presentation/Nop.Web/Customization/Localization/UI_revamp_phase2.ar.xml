@@ -1,0 +1,852 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Language Name="عربي">
+	<!--Start Admin Resource-->
+	<LocaleResource Name="Admin.Catalog.Categories.Fields.CategoryProductBoxTemplate">
+		<Value>قالب مربع المنتج الفئة</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.Catalog.Categories.Fields.CategoryProductBoxTemplate.Hint">
+		<Value>قالب مربع المنتج الفئة</Value>
+	</LocaleResource>
+
+	<LocaleResource Name="Admin.Messages.NewsLetterSubscriptionType">
+		<Value>نوع الاشتراك في النشرة الإخبارية</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.Messages.NewsLetterSubscriptionType.BackToList">
+		<Value>العودة للقائمة</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.Messages.NewsLetterSubscriptionType.AddNew">
+		<Value>أضف نوع اشتراك جديد في النشرة الإخبارية</Value>
+	</LocaleResource>
+
+	<LocaleResource Name="Admin.Messages.NewsLetterSubscriptionType.Fields.Name">
+		<Value>اسم</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.Messages.NewsLetterSubscriptionType.Fields.Name.Hint">
+		<Value>نوع الاشتراك في النشرة الإخبارية</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.Messages.NewsLetterSubscriptionType.Fields.Name.Required">
+		<Value>مطلوب اسم</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.Messages.NewsLetterSubscriptionType.Fields.Name.MaxLength">
+		<Value>الخاص بك الطول الأقصى</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.Messages.NewsLetterSubscriptionType.Fields.DisplayOrder">
+		<Value>ترتيب العرض</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.Messages.NewsLetterSubscriptionType.Fields.DisplayOrder.Hint">
+		<Value>ترتيب العرض</Value>
+	</LocaleResource>
+
+	<LocaleResource Name="Admin.Messages.NewsLetterSubscriptionType.Fields.Added">
+		<Value>تمت إضافة نوع الاشتراك في الرسالة الإخبارية.</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.Messages.NewsLetterSubscriptionType.Fields.Updated">
+		<Value>نوع الاشتراك في الرسالة الإخبارية محدث.</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.Messages.NewsLetterSubscriptionType.Fields.Deleted">
+		<Value>تم حذف نوع الاشتراك في الرسالة الإخبارية.</Value>
+	</LocaleResource>
+
+	<LocaleResource Name="Admin.Catalog.Attributes.SpecificationAttributes.Fields.PictureId">
+		<Value>صورة</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.Catalog.Attributes.SpecificationAttributes.Fields.PictureId.Hint">
+		<Value>صورة</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.Catalog.Attributes.SpecificationAttributes.Fields.IsShowInsideBox">
+		<Value>إظهار داخل الصندوق</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.Catalog.Attributes.SpecificationAttributes.Fields.IsShowInsideBox.Hint">
+		<Value>إظهار داخل الصندوق</Value>
+	</LocaleResource>
+
+	<LocaleResource Name="Admin.Catalog.Attributes.AttributesMap.Fields.IsShowButton">
+		<Value>إظهار الزر</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.Catalog.Attributes.AttributesMap.Fields.IsShowButton.Hint">
+		<Value>إظهار الزر</Value>
+	</LocaleResource>
+
+	<LocaleResource Name="Admin.Catalog.Categories.Fields.ShowWithSubCategories">
+		<Value>تظهر مع الفئات الفرعية</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.Catalog.Categories.Fields.ShowWithSubCategories.Hint">
+		<Value>تظهر مع الفئات الفرعية</Value>
+	</LocaleResource>
+
+	<LocaleResource Name="Admin.Catalog.Categories.Fields.MinimumPriceOfProduct">
+		<Value>الحد الأدنى لسعر المنتج</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.Catalog.Categories.Fields.MinimumPriceOfProduct.Hint">
+		<Value>الحد الأدنى لسعر المنتج	</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.Catalog.Products.Fields.IsService">
+		<Value>هي خدمة</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.Catalog.Products.Fields.IsService.Hint">
+		<Value>منتج الخدمة</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.Catalog.Products.Fields.IsHidePlanSelection">
+		<Value>هو إخفاء اختيار الخطة</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.Catalog.Products.Fields.IsHidePlanSelection.Hint">
+		<Value>صحيح لإخفاء الجهاز واختيار الخطة على صفحة تفاصيل المنتج</Value>
+	</LocaleResource>
+
+	<LocaleResource Name="Admin.Packages.Fields.Name">
+		<Value>اسم</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.Packages.Fields.Name.Hint">
+		<Value>اسم الحزمة</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.Packages.Fields.Name.Required">
+		<Value>مطلوب اسم</Value>
+	</LocaleResource>
+
+	<LocaleResource Name="Admin.Packages.Fields.DisplayOrder">
+		<Value>ترتيب العرض</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.Packages.Fields.DisplayOrder.Hint">
+		<Value>ترتيب العرض</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.Packages.Fields.DisplayOrder.Required">
+		<Value>ترتيب العرض مطلوب</Value>
+	</LocaleResource>
+
+	<LocaleResource Name="Admin.Packages.Fields.CategoryIds">
+		<Value>فئة</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.Packages.Fields.CategoryIds.Hint">
+		<Value>اختر الفئة</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.Packages.Fields.CategoryIds.Required">
+		<Value>اختيار القسم مطلوب</Value>
+	</LocaleResource>
+
+	<LocaleResource Name="Admin.Packages.Fields.Published">
+		<Value>نشرت</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.Packages.Fields.Published.Hint">
+		<Value>نشرت</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.Packages.Fields.Discount">
+		<Value>خصم</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.Packages.Fields.Discount.Hint">
+		<Value>خصم</Value>
+	</LocaleResource>
+
+	<LocaleResource Name="Admin.Packages.Created">
+		<Value>تمت إضافة الحزمة بنجاح.</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.Packages.Updated">
+		<Value>تم تحديث الحزمة بنجاح.</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.Packages.Deleted">
+		<Value>تم حذف الحزمة بنجاح.</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.Packages.AddNew">
+		<Value>أضف حزمة جديدة</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.Packages.Edit">
+		<Value>تحرير الحزمة</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.Packages">
+		<Value>الحزم</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.Package.Products.SaveBeforeEdit">
+		<Value>تحتاج إلى حفظ الحزمة قبل أن تتمكن من إضافة منتجات لصفحة الحزمة هذه.</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.Package.Products.EditPackage">
+		<Value>تحرير منتج الحزمة</Value>
+	</LocaleResource>
+
+	<!--End Admin Resource-->
+
+	<!--Start Header-->
+	<LocaleResource Name="Footer.Language">
+		<Value>لغة</Value>
+	</LocaleResource>
+	<!--End Header-->
+	<!--Start Footer-->
+	<LocaleResource Name="HomePage.footer.contactus">
+		<Value>اتصل بنا</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePage.footer.contactus.detail">
+		<Value>دائما أكثر دعمك</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePage.footer.AboutEshop">
+		<Value>حول Eshop</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePage.footer.AboutEshop.detail">
+		<Value>دائما أكثر دعمك</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePage.footer.NewsLetter.OfferPromotions">
+		<Value><![CDATA[العروض والعروض الترويجية]]> </Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePage.footer.NewsLetter.OfferNews">
+		<Value><![CDATA[العرض والأخبار]]></Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePage.footer.NewsLetter.BlogPromotions">
+		<Value>الترقيات بلوق</Value>
+	</LocaleResource>
+	<LocaleResource Name="Newsletter.Email.Placeholder">
+		<Value>أدخل عنوان بريدك الالكتروني</Value>
+	</LocaleResource>
+	<!--END Footer-->
+
+	<!--Start Home Page-->
+	<LocaleResource Name="HomePage.Drawer.LineOfAll">
+		<Value>خطوط للجميع</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePage.Category.ViewAll">
+		<Value>مشاهدة الكل</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePage.Category.Promotions">
+		<Value>الترقيات</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePage.Category.Compare">
+		<Value>قارن</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePage.Category.BestSeller">
+		<Value>الأكثر مبيعا</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePage.ProductBox.ViewOffers">
+		<Value>مشاهدة العروض</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePage.ProductBox.StartForm">
+		<Value>بدءا من</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePage.ProductBox.StartFormMonth">
+		<Value>شهر</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePage.ProductBox.ViewDetails">
+		<Value>عرض التفاصيل</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePage.ProductBox.ViewallOffers">
+		<Value>مشاهدة جميع العروض</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePage.ProductBox.IncludingTax">
+		<Value>شامل الضريبة</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePage.ProductBox.ExcludingTax">
+		<Value>لا يشمل الضرائب</Value>
+	</LocaleResource>
+	<!--End Home Page-->
+
+	<!--Start catalog Page-->
+	<LocaleResource Name="HomePage.Catalog.AllBrand">
+		<Value>جميع العلامات التجارية</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePage.Catalog.LoadMore">
+		<Value>تحميل المزيد</Value>
+	</LocaleResource>
+	<LocaleResource Name="CatalogPage.Prices">
+		<Value>الأسعار</Value>
+	</LocaleResource>
+	<LocaleResource Name="CatalogPage.Filter">
+		<Value>منقي</Value>
+	</LocaleResource>
+	<LocaleResource Name="CatalogPage.Offer">
+		<Value>عرض</Value>
+	</LocaleResource>
+	<LocaleResource Name="CatalogPage.Offer.New">
+		<Value>جديد</Value>
+	</LocaleResource>
+	<LocaleResource Name="CatalogPage.Offer.OnSale">
+		<Value>للبيع</Value>
+	</LocaleResource>
+	<LocaleResource Name="CatalogPage.Offer.SpecialOffer">
+		<Value>عرض خاص</Value>
+	</LocaleResource>
+	<!--End catalog Page-->
+
+	<!--Start Footer-->
+	<LocaleResource Name="HomePage.footer.contactus">
+		<Value>اتصل بنا</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePage.footer.contactus.detail">
+		<Value>دائما أكثر دعمك</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePage.footer.AboutEshop">
+		<Value>حول Eshop</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePage.footer.AboutEshop.detail">
+		<Value>دائما أكثر دعمك</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePage.footer.NewsLetter.OfferPromotions">
+		<Value><![CDATA[العروض والعروض الترويجية]]> </Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePage.footer.NewsLetter.OfferNews">
+		<Value><![CDATA[العرض والأخبار]]></Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePage.footer.NewsLetter.BlogPromotions">
+		<Value>الترقيات بلوق</Value>
+	</LocaleResource>
+	<!--Start Footer-->
+
+	<!--Start Sim Card-->
+	<LocaleResource Name="Admin.SimCard">
+		<Value>شريحة جوال</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.SimCard.Title">
+		<Value>إدارة بطاقة SIM</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.SimCard.Fields.CardNumber">
+		<Value>رقم البطاقة</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.SimCard.Fields.CardNumber.Hint">
+		<Value>رقم البطاقة</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.SimCard.Fields.CardNumber.Required">
+		<Value>رقم البطاقة مطلوب</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.SimCard.Fields.CardNumber.NumberAlreadyExists">
+		<Value>رقم البطاقة "{0}" موجود بالفعل</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.SimCard.Fields.DisplayOrder">
+		<Value>ترتيب العرض</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.SimCard.Fields.DisplayOrder.Hint">
+		<Value>ترتيب العرض</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.SelectSimCard">
+		<Value><![CDATA[اختر رقم الشريحة]]></Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.SelectSimCardNumber">
+		<Value>يختار</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.ChoosePlan">
+		<Value>اختر خطة</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.FixedLineOnly">
+		<Value>الخط الثابت فقط</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.FixedLine">
+		<Value>الخط الثابت</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.Phone">
+		<Value>هاتف</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.Sim">
+		<Value>Sim</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.Prices">
+		<Value>الأسعار</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.Data">
+		<Value>البيانات</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.Minutes">
+		<Value>محضر جلسة</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.MobilePrice">
+		<Value>سعر الموبايل</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.DevicePrice">
+		<Value>جهاز الأسعار</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.SimPrice">
+		<Value>سعر سيم</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.OverallPayment">
+		<Value>الدفع الكلي</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.FullPrice">
+		<Value>السعر الكامل</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.SimorEsimOnly">
+		<Value>سيم / عسيم فقط</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.Choosedevice">
+		<Value>اختر الجهاز</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.PostpaidLine">
+		<Value>خط الدفع الآجل</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.Device">
+		<Value>جهاز</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.FixedLinePackage">
+		<Value>باقة الخط الثابت</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.ChooseSimtype">
+		<Value><![CDATA[أختر <br />نوع سيم]]></Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.Esim">
+		<Value>عاصم</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.MonthlyPrices">
+		<Value>سعر شهري</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.WorkKnowing">
+		<Value>يستحق المعرفة</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.TermsandConditions">
+		<Value>الأحكام والشروط</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.ImportantNotes">
+		<Value>ملاحظات هامة</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.MobileDevice">
+		<Value>جهاز محمول</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.Recommendedforyou">
+		<Value>موصى به لك</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.Whybuyonline">
+		<Value>لماذا تشتري عبر الإنترنت</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.Whybuyonline.YourSide">
+		<Value><![CDATA[الى جانبك <br />24/7]]></Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.Whybuyonline.SecurePayment">
+		<Value><![CDATA[100% يؤمن <br />دفع]]></Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.Whybuyonline.FreeDelivey">
+		<Value><![CDATA[يومي عمل<br/>والتوصيل المجاني]]></Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.Whybuyonline.Promotions">
+		<Value><![CDATA[حصرية<br/> الترقيات]]></Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.Postpaid.BasicPrices">
+		<Value>السعر الأساسي</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.Postpaid.PaymentInstallments">
+		<Value>مع دفع على 24 قسط</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.Yoline.YOPostpaidSim">
+		<Value>يو سيم الدفع الآجل</Value>
+	</LocaleResource>
+	<!--End Sim Card-->
+
+	<LocaleResource Name="ProductDetail.DevicePackage">
+		<Value>حزمة الجهاز</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.DeviceOnly">
+		<Value>الجهاز فقط</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.ChoosePlanwithdevice">
+		<Value>اختر خطة مع الجهاز</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.Accessories">
+		<Value>مكملات</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.Boughttogether">
+		<Value>{0} اشترى مع</Value>
+	</LocaleResource>
+
+	<LocaleResource Name="ShoppingCart.AddToCart">
+		<Value>أضف إلى السلة</Value>
+	</LocaleResource>
+	<LocaleResource Name="ShoppingCart.BuyNow">
+		<Value>اشتري الآن</Value>
+	</LocaleResource>
+	<LocaleResource Name="Products.Qty">
+		<Value>كمية</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.SubsidyDiscountText">
+		<Value>خصم الدعم على الهاتف المحمول</Value>
+	</LocaleResource>
+
+	<LocaleResource Name="ProductDetail.OfferDetails">
+		<Value>تفاصيل العرض</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.ForMoreOfferDetails">
+		<Value>لمزيد من تفاصيل العرض</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.ClickHere">
+		<Value>انقر هنا</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.BasicPrices">
+		<Value>الأسعار الأساسية</Value>
+	</LocaleResource>
+
+	<!--Start Fixed Line Product detail-->
+	<LocaleResource Name="ProductDetail.FixedLine.FixedLinePrice">
+		<Value>سعر الخط الثابت</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.FixedLine.FixedPhonePrice">
+		<Value>سعر الهاتف الثابت</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.FixedLine.InternationalZonesCovered">
+		<Value>المناطق الدولية مغطاة</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.FixedLine.ServiceIncluded">
+		<Value>خدمة شمل</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.FixedLine.FixedPlan">
+		<Value>خطة ثابتة</Value>
+	</LocaleResource>
+	<!--End Fixed Line Product detail-->
+
+	<!--Start Internet Product detail-->
+	<LocaleResource Name="ProductDetail.Internet.ChooseAccessory">
+		<Value><![CDATA[اختيار<br/>ملحق]]></Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.Internet.ChooseAccessoryButton">
+		<Value>اختر ملحق</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.Internet.SelectOneAccessories">
+		<Value>لشراء خطة 4G فلاي بوكس ، يجب عليك اختيار أحد الملحقات أدناه.</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.Internet.4GFlybox">
+		<Value>فلاي بوكس 4G</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.Internet.FiberPlan">
+		<Value>خطة الفايبر</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.Internet.Accessories">
+		<Value>مكملات</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.Internet.4GFlyboxPrice">
+		<Value>سعر فلاي بوكس 4G</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.Internet.AccessoryPrice">
+		<Value>سعر الإكسسوار</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.Internet.WhyChooseFiberInternet">
+		<Value>لماذا تختار البرتقالي فايبر إنترنت السريع</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.Internet.VeryFastInternet">
+		<Value><![CDATA[سريع جدا<br/>إنترنت]]></Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.Internet.OnlineSurveillanceSystem">
+		<Value><![CDATA[المراقبة عبر الإنترنت<br/>نظام]]></Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.Internet.4kHDMovies">
+		<Value><![CDATA[4K / HD<br/>أفلام]]></Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.Internet.OnlineGames">
+		<Value><![CDATA[متصل<br/>ألعاب]]></Value>
+	</LocaleResource>
+	<!--End Internet Product detail-->
+
+	<!--Start Yo Postpaid Line Product Detail-->
+	<LocaleResource Name="ProductDetail.YoLine.YOPostpaidSim">
+		<Value>يو سيم الدفع الآجل</Value>
+	</LocaleResource>
+	<!--End Yo Postpaid Line Product Detail-->
+	<LocaleResource Name="ProductDetail.SmartCamera">
+		<Value>الأجهزة الذكية</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.Internet.Map.Coverage">
+		<Value>تغطية</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.Internet.Fiber.Map.LocateFiber">
+		<Value>حدد موقع الألياف</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.Internet.ADSL.Map.LocateADSL">
+		<Value>حدد موقع ADSL</Value>
+	</LocaleResource>
+
+	<!--Start Yo Postpaid Line Product Detail-->
+	<LocaleResource Name="CompareProducts.Comparator">
+		<Value>المقارن</Value>
+	</LocaleResource>
+	<LocaleResource Name="CompareProducts.Backto">
+		<Value>ارجع الى</Value>
+	</LocaleResource>
+	<LocaleResource Name="CompareProducts.Personal">
+		<Value>الشخصية</Value>
+	</LocaleResource>
+	<LocaleResource Name="CompareProducts.eShop">
+		<Value>متجر إلكتروني</Value>
+	</LocaleResource>
+	<LocaleResource Name="CompareProducts.Clear">
+		<Value>صافي</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.Checkout">
+		<Value>الدفع</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.ViewAllDevice">
+		<Value>عرض كل الجهاز</Value>
+	</LocaleResource>
+	<LocaleResource Name="CompareProducts.AddToCompare">
+		<Value>أضف للمقارنة</Value>
+	</LocaleResource>
+	<!--End Yo Postpaid Line Product Detail-->
+
+
+	<!--Start Cart Drawers-->
+	<LocaleResource Name="CartDrawer.YourCart">
+		<Value>عربتك</Value>
+	</LocaleResource>
+	<LocaleResource Name="CartDrawer.AddServices">
+		<Value>أضف خدمات</Value>
+	</LocaleResource>
+	<LocaleResource Name="CartDrawer.SuggestedProducts">
+		<Value>المنتجات المقترحة</Value>
+	</LocaleResource>
+	<LocaleResource Name="CartDrawer.Taxes">
+		<Value>الضرائب</Value>
+	</LocaleResource>
+	<LocaleResource Name="CartDrawer.Price">
+		<Value>سعر</Value>
+	</LocaleResource>
+	<LocaleResource Name="CartDrawer.EmptyBasket">
+		<Value>سلة فارغة</Value>
+	</LocaleResource>
+	<LocaleResource Name="CartDrawer.Change">
+		<Value>يتغيرون</Value>
+	</LocaleResource>
+	<!--End Cart Drawers-->
+	<!--Start ADSL Internet-->
+	<LocaleResource Name="ProductDetail.AdslInternet.WhyChooseOrangeADSLInternet">
+		<Value>لماذا تختار Orange ADSL Internet</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.Attribute.MonthlyPriceTaxDesc">
+		<Value>شامل الضريبة عند الشحن ببطاقات نص بنص</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.InternetFiber.FiberPrice">
+		<Value>سعر الألياف</Value>
+	</LocaleResource>
+	<!--End ADSL Internet-->
+
+	<!--Start Checkout-->
+	<LocaleResource Name="Checkout.AddressOption.SameAsBillingAddress">
+		<Value>استخدم نفس عنوان الفواتير</Value>
+	</LocaleResource>
+	<LocaleResource Name="Checkout.AddressOption.DifferentShippingAddress">
+		<Value>عنوان شحن مختلف</Value>
+	</LocaleResource>
+	<LocaleResource Name="Checkout.CustomerDetails">
+		<Value>تفاصيل العميل</Value>
+	</LocaleResource>
+	<LocaleResource Name="Checkout.AddressOption.BillingAddress">
+		<Value>عنوان وصول الفواتير</Value>
+	</LocaleResource>
+	<LocaleResource Name="Checkout.AddressOption.ShippingAddress">
+		<Value>عنوان الشحن</Value>
+	</LocaleResource>
+	<LocaleResource Name="Checkout.ReturntotheShop">
+		<Value>العودة إلى المحل</Value>
+	</LocaleResource>
+	<LocaleResource Name="ShoppingCart.ModifiedMessage">
+		<Value>لقد قمت بتغير محتويات السلة! هل تريد المتابعة دون تحديثها؟ التحديث سوف يضيع</Value>
+	</LocaleResource>
+
+	<LocaleResource Name="Checkout.Mycart">
+		<Value>عربة التسوق الخاصة بي</Value>
+	</LocaleResource>
+	<LocaleResource Name="Checkout.CustomerDetails">
+		<Value>تفاصيل العميل</Value>
+	</LocaleResource>
+	<LocaleResource Name="Checkout.ShippingAndBilling">
+		<Value><![CDATA[الشحن والفواتير]]></Value>
+	</LocaleResource>
+	<LocaleResource Name="Checkout.DeliveryAndPayment">
+		<Value><![CDATA[التسليم والدفع]]></Value>
+	</LocaleResource>
+	<LocaleResource Name="Checkout.Nextstep">
+		<Value>الخطوة التالية</Value>
+	</LocaleResource>
+	<LocaleResource Name="Checkout.Next">
+		<Value>التالي</Value>
+	</LocaleResource>
+	<LocaleResource Name="Checkout.Pay">
+		<Value>يدفع</Value>
+	</LocaleResource>
+	<LocaleResource Name="Checkout.Order.completed.Title">
+		<Value><![CDATA[تم <span> الدفع الخاص بك </ span> بنجاح]]></Value>
+	</LocaleResource>
+	<LocaleResource Name="Checkout.Order.completed.Title.info">
+		<Value><![CDATA[رقم طلبك هو <span> {0}. </span> الآن يمكنك البدء في تتبع طلبك أو يمكنك التحقق من الملخص وطباعته.]]></Value>
+	</LocaleResource>
+	<LocaleResource Name="Checkout.Order.completed.Pickup.Title">
+		<Value>
+			<![CDATA[تم تأكيد <span> الطلب </ span> وحجز موعد <span> الاستلام </ span>]]>
+		</Value>
+	</LocaleResource>
+	<LocaleResource Name="Checkout.Order.completed.Pickup.Title.info">
+		<Value>
+			<![CDATA[تم تأكيد طلبك والرقم <span> {0}. </span> سترسل لك Orange رسالة بريد إلكتروني تحتوي على تفاصيل الموعد. ولكي ترى تفاصيل الطلب يمكنك التحقق من ملخص الطلب وطباعته.]]>
+		</Value>
+	</LocaleResource>
+	<LocaleResource Name="Checkout.suggestedproduct.emptymessage">
+		<Value>لا يوجد منتج مقترح متاح</Value>
+	</LocaleResource>
+	<LocaleResource Name="Order.Payment">
+		<Value>دفع</Value>
+	</LocaleResource>
+	<LocaleResource Name="Order.ShippingAddress">
+		<Value>عنوان الشحن</Value>
+	</LocaleResource>
+	<LocaleResource Name="Order.PersonalDetails">
+		<Value>تفاصيل شخصية</Value>
+	</LocaleResource>
+	<LocaleResource Name="Order.CustomerDetails">
+		<Value>تفاصيل العميل</Value>
+	</LocaleResource>
+	<LocaleResource Name="Order.Nationality">
+		<Value>جنسية</Value>
+	</LocaleResource>
+	<LocaleResource Name="Order.TypeID">
+		<Value>اكتب المعرف</Value>
+	</LocaleResource>
+	<LocaleResource Name="Order.IDNumber">
+		<Value>رقم الهوية</Value>
+	</LocaleResource>
+	<LocaleResource Name="Order.PhoneNumber">
+		<Value>رقم الهاتف</Value>
+	</LocaleResource>
+	<LocaleResource Name="Order.EmailAddress">
+		<Value>عنوان البريد الإلكتروني</Value>
+	</LocaleResource>
+	<LocaleResource Name="Order.AddressDetails">
+		<Value>تفاصيل العنوان</Value>
+	</LocaleResource>
+	<LocaleResource Name="Order.Country">
+		<Value>دولة</Value>
+	</LocaleResource>
+	<!--End Checkout-->
+	<LocaleResource Name="Breadcrumb.ShoppingCart">
+		<Value>عربة التسوق</Value>
+	</LocaleResource>
+	<LocaleResource Name="Breadcrumb.Personal">
+		<Value>شخصي</Value>
+	</LocaleResource>
+	<LocaleResource Name="Breadcrumb.Eshop">
+		<Value>متجر إلكتروني</Value>
+	</LocaleResource>
+	<LocaleResource Name="Breadcrumb.OrderSummary">
+		<Value>ملخص الطلب</Value>
+	</LocaleResource>
+	<LocaleResource Name="Checkout.InternetPlanInstallationMessage">
+		<Value>بمجرد الانتهاء من عملية الدفع والحصول على التفاصيل الخاصة بك ، سوف نتصل بك قريبًا لتثبيت خطة الألياف المختارة</Value>
+	</LocaleResource>
+	<LocaleResource Name="OrderDetail.InternetPlanInstallationMessage">
+		<Value>الآن حصلنا على التفاصيل الخاصة بك وسوف نتصل بك قريبًا لتثبيت خطة الألياف المختارة في منزلك.</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.InternetUpgrade.FiberPrice.InTheFirstMonth">
+		<Value>في الشهر الأول</Value>
+	</LocaleResource>
+	<LocaleResource Name="OrderDetail.ProductRateText">
+		<Value>قيم المنتج</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.SelectOffer">
+		<Value>حدد عرض</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.ChooseOffer">
+		<Value>اختر عرض</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.ChooseDeviceWithPlan">
+		<Value>اختر الجهاز مع الخطة</Value>
+	</LocaleResource>
+	<LocaleResource Name="Newsletter.SubscribeToOur">
+		<Value>اشترك في موقعنا</Value>
+	</LocaleResource>
+	<LocaleResource Name="Header.Search">
+		<Value>يبحث</Value>
+	</LocaleResource>
+	<LocaleResource Name="products.specs">
+		<Value>تحديد</Value>
+	</LocaleResource>
+	<LocaleResource Name="Checkout.Summary">
+		<Value>ملخص</Value>
+	</LocaleResource>
+	<LocaleResource Name="Checkout.MyCart">
+		<Value>عربة التسوق الخاصة بي</Value>
+	</LocaleResource>
+	<LocaleResource Name="Checkout.TrackyourOrder">
+		<Value>أتبع طلبك</Value>
+	</LocaleResource>
+	<LocaleResource Name="CompareProducts.AddDevice">
+		<Value>اضف جهاز</Value>
+	</LocaleResource>
+	<LocaleResource Name="OrderDetail.Streetaddress">
+		<Value>عنوان الشارع</Value>
+	</LocaleResource>
+	<LocaleResource Name="OrderDetail.Streetaddress2">
+		<Value>عنوان الشارع 2</Value>
+	</LocaleResource>
+	<LocaleResource Name="OrderDetail.City">
+		<Value>مدينة</Value>
+	</LocaleResource>
+	<LocaleResource Name="Checkout.ChooseAdditionalServices">
+		<Value>اختر خدمات إضافية</Value>
+	</LocaleResource>
+	<LocaleResource Name="Checkout.SuggestedProducts">
+		<Value>المنتجات المقترحة</Value>
+	</LocaleResource>
+	<LocaleResource Name="Checkout.Added">
+		<Value>مضاف</Value>
+	</LocaleResource>
+	<LocaleResource Name="Checkout.NoServiceProductAvailable">
+		<Value>لا يوجد منتج خدمة متاح</Value>
+	</LocaleResource>
+	<LocaleResource Name="CompareProducts.Add">
+		<Value>يضيف</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Shipment.Activity.OrderCancel">
+		<Value>
+			<![CDATA[لقد اتصلنا مرتين ولم تكن متاحًا ، لذلك <span> ألغينا طلبك </span>. إذا كنت ترغب في تحديد منتجات جديدة ، يمكنك زيارة متجرنا عبر الإنترنت أو يمكنك الاتصال بنا للحصول على مزيد من المعلومات حول طلبك.]]>
+		</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Shipment.Trackyourorder.ReadytoShip">
+		<Value>على استعداد للشحن</Value>
+	</LocaleResource>
+	<LocaleResource Name="Address.Fields.PhoneNumber.MissMatch">
+		<Value>رقم الهاتف غير صحيح</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.PhoneNumber.SelectSimNumber">
+		<Value>الرجاء تحديد رقم بطاقة sim</Value>
+	</LocaleResource>
+	<LocaleResource Name="ShoppingCart.DiscountCouponCode">
+		<Value>استخدم الرمز الترويجي</Value>
+	</LocaleResource>
+	<LocaleResource Name="ShoppingCart.GiftCardCouponCode">
+		<Value>بطاقة الهدية</Value>
+	</LocaleResource>
+	<LocaleResource Name="Catrgory.Upgradeyourspeed">
+		<Value>قم بترقية سرعتك</Value>
+	</LocaleResource>
+	<LocaleResource Name="Common.PriceFormate">
+		<Value><![CDATA[{0}.<span>{1} </span> <span>دينار</span>]]></Value>
+	</LocaleResource>
+	<LocaleResource Name="Common.OldPriceFormate">
+		<Value><![CDATA[دينار 0]]></Value>
+	</LocaleResource>
+	<LocaleResource Name="Categories.Breadcrumb.Personal">
+		<Value>شخصي</Value>
+	</LocaleResource>
+	<LocaleResource Name="AppointmentBooking.viewMap">
+		<Value>عرض في الخريطة</Value>
+	</LocaleResource>
+	<LocaleResource Name="AppointmentBooking.AroundMe">
+		<Value>حولي</Value>
+	</LocaleResource>
+	<LocaleResource Name="Checkout.ContinueShopping">
+		<Value>العودة إلى المتجر</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.Catalog.Products.Fields.OfferDetailsCTA">
+		<Value>تفاصيل العرض</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.Catalog.Products.Fields.KnowingTerms">
+		<Value>معرفة الشروط</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.Catalog.Products.Fields.Conditions">
+		<Value>الظروف</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.Catalog.Products.Fields.ImportantNotes">
+		<Value>ملاحظات هامة</Value>
+	</LocaleResource>
+	<LocaleResource Name="Checkout.ConfirmOrder">
+		<Value> طرق الدفع</Value>
+	</LocaleResource>
+	<LocaleResource Name="Products.Detail.Discountamount">
+		<Value>Discount amount</Value>
+	</LocaleResource>
+	<LocaleResource Name="Footer.Contactus.URL">
+		<Value>contactus</Value>
+	</LocaleResource>
+	<LocaleResource Name="Products.Detail.DevicePriceWithPlan">
+		<Value>سعر الجهاز مع الباقة</Value>
+	</LocaleResource>
+	<LocaleResource Name="ProductDetail.CommitmentPeriod">
+		<Value>فترة الالتزام</Value>
+	</LocaleResource>
+	<LocaleResource Name="checkout.simcardnumber">
+		<Value>رقم البطاقةسيم</Value>
+	</LocaleResource>
+</Language>

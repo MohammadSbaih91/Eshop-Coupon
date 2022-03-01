@@ -1,0 +1,197 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Language Name="English">
+	<LocaleResource Name="Shipping.Aramex">
+		<Value>Aramex</Value>
+	</LocaleResource>
+
+	<LocaleResource Name="Shipping.Aramex.Configure.UseSandbox">
+		<Value>Use Sandbox</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Configure.UseSandbox.Hint">
+		<Value>Check to enable Sandbox (testing environment).</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Configure.UserName">
+		<Value>UserName</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Configure.UserName.Hint">
+		<Value>UserName</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Configure.Password">
+		<Value>Password</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Configure.Password.Hint">
+		<Value>Password</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Configure.Version">
+		<Value>Version</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Configure.Version.Hint">
+		<Value>Version</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Configure.AccountNumber">
+		<Value>Account number</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Configure.AccountNumber.Hint">
+		<Value>Account number</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Configure.AccountPin">
+		<Value>Account pin</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Configure.AccountPin.Hint">
+		<Value>Account pin</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Configure.AccountEntity">
+		<Value>Account entity</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Configure.AccountEntity.Hint">
+		<Value>Account entity</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Configure.AccountCountryCode">
+		<Value>Account country code</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Configure.AccountCountryCode.Hint">
+		<Value>Account country code</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Configure.Source">
+		<Value>Source</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Configure.Source.Hint">
+		<Value>Source</Value>
+	</LocaleResource>
+
+	<LocaleResource Name="Shipping.Aramex.Tracking.Button">
+		<Value>Track order</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Tracking.OrderNumber">
+		<Value>Your order number</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Tracking.OrderNumber.incorrects">
+		<Value>The number you entered is incorrect</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Tracking.OrderNumber.detail">
+		<Value>You can find the number in your bill SMS notification</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Tracking.OrderNumber.Required">
+		<Value>Order number is required</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Tracking.Email">
+		<Value>Your email address</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Tracking.Email.Detail">
+		<Value>Fill with the same email address that you put in the payment process</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Tracking.Email.Required">
+		<Value>Email address is required</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Tracking.OrderNotFind">
+		<Value>Order not find</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Tracking.OrderNotMatchWithEmail">
+		<Value>Order is not matched with email</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Tracking.ShipmentNotCreated">
+		<Value>Order is not shipped</Value>
+	</LocaleResource>
+
+	<LocaleResource Name="Shipping.Aramex.Shipment.OrderItem.OrderDetail">
+		<Value>Order Details</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Shipment.OrderItem.Quality">
+		<Value>Quality</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Shipment.OrderItem.Taxes">
+		<Value>Taxes</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Shipment.OrderItem.Prices">
+		<Value>Prices</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Shipment.OrderItem.Package">
+		<Value>Package 1</Value>
+	</LocaleResource>
+
+	<LocaleResource Name="Shipping.Aramex.Shipment.Activity.OrderActivity">
+		<Value>Order Activity</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Shipment.Activity.Date">
+		<Value>Date</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Shipment.Activity.Location">
+		<Value>Location</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Shipment.Activity.Activity">
+		<Value>Activity</Value>
+	</LocaleResource>
+
+	<LocaleResource Name="Shipping.Aramex.Shipment.Breadcrumb.Home">
+		<Value>Home</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Shipment.Breadcrumb.eShop">
+		<Value>eShop</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Shipment.Breadcrumb.Trackyourorder">
+		<Value>Track your order</Value>
+	</LocaleResource>
+
+	<LocaleResource Name="Shipping.Aramex.Shipment.Trackyourorder.Title">
+		<Value>Track your order</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Shipment.Trackyourorder.Title.Detail">
+		<Value>Enter your details to track your order</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Shipment.Trackyourorder.Description">
+		<Value>From our store to your door</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Shipment.Trackyourorder.OrderNumber">
+		<Value>Order number</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Shipment.Trackyourorder.Airwaybill">
+		<Value>Air waybill</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Shipment.Trackyourorder.Deliverydate">
+		<Value>Delivery date</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Shipment.Trackyourorder.OrderConfirmed">
+		<Value>Order Confirmed</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Shipment.Trackyourorder.OrderConfirmed.Detail">
+		<Value>We confirmed your order on</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Shipment.Trackyourorder.OrderProceeded">
+		<Value>Order Proceeded</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Shipment.Trackyourorder.OrderProceeded.Detail">
+		<Value>We are preparing your order</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Shipment.Trackyourorder.ReadytoShip">
+		<Value>Ready to Ship</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Shipment.Trackyourorder.ReadytoShip.Detail">
+		<Value>Your order is ready for shipping</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Shipment.Trackyourorder.OutforDelivery">
+		<Value>Out for Delivery</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Shipment.Trackyourorder.OutforDelivery.Detail">
+		<Value>Your order is out for delivery</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Shipment.Trackyourorder.Delivered">
+		<Value>Order Delivered</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Shipment.Trackyourorder.Delivered.Detail">
+		<Value>your order is delivered</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Shipment.Activity.OrderCancel">
+		<Value>
+			<![CDATA[Your order has been <span>cancelled</span> as we tried to reach you with no response; if you would like us to proceed with your order please contact us on: Mail: <a href="mailto:eshopjordan@orange.jo">eshopjordan@orange.jo</a> ,  Mobile : 0779890153.]]>
+		</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Shipment.Trackyourorder.Cancelled">
+		<Value>Order canceled</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Shipment.Trackyourorder.Cancelled.Detail">
+		<Value>Your order is canceled</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Shipment.OrderUnreachable">
+		<Value>The customer was unreachable</Value>
+	</LocaleResource>
+</Language>

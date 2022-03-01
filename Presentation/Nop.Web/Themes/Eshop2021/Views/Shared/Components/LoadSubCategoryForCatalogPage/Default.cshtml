@@ -1,0 +1,56 @@
+﻿@model CategoryNavigationModel
+@using Nop.Services.Localization;
+@inject ILocalizationService localizationService
+@{
+    var Name = localizationService.GetResource("Common.All");
+    var categories = Model.Categories.Where(p => p.Name != Name).ToList();
+}
+<div class="catalog-left">
+    <div class="tabs-nav tabs-block no-pd">
+        @if (categories != null && categories.Count > 0)
+        {
+            var cat = categories.Where(x => x.Id == Model.CurrentCategoryId).ToList();
+            <ul>
+                @for (var i = 0; categories.Count > i; i++)
+                {
+                    var category = categories[i];
+                    var clsActive = string.Empty;
+                    if(category.Id == Model.CurrentCategoryId)
+                    {
+                        clsActive = "active";
+                    }
+                    if(i == 0 && cat.Count() == 0)
+                    {
+                        clsActive = "active";
+                    }
+                    <li data-Id="@category.Id" class="@clsActive"><a data-CategoryId="@category.Id" data-state-url="@UrlStrucutre.UrlDecode(Url.RouteUrl("Category", new { SeName = category.SeName }))" href="#tab_@category.Id">@category.Name</a></li>
+                }
+            </ul>
+        }
+    </div>
+</div>
+@if (categories != null && categories.Count > 0)
+{
+    <div class="tabs-content">
+       
+        @foreach (var category in categories)
+        {
+             <div class="category-desc" id="category-desc_@category.Id">@Html.Raw(category.Desc)</div>
+            if (category.Id == Model.CurrentCategoryId)
+            {
+                <div id="tab_@category.Id" style="display:block">
+                    
+                    @*Loda Data from Ajax*@
+                </div>
+            }
+            else
+            {
+                 <div class="category-desc" id="category-desc_@category.Id">@Html.Raw(category.Desc)</div>
+                <div id="tab_@category.Id">
+                 
+                    @*Loda Data from Ajax*@
+                </div>
+            }
+        }
+    </div>
+}

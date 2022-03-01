@@ -1,0 +1,222 @@
+.eid {
+    margin-top: -32px;
+    position: absolute;
+    background: url(/images/Eid/ramadan-texture.jpg) no-repeat 0 0;
+    width: 100%;
+    text-align: center;
+    height: 300px;
+    box-sizing: border-box;
+    -webkit-animation: slide 20s linear infinite;
+    background-size: cover;
+    background-position: 0;
+    background-repeat-y: no-repeat;
+    z-index: -1;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    background-repeat: repeat-x;
+}
+.background-items {
+	width: 2000px;
+	text-align: center;
+}
+.background-items>div {
+	float: right;
+	display: inline-block;
+	padding: 0 15px;
+	margin: 0 auto;
+	width: 5vw;
+}
+.background-items img {
+	animation-timing-function: ease-out;
+	-webkit-transform-origin: 50% 0;
+}
+/*************** Pull ************/
+.pull1 img {
+	animation-name: pull1;
+	animation-duration: 2s;
+	animation-iteration-count: infinite;	
+}
+.pull2 img {
+	animation-name: pull2;
+	animation-duration: 2s;
+	animation-iteration-count: infinite;
+	animation-delay: 1s;
+}
+.pull3 img {
+	animation-name: pull3;
+	animation-duration: 2s;
+	animation-iteration-count: infinite;
+	animation-delay: 2s;
+}
+@keyframes pull1 {
+	0% {top: -10px;}
+	25% {top: -12px;}
+	50% {top: -14px;}
+	75% {top: -12px;}
+	100% {top: -10px;}
+}
+@keyframes pull2 {
+	0% {top: -15px;}
+	25% {top: -17px;}
+	50% {top: -19px;}
+	75% {top: -17px;}
+	100% {top: -15px;}
+}
+@keyframes pull3 {
+	0% {top: -7px;}
+	25% {top: -9px;}
+	50% {top: -11px;}
+	75% {top: -9px;}
+	100% {top: -7px;}
+}
+/*************** Swing ************/
+.swing1 img {
+	animation-name: swing1;
+	animation-duration: 4s;
+	animation-iteration-count: infinite;	
+}
+.swing2 img {
+	animation-name: swing2;
+	animation-duration: 4s;
+	animation-iteration-count: infinite;
+}
+.swing3 img {
+	animation-name: swing3;
+	animation-duration: 5s;
+	animation-iteration-count: infinite;
+}
+@-webkit-keyframes swing1 {
+    0%{transform: rotate(3deg);}
+    50%{transform: rotate(-2deg)}
+    100%{transform: rotate(3deg);}
+}
+@-webkit-keyframes swing2 {
+    0%{transform: rotate(-2deg);}
+    50%{transform: rotate(1deg)}
+    100%{transform: rotate(-2deg);}
+	animation-delay: 1s;
+}
+@-webkit-keyframes swing3 {
+    0%{transform: rotate(-2deg);}
+    50%{transform: rotate(1deg)}
+    100%{transform: rotate(-2deg);}
+	animation-delay: 1s;
+}
+/***********************************/
+.marquee {
+    margin-top: -33px;
+    margin-bottom: 15px;
+    overflow: hidden;
+    position: relative;
+    /*background: #f1f1f1;*/
+    height: 45px;
+}
+
+.marquee h3 {
+    color: #f16e00;
+    float: left;
+    height: auto;
+    position: relative;
+    position: absolute;
+    margin: 0;
+    line-height: 50px;
+    text-align: center; 
+    font-size: 20px;
+    font-weight: normal;
+}
+
+.marquee.ltr h3 {
+    -moz-transform: translateX(100%);
+    -webkit-transform: translateX(100%);
+    transform: translateX(100%);
+    -moz-animation: scroll-left 25s linear infinite;
+    -webkit-animation: scroll-left 25s linear infinite;
+    animation: scroll-left 25s linear infinite;
+}
+.marquee.rtl h3 {
+    -moz-transform: translateX(100%);
+    -webkit-transform: translateX(100%);
+    transform: translateX(100%);
+    -moz-animation: scroll-right 2s linear infinite;
+    -webkit-animation: scroll-right 2s linear infinite;
+    animation: scroll-right 20s linear infinite;
+}
+
+@-moz-keyframes scroll-left {
+    0% {
+        -moz-transform: translateX(100%);
+    }
+    100% {
+        -moz-transform: translateX(-100%);
+    }
+}
+@-moz-keyframes scroll-right {
+    0% {
+        -moz-transform: translateX(-100%);
+    }
+    100% {
+        -moz-transform: translateX(100%);
+    }
+}
+
+@-webkit-keyframes scroll-left {
+    0% {
+        -webkit-transform: translateX(100%);
+    }
+    100% {
+        -webkit-transform: translateX(-100%);
+    }
+}
+
+@-webkit-keyframes scroll-right {
+    0% {
+        -webkit-transform: translateX(-100%);
+    }
+    100% {
+        -webkit-transform: translateX(100%);
+    }
+}
+
+@keyframes scroll-left {
+    0% {
+        -moz-transform: translateX(100%);
+        -webkit-transform: translateX(100%);
+        transform: translateX(100%);
+    }
+    100% {
+        -moz-transform: translateX(-100%);
+        -webkit-transform: translateX(-100%);
+        transform: translateX(-100%);
+    }
+}
+
+@keyframes scroll-right {
+    0% {
+        -moz-transform: translateX(-100%);
+        -webkit-transform: translateX(-100%);
+        transform: translateX(-100%);
+    }
+    100% {
+        
+        -moz-transform: translateX(100%);
+        -webkit-transform: translateX(100%);
+        transform: translateX(100%);
+    }
+}
+/*@media (max-width: 768px)
+{
+    .marquee {
+        margin-top: -20px;
+    }
+
+   .ramadan{
+        height: 10px;
+        padding-top: 80px;
+        top: -20px;
+    }
+}
+
+  @-webkit-keyframes slide {
+      from { background-position: 0 0; }
+      to { background-position: -400px 0; }
+  }*/

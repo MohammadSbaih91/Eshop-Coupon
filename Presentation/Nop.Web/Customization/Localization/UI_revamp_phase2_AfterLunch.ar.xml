@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Language Name="عربي">
+	<LocaleResource Name="MobileExNumber">
+		<Value>مثال: ادخل الرقم كالأتي 962000000</Value>
+	</LocaleResource>
+  <LocaleResource Name="Reviews.AlreadyAdded">
+    <Value>تمت إضافة مراجعة المنتج بالفعل.</Value>
+  </LocaleResource>
+	<LocaleResource Name="Admin.Promotions.Campaigns.SendMassEmail.Confirm">
+		<Value>هل أنت متأكد أنك تريد إرسال بريد إلكتروني جماعي؟</Value>
+	</LocaleResource>
+	<LocaleResource Name="HeaderLinkes.Logout">
+		<Value>خروج</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.ProductDetail.SubsidyProducts">
+		<Value>منتجات الدعم</Value>
+	</LocaleResource>
+</Language>

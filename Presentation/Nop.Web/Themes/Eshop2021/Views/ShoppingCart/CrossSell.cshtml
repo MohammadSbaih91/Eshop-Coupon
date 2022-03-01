@@ -1,0 +1,11 @@
+﻿@model IList<ProductOverviewModel>
+<div class="product-grid ">
+    <div class="owl-carousel arrow-center" id="suggested-product">
+        @foreach (var item in Model)
+        {
+            <div class="item-box">
+                @await Html.PartialAsync("_ProductBoxCrossSell", item)
+            </div>
+        }
+    </div>
+</div>

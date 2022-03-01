@@ -1,0 +1,36 @@
+﻿@model ProductDetailsModel
+@if (Model.DefaultPictureZoomEnabled)
+{
+    <div class="gallery app-figure" id="zoom-fig">
+        <div class="picture">
+            <img style="max-height:290px" alt="@Model.DefaultPictureModel.AlternateText" src="@Model.DefaultPictureModel.FullSizeImageUrl" title="@Model.DefaultPictureModel.Title" itemprop="image" id="main-product-img-@Model.Id" />
+        </div>
+
+        @if (Model.PictureModels.Count > 1)
+        {
+            <div class="picture-thumbs selectors">
+                @foreach (var picture in Model.PictureModels)
+                {
+                    <div class="thumb-item">
+                        <img src="@picture.ThumbImageUrl" alt="@picture.AlternateText" title="@picture.Title" data-defaultsize="@picture.ImageUrl" data-fullsize="@picture.FullSizeImageUrl" />
+                    </div>
+                }
+            </div>
+            <script asp-location="Footer">
+            $(document).ready(function () {
+                $('.thumb-item img').on('click', function () {
+                    $('#main-product-img-@Model.Id').attr('src', $(this).attr('data-defaultsize'));
+                    $('#main-product-img-@Model.Id').attr('title', $(this).attr('title'));
+                    $('#main-product-img-@Model.Id').attr('alt', $(this).attr('alt'));
+                    $('#main-product-img-lightbox-anchor-@Model.Id').attr('href', $(this).attr('data-fullsize'));
+                    $('#main-product-img-lightbox-anchor-@Model.Id').attr('title', $(this).attr('title'));
+                });
+            });
+            </script>
+        }
+    </div>
+}
+else
+{
+    @await Html.PartialAsync("~/Views/Product/_ProductDetailsPictures.cshtml", Model)
+}

@@ -1,0 +1,208 @@
+﻿@model ProductDetailsModel
+@using Nop.Core
+@inject IWorkContext workContext
+@inject IThemeContext themeContext
+@{
+    var themeName = themeContext.WorkingThemeName;
+
+    Html.AddScriptParts(ResourceLocation.Footer, "~/lib/magnific-popup/jquery.magnific-popup.min.js");
+    Html.AddCssFileParts("~/lib/magnific-popup/magnific-popup.css");
+
+    Html.AppendCssFileParts($"~/Themes/{themeName}/Content/css/slick.css");
+    Html.AddScriptParts(ResourceLocation.Footer, $"~/Themes/{themeName}/Content/js/slick.min.js");
+
+    var imgCount = 4;
+    if (Model.PictureModels.Count() < 4)
+    {
+        imgCount = Model.PictureModels.Count();
+    }
+    var supportRtl = workContext.WorkingLanguage.Rtl;
+    var rtl = supportRtl ? "true" : "false";
+}
+<script type="text/javascript" src="https://embed.binkies3d.com/integrations/nU1gQk0v/w1y94cdw/script.js" async></script>
+<div class="gallery">
+    <div class="vehicle-detail-banner banner-content clearfix">
+        <div class="banner-slider">
+            @if (Model.PictureModels.Count > 1)
+            {
+                <div class="picture-thumbs">
+                    <div class="slider slider-nav thumb-image">
+                        @foreach (var picture in Model.PictureModels)
+                        {
+                            <div class="thumb-item">
+                                <img src="@picture.ThumbImageUrl" alt="@picture.AlternateText" title="@picture.Title" data-defaultsize="@picture.ImageUrl" data-fullsize="@picture.FullSizeImageUrl" />
+                            </div>
+                        }
+                    </div>
+                </div>
+                <script asp-location="Footer">
+                        $(document).ready(function () {
+                            $('.thumb-item img').on('click', function () {
+                                $('#main-product-img-@Model.Id').attr('src', $(this).attr('data-defaultsize'));
+                                $('#main-product-img-@Model.Id').attr('title', $(this).attr('title'));
+                                $('#main-product-img-@Model.Id').attr('alt', $(this).attr('alt'));
+                                $('#main-product-img-lightbox-anchor-@Model.Id').attr('href', $(this).attr('data-fullsize'));
+                                $('#main-product-img-lightbox-anchor-@Model.Id').attr('title', $(this).attr('title'));
+                            });
+                        });
+                </script>
+            }
+
+
+            @if (Model.DefaultPictureZoomEnabled)
+            {
+                @if (Model.PictureModels.Count > 1)
+                {
+                    var count = 1;
+                    <div class="main-picture">
+                        <div class="slider slider-for">
+                            @foreach (var picture in Model.PictureModels)
+                            {
+                                <a href="@picture.FullSizeImageUrl" title="@picture.Title" id="main-product-img-lightbox-anchor-@count">
+                                    <img alt="@picture.AlternateText" src="@picture.ImageUrl" title="@picture.Title" itemprop="image" id="main-product-img-@Model.Id" />
+                                </a>
+                                <script asp-location="Footer">
+                                $(document).ready(function () {
+                                    $('#main-product-img-lightbox-anchor-@count').magnificPopup(
+                                        {
+                                            type: 'image',
+                                            removalDelay: 300,
+                                            gallery: {
+                                                enabled: true,
+                                                tPrev: '@T("Media.MagnificPopup.Previous")',
+                                                tNext: '@T("Media.MagnificPopup.Next")',
+                                                tCounter: '@T("Media.MagnificPopup.Counter")'
+                                            },
+                                            tClose: '@T("Media.MagnificPopup.Close")',
+                                            tLoading: '@T("Media.MagnificPopup.Loading")'
+                                        });
+                                });
+                                </script>
+                                count++;
+                            }
+                        </div>
+                        <div class="slick-arrow-data"></div>
+                    </div>
+                }
+                else
+                {
+
+                    <div class="single-picture zoom">
+                        <a href="@Model.DefaultPictureModel.FullSizeImageUrl" title="@Model.DefaultPictureModel.Title" id="main-product-img-lightbox-anchor-@Model.Id">
+                            <img alt="@Model.DefaultPictureModel.AlternateText" src="@Model.DefaultPictureModel.ImageUrl" title="@Model.DefaultPictureModel.Title" itemprop="image" id="main-product-img-@Model.Id" />
+                        </a>
+                    </div>
+
+                    <script asp-location="Footer">
+                        $(document).ready(function () {
+                                    $('#main-product-img-lightbox-anchor-@Model.Id').magnificPopup(
+                                        {
+                                            type: 'image',
+                                            removalDelay: 300,
+                                            gallery: {
+                                                enabled: true,
+                                                tPrev: '@T("Media.MagnificPopup.Previous")',
+                                                tNext: '@T("Media.MagnificPopup.Next")',
+                                                tCounter: '@T("Media.MagnificPopup.Counter")'
+                                            },
+                                            tClose: '@T("Media.MagnificPopup.Close")',
+                                            tLoading: '@T("Media.MagnificPopup.Loading")'
+                                        });
+                                });
+                    </script>
+                }
+            }
+            else
+            {
+                @if (Model.PictureModels.Count > 1)
+                {
+                    <div class="main-picture">
+                        <div class="slider slider-for">
+                            @foreach (var picture in Model.PictureModels)
+                            {
+                                <img alt="@picture.AlternateText" src="@picture.ImageUrl" title="@picture.Title" itemprop="image" />
+                            }
+                        </div>
+                        <div class="slick-arrow-data"></div>
+                    </div>
+                }
+                else
+                {
+                    <div class="single-picture">
+                        <img alt="@Model.DefaultPictureModel.AlternateText" src="@Model.DefaultPictureModel.ImageUrl" title="@Model.DefaultPictureModel.Title" itemprop="image" id="main-product-img-@Model.Id" />
+                    </div>
+                }
+
+            }
+        </div>
+    </div>
+</div>
+
+
+
+<script asp-location="Footer">
+    $(document).ready(function () {
+        $('.slider-for').slick({
+            autoplay: false,
+            autoplaySpeed: @(EShopHelper.Animationspeed),
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            arrows: true,
+            appendArrows: $('.slick-arrow-data'),
+            nextArrow: '<div class="dir_right"><div class="timer"><span class="mask"><span class="rotator" style="transform: rotate(10deg);"></span></span></div></div>',
+            prevArrow: '<div class="dir_left"></div>',
+            fade: true,
+            asNavFor: '.slider-nav',
+            rtl: @(rtl)
+        });
+        $('.slider-nav').slick({
+            arrows: false,
+            slidesToShow: @(imgCount-1),
+            slidesToScroll: 1,
+            vertical: true,
+            asNavFor: '.slider-for',
+            dots: false,
+            infinite: true,
+            focusOnSelect: true,
+            verticalSwiping: true,
+            touchMove: true,
+        });
+
+        var timerRunning;
+        var timer = $('div.timer')
+        var degrees = 0;
+        if (timer.length != 0) {
+            var speed = (@(EShopHelper.Animationspeed)) / 180;
+            var rotator = $('div.timer span.rotator')
+            var mask = $('div.timer span.mask')
+            // var pause = $('div.timer span.pause')
+
+            function startClock() {
+                timerRunning = true;
+                // pause.removeClass('active')
+                clock = setInterval(function (e) {
+                    var degreeCSS = "rotate(" + degrees + "deg)"
+                    degrees += 2
+                    rotator.css({
+                        "transform": degreeCSS,
+                        "-webkit-transform": degreeCSS,
+                        "-moz-transform": degreeCSS,
+                        "-ms-transform": degreeCSS,
+                        "-o-transform": degreeCSS
+                    })
+                    if (degrees > 180) {
+                        rotator.addClass('move')
+                        mask.addClass('move')
+                    }
+                    if (degrees > 360) {
+                        rotator.removeClass('move')
+                        mask.removeClass('move')
+                        degrees = 0;
+                        $(".dir_right.slick-arrow").trigger("click");
+                    }
+                }, speed);
+            };
+            startClock();
+        }
+    });
+</script>

@@ -1,0 +1,211 @@
+﻿@model ShoppingCartModel
+@using Nop.Core
+@using Nop.Core.Domain.Orders
+@using Nop.Core.Domain.Tax
+@using Nop.Web.Models.ShoppingCart
+@using Nop.Services.Catalog
+
+@inject IWebHelper webHelper
+@inject IWorkContext workContext
+@inject OrderSettings orderSettings
+@inject IProductService productService
+@inject IPriceFormatter priceFormatter
+
+@if (Model.Items.Count > 0)
+{
+<form asp-route="ShoppingCart" method="post" enctype="multipart/form-data" id="shopping-cart-form">
+    <div class="cart-body">
+        <div class="cart-list">
+            <div class="cart-bx-title">
+                <div class="title first"></div>
+                <div class="title">@T("Products.Qty")</div>
+                <div class="title">@T("CartDrawer.Taxes")</div>
+                <div class="title text-price">@T("CartDrawer.Price")</div>
+                <div class="title empty"><div class="clear-btn"><i></i><span onclick="emptyBasket()">@T("CartDrawer.EmptyBasket")</span></div></div>
+            </div>
+            <partial name="_ProductList_Drawer" model="Model" />
+            <div id="Id_cart-drawer-total">
+                <div id="cart-alert-drawer" class="cust-alert" style="display:none;">@T("Checkout.TermsOfService.PleaseAccept")</div>
+            </div>
+        </div>
+    </div>
+    <div class="cart-bottom">
+        @if (Model.IsEditable)
+        {
+            if (Model.TermsOfServiceOnShoppingCartPage)
+            {
+                <div id="terms-of-service-warning-box" title="@T("Checkout.TermsOfService")" style="display: none;">
+                    <p>@T("Checkout.TermsOfService.PleaseAccept")</p>
+                </div>
+                <div class="terms-of-service">
+                    <div class="custom-control custom-control-inline">
+                        <input class="custom-control-input" id="termsofservice" type="checkbox" name="termsofservice" />
+                        <label class="custom-control-label" for="termsofservice">
+                            @T("Checkout.TermsOfService.IAccept")
+                            @if (Model.TermsOfServicePopup)
+                            {
+                                <a class="read" id="read-terms">@T("Checkout.TermsOfService.Read")</a>
+                                <script>
+                                        $(document).ready(function() {
+                                            $('#read-terms').on('click',
+                                                function(e) {
+                                                    e.preventDefault();
+                                                    displayPopupContentFromUrl(
+                                                        '@Url.RouteUrl("TopicPopup", new {SystemName = "conditionsofuse"})',
+                                                        '@T("Checkout.TermsOfService")');
+                                            });
+                                        });
+                                </script>
+                            }
+                            else
+                            {
+                                <a class="read" id="read-terms" href="@Url.RouteUrl("Topic", new {SeName = Html.GetTopicSeName("conditionsofuse")})">@T("Checkout.TermsOfService.Read")</a>
+                            }
+                        </label>
+                    </div>
+                </div>
+                <div class="cart-page-total">
+                    <div id="cart-alert" class="cust-alert" style="display:none;">@T("Checkout.TermsOfService.PleaseAccept")</div>
+                </div>
+            }
+            <div class="checkout-buttons">
+                @if (string.IsNullOrEmpty(Model.MinOrderSubtotalWarning) && !Model.HideCheckoutButton)
+                {
+                    <script>
+                        $(document).ready(function () {
+                            $('#checkout').on('click', function () {
+                                //terms of service
+                                var termOfServiceOk = true;
+                                if ($('#termsofservice').length > 0) {
+                                    //terms of service element exists
+                                    if (!$('#termsofservice').is(':checked')) {
+                                        //$("#terms-of-service-warning-box").dialog();
+                                        $("#cart-alert").focus();
+                                        $("#cart-alert").show();
+                                        termOfServiceOk = false;
+                                    } else {
+                                        termOfServiceOk = true;
+                                    }
+                                }
+                                return termOfServiceOk;
+                            });
+                            $('#drawercheckout').on('click', function () {
+                                //terms of service
+                                var termOfServiceOk = true;
+                                if ($('#termsofservice').length > 0) {
+                                    //terms of service element exists
+                                    if (!$('#termsofservice').is(':checked')) {
+                                        //$("#terms-of-service-warning-box").dialog();
+                                        $("#cart-alert-drawer").show();
+                                        var elmnt = document.getElementById("Id_cart-drawer-total");
+                                        elmnt.scrollIntoView();
+
+                                        termOfServiceOk = false;
+                                    } else {
+                                        termOfServiceOk = true;
+                                    }
+                                }
+                                return termOfServiceOk;
+                            });
+                        });
+                    </script>
+                    <div class="cart-drawer-total">
+                        <div class="prices">@await Component.InvokeAsync("CustomOrderTotals", new { isEditable = Model.IsEditable })</div>
+
+                        @if (orderSettings.CheckoutDisabled)
+                        {
+                            <div class="checkout-disabled">
+                                @T("Checkout.Disabled")
+                            </div>
+                        }
+                        else
+                        {
+                            <a href="/" class="btn btn-outline">@T("Checkout.ContinueShopping")</a>
+                            <button type="submit" id="drawercheckout" name="checkout" value="checkout" class="btn btn-orange">
+                                @T("ProductDetail.Checkout")
+                            </button>
+                            @*<div class="btn btn-orange">@T("ProductDetail.Checkout")</div>*@
+                        }
+                    </div>
+                    <div class="cart-page-total">
+                        <div class="shop-cart-bottom">
+                            <div class="left_flex">
+                                <a class="btn cut-out-btn" href="/">@T("Checkout.ReturntotheShop")</a>
+                                <div class="prices hide-desk">
+                                    @await Component.InvokeAsync("CustomOrderTotals", new { isEditable = true })
+                                </div>
+                            </div>
+                            <div class="right_flex">
+                                <div class="price-and-next">
+                                    <div class="prices hide-cart">
+                                        @await Component.InvokeAsync("CustomOrderTotals", new { isEditable = true })
+                                    </div>
+                                    <div class="next-step">
+                                        @T("Checkout.Nextstep"): <b>@T("Checkout.CustomerDetails")</b>
+                                    </div>
+                                </div>
+                                <input type="submit" id="checkout" name="checkout" title="@T("Checkout.Next")" class="button-1 new-address-next-step-button btn btn-orange" value="@T("Checkout.Next")" />
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="addon-buttons">
+                @*Payment method buttons (e.g. GoogleCheckoutButton, Paypal Express)*@
+                @foreach (var pm in Model.ButtonPaymentMethodViewComponentNames)
+                {
+                    @await Component.InvokeAsync(pm)
+                }
+            </div>
+        }
+    </div>
+    <div class="flex-content">
+        @await Html.PartialAsync("_DiscountBox", Model.DiscountBox)
+    </div>
+</form>
+
+    if (Model.IsEditable)
+    {
+        <script>
+            function checkCartValues() {
+                var cartValues = [];
+                $("input[id^=removefromcart]").each(function () {
+                    var item = { id: $(this).prop("id"), value: $(this).prop("checked") };
+                    cartValues.push(item);
+                });
+                $("input[id^=itemquantity]").each(function () {
+                    var item = { id: $(this).prop("id"), value: $(this).val() };
+                    cartValues.push(item);
+                });
+                return cartValues;
+            }
+
+            var iniCartValues = checkCartValues();
+            var isCartModified = false;
+            var $cartValues = $("#shopping-cart-form .cart-body input");
+            $cartValues.on('change', function () {
+                isCartModified = true
+            });
+
+            $("#shopping-cart-form [type=submit]").on('click', function (event) {
+                if (isCartModified && $(this).prop('name') !== "updatecart") {
+                    var currentCartValues = checkCartValues();
+                    for (var item in currentCartValues) {
+                        if (iniCartValues[item].id === currentCartValues[item].id
+                            && iniCartValues[item].value !== currentCartValues[item].value
+                            && !confirm("@T("ShoppingCart.ModifiedMessage")")) {
+                            event.preventDefault();
+                            event.stopImmediatePropagation();
+                            return false;
+                        }
+                    }
+                }
+            });
+        </script>
+    }
+}
+else
+{
+    @T("ShoppingCart.CartIsEmpty")
+}
+

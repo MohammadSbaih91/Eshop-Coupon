@@ -1,0 +1,26 @@
+@inject IThemeContext themeContext
+@{
+    var imagesPath = $"/Themes/{themeContext.WorkingThemeName}/Content/Images";
+}
+<div class="st-shopwith-container">
+    <div class="full-border"></div>
+    <section class="st-shopwith">
+        <div class="cust-row">
+            <div class="st-left">
+                <h2>تسوق بثقة</h2>
+                <div class="st-contact">
+                    <i class="fa fa-envelope"></i>
+                    <a href="/ar/contactus/">اتصل بنا</a>
+                </div>
+            </div>
+            <div class="st-left st-right">
+                <div class="st-abt-shop">
+                    <img alt="Contact us" src="@imagesPath/laptop.png">
+                    <div>
+                        <a href="https://eshop.orange.jo/ar/about-us/">حول eShop</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

@@ -1,0 +1,667 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Language Name="عربي">
+	<!--Start Below the Slider link-->
+	<LocaleResource Name="HomePageTopMenu.TopMenu1.TrackyourOrder">
+		<Value>أتبع طلبك</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu1.TrackyourOrder.URL">
+		<Value>#</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu1.UpgradeyourSpeed">
+		<Value>قم بترقية سرعتك</Value>
+	</LocaleResource>
+  <LocaleResource Name="HomePageTopMenu.TopMenu1.UpgradeyourSpeed.mobile">
+    <Value>سرعة الترقية</Value>
+  </LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu1.UpgradeyourSpeed.URL">
+		<Value>/upgrade</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu1.RefillOrangeLines">
+		<Value>إعادة تعبئة الخطوط البرتقالية</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu1.RefillOrangeLines.URL">
+		<Value>#</Value>
+	</LocaleResource>
+	<!--End Below the Slider link-->
+	
+	<!--Header Menu Start-->
+	<LocaleResource Name="HomePageTopMenu.TopMenu1.Personal">
+		<Value>شخصي</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu1.Personal.URL">
+		<Value>https://www.orange.jo/ar/</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu1.Bussiness">
+		<Value>الشركات الصغيرة</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu1.Bussiness.URL">
+		<Value>https://www.orange.jo/sites/small-businesses/ar/</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu1.OrangeMoney">
+		<Value>Orange Money</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu1.OrangeMoney.URL">
+		<Value>#</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu1.Enterprise">
+		<Value>الاعمال</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu1.Enterprise.URL">
+		<Value>https://www.orange.jo/sites/Business/en</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu1.Innovation">
+		<Value>الخدمات المبتكرة</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu1.Innovation.URL">
+		<Value>https://www.orange.jo/sites/innovation/ar</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu1.ContactUs">
+		<Value>اتصل بنا</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu1.ContactUs.URL">
+		<Value>https://www.orange.jo/en/pages/contact-us.aspx</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu1.QuickPayRefill">
+		<Value>الدفع / الشحن السريع</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu1.QuickPayRefill.URL">
+		<Value>https://www.orange.jo/ar/myaccount/pages/quick-pay.aspx</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu1.FollowUS">
+		<Value>تابعونا</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu1.FollowUS.URL">
+		<Value>#</Value>
+	</LocaleResource>
+
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.eShop">
+		<Value>المتجر الإلكتروني</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.eShop.URL">
+		<Value>/</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.eShopMobile">
+		<Value>متجر المنزل</Value>
+	</LocaleResource>
+
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.eShop.Mobile">
+		<Value>الخلوي</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.eShop.Mobile.Mobilepostpaidlines">
+		<Value>خطوط الخلوي المدفوعة لاحقاً</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.eShop.Mobile.Mobilepostpaidlines.URL">
+		<Value>https://www.orange.jo/ar/offers/Mobilepostpaidoffers/</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.eShop.Mobile.Mobileprepaidlines">
+		<Value>الخطوط المدفوعة مسبقاً</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.eShop.Mobile.Mobileprepaidlines.URL">
+		<Value>https://www.orange.jo/ar/offers/Mobileprepaidoffers/</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.eShop.Mobile.YOLines">
+		<Value>YO خطوط</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.eShop.Mobile.YOLines.URL">
+		<Value>/yo-lines</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.eShop.Mobile.MobileGovernoratesoffers">
+		<Value>عروض الخلوي للمحافظات</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.eShop.Mobile.MobileGovernoratesoffers.URL">
+		<Value>/governorate-lines</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.eShop.Mobile.Mobilephones">
+		<Value>الأجهزة الخلوية</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.eShop.Mobile.Mobilephones.URL">
+		<Value>/mobile-phone</Value>
+	</LocaleResource>
+
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.eShop.Internet">
+		<Value>الانترنت</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.eShop.Internet.ADSLoffers">
+		<Value>عروض الـ ADSL</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.eShop.Internet.ADSLoffers.URL">
+		<Value>https://www.orange.jo/ar/offers/ADSLOffers/</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.eShop.Internet.ADSLSpeedupgrade">
+		<Value>رفع سرعه ADSL</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.eShop.Internet.ADSLSpeedupgrade.URL">
+		<Value>/upgrade</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.eShop.Internet.4GFlyboxffers">
+		<Value>عروض 4G فلاي بوكس للبيت</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.eShop.Internet.4GFlyboxffers.URL">
+		<Value>/4g-flybox-offer</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.eShop.Internet.PrepaidOrangenetoffers">
+		<Value>عروض Orange نت المدفوعة مسبقاً</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.eShop.Internet.PrepaidOrangenetoffers.URL">
+		<Value>/prepaid-orange-net-offers</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.eShop.Internet.BaitAlAilehoffers">
+		<Value>عروض بيت العيلة</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.eShop.Internet.BaitAlAilehoffers.URL">
+		<Value>/bait-al-aileh-offers</Value>
+	</LocaleResource>
+
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.eShop.Fiber">
+		<Value>فايبر</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.eShop.Fiber.OrangeFiberFastInternet">
+		<Value>إنترنت سريع Orange فايبر</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.eShop.Fiber.OrangeFiberFastInternet.URL">
+		<Value>https://www.orange.jo/ar/offers/fiber-offers/pages/default.aspx</Value>
+	</LocaleResource>
+
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.eShop.Fixedline">
+		<Value>Fixed line</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.eShop.Fixedline.Fixedpostpaidlines">
+		<Value>العروض المدفوعة لاحقاً</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.eShop.Fixedline.Fixedpostpaidlines.URL">
+		<Value>/fixed-postpaid-lines</Value>
+	</LocaleResource>
+
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.eShop.Accessories">
+		<Value>إكسسوارات</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.eShop.Accessories.Mobileaccessories">
+		<Value>إكسسوارات الخلوي</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.eShop.Accessories.Mobileaccessories.URL">
+		<Value>/mobile-accessories</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.eShop.Accessories.Internetaccessories">
+		<Value>إكسسوارات الانترنت</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.eShop.Accessories.Internetaccessories.URL">
+		<Value>/internet-accessories</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.eShop.Accessories.Fixedphones">
+		<Value>الهواتف الثابتة</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.eShop.Accessories.Fixedphones.URL">
+		<Value>/fixed-phones</Value>
+	</LocaleResource>
+
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.eShop.Promotions">
+		<Value>الترقيات</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.eShop.Promotions.URL">
+		<Value>/eshop-promotions</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.eShop.Paybillsandrecharge">
+		<Value>دفع الفواتير وإعادة شحن</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.eShop.Paybillsandrecharge.URL">
+		<Value>https://www.orange.jo/ar/myaccount/pages/quick-pay.aspx</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.eShop.Compareproductslist">
+		<Value>قارن قائمة المنتجات</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.eShop.Compareproductslist.URL">
+		<Value>/compareproducts</Value>
+	</LocaleResource>
+
+
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.OffersAndServices">
+		<Value>العروض و الخدمات</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.OffersAndServices.URL">
+		<Value>https://www.orange.jo/ar/offers/</Value>
+	</LocaleResource>
+
+
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.OffersAndServices.Mobile">
+		<Value>الخلوي</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.OffersAndServices.Mobile.MobilepostpaidOffers">
+		<Value>خطوط الخلوي المدفوعة لاحقاً</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.OffersAndServices.Mobile.MobilepostpaidOffers.URL">
+		<Value>https://www.orange.jo/ar/offers/Mobilepostpaidoffers/</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.OffersAndServices.Mobile.Mobileprepaidlines">
+		<Value>الخطوط المدفوعة مسبقاً</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.OffersAndServices.Mobile.Mobileprepaidlines.URL">
+		<Value>https://www.orange.jo/ar/offers/Mobileprepaidoffers/</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.OffersAndServices.Mobile.YOLines">
+		<Value>YO خطوط</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.OffersAndServices.Mobile.YOLines.URL">
+		<Value>/yo-lines</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.OffersAndServices.Mobile.MobileGovernoratesoffers">
+		<Value>عروض الخلوي للمحافظات</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.OffersAndServices.Mobile.MobileGovernoratesoffers.URL">
+		<Value>/governorate-lines</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.OffersAndServices.Mobile.MobileServices">
+		<Value>خدمات الخلوي</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.OffersAndServices.Mobile.MobileServices.URL">
+		<Value>https://www.orange.jo/en/services/MobileServices/Pages/default.aspx</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.OffersAndServices.Mobile.FeedWEstafeedservice">
+		<Value>فيد واستفيد</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.OffersAndServices.Mobile.FeedWEstafeedservice.URL">
+		<Value>https://www.orange.jo/ar/pages/feed-w-estafeed-for-prepaid-lines.aspx</Value>
+	</LocaleResource>
+
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.OffersAndServices.Internet">
+		<Value>الإنترنت</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.OffersAndServices.Internet.ADSLoffers">
+		<Value>عروض الـ ADSL</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.OffersAndServices.Internet.ADSLoffers.URL">
+		<Value>https://www.orange.jo/ar/offers/ADSLOffers/</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.OffersAndServices.Internet.Fiberoffers">
+		<Value>عروض الفايبر</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.OffersAndServices.Internet.Fiberoffers.URL">
+		<Value>https://www.orange.jo/ar/offers/fiber-offers/pages/default.aspx</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.OffersAndServices.Internet.BaitAlAilehoffers">
+		<Value>عروض بيت العيلة</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.OffersAndServices.Internet.BaitAlAilehoffers.URL">
+		<Value>https://www.orange.jo/ar/offers/baitalailehoffers/</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.OffersAndServices.Internet.4GFlyboxoffers">
+		<Value>عروض 4G فلاي بوكس للبيت</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.OffersAndServices.Internet.4GFlyboxoffers.URL">
+		<Value>/4g-flybox-offer</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.OffersAndServices.Internet.PrepaidOrangenet">
+		<Value>خدمات الإنترنت</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.OffersAndServices.Internet.PrepaidOrangenet.URL">
+		<Value>/prepaid-orange-net-offers</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.OffersAndServices.Internet.Internetservices">
+		<Value>خدمات الإنترنت</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.OffersAndServices.Internet.Internetservices.URL">
+		<Value>https://www.orange.jo/ar/services/pages/internet-services.aspx</Value>
+	</LocaleResource>
+
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.OffersAndServices.InternationalandRoamin">
+		<Value>المكالمات الدولية و التجوال</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.OffersAndServices.InternationalandRoamin.URL">
+		<Value>https://internationalandroaming.orange.jo/</Value>
+	</LocaleResource>
+
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.OffersAndServices.OrangePremium">
+		<Value>Orange Premium</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.OffersAndServices.OrangePremium.URL">
+		<Value>https://www.orange.jo/ar/pages/orange-premium.aspx</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.OffersAndServices.Elite+">
+		<Value>Elite +</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.OffersAndServices.Elite+.URL">
+		<Value>https://www.orange.jo/ar/pages/elite-plus.aspx</Value>
+	</LocaleResource>
+
+
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.Myaccount">
+		<Value>حسابي</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.Myaccount.URL">
+		<Value>https://www.orange.jo/ar/myaccount/pages/default.aspx</Value>
+	</LocaleResource>
+
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.Myaccount.Loginandregister">
+		<Value>التسجيل والدخول</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.Myaccount.Loginandregister.Login">
+		<Value>الدخول</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.Myaccount.Loginandregister.Login.URL">
+		<Value>https://www.orange.jo/ar/myaccount/pages/default.aspx</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.Myaccount.Loginandregister.Register">
+		<Value>التسجيل</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.Myaccount.Loginandregister.Register.URL">
+		<Value>https://www.orange.jo/ar/myaccount/pages/registration.aspx</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.Myaccount.Loginandregister.UpdateIEWprepaidinfo">
+		<Value>تحديث معلومات النت وين مكان</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.Myaccount.Loginandregister.UpdateIEWprepaidinfo.URL">
+		<Value>https://www.eservices.orange.jo/OTRC/IEW/faces/pages/login.xhtml</Value>
+	</LocaleResource>
+
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.Myaccount.Billspaymentandrecharge">
+		<Value>دفع الفواتير و الشحن</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.Myaccount.Billspaymentandrecharge.Paybillsandrechargeonline">
+		<Value>دفع الفواتير و الشحن</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.Myaccount.Billspaymentandrecharge.Paybillsandrechargeonline.URL">
+		<Value>https://www.orange.jo/ar/myaccount/pages/quick-pay.aspx</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.Myaccount.Billspaymentandrecharge.e-sh7anli">
+		<Value>e - اشحنلي</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.Myaccount.Billspaymentandrecharge.e-sh7anli.URL">
+		<Value>https://www.orange.jo/ar/pages/e-sh7anli.aspx</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.Myaccount.Billspaymentandrecharge.Paymentmethods">
+		<Value>طرق تسديد الفواتير</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.Myaccount.Billspaymentandrecharge.Paymentmethods.URL">
+		<Value>https://www.orange.jo/ar/myaccount/pages/payment-methods.aspx</Value>
+	</LocaleResource>
+
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.Myaccount.Ordertracking">
+		<Value>تتبع حالة الطلب</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.Myaccount.Ordertracking.Fiberlineordertracking">
+		<Value>متابعة طلب الفايبر</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.Myaccount.Ordertracking.Fiberlineordertracking.URL">
+		<Value>https://www.orange.jo/ar/pages/ordertracking.aspx</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.Myaccount.Ordertracking.CheckeShoporderstatus">
+		<Value>متابعة طلب المتجر الإلكتروني</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.Myaccount.Ordertracking.CheckeShoporderstatus.URL">
+		<Value>/order/aramextrackyourorder</Value>
+	</LocaleResource>
+
+
+
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.Myaccount.Rewards">
+		<Value>برنامج المكافآت</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.Myaccount.Rewards.OrangeDeals">
+		<Value>عروض Orange</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.Myaccount.Rewards.OrangeDeals.URL">
+		<Value>https://www.rewards.orange.jo/deals.aspx</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.Myaccount.Rewards.TikramPoints">
+		<Value>نقاط تكرم</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.Myaccount.Rewards.TikramPoints.URL">
+		<Value>https://www.rewards.orange.jo/ar/Account/Login</Value>
+	</LocaleResource>
+
+
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.Help">
+		<Value>المساعدة</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.Help.URL">
+		<Value>https://www.orange.jo/ar/help/pages/default.aspx</Value>
+	</LocaleResource>
+
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.Help.Helptopics">
+		<Value>مواضيع المساعدة</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.Help.Helptopics.Onlinechat">
+		<Value>الدردشة</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.Help.Helptopics.Onlinechat.URL">
+		<Value>https://www.orange.jo/ar/chat/pages/infochat.aspx</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.Help.Helptopics.Contactus">
+		<Value>الإتصال بنا</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.Help.Helptopics.Contactus.URL">
+		<Value>https://www.orange.jo/ar/pages/contact-us.aspx</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.Help.Helptopics.Storelocator">
+		<Value>نقاط البيع</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.Help.Helptopics.Storelocator.URL">
+		<Value>https://store.orange.jo/</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.Help.Helptopics.Djingo-chatbot">
+		<Value>Djingo-chatbot</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.Help.Helptopics.Djingo-chatbot.URL">
+		<Value>https://www.orange.jo/ar/pages/djingo-chatbot.aspx</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.Help.Helptopics.Yourguide">
+		<Value>دليلك لأفضل تجربة ألياف</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.Help.Helptopics.Yourguide.URL">
+		<Value>https://www.orange.jo/ar/help/internet/pages/guide-to-best-fiber-experience.aspx</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.Help.Helptopics. 4G+">
+		<Value> 4G+</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.Help.Helptopics. 4G+.URL">
+		<Value>https://www.orange.jo/ar/pages/4g-plus.aspx</Value>
+	</LocaleResource>
+
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.Help.FAQ">
+		<Value>الأسئلة الشائعة</Value>
+	</LocaleResource>
+
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.Help.FAQ.Internet">
+		<Value>الإنترنت</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.Help.FAQ.Internet.URL">
+		<Value>https://www.orange.jo/ar/help/pages/internet-faq.aspx</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.Help.FAQ.Mobile">
+		<Value>الخلوي</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.Help.FAQ.Mobile.URL">
+		<Value>https://www.orange.jo/ar/help/pages/mobile-faq.aspx</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.Help.FAQ.Fixedline">
+		<Value>الثابت</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.Help.FAQ.Fixedline.URL">
+		<Value>https://www.orange.jo/ar/help/pages/fixed-faq.aspx</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.Help.Coveragemap">
+		<Value>تغطيتنا</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.Help.Coveragemap.URL">
+		<Value>https://www.orange.jo/ar/pages/coverage.aspx</Value>
+	</LocaleResource>
+
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.Help.Promotions">
+		<Value>العروض</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.Help.Promotions.URL">
+		<Value>/eshop-promotions</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.Help.Paybillsandrecharge">
+		<Value>الشحن ودفع الفواتير</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageTopMenu.TopMenu2.Help.Paybillsandrecharge.URL">
+		<Value>https://www.orange.jo/ar/myaccount/pages/quick-pay.aspx</Value>
+	</LocaleResource>
+	<!--Header Menu End-->
+
+	<!--Footer Menu Start-->
+	<LocaleResource Name="HomePageFooterMenu.Mobile">
+		<Value>التليفون المحمول</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageFooterMenu.Mobile.Postpaid">
+		<Value>الدفع الآجل</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageFooterMenu.Mobile.Postpaid.URL">
+		<Value>/</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageFooterMenu.Mobile.Prepaid">
+		<Value>مسبقة الدفع</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageFooterMenu.Mobile.Prepaid.URL">
+		<Value>/</Value>
+	</LocaleResource>
+
+	<LocaleResource Name="HomePageFooterMenu.Internet">
+		<Value>الإنترنت</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageFooterMenu.Internet.OrangeFiberFast">
+		<Value>ألياف البرتقال السريع</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageFooterMenu.Internet.OrangeFiberFast.URL">
+		<Value>/</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageFooterMenu.Internet.ADSLPlans">
+		<Value>باقات ADSL</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageFooterMenu.Internet.ADSLPlans.URL">
+		<Value>/</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageFooterMenu.Internet.4GFlybox">
+		<Value>4G فلاي بوكس</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageFooterMenu.Internet.4GFlybox.URL">
+		<Value>/</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageFooterMenu.Internet.PrepaidOrangeNet">
+		<Value>Orange Net مسبقة الدفع</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageFooterMenu.Internet.PrepaidOrangeNet.URL">
+		<Value>/</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageFooterMenu.Internet.net">
+		<Value>شبكة</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageFooterMenu.Internet.net.URL">
+		<Value>/</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageFooterMenu.Internet.FiberUpgrade">
+		<Value>ترقية الألياف</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageFooterMenu.Internet.FiberUpgrade.URL">
+		<Value>/</Value>
+	</LocaleResource>
+
+
+	<LocaleResource Name="HomePageFooterMenu.Business">
+		<Value>اعمال</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageFooterMenu.Business.Small">
+		<Value>صغير</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageFooterMenu.Business.Small.URL">
+		<Value>https://www.orange.jo/sites/small-businesses/ar</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageFooterMenu.Business.Enterprise">
+		<Value>مشروع - مغامرة</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageFooterMenu.Business.Enterprise.URL">
+		<Value>/</Value>
+	</LocaleResource>
+
+	<LocaleResource Name="HomePageFooterMenu.Corporate">
+		<Value>الشركات</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageFooterMenu.Corporate.Aboutus">
+		<Value>معلومات عنا</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageFooterMenu.Corporate.Aboutus.URL">
+		<Value>https://www.orange.jo/EN/Pages/about-orange.aspx</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageFooterMenu.Corporate.CSR">
+		<Value>CSR</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageFooterMenu.Corporate.CSR.URL">
+		<Value>/</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageFooterMenu.Corporate.Careers">
+		<Value>وظائف</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageFooterMenu.Corporate.Careers.URL">
+		<Value><![CDATA[http://jobs.orange.com/jobs/jobsearch.do?do=country&CTRY=JO&lang=EN]]></Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageFooterMenu.Corporate.MediaCenter">
+		<Value>المركز الاعلامي</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageFooterMenu.Corporate.MediaCenter.URL">
+		<Value>/</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageFooterMenu.Corporate.ContactUs">
+		<Value>اتصل بنا</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageFooterMenu.Corporate.ContactUs.URL">
+		<Value>https://www.orange.jo/en/pages/contact-us.aspx</Value>
+	</LocaleResource>
+
+	<LocaleResource Name="HomePageFooterMenu.Others">
+		<Value>الآخرين</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageFooterMenu.Others.QuickPay">
+		<Value>الدفع السريع / إعادة التعبئة</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageFooterMenu.Others.QuickPay.URL">
+		<Value>/</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageFooterMenu.Others.Locateyourshop">
+		<Value>حدد موقع متجرك</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageFooterMenu.Others.Locateyourshop.URL">
+		<Value>https://store.orange.jo/</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageFooterMenu.TermsOfUse.Coveragemap">
+		<Value>خريطة التغطية</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageFooterMenu.TermsOfUse.Coveragemap.URL">
+		<Value>https://www.orange.jo/ar/pages/coverage.aspx</Value>
+	</LocaleResource>
+
+	<LocaleResource Name="HomePageFooterMenu.TermsOfUse">
+		<Value>تعليمات الاستخدام</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageFooterMenu.TermsOfUse.PrivacyPolicy">
+		<Value>سياسة خاصة</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageFooterMenu.TermsOfUse.PrivacyPolicy.URL">
+		<Value>/</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageFooterMenu.TermsOfUse.SiteMap">
+		<Value>خريطة الموقع</Value>
+	</LocaleResource>
+	<LocaleResource Name="HomePageFooterMenu.TermsOfUse.SiteMap.URL">
+		<Value>/</Value>
+	</LocaleResource>
+
+	<LocaleResource Name="HomePageFooterMenu.LetsConnect">
+		<Value>دعنا نتواصل</Value>
+	</LocaleResource>
+	<!--Footer Menu End-->
+
+	<!--Product Detail page-->
+	<LocaleResource Name="Product.Detail.Offer.URL">
+		<Value>https://www.orange.jo/ar/offers/</Value>
+	</LocaleResource>
+
+  <LocaleResource Name="Category.IFrame.Url">
+    <Value>https://www.coveragechecker.orange.jo/index_ar.html</Value>
+  </LocaleResource>
+  <LocaleResource Name="Footer.Aboutus.URL">
+    <Value>https://eshop.orange.jo/ar/about-us/</Value>
+  </LocaleResource>
+  <LocaleResource Name="Catalog.Internet.AdslUpgrade.URL">
+    <Value>/internet/adsl-upgrade</Value>
+  </LocaleResource>
+</Language>

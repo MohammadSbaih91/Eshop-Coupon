@@ -1,0 +1,59 @@
+﻿@model PackageModel
+@using Nop.Core
+@using Nop.Core.Domain.Catalog
+@using Nop.Core.Domain.Orders
+@using Nop.Core.Domain.Tax
+@inject CatalogSettings catalogSettings
+@inject IWorkContext workContext
+@{
+    var addtocartlink = "";
+    var shoppingCartTypeId = (int)ShoppingCartType.ShoppingCart;
+    var quantity = 1;
+    addtocartlink = Url.RouteUrl("AddProductToCart-Catalog", new { productId = Model.Id, shoppingCartTypeId = shoppingCartTypeId, quantity = quantity });
+    addtocartlink = Url.RouteUrl("AddPackageToCart", new { packageId = Model.Id });
+    int firstProductId = 0;
+    var productsIds = new List<int>();
+    for (int i = 0; i < Model.Products.Count; i++)
+    {
+        var product = Model.Products[i];
+        if (i == 0)
+        {
+            firstProductId = product.Id;
+        }
+
+        productsIds.Add(product.Id);
+    }
+    var productidsString = string.Join(",", productsIds);
+
+}
+
+<input type="hidden" id="packageId_@firstProductId" value="@Model.Id" />
+<input type="hidden" id="productId_@Model.Id" value="@productidsString" />
+<input type="hidden" id="addcart-responce-@Model.Id" />
+<nop-antiforgery-token />
+<div class="product-item cls-packageId" data-productid="@firstProductId">
+    
+    <div class="int-plan-top">
+        <a class="product-title">@Model.PackageName</a>
+    </div>
+    <div class="int-plan-bottom">
+        <div class="description">
+            @if (Model.Products != null && Model.Products.Count > 0)
+            {
+                <ul>
+                    @foreach (var item in Model.Products)
+                    {
+                        <li>@item.Name</li>
+                    }
+                </ul>
+            }
+        </div>
+    </div>
+    <div class="details">
+        <div class="add-info">
+            <div class="buttons">
+                <button type="button" value="@T("ShoppingCart.BuyNow")" class="btn btn-primary btn btn-block box-add-to-cart-package lg" onclick="AjaxCart.addproducttocart_catalog('@addtocartlink');return false;">@T("ShoppingCart.BuyNow")</button>
+            </div>
+        </div>
+    </div>
+</div>

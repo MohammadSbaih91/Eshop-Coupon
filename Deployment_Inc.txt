@@ -1,0 +1,14 @@
+# Execute 20 UI.sql 
+# Topic.sql
+# Admin/Setting/Tax
+	Tax display type : Included
+	Prices include tax : UnTick
+	Force tax exclusion from order subtotal : Tick
+
+# Set StorePickupPoint Display order all in 99 and 
+	As Appointment booking ticket for this set disply order 0
+
+# Set All product link with "Simple product zoom" to "Simple product"
+
+# For mobile plan category ShowWithSubCategories need to tick
+	and must have to untick showonhomepage

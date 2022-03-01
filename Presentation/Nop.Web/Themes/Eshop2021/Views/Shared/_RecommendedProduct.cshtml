@@ -1,0 +1,353 @@
+﻿@using Nop.Services.Helpers
+@using Nop.Core
+@inject IUserAgentHelper userAgentHelper
+@inject IWorkContext workContext
+
+@{
+    var supportRtl = workContext.WorkingLanguage.Rtl;
+}
+
+<div class="container">
+
+    @*<div class="recommended-products-grid product-grid">
+            <div class="title">
+                <strong>Mobile Device</strong>
+                <span>Recommended for you</span>
+            </div>
+            <div class="owl-carousel arrow-top-mobile prd-auto-width arrow-center" id="recommended-owl">
+                <div class="item-box">
+                    <div class="product-item" data-productid="564">
+                        <div class="new-label"></div>
+                        <div class="picture">
+                            <a href="/en/fixed-plans/fixed-postpaid-line/huawei-watch-gt-2e-red" title="Show details for Huawei Smart Watch GT2 E Red">
+                                <img alt="Picture of Huawei Smart Watch GT2 E Red" src="https://localhost:44321/app-images/thumbs/0002171_huawei-smart-watch-gt2-e-red_415.png" title="Show details for Huawei Smart Watch GT2 E Red">
+                            </a>
+                            <div class="color-available">
+                            </div>
+                        </div>
+                        <div class="details">
+                            <div class="prd-brand-name">
+                                <div class="brand-name">Apple</div>
+                                <h2 class="product-title">
+                                    <a href="/en/fixed-plans/fixed-postpaid-line/huawei-watch-gt-2e-red">Huawei Smart Watch GT2 E Red</a>
+                                </h2>
+                            </div>
+                            <div class="product-rating-box" title="0 review(s)">
+                                <div class="rating">
+                                    <div style="width: 0%">
+                                    </div>
+                                </div>
+                                <div class="rating-count">(0)</div>
+                            </div>
+                            <div class="view-and-compare">
+                                <a value="Details" class="button-1 product-box-detail-button" onclick="setLocation('/en/fixed-plans/fixed-postpaid-line/huawei-watch-gt-2e-red')"><span>View Details</span><i class="fas fa-chevron-right"></i></a>
+                                <a value="Add to compare list" title="Add to compare list" class="button-2 compare-button" onclick="AjaxCart.addproducttocomparelist('/en/compareproducts/add/564');return false;"><span>Compare</span><i></i></a>
+                            </div>
+                            <div class="prices">
+                                <div class="prices-flex">
+                                    <div class="prices-list">
+                                        <span class="price actual-price">102.586 JOD</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="add-info">
+                                <div class="buttons">
+                                    <button type="button" value="Buy now" class="btn btn-primary btn btn-block lg" onclick="AjaxCart.addproducttocart_catalog('/en/addproducttocart/catalog/564/1/1?forceredirection=True');return false;">Buy now</button>
+                                    <button type="button" value="Buy now" class="btn btn-outline-dark button-2 product-box-add-to-cart-button lg" onclick="AjaxCart.addproducttocart_catalog('/en/addproducttocart/catalog/564/1/1');return false;"><i></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="item-box">
+
+                    <div class="product-item" data-productid="565">
+
+                        <div class="picture">
+                            <a href="/en/mobile-accessories/connectivity/huawei-watch-gt-2e-black" title="Show details for Huawei Smart Watch GT2 E Black">
+                                <img alt="Huawei GT2e Black" src="https://localhost:44321/app-images/thumbs/default-image_415.png" title="Show details for Huawei Smart Watch GT2 E Black">
+                            </a>
+                            <div class="color-available">
+                            </div>
+                        </div>
+                        <div class="details">
+                            <div class="prd-brand-name">
+                                <div class="brand-name">&nbsp;</div>
+                                <h2 class="product-title">
+                                    <a href="/en/mobile-accessories/connectivity/huawei-watch-gt-2e-black">Huawei Smart Watch GT2 E Black</a>
+                                </h2>
+                            </div>
+
+                            <div class="view-and-compare">
+                                <a value="Details" class="button-1 product-box-detail-button" onclick="setLocation('/en/mobile-accessories/connectivity/huawei-watch-gt-2e-black')"><span>View Details</span><i class="fas fa-chevron-right"></i></a>
+                                <a value="Add to compare list" title="Add to compare list" class="button-2 compare-button" onclick="AjaxCart.addproducttocomparelist('/en/compareproducts/add/565');return false;"><span>Compare</span><i></i></a>
+                            </div>
+
+
+                            <div class="prices">
+                                <div class="prices-flex">
+                                    <div class="prices-list">
+                                        <span class="price actual-price">102.586 JOD</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="add-info">
+
+                                <div class="buttons">
+                                    <button type="button" value="Buy now" class="btn btn-primary btn btn-block lg" onclick="AjaxCart.addproducttocart_catalog('/en/addproducttocart/catalog/565/1/1?forceredirection=True');return false;">Buy now</button>
+                                    <button type="button" value="Buy now" class="btn btn-outline-dark button-2 product-box-add-to-cart-button lg" onclick="AjaxCart.addproducttocart_catalog('/en/addproducttocart/catalog/565/1/1');return false;"><i></i></button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="item-box">
+
+                    <div class="product-item" data-productid="490">
+
+                        <div class="picture">
+                            <a href="/en/mobile-accessories/connectivity/freebuds-3" title="Show details for Huawei Free Buds 3">
+                                <img alt="Picture of Huawei Free Buds 3" src="https://localhost:44321/app-images/thumbs/default-image_415.png" title="Show details for Huawei Free Buds 3">
+                            </a>
+                            <div class="color-available">
+                            </div>
+                        </div>
+                        <div class="details">
+                            <div class="prd-brand-name">
+                                <div class="brand-name">&nbsp;</div>
+                                <h2 class="product-title">
+                                    <a href="/en/mobile-accessories/connectivity/freebuds-3">Huawei Free Buds 3</a>
+                                </h2>
+                            </div>
+
+                            <div class="view-and-compare">
+                                <a value="Details" class="button-1 product-box-detail-button" onclick="setLocation('/en/mobile-accessories/connectivity/freebuds-3')"><span>View Details</span><i class="fas fa-chevron-right"></i></a>
+                                <a value="Add to compare list" title="Add to compare list" class="button-2 compare-button" onclick="AjaxCart.addproducttocomparelist('/en/compareproducts/add/490');return false;"><span>Compare</span><i></i></a>
+                            </div>
+
+
+                            <div class="prices">
+                                <div class="prices-flex">
+                                    <div class="prices-list">
+                                        <span class="price actual-price">137.069 JOD</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="add-info">
+
+                                <div class="buttons">
+                                    <button type="button" value="Buy now" class="btn btn-primary btn btn-block lg" onclick="AjaxCart.addproducttocart_catalog('/en/addproducttocart/catalog/490/1/1?forceredirection=True');return false;">Buy now</button>
+                                    <button type="button" value="Buy now" class="btn btn-outline-dark button-2 product-box-add-to-cart-button lg" onclick="AjaxCart.addproducttocart_catalog('/en/addproducttocart/catalog/490/1/1');return false;"><i></i></button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="item-box">
+
+                    <div class="product-item" data-productid="445">
+
+                        <div class="picture">
+                            <a href="/en/mobile-accessories/connectivity/huawei-free-buds-3" title="Show details for FreeBuds 3-Red">
+                                <img alt="Picture of FreeBuds 3-Red" src="https://localhost:44321/app-images/thumbs/default-image_415.png" title="Show details for FreeBuds 3-Red">
+                            </a>
+                            <div class="color-available">
+                            </div>
+                        </div>
+                        <div class="details">
+                            <div class="prd-brand-name">
+                                <div class="brand-name">&nbsp;</div>
+                                <h2 class="product-title">
+                                    <a href="/en/mobile-accessories/connectivity/huawei-free-buds-3">FreeBuds 3-Red</a>
+                                </h2>
+                            </div>
+
+                            <div class="view-and-compare">
+                                <a value="Details" class="button-1 product-box-detail-button" onclick="setLocation('/en/mobile-accessories/connectivity/huawei-free-buds-3')"><span>View Details</span><i class="fas fa-chevron-right"></i></a>
+                                <a value="Add to compare list" title="Add to compare list" class="button-2 compare-button" onclick="AjaxCart.addproducttocomparelist('/en/compareproducts/add/445');return false;"><span>Compare</span><i></i></a>
+                            </div>
+
+
+                            <div class="prices">
+                                <div class="prices-flex">
+                                    <div class="prices-list">
+                                        <span class="price actual-price">137.069 JOD</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="add-info">
+
+                                <div class="buttons">
+                                    <button type="button" value="Buy now" class="btn btn-primary btn btn-block lg" onclick="AjaxCart.addproducttocart_catalog('/en/addproducttocart/catalog/445/1/1?forceredirection=True');return false;">Buy now</button>
+                                    <button type="button" value="Buy now" class="btn btn-outline-dark button-2 product-box-add-to-cart-button lg" onclick="AjaxCart.addproducttocart_catalog('/en/addproducttocart/catalog/445/1/1');return false;"><i></i></button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="item-box">
+
+                    <div class="product-item" data-productid="430">
+
+                        <div class="picture">
+                            <a href="/en/mobile-accessories/connectivity/360-camera-panoramic" title="Show details for Huawei 360 Camera Panoramic">
+                                <img alt="Picture of Huawei 360 Camera Panoramic" src="https://localhost:44321/app-images/thumbs/default-image_415.png" title="Show details for Huawei 360 Camera Panoramic">
+                            </a>
+                            <div class="color-available">
+                            </div>
+                        </div>
+                        <div class="details">
+                            <div class="prd-brand-name">
+                                <div class="brand-name">&nbsp;</div>
+                                <h2 class="product-title">
+                                    <a href="/en/mobile-accessories/connectivity/360-camera-panoramic">Huawei 360 Camera Panoramic</a>
+                                </h2>
+                            </div>
+
+                            <div class="view-and-compare">
+                                <a value="Details" class="button-1 product-box-detail-button" onclick="setLocation('/en/mobile-accessories/connectivity/360-camera-panoramic')"><span>View Details</span><i class="fas fa-chevron-right"></i></a>
+                                <a value="Add to compare list" title="Add to compare list" class="button-2 compare-button" onclick="AjaxCart.addproducttocomparelist('/en/compareproducts/add/430');return false;"><span>Compare</span><i></i></a>
+                            </div>
+
+
+                            <div class="prices">
+                                <div class="prices-flex">
+                                    <div class="prices-list">
+                                        <span class="price actual-price">43.103 JOD</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="add-info">
+                                <div class="buttons">
+                                    <button type="button" value="Buy now" class="btn btn-primary btn btn-block lg" onclick="AjaxCart.addproducttocart_catalog('/en/addproducttocart/catalog/430/1/1?forceredirection=True');return false;">Buy now</button>
+                                    <button type="button" value="Buy now" class="btn btn-outline-dark button-2 product-box-add-to-cart-button lg" onclick="AjaxCart.addproducttocart_catalog('/en/addproducttocart/catalog/430/1/1');return false;"><i></i></button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            @if (userAgentHelper.IsMobileDevice())
+            {
+                if (supportRtl)
+                {
+                    <script asp-location="Footer">
+                        $(document).ready(function () {
+                            $('#recommended-owl').owlCarousel({
+                                loop: false,
+                                margin: 15,
+                                dots: false,
+                                autoWidth: true,
+                                nav: true,
+                                rtl: true,
+                                //for animation
+                                navText: ["", "<div class='timer'><span class='mask'><span class='rotator' style='transform: rotate(1deg);'></span></span></div>"],
+                            });
+
+                            //for animation
+                            var parentID = "#recommended-owl";
+                            var animationspeed = @(Nop.Web.EShopHelper.Animationspeed);
+
+                            //function for animation
+                            AnimationCircling(animationspeed, parentID);
+                        });
+                    </script>
+                }
+                else
+                {
+                    <script asp-location="Footer">
+                        $(document).ready(function () {
+                            $('#recommended-owl').owlCarousel({
+                                loop: false,
+                                margin: 15,
+                                dots: false,
+                                autoWidth: true,
+                                nav: true,
+                                rtl: false,
+
+                                //for animation
+                                navText: ["", "<div class='timer'><span class='mask'><span class='rotator' style='transform: rotate(1deg);'></span></span></div>"],
+                            });
+
+                            //for animation
+                            var parentID = "#recommended-owl";
+                            var animationspeed = @(Nop.Web.EShopHelper.Animationspeed);
+
+                            //function for animation
+                            AnimationCircling(animationspeed, parentID);
+
+                        });
+                    </script>
+                }
+            }
+            else
+            {
+                if (supportRtl)
+                {
+                    <script asp-location="Footer">
+                        $(document).ready(function () {
+                            $('#recommended-owl').owlCarousel({
+                                loop: false,
+                                margin: 20,
+                                dots: false,
+                                autoWidth: true,
+                                nav: false,
+                                rtl: true,
+
+                                responsive: {
+                                    0: {
+                                        margin: 15,
+                                    },
+                                    481: {
+                                        margin: 15,
+                                    },
+                                    991: {
+
+                                    },
+                                    1001: {
+                                        nav: true,
+                                    }
+                                }
+                            });
+                        });
+                    </script>
+                }
+                else
+                {
+                    <script asp-location="Footer">
+                        $(document).ready(function () {
+                            $('#recommended-owl').owlCarousel({
+                                loop: false,
+                                margin: 20,
+                                dots: false,
+                                autoWidth: true,
+                                nav: false,
+                                rtl: false,
+                                responsive: {
+                                    0: {
+                                        margin: 15,
+                                    },
+                                    481: {
+                                        margin: 15,
+                                    },
+                                    991: {
+
+                                    },
+                                    1001: {
+                                        nav: true,
+                                    }
+                                }
+                            });
+                        });
+                    </script>
+
+                }
+            }
+        </div>*@
+
+</div>

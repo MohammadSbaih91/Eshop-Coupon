@@ -1,0 +1,26 @@
+﻿@using Nop.Plugin.Payments.OrangeMoney.Models
+@model PaymentStatusModel
+@{
+    Layout = null;
+}
+<div class="paymentstatus">
+    @if (Model.IsPaid)
+    {
+        <h4>@T("Plugins.Payments.OrangeMoney.PaymentStatus.Success")</h4>
+    }
+    else
+    {
+        <h4>@T("Plugins.Payments.OrangeMoney.PaymentStatus.Fail")</h4>
+        if (!string.IsNullOrWhiteSpace(Model.FailStatusMessage))
+        {
+            <h4>@Model.FailStatusMessage</h4>
+        }
+        @if (Model.CanRePostProcessPayment)
+        {
+            <a href="@Url.RouteUrl("RetryPayment", new { orderId= Model.OrderId})" class="button-1 re-order-button">@T("Order.RetryPayment")</a>
+            <p class="hint">
+                <em>@T("Order.RetryPayment.Hint")</em>
+            </p>
+        }
+    }
+</div>

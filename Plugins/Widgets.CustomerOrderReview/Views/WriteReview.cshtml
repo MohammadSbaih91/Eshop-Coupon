@@ -1,0 +1,211 @@
+﻿@using Microsoft.AspNetCore.Routing
+@using Widgets.CustomerOrderReview.Domain
+@model Widgets.CustomerOrderReview.Models.CustomerOrderReviewModel
+@{
+    Layout = "";
+    Html.AddCssFileParts("~/Plugins/Widgets.CustomerOrderReview/Content/css/customer.review.css");
+    Html.AppendCssFileParts($"~/Plugins/Misc.AppointmentBooking/Views/Content/css/widget.css");
+}
+
+@if (!Model.HideRatingForm)
+{
+    @*<div class="flex-right">
+            <h2>Give Us a <span>feedback!</span></h2>
+            <p class="head">It helps us grow.</p>
+            <div class="review">
+                <ul>
+                    <li>
+                        <div class="name">
+                            <span>1</span><p>How easy was the Buy journey?</p>
+                        </div>
+                        <div class="icons">
+                            <span></span><span class="active"></span><span></span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="name">
+                            <span>2</span><p>Did you find the nearest shop easily?</p>
+                        </div>
+                        <div class="icons">
+                            <span class="active"></span><span></span><span></span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="name">
+                            <span>3</span><p>Did you like the Book Appointment service?</p>
+                        </div>
+                        <div class="icons">
+                            <span></span><span class="active"></span><span></span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="name">
+                            <span>4</span><p>Would you recommend Book Appointment to you friends?</p>
+                        </div>
+                        <div class="icons">
+                            <span></span><span></span><span class="active"></span>
+                        </div>
+                    </li>
+                </ul>
+                <a class="btn btn-outline-dark btn-block" href="#">Submit Review</a>
+            </div>
+        </div>*@
+    <div class="flex-right">
+        <form method="post" id="customer-review-form">
+            <nop-antiforgery-token />
+            <div asp-validation-summary="ModelOnly" class="message-error"></div>
+            <input asp-for="OrderId" type="hidden" />
+            <input asp-for="StoreId" type="hidden" />
+            <input asp-for="CustomerId" type="hidden" />
+            <h2>@T("Plugins.Misc.AppointmentBooking.ConfirmBooking.FeedBack.Title1")</h2>
+            <p class="head">@T("Plugins.Misc.AppointmentBooking.ConfirmBooking.FeedBack.Title2")</p>
+            <div class="review">
+                <div class="result success">
+                    <h1>
+                        @T("Plugins.CustomerOrderReview.submit.success")
+                    </h1>
+                </div>
+                <div class="result fail">
+                    <h1>
+                        @T("Plugins.CustomerOrderReview.submit.fail")
+                    </h1>
+                </div>
+                <ul>
+                    @if (!string.IsNullOrWhiteSpace(Model.Rate1Label))
+                    {
+                        <li>
+                            <div class="name">
+                                @Html.Raw(Model.Rate1Label)
+                            </div>
+                            <div class="icons">
+                                <div class="icons">
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input class="custom-control-input" asp-for="Rate1" value="3" type="radio" id="addorderrating_1_1" />
+                                        <label for="addorderrating_1_1" class="custom-control-label"><span></span></label>
+                                    </div>
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input class="custom-control-input" asp-for="Rate1" value="2" type="radio" id="addorderrating_1_2" />
+                                        <label for="addorderrating_1_2" class="custom-control-label"><span class="funny1"></span></label>
+                                    </div>
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input class="custom-control-input" asp-for="Rate1" value="1" type="radio" id="addorderrating_1_3" />
+                                        <label for="addorderrating_1_3" class="custom-control-label"><span class="funny2"></span></label>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    }
+                    @if (!string.IsNullOrWhiteSpace(Model.Rate2Label))
+                    {
+                        <li>
+                            <div class="name">
+                                @Html.Raw(Model.Rate2Label)
+                            </div>
+                            <div class="icons">
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input class="custom-control-input" asp-for="Rate2" value="3" type="radio" id="addorderrating_2_1" />
+                                    <label for="addorderrating_2_1" class="custom-control-label"><span></span></label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input class="custom-control-input" asp-for="Rate2" value="2" type="radio" id="addorderrating_2_2" />
+                                    <label for="addorderrating_2_2" class="custom-control-label"><span class="funny1"></span></label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input class="custom-control-input" asp-for="Rate2" value="1" type="radio" id="addorderrating_2_3" />
+                                    <label for="addorderrating_2_3" class="custom-control-label"><span class="funny2"></span></label>
+                                </div>
+                            </div>
+                        </li>
+                    }
+                    @if (!string.IsNullOrWhiteSpace(Model.Rate3Label))
+                    {
+                        <li>
+                            <div class="name">
+                                @Html.Raw(Model.Rate3Label)
+                            </div>
+                            <div class="icons">
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input class="custom-control-input" asp-for="Rate3" value="3" type="radio" id="addorderrating_3_1" />
+                                    <label for="addorderrating_3_1" class="custom-control-label"><span></span></label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input class="custom-control-input" asp-for="Rate3" value="2" type="radio" id="addorderrating_3_2" />
+                                    <label for="addorderrating_3_2" class="custom-control-label"><span class="funny1"></span></label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input class="custom-control-input" asp-for="Rate3" value="1" type="radio" id="addorderrating_3_3" />
+                                    <label for="addorderrating_3_3" class="custom-control-label"><span class="funny2"></span></label>
+                                </div>                               
+                            </div>
+                        </li>
+                    }
+                    @if (!string.IsNullOrWhiteSpace(Model.Rate4Label))
+                    {
+                        <li>
+                            <div class="name">
+                                @Html.Raw(Model.Rate4Label)
+                            </div>
+                            <div class="icons">
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input class="custom-control-input" asp-for="Rate4" value="3" type="radio" id="addorderrating_4_1" />
+                                    <label for="addorderrating_4_1" class="custom-control-label"><span></span></label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input class="custom-control-input" asp-for="Rate4" value="2" type="radio" id="addorderrating_4_2" />
+                                    <label for="addorderrating_4_2" class="custom-control-label"><span class="funny1"></span></label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input class="custom-control-input" asp-for="Rate4" value="1" type="radio" id="addorderrating_4_3" />
+                                    <label for="addorderrating_4_3" class="custom-control-label"><span class="funny2"></span></label>
+                                </div>
+                            </div>
+                        </li>
+                    }
+                </ul>
+                @if (!string.IsNullOrWhiteSpace(Model.FeedbackLabel))
+                {
+                    <div class="inputs">
+                        <label>@Model.FeedbackLabel</label>
+                        <div class="rating-wrapper">
+                            <textarea asp-for="Feedback" class="review-text form-control"></textarea>
+                            <span asp-validation-for="Feedback"></span>
+                        </div>
+                    </div>
+                }
+                <div class="buttons">
+                    <input type="submit" name="add-review" class="btn btn-outline-dark btn-block" value="@T("Reviews.SubmitButton")" />
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script asp-location="Footer">
+
+        $(document).ready(function () {
+            $('input[type=radio]').change(function () {
+                $(this).closest('li>div.feed-review').find('i').removeClass('selected');
+                $(this).next('i').addClass("selected");
+            });
+
+     var $form=$('#customer-review-form');
+        $form.submit(function (e) {
+           e.preventDefault();
+           $.ajax({
+                   cache: false,
+                   url:'@Url.RouteUrl("CustomerOrderReview.WriteCustomerOrderReview")',
+                   type: 'post',
+                   data: $form.serialize(),
+                   error: function(xhr, ajaxOptions, thrownError) {
+                       $('.result.fail').slideDown();
+                       $('.feed-list').slideUp();
+                   },
+                   success:function(xhr, ajaxOptions, thrownError) {
+                       $('.review-title').slideUp();
+                       $('.result.success').slideDown();
+                       $('.feed-list').slideUp();
+                   }
+               });
+        });
+    });
+    </script>
+}

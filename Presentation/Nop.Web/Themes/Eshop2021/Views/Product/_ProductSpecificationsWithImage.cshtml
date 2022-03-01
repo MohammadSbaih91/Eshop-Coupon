@@ -1,0 +1,21 @@
+﻿@model IList<ProductSpecificationModel>
+@using Nop.Core.Domain.Catalog;
+@if (Model.Count > 0)
+{
+    <div class="product-collateral-with-picture">
+        <ul>
+            @foreach (var item in Model)
+            {
+                <li>
+                    <div class="prd-spc-flex">
+                        <div class="prd-pic"><img src="@item.PictureUrl" /></div>
+                        <div class="prd-spc">
+                            <h4>@Html.Raw(item.ValueRaw)</h4>
+                            <span>@item.SpecificationAttributeName</span>
+                        </div>
+                    </div>
+                </li>
+            }
+        </ul>
+    </div>
+}

@@ -1,0 +1,90 @@
+﻿@using Nop.Plugin.Shipping.Aramex
+@using Nop.Core
+@using Nop.Web.Framework.UI
+@using Nop.Core.Domain.Seo;
+@using Nop.Core
+@inject SeoSettings seoSettings
+@inject IStoreContext storeContext
+@inject IWorkContext workContext
+
+@model TrackingModel
+@{
+    var supportRtl = workContext.WorkingLanguage.Rtl;
+    Layout = "_ColumnsOne";
+    //page class
+    Html.AppendPageCssClassParts("html-track-page");
+
+
+    if (supportRtl)
+    {
+        Html.AppendCssFileParts($"~/Plugins/Shipping.Aramex/Content/css/track.rtl.css");
+    }
+    else
+    {
+        Html.AppendCssFileParts($"~/Plugins/Shipping.Aramex/Content/css/track.ltr.css");
+    }
+    Html.AppendCssFileParts($"~/Plugins/Shipping.Aramex/Content/css/track.css");
+
+    //canonical URL
+    if (seoSettings.CanonicalUrlsEnabled)
+    {
+        Html.AddCanonicalUrlParts(storeContext.CurrentStore.Url + workContext.WorkingLanguage.UniqueSeoCode + "order/aramextrackyourorder", seoSettings.QueryStringInCanonicalUrlsEnabled);
+    }
+}
+<form id="OrderTrack" asp-acton="AramexTrackYourOrder" asp-controller="AramexTracking" method="post">
+    <div class="track-head">
+        <div class="track-title">
+            <h2>@T("Shipping.Aramex.Shipment.Trackyourorder.Title")</h2>
+        </div>
+        <a class="_close" href="@Url.RouteUrl("HomePage")">
+            <i></i>
+        </a>
+    </div>
+    <div class="breadcrumb-hide">
+        <partial name="@(AramexDefault.ViewPath)_AramexBreadcrumb.cshtml" />
+    </div>
+    <div class="container">
+        <div class="track-shadow">
+            <div class="track-page">
+                <div class="track-title hide-m">
+                    <h2>@T("Shipping.Aramex.Shipment.Trackyourorder.Title")</h2>
+                </div>
+                <div asp-validation-summary="ModelOnly" class="message-error"></div>
+                <div class="track-first-step">
+                    <div class="track-form">
+                        <div class="cust-group __first">
+                            <div>
+                                <label asp-for="OrderNumber"></label>
+                                <nop-required />
+                            </div>
+                            <p>@T("Shipping.Aramex.Tracking.OrderNumber.detail")</p>
+                            <div class="inp">
+                                <input asp-for="OrderNumber" class="cus-input" />
+                                <span class="cust-error" asp-validation-for="OrderNumber"></span>
+                                @*<input asp-for="OrderNumber" class="cus-input" />*@
+                            </div>
+                            @*<div class="cust-error">The number you entered is incorrect</div>*@
+                        </div>
+                        <div class="cust-group">
+                            <div>
+                                <label asp-for="Email"></label>
+                                <nop-required />
+                            </div>
+                            <p>@T("Shipping.Aramex.Tracking.Email.Detail")</p>
+                            <div class="inp">
+                                <input asp-for="Email" />
+                                <span class="cust-error" asp-validation-for="Email"></span>
+                                @*<input asp-for="Email" class="cus-input" />*@
+                            </div>
+                        </div>
+                        <div class="cust-btn-container">
+                            <button class="btn btn-orange" type="submit">@T("Shipping.Aramex.Tracking.Button")</button>
+                            @*<div class="btn btn-primary">Track order</div>*@
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,244 @@
+@model List<PackageModel>
+@using Nop.Services.Helpers
+@using Nop.Core
+@inject IWorkContext workContext
+@inject IUserAgentHelper userAgentHelper
+@{
+    var supportRtl = workContext.WorkingLanguage.Rtl;
+    var itemCount = 4;
+    if (userAgentHelper.IsMobileDevice())
+    {
+        itemCount = 1;
+    }
+}
+@if (Model != null && Model.Count > 0)
+{
+    <div class="container">
+        <div class="related-products-grid product-grid plan-whoutpic-product">
+            @if (Model != null && Model.Count > itemCount)
+            {
+
+                <div class="title">
+                    <strong>@T("Admin.Packages")</strong>
+                </div>
+                <div class="item-grid small-prd-bx productbox-without-rating" id="rel-parent">
+                    <div class="owl-carousel prd-auto-width-mobile arrow-center" id="related-owl">
+                        @foreach (var item in Model)
+                        {
+                            var dataDictAddress = new ViewDataDictionary(ViewData);
+                            dataDictAddress.TemplateInfo.HtmlFieldPrefix = "ProductOverviewModel";
+                            <div class="item-box">@await Html.PartialAsync("_PackageBox", item, dataDictAddress)</div>
+                        }
+                    </div>
+                </div>
+
+            }
+            else
+            {
+                <div class="title">
+                    <strong>@T("Admin.Packages")</strong>
+                </div>
+                <div class="item-grid small-prd-bx productbox-without-rating">
+                    <div class="row">
+                        @foreach (var item in Model)
+                        {
+                            var dataDictAddress = new ViewDataDictionary(ViewData);
+                            dataDictAddress.TemplateInfo.HtmlFieldPrefix = "ProductOverviewModel";
+
+                            <div class="col-12 col-sm-3">
+                                <div class="item-box">@await Html.PartialAsync("_PackageBox", item, dataDictAddress)</div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+}
+    @if (userAgentHelper.IsMobileDevice())
+    {
+        if (supportRtl)
+        {
+            <script asp-location="Footer">
+            $(document).ready(function () {
+                $('#related-owl').owlCarousel({
+                    loop: true,
+                    margin: 15,
+                    autoWidth: true,
+                    items: 2,
+                    nav: true,
+                    dots: false,
+                    rtl: true,
+
+                    //for animation
+                    navText: ["", "<div class='timer'><span class='mask'><span class='rotator' style='transform: rotate(1deg);'></span></span></div>"],
+                    responsive: {
+                        0: {
+                            margin: 10,
+                            items: 1
+                        },
+                        991: {
+                            margin: 10,
+                            items: 1
+                        },
+                        992: {
+                            margin: 10,
+                            items: 1
+                        },
+                        1366: {
+                            margin: 10,
+                        },
+                        1400: {
+                            margin: 20,
+                        }
+                    }
+                });
+
+                //for animation
+                var parentID = "#rel-parent";
+                var animationspeed = @(Nop.Web.EShopHelper.Animationspeed);
+
+                //function for animation
+                AnimationCircling(animationspeed, parentID);
+            });
+            </script>
+        }
+        else
+        {
+            <script asp-location="Footer">
+            $(document).ready(function () {
+                $('#related-owl').owlCarousel({
+                    loop: true,
+                    margin: 15,
+                    autoWidth: true,
+                    rtl: false,
+                    items: 2,
+                    nav: true,
+                    dots: false,
+                    //for animation
+                    navText: ["", "<div class='timer'><span class='mask'><span class='rotator' style='transform: rotate(1deg);'></span></span></div>"],
+                    responsive: {
+                        0: {
+                            margin: 10,
+                            items: 1
+                        },
+                        991: {
+                            margin: 10,
+                            items: 1
+                        },
+                        992: {
+                            margin: 10,
+                            items: 1
+                        },
+                        1366: {
+                            margin: 10,
+                        },
+                        1400: {
+                            margin: 20,
+                        }
+                    }
+                });
+
+                //for animation
+                var parentID = "#rel-parent";
+                var animationspeed = @(Nop.Web.EShopHelper.Animationspeed);
+
+                //function for animation
+                AnimationCircling(animationspeed, parentID);
+            });
+            </script>
+        }
+    }
+    else
+    {
+        if (supportRtl)
+        {
+            <script asp-location="Footer">
+                $(document).ready(function () {
+                    $('#related-owl').owlCarousel({
+                        loop: true,
+                        margin: 15,
+                        dots: false,
+                        //autoWidth: true,
+                        nav: true,
+                        rtl: true,
+                        responsive: {
+                            0: {
+                                margin: 7,
+                                items: 1,
+                            },
+                            991: {
+                                margin: 7,
+                                items: 3,
+                            },
+                            992: {
+                                margin: 7,
+                                items: 3,
+                            },
+                            1024: {
+                                margin: 10,
+                                items: 4,
+                            },
+                            1280: {
+                                margin: 14,
+                                items: 4,
+                            },
+                            1366: {
+                                margin: 15,
+                                items: 4,
+                            },
+                            1400: {
+                                margin: 20,
+                                items: 4,
+                            }
+                        }
+                    });
+                });
+            </script>
+        }
+        else
+        {
+            <script asp-location="Footer">
+                $(document).ready(function () {
+                    $('#related-owl').owlCarousel({
+                        loop: true,
+                        margin: 15,
+                        dots: false,
+                        nav: true,
+                        rtl: false,
+                        responsive: {
+                            0: {
+                                margin: 7,
+                                items: 1,
+                            },
+                            991: {
+                                margin: 7,
+                                items: 3,
+                            },
+                            992: {
+                                margin: 7,
+                                items: 3,
+                            },
+                            1024: {
+                                margin: 10,
+                                items: 4,
+                            },
+                            1280: {
+                                margin: 14,
+                                items: 4,
+                            },
+                            1366: {
+                                margin: 15,
+                                items: 4,
+                            },
+                            1400: {
+                                margin: 20,
+                                items: 4,
+                            }
+                        }
+                    });
+                });
+            </script>
+
+        }
+    }

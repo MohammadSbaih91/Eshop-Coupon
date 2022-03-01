@@ -1,0 +1,29 @@
+﻿@using Nop.Plugin.Shipping.Aramex.Models.Responce;
+
+@model List<TrackingResult>
+<div class="cut-order-activity">
+    <h4>@T("Shipping.Aramex.Shipment.Activity.OrderActivity")</h4>
+    <table>
+        <tr>
+            <th>@T("Shipping.Aramex.Shipment.Activity.Date")</th>
+            <th>@T("Shipping.Aramex.Shipment.Activity.Location")</th>
+            <th>@T("Shipping.Aramex.Shipment.Activity.Activity")</th>
+        </tr>
+        @foreach (var tracking in Model)
+        {
+            <tr>
+                <td>
+                    <b>@tracking.UpdateDateTime.ToString("dd MMM yyyy")</b>
+                    <span>@tracking.UpdateDateTime.ToString("hh:mm tt")</span>
+                    @*<span>@tracking.UpdateDescription</span>*@
+                </td>
+                <td>
+                    @tracking.UpdateLocation
+                </td>
+                <td>
+                    @tracking.UpdateDescription
+                </td>
+            </tr>
+        }
+    </table>
+</div>

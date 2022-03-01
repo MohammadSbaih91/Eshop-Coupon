@@ -1,0 +1,24 @@
+﻿@model PackagesModel
+
+@inject IEventPublisher eventPublisher
+
+<div asp-validation-summary="All"></div>
+<input asp-for="Id" type="hidden" />
+
+<div class="content">
+    <div class="form-horizontal">
+        <nop-tabs id="package-edit">
+            <nop-tab asp-name="tab-info" asp-title="@T("Admin.Packages")" asp-default="true">@await Html.PartialAsync("_CreateOrUpdate.info", Model)</nop-tab>
+            <nop-tab asp-name="tab-products" asp-title="@T("Admin.Catalog.Categories.Products")">@await Html.PartialAsync("_CreateOrUpdate.Products", Model)</nop-tab>
+        </nop-tabs>
+    </div>
+</div>
+@{
+    //custom tabs
+    var eventMessage = new AdminTabStripCreated(this.Html, "package-edit");
+    eventPublisher.Publish(eventMessage);
+    foreach (var eventBlock in eventMessage.BlocksToRender)
+    {
+        @eventBlock
+    }
+}

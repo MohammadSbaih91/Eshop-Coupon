@@ -1,0 +1,14 @@
+﻿@model ProductDetailsModel
+@{
+    var addtocomparelink = Url.RouteUrl("AddProductToCompare", new { productId = Model.Id });
+    var addtocomparelinkRedirect = Url.RouteUrl("AddProductToCompare", new { productId = Model.Id, forceredirection = true });
+}
+@if (Model.CompareProductsEnabled)
+{
+    <div class="compare-products compare-redirect">
+        <div value="@T("Products.Compare.AddToCompareList")" class="custom-add-to-compare add-to-compare-list-button" onclick="AjaxCart.addproducttocomparelist('@addtocomparelinkRedirect');return false;"><span>@T("HomePage.Category.Compare")</span><i></i></div>
+    </div>
+    <div class="compare-products compare-added">
+        <div value="@T("Products.Compare.AddToCompareList")" class="custom-add-to-compare add-to-compare-list-button" onclick="AjaxCart.addproducttocomparelist('@addtocomparelink');return false;"><span>@T("HomePage.Category.Compare")</span><i></i></div>
+    </div>
+}

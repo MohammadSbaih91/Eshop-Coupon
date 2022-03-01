@@ -1,0 +1,309 @@
+﻿@model Nop.Plugin.Widgets.AnywhereSlider.Models.PublicInfoModel
+@using Nop.Core
+@using Nop.Web.Framework.UI
+@using Nop.Services.Helpers
+@using Nop.Plugin.Widgets.AnywhereSlider.Domains
+
+@inject IWorkContext workContext
+@inject IUserAgentHelper userAgentHelper
+
+@{
+    var sliderGroup = Model.SliderGroupInfos;
+}
+@{
+    var supportRtl = workContext.WorkingLanguage.Rtl;
+    var rtl = supportRtl ? "true" : "false";
+
+    Layout = "";
+    Html.AddCssFileParts("~/Plugins/Widgets.AnywhereSlider/Views/Content/css/owl.style.css");
+
+    Html.AppendCssFileParts($"~/Themes/Eshop2021/Content/css/slick.css");
+    Html.AddScriptParts(ResourceLocation.Footer, $"~/Themes/Eshop2021/Content/js/slick.min.js");
+
+    @if (supportRtl)
+    {
+        Html.AddCssFileParts("~/Plugins/Widgets.AnywhereSlider/Views/Content/css/rtl.css");
+    }
+    else
+    {
+        Html.AddCssFileParts("~/Plugins/Widgets.AnywhereSlider/Views/Content/css/ltr.css");
+    }
+
+    var sliderCount = 0;
+}
+
+<div class="first_section any-slider">
+    <div class="container">
+        <div class="custom-slider" id="slick-main">
+            <div class="slider_flex">
+                <div class="slider-left">
+                    <div class="timeline__slider slider-home">
+                        @for (int i = 0; i < Model.SliderGroupInfos.Count; i++)
+                        {
+                            var group = Model.SliderGroupInfos[i];
+                            var from = sliderCount + 1;
+                            var to = from + group.AccordinglyInfos.Count;
+
+                            sliderCount = sliderCount + group.AccordinglyInfos.Count;
+                            foreach (var slider in group.AccordinglyInfos)
+                            {
+                                var positionClass = "";
+                                var alignmentClass = "";
+                                switch (slider.Position)
+                                {
+                                    case (int)PositionEnum.Top:
+                                        positionClass = "position-top";
+                                        break;
+                                    case (int)PositionEnum.Bottom:
+                                        positionClass = "position-bottom";
+                                        break;
+                                    case (int)PositionEnum.Middle:
+                                        positionClass = "position-middle";
+                                        break;
+                                    default:
+                                        positionClass = "";
+                                        break;
+
+                                }
+                                switch (slider.Alignment)
+                                {
+                                    case (int)AlignmentEnum.Right:
+                                        alignmentClass = "alignment-right";
+                                        break;
+                                    case (int)AlignmentEnum.Center:
+                                        alignmentClass = "alignment-center";
+                                        break;
+                                    case (int)AlignmentEnum.Left:
+                                        alignmentClass = "alignment-left";
+                                        break;
+                                    default:
+                                        positionClass = "";
+                                        break;
+
+                                }
+
+                                <div class="timeline__item slider-home" data-id="@(from) to @(to)">
+                                    <div class="slider-alignmnet @positionClass @alignmentClass">
+                                        <div class="desktop-slider">
+                                            <div class="item">
+                                                @if (userAgentHelper.IsMobileDevice())
+                                                {
+                                                    <img class="mobile-slider-img" src="@(slider.MobilePictureUrl)">
+                                                }
+                                                else
+                                                {
+                                                    <img class="tablet-slider-img" src="@(slider.TabletPictureUrl)">
+                                                    <img class="desktop-slider-img" src="@(slider.PictureUrl)">
+                                                }
+                                                <div class="caption">
+                                                    @Html.Raw(slider.Html)
+                                                    @if (!string.IsNullOrEmpty(slider.ClickToAction))
+                                                    {
+                                                        <a href="@slider.ClickToAction" class="btn btn-orange btn-slider">@T("Widgets.AnywhereSlider.Accordingly.Exploremore")</a>
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    </div>
+                    <div class="slick-dots" id="dots"></div>
+                </div>
+                <div class="horizantal-menu">
+                    <ul class="horizantal__nav" id="horizantal-menu-slider">
+                        @{
+                            sliderCount = 0;
+                        }
+                        @for (int i = 0; i < Model.SliderGroupInfos.Count; i++)
+                        {
+
+                            var group = Model.SliderGroupInfos[i];
+                            var activeClass = "";
+                            if (i == 0)
+                            {
+                                activeClass = "is-active";
+                            }
+                            var from = sliderCount + 1;
+                            var to = from + group.AccordinglyInfos.Count;
+
+                            sliderCount = sliderCount + group.AccordinglyInfos.Count;
+                            <li class="item @activeClass" data-from="@(from) to @(to)" data-slick-index="@(from-1)">
+                                <a>
+                                    <span>@Html.Raw(group.Description)</span>
+                                    <h2>@Html.Raw(group.Title)</h2>
+                                </a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+            <div class="slick-arrow-data white-arrow"></div>
+            <div class="slider-counter">
+                <div class="total_count"></div>
+                <div class="count"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script asp-location="Footer">
+    $(document).ready(function () {
+        $('.timeline__slider').slick({
+            infinite: true,
+            arrows: true,
+            dots: false,
+            autoplay: false,
+            swipeToSlide: true,
+            rtl: @(rtl),
+            cssEase: 'ease-in-out',
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            appendArrows: $('.slick-arrow-data'),
+            nextArrow: '<div class="dir_right"><div class="timer"><span class="mask"><span class="rotator" style="transform: rotate(10deg);"></span></span></div></div>',
+            prevArrow: '<div class="dir_left"></div>'
+        });
+
+        var parentID = $("#slick-main");
+        var animationspeed = @(Nop.Web.EShopHelper.Animationspeed);
+
+        AnimationCirclingSlick(animationspeed , parentID);
+        let groupKey = 0;
+        $('.timeline__slider').on('afterChange', function (event, slick, currentSlide, nextSlide) {
+
+            //For thumbnaiv active-group on afterChange
+            $('.horizantal__nav li.is-active').removeClass('is-active');
+            $('.horizantal__nav li[data-group="' + $('.slick-current').data('group') + '"').addClass('is-active');
+
+            //For dot active-group on afterChange
+            $('#dots li.is-active').removeClass('is-active');
+            $('#dots li[data-group="' + $('.slick-current').data('group') + '"').addClass('is-active');
+
+            //For dot active on afterChange
+            $("li", '#dots').removeClass('dot-active');
+            var dataId = $('.slick-current').attr("data-slick-index");
+            $('li[data-slick-index=' + dataId + ']', '#dots').addClass('dot-active');
+
+            //For totalcounter active-group on afterChange
+            $('.totalcounter.total-active').removeClass('total-active');
+            $('.totalcounter[data-group="' + $('.slick-current').data('group') + '"').addClass('total-active');
+
+            //For counter active-group on afterChange
+            $('.counter.count-active').removeClass('count-active');
+            $('.counter[data-group="' + $('.slick-current').data('group') + '"').addClass('count-active');
+            if (groupKey == Number($('.count-active').data('group'))) {
+                var sliderCountNumner = Number($('.count-active').text());
+                $('.count-active').text(sliderCountNumner + 1);
+            }
+            else {
+                groupKey = Number($('.count-active').data('group'));
+                $('.count-active').text(1);
+            }
+        });
+
+        // set up verticall menu and dots with slick slider
+        let groupNum = 1;
+        let dotscount = 0;
+        var dots = $("#dots");
+        var ul = $("<ul/>");
+        $('.horizantal__nav li').each(function () {
+            let [from, to] = $(this).attr("data-from").trim().split('to');
+            from = +from.trim();
+            to = +to.trim();
+            $(this).attr('data-group', groupNum);
+            let dataGroup = groupNum;
+            found = false
+
+            $('.slick-slide').not(".slick-cloned").each(function () {
+
+                let [ifrom, ito] = $(this).attr("data-id").trim().split('to');
+
+                ifrom = +ifrom.trim();
+                ito = +ito.trim();
+
+                if (ifrom >= from && ito <= to) {
+                    $(this).attr('data-group', dataGroup);
+                    var li;
+                    $("li:eq(0)", dots).addClass("dot-active");
+                    if (dataGroup == 1) {
+                        li = $('<li class="is-active"/>').attr('data-group', dataGroup).attr('data-slick-index', dotscount);
+                    } else {
+                        li = $('<li></li>').attr('data-group', dataGroup).attr('data-slick-index', dotscount);
+                    }
+                    ul.append(li);
+                    dots.append(ul);
+                    found = true
+                    dotscount++;
+                }
+            })
+            if (!found) {
+                $(this).addClass('disabled')
+            }
+            groupNum++;
+        });
+
+        var categories = {},
+            category;
+        $('.slick-slide[data-group]','.timeline__slider').each(function (i, el) {
+            category = $(el).data('group');
+            if (categories.hasOwnProperty(category)) {
+                categories[category] += 1;
+            }
+            else {
+                categories[category] = 1;
+            }
+        });
+
+        // group wise total count
+        var groupslider = $(".count");
+        var groupslidetotal = $(".total_count");
+        for (var key in categories) {
+            groupslider.append("<span data-group="+ key +" class='counter'>" + 1 +'</span>');
+            groupslidetotal.append("<span data-group=" + key + " class='totalcounter'>" + categories[key] + '</span>');
+            $(".counter:eq(0)").addClass("count-active");
+            $(".totalcounter:eq(0)").addClass("total-active");
+        }
+        groupKey = Number($('.count-active').data('group'));
+
+        // click on verticall change group
+        $('.horizantal__nav li').click(function () {
+            var groupid = $(this).attr('data-slick-index');
+            $('.timeline__slider').slick('slickGoTo', groupid);
+        })
+
+        // click on dot change slick slider
+        $('li[data-slick-index]').click(function (e) {
+            e.preventDefault();
+            var slideno = $(this).attr('data-slick-index');
+            $('.timeline__slider').slick('slickGoTo', slideno);
+        });
+    });
+</script>
+
+@*For scroll left and right*@
+@if (userAgentHelper.IsMobileDevice())
+{
+    @if (supportRtl)
+    {
+        <script asp-location="Footer">
+            $(document).ready(function () {
+                $('.timeline__slider').on('afterChange', function (event, slick, currentSlide, nextSlide) {
+                    let scrolldir = (($('.slick-current').data('group') - 1) * 200);
+                    $(".horizantal-menu ul").scrollLeft(-scrolldir);
+                });
+            });
+        </script>
+    }
+    else
+    {
+        <script asp-location="Footer">
+            $(document).ready(function () {
+                $('.timeline__slider').on('afterChange', function (event, slick, currentSlide, nextSlide) {
+                    let scrolldir = (($('.slick-current').data('group') - 1) * 200);
+                    $(".horizantal-menu ul").scrollLeft(scrolldir);
+                });
+            });
+        </script>
+    }
+}

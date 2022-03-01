@@ -1,0 +1,63 @@
+﻿@model Nop.Web.Customization.Models.Catalog.CategoryProductModel
+@using Nop.Services.Helpers
+@using Nop.Core
+@inject IWorkContext workContext
+@inject IUserAgentHelper userAgentHelper
+@{
+    var supportRtl = workContext.WorkingLanguage.Rtl;
+
+    var boxCalss = "mobile-plan-product";
+    if (Model.CategoryProductBoxTemplate == "_ProductBox")
+    {
+        boxCalss = "plan-whoutpic-product";
+    }
+    else if (Model.CategoryProductBoxTemplate == "_ProductBoxFixedPlans")
+    {
+        boxCalss = "plan-whoutpic-product";
+    }
+    else if (Model.CategoryProductBoxTemplate == "_ProductBoxInternetPlan")
+    {
+        boxCalss = "plan-whoutpic-product";
+    }
+    else if (Model.CategoryProductBoxTemplate == "_ProductBoxMobilePlan")
+    {
+        boxCalss = "mobile-plan-product";
+    }
+    else if (Model.CategoryProductBoxTemplate == "_ProductBoxSmartLife")
+    {
+        boxCalss = "plan-whoutpic-product";
+    }
+}
+
+@if (userAgentHelper.IsMobileDevice())
+{
+    <div class="product-grid @(boxCalss)">
+        <div class="item-grid">
+            <div class="owl-carousel prd-auto-width prd-arrow-right" id="catalog-owl_@Model.CategoryId">
+                @foreach (var item in Model.ProductOverviewModel)
+                {
+                    <div class="item-box">
+                        @await Html.PartialAsync(Model.CategoryProductBoxTemplate, item)
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="product-grid @(boxCalss)">
+        <div class="item-grid">
+            <div class="row">
+                @foreach (var item in Model.ProductOverviewModel)
+                {
+                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-4">
+                        <div class="item-box">
+                            @await Html.PartialAsync(Model.CategoryProductBoxTemplate, item)
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+}

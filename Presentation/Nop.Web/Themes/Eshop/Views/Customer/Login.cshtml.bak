@@ -1,0 +1,11 @@
+﻿@model LoginModel
+@if (Model.CheckoutAsGuest)
+{
+    <script>
+        location.href='@Url.RouteUrl("Checkout")';
+    </script>    
+}
+else
+{
+    @await Html.PartialAsync("~/Views/Customer/Login.cshtml", Model    )
+}

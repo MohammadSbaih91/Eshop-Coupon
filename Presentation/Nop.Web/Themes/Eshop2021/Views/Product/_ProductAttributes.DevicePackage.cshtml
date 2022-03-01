@@ -1,0 +1,148 @@
+﻿
+@model IList<ProductDetailsModel.ProductAttributeModel>
+@using Nop.Core.Domain.Catalog
+@using Nop.Core.Domain.Media
+@using System.Text
+@using Nop.Services.Media
+@using Nop.Services
+@using Nop.Services.Configuration;
+
+@inject IDownloadService downloadService
+@inject CatalogSettings catalogSettings
+@inject ISettingService settingService
+@{
+    var devicePackageAttribute = settingService.GetSettingByKey<int>(EShopHelper.DevicePackageAttribute);
+    var attribute = Model.Where(p => p.ProductAttributeId == devicePackageAttribute).FirstOrDefault();
+
+}
+@if (attribute != null)
+{
+    var controlId = $"product_attribute_{attribute.Id}";
+    var textPrompt = !string.IsNullOrEmpty(attribute.TextPrompt) ? attribute.TextPrompt : attribute.Name;
+    <div id="@($"product_attribute_input_{attribute.Id}")">
+        <div class="device-package">
+            <label class="dev-label">@textPrompt</label>
+            <div class="__flex">
+                @foreach (var attributeValue in attribute.Values)
+                {
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" value="@attributeValue.Id" id="@(controlId)_@(attributeValue.Id)" data-deviceid="device" name="@(controlId)" class="custom-control-input" checked="@attributeValue.IsPreSelected">
+                        <label class="custom-control-label" for="@(controlId)_@(attributeValue.Id)">@attributeValue.Name</label>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+}
+
+@if (attribute != null)
+{
+    //dynamic update support
+    var attributesHaveConditions = Model.Any(x => x.HasCondition);
+    var attributesHaveAssociatedPictures = Model.Any(x => x.ProductId > 0);
+    var attributeChangeScriptsBuilder = new StringBuilder();
+    var productId = Model.First().ProductId;
+    var attributeChangeHandlerFuncName = $"custome_attribute_change_handler_{productId}";
+    if (catalogSettings.AjaxProcessAttributeChange)
+    {
+
+        var controlId = $"product_attribute_{attribute.Id}";
+        int count = 0;
+        foreach (var attributeValue in attribute.Values)
+        {
+            var iNotsDeviceOnly = 1;
+            if (count == 0)
+            {
+                iNotsDeviceOnly = 0;
+            }
+            count = count +1;
+            attributeChangeScriptsBuilder.AppendFormat("$('#{0}_{1}').on('click', function(){{{2}({3});}});\n", controlId, attributeValue.Id, attributeChangeHandlerFuncName, iNotsDeviceOnly);
+        }
+        foreach (var attributeValue in attribute.Values.Where(value => value.CustomerEntersQty))
+        {
+            attributeChangeScriptsBuilder.AppendFormat("$('#{0}_{1}_qty').on('input propertychange paste', function(){{{2}();}});\n", controlId, attributeValue.Id, attributeChangeHandlerFuncName);
+        }
+
+
+        //render scripts
+        //almost the same implementation is used in the \Views\Product\_RentalInfo.cshtml file
+        <script>
+           
+            function @(attributeChangeHandlerFuncName)(isnotdeviceonly) {
+                $.ajax({
+                    cache: false,
+                    url: '@Html.Raw(Url.Action("productdetails_attributechange", "shoppingcart", new { productId = productId, validateAttributeConditions = attributesHaveConditions, loadPicture = attributesHaveAssociatedPictures }))',
+                    data: $('#product-details-form').serialize(),
+                    type: 'post',
+                    success: function (data) {
+                        if (isnotdeviceonly == 1) {
+                            $("#div-DevicePackage").show();
+                            $("#divMonthlyPrice").show();
+                            $("#simSelect").show()
+                            $("#simSelect").addClass("active with-arrow")
+                        }
+                        else {
+                            $("#div-DevicePackage").hide();
+                            $("#divMonthlyPrice").hide();
+                            $("#simSelect").hide()
+                            $("#simSelect").removeClass("active with-arrow");
+                        }
+                        var planPrice = $('#simPrice').attr("data-simprice");
+                        GetFilteredPrice(data.price, data.finalProductPrice, planPrice);
+                        var planPrice = $('#simPrice').attr("data-simprice");
+                        if (data.basepricepangv) {
+                            $('#base-price-pangv-@productId').text(data.basepricepangv);
+                        } else {
+                            $('#base-price-pangv-@productId').hide();
+                        }
+                        if (data.sku) {
+                            $('#sku-@productId').text(data.sku).parent(".sku").show();
+                        } else {
+                            $('#sku-@productId').parent(".sku").hide();
+                        }
+                        if (data.mpn) {
+                            $('#mpn-@productId').text(data.mpn).parent(".manufacturer-part-number").show();
+                        } else {
+                            $('#mpn-@productId').parent(".manufacturer-part-number").hide();
+                        }
+                        if (data.gtin) {
+                            $('#gtin-@productId').text(data.gtin).parent(".gtin").show();
+                        } else {
+                            $('#gtin-@productId').parent(".gtin").hide();
+                        }
+                        if (data.stockAvailability) {
+                            $('#stock-availability-value-@productId').text(data.stockAvailability);
+                        }
+                        if (data.enabledattributemappingids) {
+                            for (var i = 0; i < data.enabledattributemappingids.length; i++) {
+                                $('#product_attribute_label_' + data.enabledattributemappingids[i]).show();
+                                $('#product_attribute_input_' + data.enabledattributemappingids[i]).show();
+                            }
+                        }
+                        if (data.disabledattributemappingids) {
+                            for (var i = 0; i < data.disabledattributemappingids.length; i++) {
+                                $('#product_attribute_label_' + data.disabledattributemappingids[i]).hide();
+                                $('#product_attribute_input_' + data.disabledattributemappingids[i]).hide();
+                            }
+                        }
+                        if (data.pictureDefaultSizeUrl) {
+                            $('#main-product-img-@productId').attr("src", data.pictureDefaultSizeUrl);
+                        }
+                        if (data.pictureFullSizeUrl) {
+                            $('#main-product-img-lightbox-anchor-@productId').attr("href", data.pictureFullSizeUrl);
+                        }
+                        if (data.message) {
+                            alert(data.message);
+                        }
+                        $(document).trigger({ type: "product_attributes_changed", changedData: data });
+                    }
+                });
+            }
+            $(document).ready(function () {
+                @(attributeChangeHandlerFuncName)();
+                @Html.Raw(attributeChangeScriptsBuilder.ToString())
+            });
+
+        </script>
+    }
+}

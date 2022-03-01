@@ -1,0 +1,46 @@
+﻿@using Nop.Core.Domain.Orders
+
+@model List<ProductOverviewModel>
+
+<nop-antiforgery-token />
+<div class="item-grid">
+    <div class="row">
+        @foreach (var product in Model)
+        {
+            var shoppingCartTypeId = (int)ShoppingCartType.ShoppingCart;
+            var quantity = 1;
+            var buyNow = Url.RouteUrl("AddProductToCart-Catalog", new { productId = product.Id, shoppingCartTypeId = shoppingCartTypeId, quantity = quantity, forceredirection = true });
+            var addtocomparelink = Url.RouteUrl("AddProductToCompare", new { productId = product.Id });
+
+            <div class="col-12 col-sm-6 col-md-3">
+                <div class="item-box">
+                    <div class="product-item" data-productid="491">
+                        <div class="picture">
+                            <a href="@UrlStrucutre.UrlDecode(Url.RouteUrl("Product", new {SeName = product.SeName}))" title="@product.Name">
+                                <img alt="@product.DefaultPictureModel.AlternateText" src="@product.DefaultPictureModel.ImageUrl" title="@product.DefaultPictureModel.Title" />
+                            </a>
+                        </div>
+                        <div class="details">
+                            <a class="product-title" href="@UrlStrucutre.UrlDecode(Url.RouteUrl("Product", new {SeName = product.SeName}))">@product.Name</a>
+                            <div class="description">
+                                @Html.Raw(product.ShortDescription)
+                            </div>
+                            <div class="add-info">
+
+                                <div class="prices">
+                                    <span class="price actual-price">@product.ProductPrice.Price</span>
+                                </div>
+
+                                <div class="buttons">
+                                    <input type="button" value="@T("Admin.Catalog.ComparePage.Buynow")" class="button-2 product-box-add-to-cart-button" onclick="AjaxCart.addproducttocart_catalog('@buyNow');return false;">
+                                    <input type="button" value="@T("Admin.Catalog.ComparePage.AddToCompare")" title="@T("Admin.Catalog.ComparePage.AddToCompare")" class="button-2 add-to-compare-list-button" onclick="AddToCompare('@addtocomparelink');return false;">
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

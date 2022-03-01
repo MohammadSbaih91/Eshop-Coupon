@@ -1,0 +1,128 @@
+﻿@model ProductDetailsModel
+@using Nop.Core.Domain.Orders
+@using Nop.Services.Configuration;
+@using Nop.Core
+@using Nop.Services
+@inject ISettingService settingService
+@inject IWorkContext workContext
+@inject IThemeContext themeContext
+@{
+    //Advanced Payment Amount Attribute
+    var advancedPaymentAmountAttrId = settingService.GetSettingByKey<int>(EShopHelperService.AdvancedPaymentAmountAttribute);
+    var advancedPaymentAmountAttribute = Model.ProductAttributes.Where(p => p.ProductAttributeId == advancedPaymentAmountAttrId).FirstOrDefault();
+    var controlId = "";
+    if (advancedPaymentAmountAttribute != null)
+    {
+        controlId = $"product_attribute_{advancedPaymentAmountAttribute.Id}";
+    }
+
+    var uniqueSeoCode = workContext.WorkingLanguage.UniqueSeoCode;
+    var themeName = themeContext.WorkingThemeName;
+
+}
+<div class="overall-payment">
+    <table>
+        <tr>
+            <td>
+                <p><span>@T("ProductDetail.DevicePrice")</span>@*<br /> @T("ProductDetail.Postpaid.PaymentInstallments")*@</p>
+            </td>
+            <td colspan="2">
+                <div class="full-price">
+                    <div class="final" id="divdeviceprice" data-productPrice="">
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr id="trSimPrice">
+            <td>
+                <p><span>@T("ProductDetail.SimPrice")</span> </p>
+                <p id="lblPaymentInstallments"></p>
+            </td>
+            <td>
+                <div class="full-price">
+                    @{
+                        var dataDictAttributes_Plans = new ViewDataDictionary(ViewData);
+                        dataDictAttributes_Plans.TemplateInfo.HtmlFieldPrefix = $"attributes_{Model.Id}";
+                        @await Html.PartialAsync("_ProductAttributes.Plans", Model.ProductAttributes, dataDictAttributes_Plans)
+                    }
+                    @*<div class="estimate">
+                            <span>@T("ProductDetail.FullPrice"):</span>
+                            <strong id="spnSimFullPrice"></strong>
+                        </div>*@
+                    <div class="final" id="simPrice" data-simPrice="">
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td class="vertical-top">
+                <p><span>@T("ProductDetail.OverallPayment")</span></p>
+            </td>
+            <td>
+                <div class="over-flex">
+                    <div class="full-price">
+                        @*<div class="estimate text-white">
+                                <span>@T("ProductDetail.FullPrice"):</span>
+                                <strong id="spnTotalFullPrice"></strong>
+                            </div>*@
+
+                        @if (advancedPaymentAmountAttribute != null && advancedPaymentAmountAttribute.Values != null && advancedPaymentAmountAttribute.Values.Count > 0)
+                        {
+                            <div class="flex">
+                                <div class="final" id="divTotalPrice">
+                                </div>
+                                <div class="plus">+</div>
+                            </div>
+                            var adPrice = 0M;
+                            foreach (var attributeValue in advancedPaymentAmountAttribute.Values)
+                            {
+                                var adjPrice = attributeValue.PriceAdjustment;
+                                adPrice = attributeValue.PriceAdjustmentValue;
+                                @if (!string.IsNullOrEmpty(attributeValue.PriceAdjustment))
+                                {
+                                    adjPrice = attributeValue.PriceAdjustment.Replace("+", "").Replace("-", "");
+                                }
+                                <div class="custom-control custom-radio custom-control-inline" style="display:none;">
+                                    <input class="custom-control-input" id="@(controlId)_@(attributeValue.Id)" type="radio" name="@(controlId)" value="@attributeValue.Id" checked="@attributeValue.IsPreSelected"
+                                           @(advancedPaymentAmountAttribute.Values.Any(value => value.CustomerEntersQty) ? Html.Raw($"onclick=\"showHideRadioQuantity('{controlId}')\"") : null) />
+                                    <label class="custom-control-label" for="@(controlId)_@(attributeValue.Id)"><span>@attributeValue.Name</span></label>
+                                    <div class="monthly-price">
+                                        <div class="monthly-price-info">
+                                            <h3>@Html.Raw(adjPrice)</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="advance-payment">
+                                    @Html.Raw(adjPrice)<p>@attributeValue.Name</p>
+                                </div>
+                            }
+                            <input type="hidden" id="hid_@(controlId)" value="@adPrice" />
+                        }
+                        else
+                        {
+                            <div class="flex">
+                                <div class="final" id="divTotalPrice">
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    <div class="btn btn-outline-white"><span onclick="AjaxCart.addproducttocart_details('@Url.RouteUrl("AddProductToCart-Details", new {productId = Model.Id, shoppingCartTypeId = (int) ShoppingCartType.ShoppingCart})', '#product-details-form');return true;">@T("shoppingcart.addtocart")</span><i></i></div>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
+<input type="hidden" value="@Model.Id" id="hdnProductId" />
+@{
+    Html.AddScriptParts(ResourceLocation.Footer, $"~/Themes/{themeName}/Content/js/productTemplate.js");
+}
+<script>
+    var adControlPayment = $("#hid_@(controlId)").val();
+    var startFormMonth = "@T("HomePage.ProductBox.StartFormMonth")";
+    var hdnProductPrice = @Model.ProductPrice.PriceValue;
+    $(document).ready(function () {
+        productTemplate.fncallCommonDocumentReady(adControlPayment, startFormMonth, hdnProductPrice);
+    });
+</script>
+
+

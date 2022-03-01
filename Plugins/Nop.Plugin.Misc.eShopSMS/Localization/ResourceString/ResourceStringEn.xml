@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Language Name="English">
+  <LocaleResource Name="Plugins.Misc.eShopSMS.APIUrl">
+    <Value>API URL</Value>
+  </LocaleResource>
+  <LocaleResource Name="Plugins.Misc.eShopSMS.APIUrl.Hint">
+    <Value>API URL</Value>
+  </LocaleResource>
+  <LocaleResource Name="Plugins.Misc.eShopSMS.UserName">
+    <Value>User name</Value>
+  </LocaleResource>
+  <LocaleResource Name="Plugins.Misc.eShopSMS.UserName.Hint">
+    <Value>User name</Value>
+  </LocaleResource>
+  <LocaleResource Name="Plugins.Misc.eShopSMS.Password">
+    <Value>Password</Value>
+  </LocaleResource>
+  <LocaleResource Name="Plugins.Misc.eShopSMS.Password.Hint">
+    <Value>Password</Value>
+  </LocaleResource>
+  <LocaleResource Name="Plugins.Misc.eShopSMS.IsActive">
+    <Value>Active</Value>
+  </LocaleResource>
+  <LocaleResource Name="Plugins.Misc.eShopSMS.IsActive.Hint">
+    <Value>IsActive</Value>
+  </LocaleResource>
+
+  <LocaleResource Name="Plugins.Misc.eShopSMS.SmsTemplates">
+    <Value>Sms Templates</Value>
+  </LocaleResource>
+  <LocaleResource Name="Plugins.Misc.eShopSMS.SmsTemplates.BackToList">
+    <Value>Back to list</Value>
+  </LocaleResource>
+  <LocaleResource Name="Plugins.Misc.eShopSMS.Fields.TemplateName">
+    <Value>Name</Value>
+  </LocaleResource>
+  <LocaleResource Name="Plugins.Misc.eShopSMS.Fields.TemplateName.Hint">
+    <Value>Name</Value>
+  </LocaleResource>
+  <LocaleResource Name="Plugins.Misc.eShopSMS.Fields.Body">
+    <Value>Body</Value>
+  </LocaleResource>
+  <LocaleResource Name="Plugins.Misc.eShopSMS.Fields.Body.Hint">
+    <Value>Body</Value>
+  </LocaleResource>
+  <LocaleResource Name="Plugins.Misc.eShopSMS.Fields.IsActive">
+    <Value>Active</Value>
+  </LocaleResource>
+  <LocaleResource Name="Plugins.Misc.eShopSMS.Fields.IsActive.Hint">
+    <Value>IsActive</Value>
+  </LocaleResource>
+
+  <LocaleResource Name="Plugins.Misc.eShopSMS.smsTemplates.Updated">
+    <Value>SMS template updated successfully</Value>
+  </LocaleResource>
+  <LocaleResource Name="Plugins.Misc.eShopSMS.Menu.SmsTemplate">
+    <Value>SMS Template</Value>
+  </LocaleResource>
+ 
+</Language>

@@ -1,0 +1,48 @@
+.search-inp .inp-grop .inp-icon .icon-right { right: 1vh; }
+.search-inp .inp-grop .inp-icon input { padding-right: 4.64vh;padding-left:2.58vh;text-align:left; }
+.search-inp .inp-grop .inp-icon .icon-right.right-icon-close { right: 3.51vh; }
+.right-space { margin-right: 1.55vh; }
+.appointment-content .back-btn .btn-outline-dark{text-align:left;}
+.appointment-content .back-btn .angle-left{margin-right:1vh;}
+
+.appointment-content .flex_row .flex-md-5{margin-right:7.74vh;}
+.appointment-content .flex_row .flex-md-5.xs-width{margin-right:6.19vh;}
+.checkout-appointment .search-inp .a-btn-group { margin-left: 1.55vh; }
+
+.appointment-date-popup .select-time ul li{float: left; }
+.apointment-date-popup .date-btn { text-align: right;}
+.appointment-date-popup .date-btn i{margin-left: 0.83vh; }
+.appointment-book-popup .date-btn { text-align: right;}
+.appointment-book-popup .opening-hours ul li { float: left; }
+.appointment-book-popup .direction { margin-left: 2vh; }
+
+.book-completed .ticket{margin: 0 7.22vh 0 5.16vh;}
+.appointment-first-popup .appointment-list li{text-align:left;}
+
+@media all and (min-width:768px) and (max-width:991px)
+{
+ .search-inp .inp-grop .inp-icon input{padding-left:15px;}
+ .appointment-content .back-btn .angle-left{margin-right: 7px; }
+ .checkout-appointment .search-inp .a-btn-group { margin-left: 0; }
+ .appointment-content .flex_row .flex-md-5.xs-width{margin-right:0;}
+ .order-confirm-page .appoint-booked .booked-bootom ._flex_data a.btn.btn-outline-primary { margin-left: 10px; }
+ .book-completed .flex-ticket .btn-group-left .btn-orange{margin:0;margin-right:15px;}
+.appointment-booked .order-completed .flex-right .review ul li .icons .custom-radio{margin-left:24px;}
+.appointment-booked .order-completed .flex-right .review ul li .icons .custom-radio:first-of-type{margin-left:7px;}
+ .book-completed .ticket .top {border-right: 2px dashed #797777; }
+}
+
+@media all and (max-width: 767)
+{
+ .book-completed .ticket .bottom{padding-left:10px;}
+ .book-completed .ticket .top{border-right: 2px dashed #797777;}
+ .search-inp .inp-grop .inp-icon input{padding-left:2.25vh;}
+ .appointment-content .back-btn .angle-left{margin-right: 1vh; }
+ .checkout-appointment .search-inp .a-btn-group { margin-left: 0; }
+ .appointment-content .flex_row .flex-md-5.xs-width{margin-right:0;}
+ .order-confirm-page .appoint-booked .booked-bootom ._flex_data a.btn.btn-outline-primary { margin-left: 1.50vh; }
+ .book-completed .flex-ticket .btn-group-left .btn-orange{margin:0;margin-right:2.25vh;}
+.appointment-booked .order-completed .flex-right .review ul li .icons .custom-radio{margin-left:3.60vh;}
+.appointment-booked .order-completed .flex-right .review ul li .icons .custom-radio:first-of-type{margin-left:1vh;}
+ .book-completed .ticket .top {border-right: 2px dashed #797777; }
+}

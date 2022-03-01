@@ -1,0 +1,37 @@
+﻿@model TopMenuModel.CategoryLineModel
+<li>
+    <h2 class="accordion-title">
+        <a href="@UrlStrucutre.UrlDecode(Url.RouteUrl("Category", new { SeName = Model.Category.SeName }))">
+            @Model.Category.Name
+        </a>
+    </h2>
+
+    @{
+        //subcategories
+        var subCategories = Model.ResponsiveMobileMenu ?
+            //responsive (all categories)
+            Model.Category.SubCategories :
+            //standard design (only categories with "IncludeInTopMenu")
+            Model.Category.SubCategories.Where(x => x.IncludeInTopMenu).ToList();
+
+        var levelClass = "";
+        if (Model.Level == 0)
+        {
+            levelClass = "first-level";
+        }
+        if (subCategories.Any())
+        {
+            <div class="sublist-toggle"></div>
+            <ul class="sublist @levelClass">
+                @foreach (var subCategory in subCategories)
+                {
+                <li>
+                    <a href="@UrlStrucutre.UrlDecode(Url.RouteUrl("Category", new { SeName = subCategory.SeName }))">
+                        @subCategory.Name
+                    </a>
+                </li>
+                }
+            </ul>
+        }
+    }
+</li>

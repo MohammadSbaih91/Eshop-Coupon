@@ -1,0 +1,90 @@
+@model NewsLetterSubscriptionTypeSearchModel
+
+@{
+    //page title
+    ViewBag.Title = T("Admin.Messages.NewsLetterSubscriptionType").Text;
+    //active menu item (system name)
+    Html.SetActiveMenuItemSystemName("NewsLetterSubscriptionType");
+}
+
+<nop-antiforgery-token />
+<div class="content-header clearfix">
+    <h1 class="pull-left">
+        @T("Admin.Messages.NewsLetterSubscriptionType")
+    </h1>
+    <div class="pull-right">
+        <a asp-action="Create" class="btn bg-blue">
+            <i class="fa fa-plus-square"></i>
+            @T("Admin.Common.AddNew")
+        </a>
+    </div>
+</div>
+
+<div class="content">
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div id="newsLetterSubscriptionType-grid"></div>
+
+                <script>
+                    $(document).ready(function() {
+                        $("#newsLetterSubscriptionType-grid").kendoGrid({
+                            dataSource: {
+                                type: "json",
+                                transport: {
+                                    read: {
+                                        url: "@Html.Raw(Url.Action("List", "NewsLetterSubscriptionType"))",
+                                        type: "POST",
+                                        dataType: "json",
+                                        data: addAntiForgeryToken
+                                    }
+                                },
+                                schema: {
+                                    data: "Data",
+                                    total: "Total",
+                                    errors: "Errors"
+                                },
+                                error: function(e) {
+                                    display_kendoui_grid_error(e);
+                                    // Cancel the changes
+                                    this.cancelChanges();
+                                },
+                                pageSize: @(Model.PageSize),
+                                serverPaging: true,
+                                serverFiltering: true,
+                                serverSorting: true
+                            },
+                            pageable: {
+                                refresh: true,
+                                pageSizes: [@(Model.AvailablePageSizes)],
+                                @await Html.PartialAsync("_GridPagerMessages")
+                            },
+                            editable: {
+                                confirmation: "@T("Admin.Common.DeleteConfirmation")",
+                                mode: "inline"
+                            },
+                            scrollable: false,
+                            columns: [
+                                {
+                                    field: "Name",
+                                    title: "@T("Admin.Messages.NewsLetterSubscriptionType.Fields.Name")",
+                                    width: 300
+                                }, {
+                                    field: "DisplayOrder",
+                                    title: "@T("Admin.Messages.NewsLetterSubscriptionType.Fields.DisplayOrder")",
+                                    width: 100
+                                }, {
+                                    field: "Id",
+                                    title: "@T("Admin.Common.Edit")",
+                                    width: 80,
+                                    headerAttributes: { style: "text-align:center" },
+                                    attributes: { style: "text-align:center" },
+                                    template: '<a class="btn btn-default" href="Edit/#=Id#"><i class="fa fa-pencil"></i>@T("Admin.Common.Edit")</a>'                                }
+                            ]
+                        });
+                    });
+                </script>
+            </div>
+        </div>
+    </div>
+</div>

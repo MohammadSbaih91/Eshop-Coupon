@@ -1,0 +1,12 @@
+Release and deployment
+1 put app folder to the location where you pointed iis in server 
+2 setup iis - keep app pool type to no managed code (recommended)
+3 need to upload wwwroot to preserve previously uploaded images. (we're using the file system for storing image)
+4 restore the database and update the connection string in "path to the iis\App_Data\dataSettings.json"
+5 ssms run DB script in sequence its placed in DBScript folder with package
+6 open the app and goto /Admin/Language/List edit English Language, in second tab "String resources" import string for English by selecting a correct file (filename-Language.xml e.g. eshop-resource-en.xml) from "Resource" folder in package. and repeat the same for Arabic.
+7 install all necessary plugins from admin side "/Admin/Plugin/List" and enable it (in case of setting English version will be installed automatically, need to set up manually for Arabic)
+-Widgets.CustomerOrderReview
+-Widgets.VisitorEmailCollector
+-Widgets.NivoSliderML
+-other nopcommerce plugins

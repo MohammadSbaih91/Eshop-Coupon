@@ -1,0 +1,56 @@
+﻿@model List<ProductOverviewModel>
+@using Nop.Core.Domain.Orders
+@{
+    //prepare "Add to cart" AJAX link
+    var addtocartlink = "";
+    var shoppingCartTypeId = (int)ShoppingCartType.ShoppingCart;
+    var quantity = 1;
+}
+@if (Model != null && Model.Count > 0)
+{
+    <ul>
+        @foreach (var item in Model)
+        {
+            string strClass = "";
+            @if (item.IsServiceProductAddedToCart)
+            {
+                strClass = "added";
+            }
+            addtocartlink = Url.RouteUrl("AddProductToCart-Catalog", new { productId = item.Id, shoppingCartTypeId = shoppingCartTypeId, quantity = quantity });
+            <li class="@(strClass)">
+                <div class="serv-left">
+                    <a class="pic">
+                        <img src="@item.DefaultPictureModel.ImageUrl" />
+                    </a>
+                    <div class="serv-details">
+                        <h2>@item.Name</h2>
+                        <span>@Html.Raw(item.ShortDescription)</span>
+                    </div>
+                </div>
+                <div class="serv-right">
+                    <div class="price">@Html.Raw(item.ProductPrice.Price)</div>
+                    <div class="btn-right">
+                        @if (!item.IsServiceProductAddedToCart)
+                        {
+                            <a class="btn btn-outline-dark" onclick="addToCart_@(item.Id)()">@T("shoppingcart.addtocart")</a>
+                            <script>
+                                function addToCart_@(item.Id)() {
+                                    AjaxCart.addproducttocart_catalog('@addtocartlink', true);
+                                    $('#additional-service-popup').modal('toggle');
+                                }
+                            </script>
+                        }
+                        else
+                        {
+                            <text>@T("Checkout.Added")</text>
+                        }
+                    </div>
+                </div>
+            </li>
+        }
+    </ul>
+}
+else
+{
+    @T("Checkout.NoServiceProductAvailable")
+}

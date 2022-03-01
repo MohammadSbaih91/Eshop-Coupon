@@ -1,0 +1,272 @@
+﻿@model BoughtTogether
+@using Nop.Services.Helpers
+@using Nop.Core
+@inject IWorkContext workContext
+@inject IUserAgentHelper userAgentHelper
+
+@{
+    var supportRtl = workContext.WorkingLanguage.Rtl;
+    var itemCount = 4;
+    if (userAgentHelper.IsMobileDevice())
+    {
+        itemCount = 1;
+    }
+}
+
+@if (Model.ProductOverviewModel.Count > itemCount)
+{
+    <div class="related-products-grid product-grid">
+        @if (Model.enumProductDetail == Nop.Core.Domain.Enum.EnumProductDetail.Device || Model.enumProductDetail == Nop.Core.Domain.Enum.EnumProductDetail.Fixedline || Model.enumProductDetail == Nop.Core.Domain.Enum.EnumProductDetail.InternetFiber || Model.enumProductDetail == Nop.Core.Domain.Enum.EnumProductDetail.Internet || Model.enumProductDetail == Nop.Core.Domain.Enum.EnumProductDetail.InternetFiberUpgrade)
+        {
+            <div class="title">
+                <strong>@T("ProductDetail.Accessories")</strong>
+                <span>@(string.Format(T("ProductDetail.Boughttogether").Text, Model.ProductName))</span>
+            </div>
+        }
+        else if (Model.enumProductDetail == Nop.Core.Domain.Enum.EnumProductDetail.Postpaid || Model.enumProductDetail == Nop.Core.Domain.Enum.EnumProductDetail.Prepaid || Model.enumProductDetail == Nop.Core.Domain.Enum.EnumProductDetail.Yoline)
+        {
+            <div class="title">
+                <strong>@T("ProductDetail.MobileDevice")</strong>
+                <span>@T("ProductDetail.Recommendedforyou")</span>
+            </div>
+        }
+        else if (Model.enumProductDetail == Nop.Core.Domain.Enum.EnumProductDetail.Smartlife)
+        {
+            <div class="title">
+                <strong>@T("ProductDetail.SmartCamera")</strong>
+                <span>@T("ProductDetail.Recommendedforyou")</span>
+            </div>
+        }
+        <div class="item-grid product-box product-small-picture" id="rel-parent">
+            <div class="owl-carousel prd-auto-width-mobile arrow-center" id="related-owl">
+                @foreach (var item in Model.ProductOverviewModel)
+                {
+                    <div class="item-box">@await Html.PartialAsync("_ProductBox", item)</div>
+                }
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="related-products-grid product-grid">
+        @if (Model.enumProductDetail == Nop.Core.Domain.Enum.EnumProductDetail.Device || Model.enumProductDetail == Nop.Core.Domain.Enum.EnumProductDetail.Fixedline || Model.enumProductDetail == Nop.Core.Domain.Enum.EnumProductDetail.InternetFiber || Model.enumProductDetail == Nop.Core.Domain.Enum.EnumProductDetail.Internet || Model.enumProductDetail == Nop.Core.Domain.Enum.EnumProductDetail.InternetFiberUpgrade)
+        {
+            <div class="title">
+                <strong>@T("ProductDetail.Accessories")</strong>
+                <span>@(string.Format(T("ProductDetail.Boughttogether").Text, Model.ProductName))</span>
+            </div>
+        }
+        else if (Model.enumProductDetail == Nop.Core.Domain.Enum.EnumProductDetail.Postpaid || Model.enumProductDetail == Nop.Core.Domain.Enum.EnumProductDetail.Prepaid || Model.enumProductDetail == Nop.Core.Domain.Enum.EnumProductDetail.Yoline)
+        {
+            <div class="title">
+                <strong>@T("ProductDetail.MobileDevice")</strong>
+                <span>@T("ProductDetail.Recommendedforyou")</span>
+            </div>
+        }
+        else if (Model.enumProductDetail == Nop.Core.Domain.Enum.EnumProductDetail.Smartlife)
+        {
+            <div class="title">
+                <strong>@T("ProductDetail.SmartCamera")</strong>
+                <span>@T("ProductDetail.Recommendedforyou")</span>
+            </div>
+        }
+        <div class="item-grid product-box product-small-picture">
+            <div class="row">
+                @foreach (var item in Model.ProductOverviewModel)
+                {
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="item-box">@await Html.PartialAsync("_ProductBox", item)</div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+}
+@if (userAgentHelper.IsMobileDevice())
+{
+    if (supportRtl)
+    {
+        <script asp-location="Footer">
+            $(document).ready(function () {
+                $('#related-owl').owlCarousel({
+                    loop: true,
+                    margin: 15,
+                    autoWidth: true,
+                    items: 2,
+                    nav: true,
+                    dots: false,
+                    rtl: true,
+
+                    //for animation
+                    navText: ["", "<div class='timer'><span class='mask'><span class='rotator' style='transform: rotate(1deg);'></span></span></div>"],
+                    responsive: {
+                        0: {
+                            margin: 10,
+                            items: 1
+                        },
+                        991: {
+                            margin: 10,
+                            items: 1
+                        },
+                        992: {
+                            margin: 10,
+                            items: 1
+                        },
+                        1366: {
+                            margin: 10,
+                        },
+                        1400: {
+                            margin: 20,
+                        }
+                    }
+                });
+
+                //for animation
+                var parentID = "#rel-parent";
+                var animationspeed = @(Nop.Web.EShopHelper.Animationspeed);
+
+                //function for animation
+                AnimationCircling(animationspeed, parentID);
+            });
+        </script>
+    }
+    else
+    {
+        <script asp-location="Footer">
+            $(document).ready(function () {
+                $('#related-owl').owlCarousel({
+                    loop: true,
+                    margin: 15,
+                    autoWidth: true,
+                    rtl: false,
+                    items: 2,
+                    nav: true,
+                    dots: false,
+                    //for animation
+                    navText: ["", "<div class='timer'><span class='mask'><span class='rotator' style='transform: rotate(1deg);'></span></span></div>"],
+                    responsive: {
+                        0: {
+                            margin: 10,
+                            items: 1
+                        },
+                        991: {
+                            margin: 10,
+                            items: 1
+                        },
+                        992: {
+                            margin: 10,
+                            items: 1
+                        },
+                        1366: {
+                            margin: 10,
+                        },
+                        1400: {
+                            margin: 20,
+                        }
+                    }
+                });
+
+                //for animation
+                var parentID = "#rel-parent";
+                var animationspeed = @(Nop.Web.EShopHelper.Animationspeed);
+
+                //function for animation
+                AnimationCircling(animationspeed, parentID);
+            });
+        </script>
+    }
+}
+else
+{
+    if (supportRtl)
+    {
+        <script asp-location="Footer">
+            $(document).ready(function () {
+                $('#related-owl').owlCarousel({
+                    loop: true,
+                    margin: 15,
+                    dots: false,
+                    //autoWidth: true,
+                    nav: true,
+                    rtl: true,
+                    responsive: {
+                        0: {
+                            margin: 7,
+                            items: 1,
+                        },
+                        991: {
+                            margin: 7,
+                            items: 3,
+                        },
+                        992: {
+                            margin: 7,
+                            items: 3,
+                        },
+                        1024: {
+                            margin: 10,
+                            items: 4,
+                        },
+                        1280: {
+                            margin: 14,
+                            items: 4,
+                        },
+                        1366: {
+                            margin: 15,
+                            items: 4,
+                        },
+                        1400: {
+                            margin: 20,
+                            items: 4,
+                        }
+                    }
+                });
+            });
+        </script>
+    }
+    else
+    {
+        <script asp-location="Footer">
+            $(document).ready(function () {
+                $('#related-owl').owlCarousel({
+                    loop: true,
+                    margin: 15,
+                    dots: false,
+                    nav: true,
+                    rtl: false,
+                    responsive: {
+                        0: {
+                            margin: 7,
+                            items: 1,
+                        },
+                        991: {
+                            margin: 7,
+                            items: 3,
+                        },
+                        992: {
+                            margin: 7,
+                            items: 3,
+                        },
+                        1024: {
+                            margin: 10,
+                            items: 4,
+                        },
+                        1280: {
+                            margin: 14,
+                            items: 4,
+                        },
+                        1366: {
+                            margin: 15,
+                            items: 4,
+                        },
+                        1400: {
+                            margin: 20,
+                            items: 4,
+                        }
+                    }
+                });
+            });
+        </script>
+
+    }
+}

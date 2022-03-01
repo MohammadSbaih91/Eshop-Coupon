@@ -1,0 +1,235 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Language Name="English">
+  <LocaleResource Name="Address.Fields.Nationality.Required">
+    <Value>Please select your nationality.</Value>
+  </LocaleResource>
+  <LocaleResource Name="Address.Fields.NationalityType.Required">
+    <Value>Please select your nationality type.</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Orders.List.SearchCategory">
+    <Value>Category</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Orders.List.SearchCategory.Hint">
+    <Value>Search by a specific category.</Value>
+  </LocaleResource>
+  <LocaleResource Name="Address.Fields.EmailConfirm.Required">
+    <Value>Email is required.</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Orders.Address.Nationality">
+    <Value>Nationality</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Order.BillingAddress.IdentityCardOrPassport">
+    <Value>Customer Id</Value>
+  </LocaleResource>
+  <LocaleResource Name="enums.nop.core.domain.orders.orderstatus.Unreachable">
+    <Value>Unreachable</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Orders.Cancel.ReasonMessage">
+    <Value>Maintain the order cancellation reason</Value>
+  </LocaleResource>
+  <LocaleResource Name="OrderNotes.WithReason">
+    <Value>Order has been cancelled With the reason '{0}'</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Promotions.Discounts.Fields.CouponCode.Duplication">
+    <Value>The discount coupon code already exists</Value>
+  </LocaleResource>
+  <LocaleResource Name="Category.Filter.AreaLabel">
+    <Value>Select category for search</Value>
+  </LocaleResource>
+  <LocaleResource Name="Category.Filter.Label">
+    <Value>Find Category</Value>
+  </LocaleResource>
+  <LocaleResource Name="Product.Filter.Label">
+    <Value>Find Product</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Orders.List.SearchCustomProductType">
+    <Value>Product type</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Orders.List.SearchCustomProductType.Hint">
+    <Value>Product type</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Reports.CustomizeReport">
+    <Value>Customize report</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Reports.CustomReport.StartDate">
+    <Value>Start date</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Reports.CustomReport.StartDate.Hint">
+    <Value>Start date</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Reports.CustomReport.EndDate">
+    <Value>End date</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Reports.CustomReport.EndDate.Hint">
+    <Value>End date</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Reports.CustomReport.OrderStatus">
+    <Value>Order status</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Reports.CustomReport.OrderStatus.Hint">
+    <Value>Order status</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Reports.CustomReport.ProductName">
+    <Value>Product name</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Reports.CustomReport.ProductName.Hint">
+    <Value>Product name</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.CustomizeReport">
+    <Value>Report</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Report.Customization.OrderId">
+    <Value>Order #</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Report.Customization.OrderStatus">
+    <Value>Order status</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Report.Customization.OrderProduct">
+    <Value>Order product</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Report.Customization.Vender">
+    <Value>Vender</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Report.Customization.CustomerName">
+    <Value>Customer name</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Report.Customization.PhoneNumber">
+    <Value>Phone number</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Report.Customization.CustomerAddress">
+    <Value>Address</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Report.Customization.CustomerEmail">
+    <Value>Customer email</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Report.Customization.CreatedOn">
+    <Value>Created on</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Report.Customization.OrderTotal">
+    <Value>Order total</Value>
+  </LocaleResource>
+  
+
+  <LocaleResource Name="Common.Fileds.ProductType">
+    <Value>Product type</Value>
+  </LocaleResource>
+  <LocaleResource Name="Enums.Nop.Core.Domain.Catalog.CustomProductType.None">
+    <Value>None</Value>
+  </LocaleResource>
+  <LocaleResource Name="Enums.Nop.Core.Domain.Catalog.CustomProductType.New">
+    <Value>New</Value>
+  </LocaleResource>
+  <LocaleResource Name="Enums.Nop.Core.Domain.Catalog.CustomProductType.Upgrade">
+    <Value>Upgrade</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Catalog.Products.Fields.CustomProductType">
+    <Value>Custom Product Type</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Catalog.Products.Fields.CustomProductType.Hint">
+    <Value>Custom Product Type are used for filter order only</Value>
+  </LocaleResource>
+
+
+  <LocaleResource Name="PageTitle.Employee">
+    <Value>Employee detail</Value>
+  </LocaleResource>
+  <LocaleResource Name="Employee.Title">
+    <Value>Employee detail</Value>
+  </LocaleResource>
+  <LocaleResource Name="Employee.EmployeeName">
+    <Value>Employee name</Value>
+  </LocaleResource>
+  <LocaleResource Name="Employee.EmployeeName.Hint">
+    <Value>Employee name</Value>
+  </LocaleResource>
+  <LocaleResource Name="Employee.EmployeeName.Required">
+    <Value>Employee name is required</Value>
+  </LocaleResource>
+  <LocaleResource Name="Employee.EmployeeId">
+    <Value>Employee Id</Value>
+  </LocaleResource>
+  <LocaleResource Name="Employee.EmployeeId.Hint">
+    <Value>Employee Id</Value>
+  </LocaleResource>
+  <LocaleResource Name="Employee.EmployeeContactNumber">
+    <Value>Contact number</Value>
+  </LocaleResource>
+  <LocaleResource Name="Employee.EmployeeContactNumber.Hint">
+    <Value>Contact number</Value>
+  </LocaleResource>
+  <LocaleResource Name="Employee.EmployeeContactNumber.NotValied">
+    <Value>Contact number should start with 077</Value>
+  </LocaleResource>
+  <LocaleResource Name="Employee.Email">
+    <Value>Email</Value>
+  </LocaleResource>
+  <LocaleResource Name="Employee.Email.Hint">
+    <Value>Email</Value>
+  </LocaleResource>
+  <LocaleResource Name="Employee.Email.Required">
+    <Value>Email is required</Value>
+  </LocaleResource>
+  <LocaleResource Name="Employee.Email.WrongEmail">
+    <Value>Email is not valid</Value>
+  </LocaleResource>
+  <LocaleResource Name="Employee.Months">
+    <Value>Installment Months</Value>
+  </LocaleResource>
+  <LocaleResource Name="Employee.Months.Hint">
+    <Value>Installment Months</Value>
+  </LocaleResource>
+  <LocaleResource Name="Employee.Months.NotValied">
+    <Value>Installment Months is not valid</Value>
+  </LocaleResource>
+  <LocaleResource Name="Employee.Amount">
+    <Value>Installment Amount</Value>
+  </LocaleResource>
+  <LocaleResource Name="Employee.Amount.Hint">
+    <Value>Installment Amount</Value>
+  </LocaleResource>
+  <LocaleResource Name="Employee.Amount.NotValied">
+    <Value>Installment Amount is not valid</Value>
+  </LocaleResource>
+  <LocaleResource Name="Employee.OrderNumber">
+    <Value>Order number</Value>
+  </LocaleResource>
+  <LocaleResource Name="Employee.OrderNumber.Hint">
+    <Value>Order number</Value>
+  </LocaleResource>
+  <LocaleResource Name="Employee.EmployeeDetailAdded">
+    <Value>Employee Detail Added against Order number {0}</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.EmployeeOrders">
+    <Value>Employee Order</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.EmployeeOrders">
+    <Value>Employee Order</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Employee.View">
+    <Value>Employee</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Employee.EditEmployee">
+    <Value>Edit order employee detail</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Employee.BackTolist">
+    <Value>back to list</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Employee.Updated">
+    <Value>The employee has been updated successfully.</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Employee.ExistWithOrder">
+    <Value>Employee detail already added against order number {0}</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Employee.OrderNotExist">
+    <Value>Order number {0} does not exist.</Value>
+  </LocaleResource>
+  <LocaleResource Name="employee.save">
+    <Value>Save</Value>
+  </LocaleResource>
+  <LocaleResource Name="checkout.employeedetail">
+    <Value>Enter employee detail</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Report.Customization.CustomerId">
+    <Value>Customer Id</Value>
+  </LocaleResource>
+</Language>

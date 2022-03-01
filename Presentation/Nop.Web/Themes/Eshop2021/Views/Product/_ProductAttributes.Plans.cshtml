@@ -1,0 +1,50 @@
+﻿@model IList<ProductDetailsModel.ProductAttributeModel>
+@using Nop.Core.Domain.Catalog
+@using Nop.Core.Domain.Media
+@using System.Text
+@using Nop.Services.Media
+@using Nop.Services
+@using Nop.Services.Configuration;
+
+@inject IDownloadService downloadService
+@inject CatalogSettings catalogSettings
+@inject ISettingService settingService
+@{
+
+    var attributes = Model.Where(p => p.Name == "Plan Price" || p.Name == "سعر الإشتراك").ToList();
+
+
+}
+@if (Model.Count > 0)
+{
+    @foreach (var attribute in attributes)
+    {
+        var controlId = $"product_attribute_{attribute.Id}";
+        var textPrompt = !string.IsNullOrEmpty(attribute.TextPrompt) ? attribute.TextPrompt : attribute.Name;
+
+        <div id="@($"product_attribute_input_{attribute.Id}")">
+            @foreach (var attributeValue in attribute.Values)
+            {
+                if (attributeValue != null && attributeValue.PriceAdjustment != null)
+                {
+                    var price = attributeValue.PriceAdjustment.Replace("-", "").Replace("+", "");
+                    <div class="final" id="simPrice" data-simPrice="">
+                        @Html.Raw(EShopHelper.GetPriceFormatting(price))
+                    </div>
+                }
+            }
+            <div class="device-package" style="display:none">
+                @foreach (var attributeValue in attribute.Values)
+                {
+
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" value="@attributeValue.Id" id="@(controlId)_@(attributeValue.Id)" name="@(controlId)" class="custom-control-input" checked="@attributeValue.IsPreSelected"
+                               @(attribute.Values.Any(value => value.CustomerEntersQty) ? Html.Raw($"onclick=\"showHideRadioQuantity('{controlId}')\"") : null)>
+                        <label class="custom-control-label" for="@(controlId)_@(attributeValue.Id)">@attributeValue.Name</label>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+}
+

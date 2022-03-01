@@ -1,0 +1,193 @@
+﻿@using Widgets.CustomerOrderReview.Domain
+@model Widgets.CustomerOrderReview.Models.CustomerOrderReviewSearchModel
+<nop-antiforgery-token/>
+<div class="form-horizontal">
+    <div class="panel-group">
+        <div class="panel panel-default panel-search">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="col-md-4">
+                                <nop-label asp-for="CreatedOnFrom"/>
+                            </div>
+                            <div class="col-md-8">
+                                <nop-editor asp-for="CreatedOnFrom"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-4">
+                                <nop-label asp-for="CreatedOnTo"/>
+                            </div>
+                            <div class="col-md-8">
+                                <nop-editor asp-for="CreatedOnTo"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-4">
+                                <nop-label asp-for="SearchText"/>
+                            </div>
+                            <div class="col-md-8">
+                                <nop-editor asp-for="SearchText"/>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-4">
+                                <nop-label asp-for="SearchOrderId"/>
+                            </div>
+                            <div class="col-md-8">
+                                <nop-editor asp-for="SearchOrderId"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-8 col-md-offset-4">
+                                <button type="button" id="search-orderreviews" class="btn btn-primary btn-search">
+                                    <i class="fa fa-search"></i>
+                                    @T("Admin.Common.Search")
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div id="orderreviews-grid"></div>
+                <script>
+                        $(document).ready(function() {
+                            $("#orderreviews-grid").kendoGrid({
+                                dataSource: {
+                                    type: "json",
+                                    transport: {
+                                        read: {
+                                            url: "@Html.Raw(Url.Action("List", "CustomerOrderReview"))",
+                                            type: "POST",
+                                            dataType: "json",
+                                            data: function() {
+                                                var data = {
+                                                    CreatedOnFrom: $('#@Html.IdFor(model => model.CreatedOnFrom)').val(),
+                                                    CreatedOnTo: $('#@Html.IdFor(model => model.CreatedOnTo)').val(),
+                                                    SearchText: $('#@Html.IdFor(model => model.SearchText)').val(),
+                                                    SearchOrderId: $('#@Html.IdFor(model => model.SearchOrderId)').val()
+                                                };
+                                                addAntiForgeryToken(data);
+                                                return data;
+                                            }
+                                        }
+                                    },
+                                    schema: {
+                                        data: "Data",
+                                        total: "Total",
+                                        errors: "Errors"
+                                    },
+                                    error: function(e) {
+                                        display_kendoui_grid_error(e);
+                                        // Cancel the changes
+                                        this.cancelChanges();
+                                    },
+                                    pageSize: @(Model.PageSize),
+                                    serverPaging: true,
+                                    serverFiltering: true,
+                                    serverSorting: true
+                                },
+                                pageable: {
+                                    refresh: true,
+                                    pageSizes: [@(Model.AvailablePageSizes)],
+                                    @await Html.PartialAsync("_GridPagerMessages")
+                                },
+                                scrollable: false,
+                                columns: [
+                                    {
+                                        field: "OrderId",
+                                        title: "@T("Plugins.CustomerOrderReview.Order")",
+                                        headerAttributes: { style: "text-align:center" },  
+                                        attributes: { style: "text-align:center" },
+                                        width: 200,
+                                        template: '<a class="btn btn-default" href="@Url.Content("~/Admin/Order/Edit/")#=OrderId#"><i class="fa fa-eye"></i>@T("Admin.Common.View") \\##:OrderId#</a>',
+                                    }, 
+                                    {
+                                        field: "CustomerOrderReviewString",
+                                        title: "@T("Plugins.CustomerOrderReview.CustomerOrderReviewType")",
+                                        width: 400,
+                                        headerAttributes: { style: "text-align:center" },  
+                                        attributes: { style: "text-align:center" },
+                                        encoded: false,
+                                        template: '<span class="grid-report-item ' +
+                                        '# if(CustomerOrderReviewString == "@CustomerOrderReviewType.Negative") {# yellow #} #' +
+                                        '# if(CustomerOrderReviewString == "@CustomerOrderReviewType.Neutral") {# blue #} #' +
+                                        '# if(CustomerOrderReviewString == "@CustomerOrderReviewType.Positive") {# green #} #' +
+                                        '">#=CustomerOrderReviewString#</span>'
+                                    },
+                                    {
+                                        field: "Rate1",
+                                        title: "@T("Plugins.CustomerOrderReview.Rating1")",
+                                        width: 100,
+                                        headerAttributes: { style: "text-align:center" },
+                                        attributes: { style: "text-align:center" }
+                                    },
+                                    {
+                                        field: "Rate2",
+                                        title: "@T("Plugins.CustomerOrderReview.Rating2")",
+                                        width: 100,
+                                        headerAttributes: { style: "text-align:center" },
+                                        attributes: { style: "text-align:center" }
+                                    },
+                                    {
+                                        field: "Rate3",
+                                        title: "@T("Plugins.CustomerOrderReview.Rating3")",
+                                        width: 100,
+                                        headerAttributes: { style: "text-align:center" },
+                                        attributes: { style: "text-align:center" }
+                                    },
+                                    {
+                                        field: "Rate4",
+                                        title: "@T("Plugins.CustomerOrderReview.Rating4")",
+                                        width: 100,
+                                        headerAttributes: { style: "text-align:center" },
+                                        attributes: { style: "text-align:center" }
+                                    },
+                                    {
+                                         field: "Feedback",
+                                         title: "@T("Plugins.CustomerOrderReview.Feedback")",
+                                         width: 400,
+                                         encoded: false
+                                    }, 
+                                    {
+                                        field: "CreatedOn",
+                                        title: "@T("Plugins.CustomerOrderReview.CreatedOn")",
+                                        width: 250,
+                                        type: "date",
+                                        format: "{0:G}"
+                                    },
+                                    {
+                                        field: "CustomerId",
+                                        title: "@T("Plugins.CustomerOrderReview.Customer")",
+                                        headerAttributes: { style: "text-align:center" },  
+                                        attributes: { style: "text-align:center" },
+                                        width: 200,
+                                        template: '<a class="btn btn-default" href="@Url.Content("~/Admin/Customer/Edit/")#=CustomerId#"><i class="fa fa-eye"></i>@T("Admin.Common.View")</a>'
+    
+                                    }
+                                ]
+                            });
+                        });
+                </script>
+
+                <script>
+                    $(document).ready(function () {
+                        //search button
+                        $('#search-orderreviews').click(function () {
+                            //search
+                            var grid = $('#orderreviews-grid').data('kendoGrid');
+                            grid.dataSource.page(1); //new search. Set page size to 1
+                            return false;
+                        });
+                    });
+                </script>
+            </div>
+        </div>
+    </div>
+</div>

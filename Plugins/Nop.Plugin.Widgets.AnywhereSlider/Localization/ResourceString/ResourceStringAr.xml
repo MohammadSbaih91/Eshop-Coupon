@@ -1,0 +1,157 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Language Name="English">
+  <LocaleResource Name="Widgets.AnywhereSlider">
+    <Value>أي مكان المتزلج</Value>
+  </LocaleResource>
+
+  <LocaleResource Name="Widgets.AnywhereSlider.BackToList">
+    <Value>الرجوع للقائمة</Value>
+  </LocaleResource>
+  <LocaleResource Name="Widgets.AnywhereSlider.AddNew">
+    <Value>أضف شريط تمرير جديد</Value>
+  </LocaleResource>
+  <LocaleResource Name="Widgets.AnywhereSlider.Edit">
+    <Value>قم بتحرير شريط تمرير جديد</Value>
+  </LocaleResource>
+
+  <LocaleResource Name="Widgets.AnywhereSlider.SearchName">
+    <Value>اسم</Value>
+  </LocaleResource>
+  <LocaleResource Name="Widgets.AnywhereSlider.SearchName.Hint">
+    <Value>اسم</Value>
+  </LocaleResource>
+
+  <LocaleResource Name="Widgets.AnywhereSlider.Fields.Name">
+    <Value>اسم</Value>
+  </LocaleResource>
+  <LocaleResource Name="Widgets.AnywhereSlider.Fields.Name.Hint">
+    <Value>اسم المنزلق</Value>
+  </LocaleResource>
+  <LocaleResource Name="Widgets.AnywhereSlider.Fields.WidgetZone">
+    <Value>منطقة القطعة</Value>
+  </LocaleResource>
+  <LocaleResource Name="Widgets.AnywhereSlider.Fields.WidgetZone.Hint">
+    <Value>حدد منطقة القطعة لعرض شريط التمرير</Value>
+  </LocaleResource>
+  <LocaleResource Name="Widgets.AnywhereSlider.Fields.Published">
+    <Value>ينشر</Value>
+  </LocaleResource>
+  <LocaleResource Name="Widgets.AnywhereSlider.Fields.Published.Hint">
+    <Value>يحدد ما إذا كان شريط التمرير منشورًا (مرئيًا) في متجرك.</Value>
+  </LocaleResource>
+
+  <LocaleResource Name="Widgets.AnywhereSlider.Accordingly.Fields.Html">
+    <Value>لغة البرمجة</Value>
+  </LocaleResource>
+  <LocaleResource Name="Widgets.AnywhereSlider.Accordingly.Fields.Html.Hint">
+    <Value>Html للظهور على الصفحة</Value>
+  </LocaleResource>
+  <LocaleResource Name="Widgets.AnywhereSlider.Accordingly.Fields.DisplayOrder">
+    <Value>ترتيب العرض</Value>
+  </LocaleResource>
+  <LocaleResource Name="Widgets.AnywhereSlider.Accordingly.Fields.DisplayOrder.Hint">
+    <Value>ترتيب العرض</Value>
+  </LocaleResource>
+
+  <LocaleResource Name="Widgets.AnywhereSlider.Slider.Added">
+    <Value>تمت إضافة شريط التمرير بنجاح</Value>
+  </LocaleResource>
+  <LocaleResource Name="Widgets.AnywhereSlider.Slider.Updated">
+    <Value>تم تحديث شريط التمرير بنجاح</Value>
+  </LocaleResource>
+  <LocaleResource Name="Widgets.AnywhereSlider.Slider.Deleted">
+    <Value>تم حذف شريط التمرير بنجاح</Value>
+  </LocaleResource>
+
+  <LocaleResource Name="Widgets.AnywhereSlider.Accordingly.AddNew">
+    <Value>إضافة تفاصيل شريط التمرير</Value>
+  </LocaleResource>
+  <LocaleResource Name="Widgets.AnywhereSlider.Accordingly.Edit">
+    <Value>تحرير تفاصيل شريط التمرير</Value>
+  </LocaleResource>
+  <LocaleResource Name="Widgets.AnywhereSlider.Tab.Info">
+    <Value>معلومات</Value>
+  </LocaleResource>
+  <LocaleResource Name="Widgets.AnywhereSlider.Tab.Accordingly">
+    <Value>وفقا لذلك</Value>
+  </LocaleResource>
+  <LocaleResource Name="Widgets.AnywhereSlider.Tab.Accordingly.SaveBeforeEdit">
+    <Value>تحتاج إلى حفظ الشريحة قبل أن تتمكن من الإضافة وفقًا لصفحة شريط التمرير هذه.</Value>
+  </LocaleResource>
+
+	<LocaleResource Name="Widgets.AnywhereSlider.SliderGroup.AddNew">
+		<Value>إضافة تفاصيل مجموعة شريط التمرير</Value>
+	</LocaleResource>
+	<LocaleResource Name="Widgets.AnywhereSlider.SliderGroup.Edit">
+		<Value>تحرير تفاصيل مجموعة شريط التمرير</Value>
+	</LocaleResource>
+	<LocaleResource Name="Widgets.AnywhereSlider.Tab.SliderGroup">
+		<Value>مجموعة المنزلق</Value>
+	</LocaleResource>
+	<LocaleResource Name="Widgets.AnywhereSlider.SliderGroup.Fields.Title">
+		<Value>عنوان</Value>
+	</LocaleResource>
+	<LocaleResource Name="Widgets.AnywhereSlider.SliderGroup.Fields.Title.Hint">
+		<Value>عنوان مجموعة شريط التمرير</Value>
+	</LocaleResource>
+	<LocaleResource Name="Widgets.AnywhereSlider.SliderGroup.Fields.Descrption">
+		<Value>وصف</Value>
+	</LocaleResource>
+	<LocaleResource Name="Widgets.AnywhereSlider.SliderGroup.Fields.Descrption.Hint">
+		<Value>وصف مجموعة المنزلق</Value>
+	</LocaleResource>
+	<LocaleResource Name="Widgets.AnywhereSlider.SliderGroup.Added">
+		<Value>تمت إضافة مجموعة المنزلق بنجاح</Value>
+	</LocaleResource>
+	<LocaleResource Name="Widgets.AnywhereSlider.SliderGroup.Updated">
+		<Value>تم تحديث مجموعة المنزلق بنجاح</Value>
+	</LocaleResource>
+	<LocaleResource Name="Widgets.AnywhereSlider.SliderGroup.Deleted">
+		<Value>تم حذف مجموعة شريط التمرير بنجاح</Value>
+	</LocaleResource>
+	<LocaleResource Name="Widgets.AnywhereSlider.SliderGroup.AddNew">
+		<Value>أضف مجموعة سلايدر جديدة</Value>
+	</LocaleResource>
+	<LocaleResource Name="Widgets.AnywhereSlider.SliderGroup.Edit">
+		<Value>تحرير مجموعة شريط التمرير</Value>
+	</LocaleResource>
+	<LocaleResource Name="Widgets.AnywhereSlider.Accordingly.Exploremore">
+		<Value>استكشاف المزيد</Value>
+	</LocaleResource>
+	<LocaleResource Name="Widgets.AnywhereSlider.Accordingly.Fields.Position">
+		<Value>موضع</Value>
+	</LocaleResource>
+	<LocaleResource Name="Widgets.AnywhereSlider.Accordingly.Fields.Position.Hint">
+		<Value>تعيين موضع شريط التمرير</Value>
+	</LocaleResource>
+	<LocaleResource Name="Widgets.AnywhereSlider.Accordingly.Fields.Alignment">
+		<Value>انتقام</Value>
+	</LocaleResource>
+	<LocaleResource Name="Widgets.AnywhereSlider.Accordingly.Fields.Alignment.Hint">
+		<Value>ضبط محاذاة شريط التمرير</Value>
+	</LocaleResource>
+	<LocaleResource Name="Widgets.AnywhereSlider.Accordingly.Fields.ClickToAction">
+		<Value>انقر فوق الإجراء</Value>
+	</LocaleResource>
+	<LocaleResource Name="Widgets.AnywhereSlider.Accordingly.Fields.ClickToAction.Hint">
+		<Value>انقر للعمل URL</Value>
+	</LocaleResource>
+	<LocaleResource Name="Widgets.AnywhereSlider.Accordingly.Fields.Picture">
+		<Value>صورة الويب</Value>
+	</LocaleResource>
+	<LocaleResource Name="Widgets.AnywhereSlider.Accordingly.Fields.Picture.Hint">
+		<Value>صورة الويب</Value>
+	</LocaleResource>
+	<LocaleResource Name="Widgets.AnywhereSlider.Accordingly.Fields.MobilePictureId">
+		<Value>صورة المحمول</Value>
+	</LocaleResource>
+	<LocaleResource Name="Widgets.AnywhereSlider.Accordingly.Fields.MobilePictureId.Hint">
+		<Value>صورة المحمول</Value>
+	</LocaleResource>
+	<LocaleResource Name="Widgets.AnywhereSlider.Accordingly.Fields.TabletPictureId">
+		<Value>صورة لوحي</Value>
+	</LocaleResource>
+	<LocaleResource Name="Widgets.AnywhereSlider.Accordingly.Fields.TabletPictureId.Hint">
+		<Value>صورة لوحي</Value>
+	</LocaleResource>
+</Language>

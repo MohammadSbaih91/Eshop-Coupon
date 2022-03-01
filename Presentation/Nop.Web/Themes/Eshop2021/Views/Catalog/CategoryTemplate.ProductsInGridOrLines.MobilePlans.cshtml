@@ -1,0 +1,294 @@
+﻿@model CategoryModel
+@using Nop.Core.Domain.Common
+@using Nop.Core.Domain.Seo
+@inject Nop.Core.IWebHelper webHelper
+@inject SeoSettings seoSettings
+@inject CommonSettings commonSettings
+@using Nop.Services.Helpers
+@using Nop.Core
+@inject IUserAgentHelper userAgentHelper
+@inject IWorkContext workContext
+
+@{
+    var supportRtl = workContext.WorkingLanguage.Rtl;
+    var rtl = supportRtl ? "true" : "false";
+
+    Layout = "_ColumnsOne";
+
+    //title
+    Html.AddTitleParts(!string.IsNullOrEmpty(Model.MetaTitle) ? Model.MetaTitle : Model.Name);
+    //meta
+    Html.AddMetaDescriptionParts(Model.MetaDescription);
+    Html.AddMetaKeywordParts(Model.MetaKeywords);
+
+    Html.AppendPageCssClassParts("breadcrumb-black");
+    Html.AppendPageCssClassParts("slider-mask left-small mobileplan-catalog common-catalog");
+
+    if (seoSettings.CanonicalUrlsEnabled)
+    {
+        var categoryUrl = Url.RouteUrl("Category", new { SeName = Model.SeName }, webHelper.CurrentRequestProtocol).ToLowerInvariant();
+        Html.AddCanonicalUrlParts(categoryUrl, seoSettings.QueryStringInCanonicalUrlsEnabled);
+    }
+
+    var breadcrumbDelimiter = commonSettings.BreadcrumbDelimiter;
+
+    var firstBreadc = Model.CategoryBreadcrumb.FirstOrDefault();
+    var CategoryName = Model.Name;
+    if (firstBreadc != null)
+    {
+        CategoryName = firstBreadc.Name;
+    }
+}
+@*category breadcrumb*@
+@section Breadcrumb
+    {
+    @if (Model.DisplayCategoryBreadcrumb)
+    {
+
+        <partial name="_CategoryBreadcrumb" model="Model.CategoryBreadcrumb" />
+
+        @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.CategoryDetailsAfterBreadcrumb, additionalData = Model })
+    }
+}
+
+@*@await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.CategoryDetailsTop, additionalData = Model })*@
+@await Component.InvokeAsync("Widget", new { widgetZone = "categorydetails_top_MobilePlans", additionalData = Model })
+
+<div class="page category-page catalog-mask">
+    <div class="page-body">
+        <div class="catalog-post-pre-yo">
+            <div class="container no-pd-right">
+                @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.CategoryDetailsBeforeSubcategories, additionalData = Model })
+
+                @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.CategoryDetailsBeforeFeaturedProducts, additionalData = Model })
+
+                @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.CategoryDetailsBeforeFilters, additionalData = Model })
+
+                @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.CategoryDetailsBeforeProductList, additionalData = Model })
+                <div class="page-title page-title-catalog">
+                    <h1 class="res-float-none top-cat">@CategoryName</h1>
+                    <div class="other-link mobile-show-text" style="display:none !important;" id="productTagFilter">
+                        <ul>
+                            <li><a href="/eshop-promotions"><i class="cir"></i><span>@T("HomePage.Category.Promotions")</span></a></li>
+                            <li class="best-seller-icon">
+                                <div class="dropdown">
+                                    <div class="dropdown-toggle" id="catadropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="cir"></i><span>@T("HomePage.Category.BestSeller")</span>
+                                    </div>
+                                    <div class="dropdown-menu" aria-labelledby="catadropdownMenuButton" id="bestsellerlistCatalog">
+                                        @*Add filter list by json*@
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="compare-icon"><a href="/compareproducts"><i class="cir"></i><span>@T("HomePage.Category.Compare")</span></a></li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="catalog-with-tab" id="catalog-tab">
+                    @await Component.InvokeAsync("LoadSubCategoryForCatalogPage", new { currentCategoryId = Model.Id })
+                </div>
+                @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.CategoryDetailsBottom, additionalData = Model })
+            </div>
+        </div>
+        @await Component.InvokeAsync("PackagesList", new { categoryId = Model.Id })
+        @await Html.PartialAsync("_WhyBuyOnline")
+    </div>
+</div>
+<div class="prd-drawer prd-drawer-subCat" id="cat-drawer-load">
+    @*Load drawer product from Ajax*@
+</div>
+<div class="drawer-layer" id="drawer-layer-subCat"></div>
+
+<script asp-location="Footer">
+    $(document).ready(function () {
+          $(".category-desc").hide();
+        $(function () {
+            $('.tabs-nav a', '#catalog-tab').click(function () {
+                var selectedCategoryId = $(this).attr('data-CategoryId');
+                var url = window.location.href;
+                url = url.split("?")[0];
+                LoadsubCategory(@(Model.Id), selectedCategoryId, 0);
+                pushStateUrl($(this).attr('data-state-url'), $(this).text());
+                // Check for active
+                $('.tabs-nav li', '#catalog-tab').removeClass('active');
+                $(this).parent().addClass('active');
+
+                // Display active tab
+                let currentTab = $(this).attr('href');
+                $('.tabs-content > div', '#catalog-tab').hide();
+                $(currentTab).show();
+
+                return false;
+            });
+        });
+        var url = window.location.href;
+        url = url.split("?")[0];
+        LoadsubCategory(@(Model.Id), $(".tabs-nav .active a").attr("data-CategoryId"));
+        pushStateUrl($(this).attr('data-state-url'), $(this).text());
+    })
+
+    function closeDrawer() {
+        $('body').toggleClass("scroll-lock");
+        $('.prd-drawer-subCat').toggleClass('active');
+
+        $('#drawer-layer-subCat').toggleClass('active');
+    }
+
+    function LoadCategoryProduct(categoryId, productTagId = 0, rtl = false, parentCategoryId = 0) {
+        $('#cat-drawer-load').empty();
+        $('body').toggleClass("scroll-lock");
+        $('.prd-drawer-subCat').toggleClass('active');
+
+        $('#drawer-layer-subCat').toggleClass('active');
+        GetSubCategoryProducts(categoryId, productTagId, rtl, parentCategoryId);
+    }
+
+    function GetSubCategoryProducts(categoryId, productTagId = 0, rtl = false, parentCategoryId = 0) {
+            $("#cat-drawer-load").html("<div class='ajax-loading-productload' style=''></div>");
+            var postData = {
+                categoryId: categoryId,
+                productTagId: productTagId,
+                parentCategoryId: parentCategoryId
+            };
+            addAntiForgeryToken(postData);
+            $.ajax({
+                cache: false,
+                type: "POST",
+                url: "/CustomProduct/GetCategoryProducts",
+                data: postData,
+                dataType: 'json',
+                success: function (response) {
+                    $("#cat-drawer-load").html(response.html);
+                    $("#bestsellerlist-drawer-" + categoryId).html(response.filterhtml);
+
+                    $('#drawer-prd-slider-' + categoryId).owlCarousel({
+                        loop: false,
+                        margin: 20,
+                        dots: false,
+                        nav: true,
+                        autoWidth: true,
+                        rtl: rtl,
+                        //for animation
+                        navText: ["", "<div class='timer'><span class='mask'><span class='rotator' style='transform: rotate(1deg);'></span></span></div>"],
+                        responsive: {
+                            0: {
+                                margin: 10,
+                            },
+                            991: {
+                                margin: 10,
+                            },
+                            992: {
+                                margin: 10,
+                            },
+                            1366: {
+                                margin: 10,
+                            },
+                            1400: {
+                                margin: 20,
+                            }
+                        }
+                    });
+
+                    //for animation
+                    var parentID = "#drawer-prd-slider-" + categoryId;
+                    var animationspeed = @(Nop.Web.EShopHelper.Animationspeed);
+
+                    //function for animation
+                    AnimationCircling(animationspeed, parentID);
+
+
+                    $('[data-toggle="tooltip"]').tooltip()
+                },
+                failure: function (response) {
+                    alert(response);
+                    $("#bestsellerlist-drawer-" + categoryId).html('');
+                }
+            });
+        }
+
+    function LoadsubCategory(categoryId, subCategoryId = 0, productTagId = 0) {
+        $("#tab_" + subCategoryId).html('<div id="tmpLoaderCatalog"><div class="ajax-loading-Catalogproductload"></div></div>');
+        $.ajax({
+            cache: false,
+            type: "POST",
+            url: "/CustomCatalog/LoadMobilePlanSubCategory",
+            data: { "categoryId": categoryId, "subCategoryId": subCategoryId, "productTagId": productTagId },
+            dataType: 'json',
+            success: function (response) {
+                $("#tmpLoaderCatalog").remove();
+                $("#tab_" + subCategoryId).html(response.html);
+
+                  $("#category-desc").hide();
+                  $("#category-desc_"+subCategoryId).show();
+
+                if (response.filterhtml != "") {
+                    $("#productTagFilter").show();
+                    $('body').addClass('yo-catalog');
+                    $("#bestsellerlistCatalog").html(response.filterhtml);
+                }
+                else {
+                    $('#productTagFilter').attr("style", "display: none !important");
+                    $('body').removeClass('yo-catalog');
+                }
+                @if(userAgentHelper.IsMobileDevice())
+                {
+                    <text>
+                    $('#catalog-owl_' + subCategoryId).owlCarousel({
+                        loop: false,
+                        margin: 20,
+                        dots: false,
+                        nav: true,
+                        autoWidth: true,
+                        rtl: @(rtl),
+                        //for animation
+                        navText: ["", "<div class='timer'><span class='mask'><span class='rotator' style='transform: rotate(1deg);'></span></span></div>"],
+                        responsive: {
+                            0: {
+                                margin: 10,
+                                items:1,
+                            },
+                            991: {
+                                margin: 10,
+                                items: 1,
+                            },
+                            992: {
+                                margin: 10,
+                            },
+                            1366: {
+                                margin: 10,
+                            },
+                            1400: {
+                                margin: 20,
+                            }
+                        }
+                    });
+
+                    //for animation
+                    var parentID = "#catalog-owl_" + subCategoryId;
+                    var animationspeed = @(Nop.Web.EShopHelper.Animationspeed);
+
+                    //function for animation
+                    AnimationCircling(animationspeed, parentID);
+                    </text>
+                }
+            },
+            failure: function (response) {
+                alert(response);
+                $("#tab_" + subCategoryId).html('');
+            }
+        });
+    }
+
+    function updateQueryStringParameter(key, value, uri = window.location.href) {
+        var re = new RegExp("([?&])" + key + "=.*?(&|$)", "i");
+        var separator = uri.indexOf('?') !== -1 ? "&" : "?";
+        if (uri.match(re)) {
+            return uri.replace(re, '$1' + key + "=" + value + '$2');
+        }
+        else {
+            return uri + separator + key + "=" + value;
+        }
+    }
+</script>

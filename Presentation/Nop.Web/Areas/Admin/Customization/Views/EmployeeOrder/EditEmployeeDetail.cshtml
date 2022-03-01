@@ -1,0 +1,106 @@
+@model Nop.Web.Models.Employees.EmployeeModel
+@{
+    //page title
+    ViewBag.Title = T("Admin.Employee.EditEmployee").Text;
+    //active menu item (system name)
+    Html.SetActiveMenuItemSystemName("EmployeeOrders");
+}
+
+<form asp-controller="EmployeeOrder" asp-action="EditEmployeeDetail" method="post" id="employee-form">
+    <div class="content-header clearfix">
+        <h1 class="pull-left">
+            @T("Admin.Employee.EditEmployee") - @Model.EmployeeName
+            <small>
+                <i class="fa fa-arrow-circle-left"></i>
+                <a asp-action="List">@T("Admin.Employee.BackTolist")</a>
+            </small>
+        </h1>
+        <div class="pull-right">
+            <button type="submit" name="save" class="btn bg-blue">
+                <i class="fa fa-floppy-o"></i>
+                @T("Admin.Common.Save")
+            </button>
+            <button type="submit" name="save-continue" class="btn bg-blue">
+                <i class="fa fa-floppy-o"></i>
+                @T("Admin.Common.SaveContinue")
+            </button>
+        </div>
+    </div>
+    <div class="content">
+        <div class="form-horizontal">
+
+            <div class="panel-group">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        @Html.HiddenFor(m => m.Id)
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <nop-label asp-for="EmployeeName" />
+                            </div>
+                            <div class="col-md-9">
+                                <nop-editor asp-for="EmployeeName" />
+                                <span asp-validation-for="EmployeeName"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <nop-label asp-for="EmployeeId" />
+                            </div>
+                            <div class="col-md-9">
+                                <nop-editor asp-for="EmployeeId" />
+                                <span asp-validation-for="EmployeeId"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <nop-label asp-for="EmployeeContactNumber" />
+                            </div>
+                            <div class="col-md-9">
+                                <nop-editor asp-for="EmployeeContactNumber" />
+                                <span asp-validation-for="EmployeeContactNumber"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <nop-label asp-for="Email" />
+                            </div>
+                            <div class="col-md-9">
+                                <nop-editor asp-for="Email" />
+                                <span asp-validation-for="Email"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <nop-label asp-for="Months" />
+                            </div>
+                            <div class="col-md-9">
+                                <nop-editor asp-for="Months" />
+                                <span asp-validation-for="Months"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <nop-label asp-for="Amount" />
+                            </div>
+                            <div class="col-md-9">
+                                <nop-editor asp-for="Amount" />
+                                <span asp-validation-for="Amount"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <nop-label asp-for="OrderNumber" />
+                            </div>
+                            <div class="col-md-9">
+                                @Html.HiddenFor(model=>model.OrderNumber)
+                                <nop-label>@Model.OrderNumber</nop-label>
+                                <span asp-validation-for="OrderNumber"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</form>

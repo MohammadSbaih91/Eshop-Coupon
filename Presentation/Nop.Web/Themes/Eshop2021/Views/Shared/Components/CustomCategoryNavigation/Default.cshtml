@@ -1,0 +1,31 @@
+﻿@model CategoryNavigationModel
+@if (Model.Categories.Count > 0)
+{
+    <div class="block block-category-navigation">
+        <div class="title">
+            <strong>@T("Categories")</strong>
+        </div>
+        <div class="listbox">
+            <ul class="list">
+                @foreach (var category in Model.Categories)
+                {
+                    var categoryLineModel = new CategoryNavigationModel.CategoryLineModel
+                    {
+                        CurrentCategoryId = Model.CurrentCategoryId,
+                        Category = category
+                    };
+                    @*@await Html.PartialAsync("_CategoryLine.Navigation", categoryLineModel)*@
+                    @foreach (var subCategory in category.SubCategories)
+                    {
+                        var subcategoryLineModel = new CategoryNavigationModel.CategoryLineModel
+                        {
+                            CurrentCategoryId = Model.CurrentCategoryId,
+                            Category = subCategory
+                        };
+                        @await Html.PartialAsync("_CategoryLine.Navigation", subcategoryLineModel)
+                    }
+                }
+            </ul>
+        </div>
+    </div>
+}

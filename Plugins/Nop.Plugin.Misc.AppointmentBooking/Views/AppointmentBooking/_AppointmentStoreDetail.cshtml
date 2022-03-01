@@ -1,0 +1,133 @@
+﻿@model StoreDetailModel
+@*@{
+        var workingfirst = Model.Branch.TodayWorkingShifts.FirstOrDefault();
+    }*@
+<div class="appointment-content">
+    <div class="appoint-title">
+        <h2>@T("Plugins.Misc.AppointmentBooking.StoreList.Title")</h2>
+    </div>
+
+    <div class="back-btn">
+        <button type="button" class="btn btn-outline-secondary" onclick="LoadStoreList()"><i class="fas fa-angle-left"></i>@T("Plugins.Misc.AppointmentBooking.Back")</button>
+    </div>
+    <div class="appointment-body">
+        <div class="appointment-book-popup">
+            <div class="flex_row">
+                <div class="flex-md-5">
+                    <div class="book-selected">
+                        <h3>1. @Model.Branch.Name</h3>
+                        @if (!string.IsNullOrEmpty(Model.OpenUntil))
+                        {
+                            <p><i class="fa fa-circle"></i>Opne until @Model.OpenUntil</p>
+                        }
+
+                        @* <p><i class="fa fa-map-marker-alt"></i>Abdali - Boulevard Amman</p> *@
+                        @* <p><i class="fa fa-phone"></i> +777 8458 454</p> *@
+                    </div>
+                    <div class="opening-hours">
+                        <h3>@T("Plugins.Misc.AppointmentBooking.OrderDetail.Title")</h3>
+                        <input type="hidden" id="selectedDate" />
+                        <ul>
+                            @foreach (var day in Model.AvailableDaysToTakeAppointment.ValidAppointmentDays)
+                            {
+                                DateTime date = DateTime.ParseExact(day, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
+                                <li data-selectedDate="@day">
+                                    <div class="time-day">
+                                        <strong>@date.DayOfWeek.ToString()</strong>
+                                        <span>8:30 - 17:30</span>
+                                    </div>
+                                </li>
+                            }
+                            @*<li>
+                                    <div class="time-day">
+                                        <strong>Monday</strong>
+                                        <span>8:30 - 17:30</span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="time-day">
+                                        <strong>Monday</strong>
+                                        <span>8:30 - 17:30</span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="time-day">
+                                        <strong>Monday</strong>
+                                        <span>8:30 - 17:30</span>
+                                    </div>
+                                </li>
+                                <li class="selected">
+                                    <div class="time-day">
+                                        <strong>Monday</strong>
+                                        <span>8:30 - 17:30</span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="time-day">
+                                        <strong>Monday</strong>
+                                        <span>8:30 - 17:30</span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="time-day">
+                                        <strong>Monday</strong>
+                                        <span>8:30 - 17:30</span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="time-day">
+                                        <strong>Monday</strong>
+                                        <span>8:30 - 17:30</span>
+                                    </div>
+                                </li>*@
+                        </ul>
+                    </div>
+                </div>
+                <div class="flex-md-7">
+                    <div class="direction">
+                        <div class="store-img">
+                            <img src="https://eshop.orange.jo/app-images/0001171.jpeg" />
+                            <div class="map" id="storemap" style="width: 500px; height: 400px;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="date-btn">
+                <button class="btn btn-primary btn-xx" type="button" onclick="LoadTime(@Model.Branch.CityId, @Model.Branch.DepartmentId, @Model.Branch.Distance, @Model.Branch.Id, '@Model.Branch.Identity', @Model.Branch.IsWorkingNow.ToString().ToLower(), @Model.Branch.Latitude, @Model.Branch.Longitude, '@Model.Branch.Name','09/11/2020','@Model.ServiceId','@Model.OpenUntil')">@T("Plugins.Misc.AppointmentBooking.OrderDetail.BookAppoinment")</button>
+                <div class="btn btn-outline-primary btn-xx">@T("Plugins.Misc.AppointmentBooking.StoreList.Contactus")</div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $('ul li').click(function () {
+            $('ul li.selected').removeClass('selected');
+            $(this).addClass("selected");
+            $("#selectedDate").val((this).dataset.selecteddate);
+        });
+    });
+</script>
+<script type="text/javascript">
+
+    var storemap = new google.maps.Map(document.getElementById('storemap'), {
+        zoom: 12,
+        center: new google.maps.LatLng(@Model.Branch.Latitude, @Model.Branch.Longitude),
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    });
+
+    var infowindow = new google.maps.InfoWindow();
+
+    var marker, i;
+    marker = new google.maps.Marker({
+        position: new google.maps.LatLng(@Model.Branch.Latitude, @Model.Branch.Longitude),
+        map: storemap
+    });
+
+    google.maps.event.addListener(marker, 'click', (function (marker, i) {
+        return function () {
+            infowindow.setContent('@Model.Branch.Name');
+            infowindow.open(storemap, marker);
+        }
+    })(marker, i));
+</script>

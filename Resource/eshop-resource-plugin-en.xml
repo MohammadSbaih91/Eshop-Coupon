@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Language Name="English">
+  <LocaleResource Name="Logo.Title"><Value>eShop</Value></LocaleResource>
+  <LocaleResource Name="Plugins.VisitorEmailCollector.Title"><Value>Welcome To Orange e-Shop</Value></LocaleResource>
+  <LocaleResource Name="Plugins.VisitorEmailCollector.Headline"><Value>Configuration</Value></LocaleResource>
+  <LocaleResource Name="Plugins.VisitorEmailCollector.Submit"><Value>Submit</Value></LocaleResource>
+  <LocaleResource Name="Plugins.VisitorEmailCollector.Email"><Value>Email</Value></LocaleResource>
+  <LocaleResource Name="Plugins.VisitorEmailCollector.Description"><Value>Description</Value></LocaleResource>
+  <LocaleResource Name="Plugins.VisitorEmailCollector.Label"><Value>label</Value></LocaleResource>
+  <LocaleResource Name="Plugins.VisitorEmailCollector.CreatedOnTo"><Value>To</Value></LocaleResource>
+  <LocaleResource Name="Plugins.VisitorEmailCollector.CreatedOnFrom"><Value>From</Value></LocaleResource>
+  <LocaleResource Name="Plugins.VisitorEmailCollector.SearchText"><Value>Email</Value></LocaleResource>
+  <LocaleResource Name="Plugins.VisitorEmailCollector.Store"><Value>Store</Value></LocaleResource>
+  <LocaleResource Name="Plugins.VisitorEmailCollector.CreatedOn"><Value>Date</Value></LocaleResource>
+  <LocaleResource Name="Plugins.VisitorEmailCollector.Plugins.VisitorEmailCollector.Submit"><Value>Submit</Value></LocaleResource>
+
+  <LocaleResource Name="Plugin.ProductImportNUpdate.UnsupportedFile"><Value>Unsupported or corrupted file</Value></LocaleResource>
+  <LocaleResource Name="Plugin.ProductImportNUpdate.submit"><Value>Import</Value></LocaleResource>
+  <LocaleResource Name="Plugin.ProductImportNUpdate.DragDrop"><Value>You can chose by clicking or just drag and drop your file here</Value></LocaleResource>
+  <LocaleResource Name="Plugin.ProductImportNUpdate.File"><Value>Upload .csv file with (,) separator</Value></LocaleResource>
+
+  <LocaleResource Name="Plugins.CustomerOrderReview.Headline"><Value>Set Review Questions</Value></LocaleResource>
+  <LocaleResource Name="Plugins.CustomerOrderReview.Title"><Value>Let us know your experience</Value></LocaleResource>
+  <LocaleResource Name="Plugins.CustomerOrderReview.Submit.Success"><Value>Your review has been saved, Thank you.</Value></LocaleResource>
+  <LocaleResource Name="Plugins.CustomerOrderReview.Submit.Fail"><Value>Something went wrong</Value></LocaleResource>
+  <LocaleResource Name="Plugins.CustomerOrderReview.Rating1"><Value>Question1</Value></LocaleResource>
+  <LocaleResource Name="Plugins.CustomerOrderReview.Rating2"><Value>Question2</Value></LocaleResource>
+  <LocaleResource Name="Plugins.CustomerOrderReview.Rating3"><Value>Question3</Value></LocaleResource>
+  <LocaleResource Name="Plugins.CustomerOrderReview.Rating4"><Value>Question4</Value></LocaleResource>
+  <LocaleResource Name="Plugins.CustomerOrderReview.Feedback"><Value>Descriptive</Value></LocaleResource>
+  <LocaleResource Name="Plugins.CustomerOrderReviewType.Negative"><Value>Negative</Value></LocaleResource>
+  <LocaleResource Name="Plugins.CustomerOrderReviewType.Neutral"><Value>Neutral</Value></LocaleResource>
+  <LocaleResource Name="Plugins.CustomerOrderReviewType.Positive"><Value>Positive</Value></LocaleResource>
+  <LocaleResource Name="Plugins.CustomerOrderReview.CreatedOnFrom"><Value>From Date</Value></LocaleResource>
+  <LocaleResource Name="Plugins.CustomerOrderReview.CreatedOnTo"><Value>To Date</Value></LocaleResource>
+  <LocaleResource Name="Plugins.CustomerOrderReview.SearchText"><Value>Feedback</Value></LocaleResource>
+  <LocaleResource Name="Plugins.CustomerOrderReview.Order"><Value>Order No</Value></LocaleResource>
+  <LocaleResource Name="Plugins.CustomerOrderReview.Customer"><Value>Customer</Value></LocaleResource>
+  <LocaleResource Name="Plugins.CustomerOrderReview.CreatedOn"><Value>Created On</Value></LocaleResource>
+  <LocaleResource Name="Plugins.CustomerOrderReview.SearchOrder"><Value>Order No</Value></LocaleResource>
+  <LocaleResource Name="Plugins.CustomerOrderReview.CustomerOrderReviewType"><Value>Review Type</Value></LocaleResource>
+</Language>
+
+

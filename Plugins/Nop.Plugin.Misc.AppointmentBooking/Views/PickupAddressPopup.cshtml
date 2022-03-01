@@ -1,0 +1,263 @@
+﻿@*Add this in checkout page*@
+@*<div class="checkout-appointment">
+    <div class="data">
+        <h3>Find the nearest Orange store</h3>
+        <div class="search-inp">
+            <div class="flex_group">
+                <div class="inp-grop">
+                    <div class="inp-icon right-space">
+                        <input type="text" class="form-control" />
+                        <div class="icon-right">
+                            <i class="fas fa-paper-plane"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="inp-grop">
+                    <div class="inp-icon">
+                        <input type="text" class="form-control" />
+                        <div class="icon-right right-icon-close">
+                            <i class="fas fa-times"></i>
+                        </div>
+                        <div class="icon-right">
+                            <i class="fa fa-search"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="a-btn-group">
+                <div class="btn btn-primary">Search</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="appointment-popup">
+
+    <div class="appointment-content">
+        <div class="appointment-head">
+            <div class="appointment-close"></div>
+        </div>
+        <div class="appointment-body">
+            <div class="appointment-first-popup">
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="appointment-first-left">
+                            <div class="search-content">
+                                <div class="search-inp">
+                                    <div class="inp-grop">
+                                        <div class="inp-icon right-space">
+                                            <input type="text" class="form-control" />
+                                            <div class="icon-right">
+                                                <i class="fas fa-paper-plane"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="inp-grop">
+                                        <div class="inp-icon">
+                                            <input type="text" class="form-control" />
+                                            <div class="icon-right right-icon-close">
+                                                <i class="fas fa-times"></i>
+                                            </div>
+                                            <div class="icon-right">
+                                                <i class="fa fa-search"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="count-store">288 Store in our area</div>
+                            <div class="appointment-list">
+                                <ul>
+                                    <li>
+                                        <div class="appointment-list-left">
+                                            <h3>1. Orange Store Boulevard</h3>
+                                            <p><i class="fa fa-circle"></i>Opne until 17:30</p>
+                                            <p><i class="fa fa-map-marker-alt"></i>Abdali - Boulevard Amman</p>
+                                            <p><i class="fa fa-phone"></i> +777 8458 454</p>
+                                        </div>
+                                        <div class="appointment-list-right">
+                                            <div class="btn btn-primary btn-block">Acess</div>
+                                            <div class="btn btn-outline-primary btn-block">Contact</div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="appointment-list-left">
+                                            <h3>1. Orange Store Boulevard</h3>
+                                            <p><i class="fa fa-circle"></i>Opne until 17:30</p>
+                                            <p><i class="fa fa-map-marker-alt"></i>Abdali - Boulevard Amman</p>
+                                            <p><i class="fa fa-phone"></i> +777 8458 454</p>
+                                        </div>
+                                        <div class="appointment-list-right">
+                                            <div class="btn btn-primary btn-block">Acess</div>
+                                            <div class="btn btn-outline-primary btn-block">Contact</div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="appointment-list-left">
+                                            <h3>1. Orange Store Boulevard</h3>
+                                            <p><i class="fa fa-circle"></i>Opne until 17:30</p>
+                                            <p><i class="fa fa-map-marker-alt"></i>Abdali - Boulevard Amman</p>
+                                            <p><i class="fa fa-phone"></i> +777 8458 454</p>
+                                        </div>
+                                        <div class="appointment-list-right">
+                                            <div class="btn btn-primary btn-block">Acess</div>
+                                            <div class="btn btn-outline-primary btn-block">Contact</div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-7">
+                        <div class="appointment-first-left">
+                            <div class="map">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="appointment-popup" style="display:none;">
+    <div class="appointment-content">
+        <div class="appointment-head">
+            <div class="appointment-close"></div>
+        </div>
+        <div class="back-btn">
+            <div class="btn btn-outline-secondary"><i class="fas fa-angle-left"></i>Back</div>
+        </div>
+        <div class="popup-title">
+            <h3>Best Popup Design in word</h3>
+        </div>
+        <div class="appointment-body">
+            <div class="appointment-date-popup">
+                <div class="row">
+                    <div class="col-md-4 col-sm-5">
+                        <div class="date-title">Select Date</div>
+                        <div class="datepicker-in">
+                            <div id="calendar"></div>
+                        </div>
+                        <script asp-location="Footer">
+                            $(document).ready(function () {
+                                $('#calendar').datepicker({
+                                    language: "nl",
+                                    calendarWeeks: true,
+                                    todayHighlight: true
+                                });
+                            })
+                        </script>
+                    </div>
+                    <div class="col-md-8 col-sm-7">
+                        <div class="select-time">
+                            <ul>
+                                <li><span>10:15 AM</span></li>
+                                <li><span>10:15 AM</span></li>
+                                <li class="disabled-time"><span>10:15 AM</span></li>
+                                <li><span>10:15 AM</span></li>
+                                <li class="disabled-time"><span>10:15 AM</span></li>
+                                <li class="disabled-time"><span>10:15 AM</span></li>
+                                <li class="disabled-time"><span>10:15 AM</span></li>
+                                <li><span>10:15 AM</span></li>
+                                <li><span>10:15 AM</span></li>
+                                <li><span>10:15 AM</span></li>
+                                <li><span>10:15 AM</span></li>
+                                <li><span>10:15 AM</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="date-btn">
+                    <div class="btn btn-primary">Book Now<i class="fas fa-arrow-right"></i></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="appointment-popup" style="display:none;">
+    <div class="appointment-content">
+        <div class="appointment-head">
+            <div class="appointment-close"></div>
+        </div>
+        <div class="back-btn">
+            <div class="btn btn-outline-secondary"><i class="fas fa-angle-left"></i>Back</div>
+        </div>
+        <div class="appointment-body">
+            <div class="appointment-book-popup">
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="book-selected">
+                            <h3>1. Orange Store Boulevard</h3>
+                            <p><i class="fa fa-circle"></i>Opne until 17:30</p>
+                            <p><i class="fa fa-map-marker-alt"></i>Abdali - Boulevard Amman</p>
+                            <p><i class="fa fa-phone"></i> +777 8458 454</p>
+                        </div>
+                        <div class="opening-hours">
+                            <h3>Opening hours</h3>
+                            <ul>
+                                <li>
+                                    <div class="time-day">
+                                        <strong>Monday</strong>
+                                        <span>8:30 - 17:30</span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="time-day">
+                                        <strong>Monday</strong>
+                                        <span>8:30 - 17:30</span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="time-day">
+                                        <strong>Monday</strong>
+                                        <span>8:30 - 17:30</span>
+                                    </div>
+                                </li>
+                                <li class="selected">
+                                    <div class="time-day">
+                                        <strong>Monday</strong>
+                                        <span>8:30 - 17:30</span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="time-day">
+                                        <strong>Monday</strong>
+                                        <span>8:30 - 17:30</span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="time-day">
+                                        <strong>Monday</strong>
+                                        <span>8:30 - 17:30</span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="time-day">
+                                        <strong>Monday</strong>
+                                        <span>8:30 - 17:30</span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-7">
+                        <div class="direction">
+                            <div class="store-img">
+                                <img src="https://eshop.orange.jo/app-images/0001171.jpeg" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="date-btn">
+                    <div class="btn btn-primary">Book Appointment</div>
+                    <div class="btn btn-outline-primary">Contact Us</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>*@

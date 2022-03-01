@@ -1,0 +1,212 @@
+﻿@model TopMenuModel
+@using Nop.Core
+@inject IStoreContext storeContext
+
+@* TODO: This view is not being used at the moment but will use may be while integrating with orange *@
+<div class="es-menu-accordion" id="nop-menu">
+    @if (Model.DisplayHomePageMenuItem)
+    {
+        <h1 class=es-home><a href="@Url.RouteUrl("HomePage")">@T("HomePage")</a></h1>
+    }
+    <ul class="top-menu mega">
+        @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.HeaderMenuBefore })
+
+        @{
+            var rootCategories = Model.Categories.Where(x => x.IncludeInTopMenu).ToList();
+        }
+        @foreach (var category in rootCategories)
+        {
+            var categoryLineModel = new TopMenuModel.CategoryLineModel
+            {
+                Category = category
+            };
+            @await Html.PartialAsync("_CategoryLine.TopMenu.Mega", categoryLineModel)
+        }
+    </ul>
+
+    <ul class="top-menu secondary">
+        @foreach (var topic in Model.Topics)
+        {
+            <li><a href="@Url.RouteUrl("Topic", new { SeName=topic.SeName })">@topic.Name</a></li>
+        }
+        @if (Model.NewProductsEnabled && Model.DisplayNewProductsMenuItem)
+        {
+            <li><a href="@Url.RouteUrl("NewProducts")">@T("Products.NewProducts")</a></li>
+        }
+        @if (Model.DisplayProductSearchMenuItem)
+        {
+            <li><a href="@Url.RouteUrl("ProductSearch")">@T("Search")</a></li>
+        }
+        @if (Model.DisplayCustomerInfoMenuItem)
+        {
+            <li><a href="@Url.RouteUrl("CustomerInfo")">@T("Account.MyAccount")</a></li>
+        }
+        @if (Model.BlogEnabled && Model.DisplayBlogMenuItem)
+        {
+            <li><a href="@Url.RouteUrl("Blog")">@T("Blog")</a></li>
+        }
+        @if (Model.ForumEnabled && Model.DisplayForumsMenuItem)
+        {
+            <li><a href="@Url.RouteUrl("Boards")">@T("Forum.Forums")</a></li>
+        }
+        @if (Model.DisplayContactUsMenuItem)
+        {
+            <li><a href="@Url.RouteUrl("ContactUs")">@T("ContactUs")</a></li>
+        }
+        @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.HeaderMenuAfter })
+    </ul>
+    <div class="top-menu es-menu-footer">
+        @*<div><a href="https://eshop.orange.jo/en/promotions/"> <span class="icon-discount-white">&nbsp;</span> <span>Promotions</span> </a></div>*@
+        <div><a href="@storeContext.CurrentStore.Url/en/eshop-promotions"> <span class="icon-discount-white">&nbsp;</span> <span>Promotions</span> </a></div>
+        <div><a href="https://www.orange.jo/en/myaccount/pages/pay-bills-and-recharge-online.aspx/" target="_self"> <span class="icon-top-up-euro">&nbsp;</span> <span>Pay bills and  recharge</span> </a></div>
+        <div class="float-right close">
+            <i class="fas fa-times"></i>
+        </div>
+    </div>
+</div>
+
+@await Html.PartialAsync("_Static.Menu.Accordions")
+@{
+    var rootCategoriesResponsive = Model.Categories.ToList();
+    //name it "Categories" if we have only categories. Otherwise, "Menu"
+    var responsiveMenuTitle = Model.HasOnlyCategories ? T("Categories") : T("Menu");
+    @*<div class="menu-toggle">@responsiveMenuTitle</div>*@
+    <ul class="top-menu mobile">
+        @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.MobHeaderMenuBefore })
+        @*@if (Model.DisplayHomePageMenuItem)
+            {
+            <li><a href="@Url.RouteUrl("HomePage")">@T("HomePage")</a></li>
+            }*@
+        <li class="mobile-root-menu">
+            <a href="/">
+                @T("Menu.Title")
+                <i class="fas fa-angle-right"></i>
+            </a>
+            <div class="sublist-toggle"></div>
+            <ul class="sublist first-level">
+                <li class="back-menu">
+
+                    <i class="fas fa-angle-left"></i>   @T("Menu.Title")
+                </li>
+                @foreach (var category in rootCategoriesResponsive)
+                {
+                    var categoryLineModel = new TopMenuModel.CategoryLineModel
+                    {
+                        Category = category,
+                        ResponsiveMobileMenu = true
+                    };
+                    @await Html.PartialAsync("_CategoryLine.TopMenu", categoryLineModel)
+                }
+            </ul>
+        </li>
+
+        @await Html.PartialAsync("_Static.Menu.Accordions.Mobile")
+
+        @foreach (var topic in Model.Topics)
+        {
+            <li><a href="@Url.RouteUrl("Topic", new { SeName=topic.SeName })">@topic.Name</a></li>
+        }
+        @if (Model.NewProductsEnabled && Model.DisplayNewProductsMenuItem)
+        {
+            <li><a href="@Url.RouteUrl("NewProducts")">@T("Products.NewProducts")</a></li>
+        }
+        @if (Model.DisplayProductSearchMenuItem)
+        {
+            <li><a href="@Url.RouteUrl("ProductSearch")">@T("Search")</a></li>
+        }
+        @if (Model.DisplayCustomerInfoMenuItem)
+        {
+            <li><a href="@Url.RouteUrl("CustomerInfo")">@T("Account.MyAccount")</a></li>
+        }
+        @if (Model.BlogEnabled && Model.DisplayBlogMenuItem)
+        {
+            <li><a href="@Url.RouteUrl("Blog")">@T("Blog")</a></li>
+        }
+        @if (Model.ForumEnabled && Model.DisplayForumsMenuItem)
+        {
+            <li><a href="@Url.RouteUrl("Boards")">@T("Forum.Forums")</a></li>
+        }
+        @if (Model.DisplayContactUsMenuItem)
+        {
+            <li><a href="@Url.RouteUrl("ContactUs")">@T("ContactUs")</a></li>
+        }
+        <li class="mobile-root-menu-footer">
+            @await Html.PartialAsync("_Static.HeaderLinks")
+        </li>
+
+        @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.MobHeaderMenuAfter })
+    </ul>
+    <script asp-location="Footer">
+        $(document).ready(function () {
+            $(".header .es-root-menu li").mouseenter(function () {
+                closeSearch();
+                $('.header-menu .es-menu-accordion').hide()
+                var accordion = '#' + $(this).data('target');
+                $(accordion).slideDown().show();
+                $('[data-target]').removeClass('org-primary');
+                $(this).addClass('org-primary')
+            });
+
+            $(".es-header-menu").mouseleave(function () {
+                $(this).find('.header-menu .es-menu-accordion').hide();
+                $('[data-target]').removeClass('org-primary')
+            });
+
+            $('.es-menu').on('click', function () {
+                closeSearch();
+                $('.top-menu.mobile').fadeToggle();
+                $('.hd-lower-right .es-menu-icon').toggleClass('active')
+            });
+
+            $('.top-menu.mobile .first-level .sublist-toggle').on('click', function () {
+                $(this).siblings('.sublist').fadeToggle();
+                $(this).siblings('a').toggleClass('org-primary').children('i').toggleClass('fa-sort-down fa-sort-up')
+                closeSearch();
+            });
+
+            $('.top-menu.mobile .sublist-toggle').on('click', function () {
+                $(this).parent('li').siblings('li').children('.sublist').hide();
+                $(this).parent('li').siblings('li').children('a').removeClass('org-primary').children('.fa-sort-up').addClass('fa-sort-down').removeClass('fa-sort-up');
+
+            });
+
+            $('.mobile-root-menu > .sublist-toggle').on('click', function (e) {
+                $(this).parent('.mobile-root-menu').siblings('.mobile-root-menu').hide();
+                $(this).siblings('a').hide();
+                $(this).siblings('.sublist').fadeIn();
+                $(".mobile-root-menu-footer").addClass('active-sub-menu');
+            });
+
+            $('.back-menu').on('click', function (e) {
+                var back = $(this);
+                $('.header-menu').fadeOut('fast', function (e) {
+                    $(".mobile-root-menu-footer").removeClass('active-sub-menu');
+                    back.parent('.sublist').hide();
+                    back.parent('.sublist').siblings('a').show();
+                    $('.header-menu').fadeIn();
+
+                    back.parents('.mobile-root-menu').siblings('.mobile-root-menu').show();
+
+                });
+
+            });
+
+            $('.search-icon').on('click', function () {
+                $('.search-box').toggle();
+                $("#small-searchterms").focus();
+                closeMenu();
+            });
+            $('.es-menu-footer .close').on('click', closeMenu);
+            $('.search-box .close').on('click', closeSearch);
+
+        });
+        function closeSearch() {
+            $('.search-box').hide();
+        }
+        function closeMenu() {
+            $('.top-menu.mobile').slideUp('fast');
+            $('.es-menu-accordion').hide();
+            $('.hd-lower-right .es-menu-icon').removeClass('active');
+        }
+    </script>
+}

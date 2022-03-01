@@ -1,0 +1,245 @@
+﻿@model BoughtTogether
+@using Microsoft.AspNetCore.Http
+@using Nop.Core
+@using Nop.Services
+@using Nop.Services.Configuration;
+@using Nop.Core.Domain.Orders
+@inject IWebHelper webHelper
+@inject IHttpContextAccessor httpContextAccessor
+@using Nop.Services.Helpers
+@inject IUserAgentHelper userAgentHelper
+@inject IWorkContext workContext
+@inject ISettingService settingService
+
+@if (Model.ProductOverviewModel != null && Model.ProductOverviewModel.Count > 0)
+{
+    var supportRtl = workContext.WorkingLanguage.Rtl;
+    var rtl = supportRtl ? "true" : "false";
+
+    if (Model.enumProductDetail == Nop.Core.Domain.Enum.EnumProductDetail.Device)
+    {
+        <div class="heading">
+            <div class="hed-first"></div>
+            <div class="new-choose">
+                <div class="new_flex">
+                    <div class="center prices-width sm-width">@T("ProductDetail.CommitmentPeriod")</div>
+                    <div class="center sm-width">@T("Products.Detail.Discountamount")</div>
+                    @*<div class="center sm-width right-text">@T("ProductDetail.Minutes")</div>*@
+                </div>
+                <div class="head-last"></div>
+            </div>
+        </div>
+        int count = 0;
+        @foreach (var item in Model.ProductOverviewModel)
+        {
+            var className = "yellow-border";
+            count++;
+            switch (count)
+            {
+                case 1:
+                    className = "yellow-border";
+                    break;
+                case 2:
+                    className = "green-border";
+                    break;
+                case 3:
+                    className = "blue-border";
+                    count = 0;
+                    break;
+            }
+
+            var monthlyPriceAttrId = settingService.GetSettingByKey<int>(EShopHelperService.MonthlyPriceAttribute);
+            var attribute = item.ProductAttributeOverviewModels.FirstOrDefault(p => p.ProductAttributeId == monthlyPriceAttrId);
+
+            var deafultpriceattribute = attribute != null ? attribute.Values.Where(x => x.IsPreSelected == true).Select(y => y.Price).FirstOrDefault() : "";
+            var deafultpriceattributevalue = attribute != null ? attribute.Values.Where(x => x.IsPreSelected == true).Select(y => y.PriceValue).FirstOrDefault() : 0;
+            <input type="hidden" id="hdnpriceattributevalue_@item.Id" name="hdnpriceattributevalue" value="@deafultpriceattribute" />
+            <input type="hidden" id="hdnpriceattribute_@item.Id" name="hdnpriceattribute" value="@deafultpriceattributevalue" />
+            <input type="hidden" id="hdnSelectedAttributeValuePrice_@item.Id" name="hdnSelectedAttributeValuePrice_@item.Id" value="" />
+
+            <div class="bun @(className) clsProduct_@item.Id">
+                <div class="seprate bun-info">
+                    <div>
+                        <h3>@item.Name</h3>
+                        @*<span>+ New line</span>*@
+                    </div>
+                </div>
+                <div class="new-choose">
+                    <div class="new_flex">
+                        <div class="seprate center rate sm-width">
+
+                            <div class="dropdown cmt-drop">
+                                <button class="btn dropdown-toggle" type="button" id="ddlPriceAttribute_@item.Id" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-selectid="0">
+                                    Select
+                                </button>
+                                @if (attribute != null)
+                                {
+                                    <div class="dropdown-menu" aria-labelledby="ddlPriceAttribute_@item.Id">
+                                        @foreach (var attributeitem1 in attribute.Values)
+                                        {
+                                            <a tabindex="-1" id="id_@(attributeitem1.Id)" onclick="SetSelectedPlanAttribValue(this, '@attributeitem1.PriceValue', '@attributeitem1.Price', '@attributeitem1.Name','@attributeitem1.Id','@item.Id')" value="@attributeitem1.PriceValue" class="dropdown-item @(attributeitem1.IsPreSelected?"selected":"")">@attributeitem1.Name</a>
+                                            if (attributeitem1.IsPreSelected)
+                                            {
+                                                <script asp-location="Footer">
+                                                    $("#ddlPriceAttribute_" + @item.Id).html('@attributeitem1.Name');
+                                                    $("#id_" + @attributeitem1.Id).addClass("selected");
+                                                    $("#ddlPriceAttribute_" + @item.Id).attr("data-selectid", @attributeitem1.Id);
+                                                </script>
+                                            }
+                                        }
+                                    </div>
+                                }
+                            </div>
+                            <script asp-location="Footer">
+                                    var pid = @item.Id;
+                                $("#ddlPriceAttribute_" + pid+" :not(:first-child)").addClass("ddlhide");
+                                $("#chooseprice_" + pid).html($("#hdnpriceattributevalue_"+pid).val());
+                                function SetSelectedPlanAttribValue(selected, dllPriceValue, dllValue, dllText, ddlId, prodid) {
+                                    $("#ddlPriceAttribute_" + prodid+">a.selected").removeClass("selected");
+                                    $("#chooseprice_" + prodid).html(dllValue);
+                                    $("#ddlPriceAttribute_" + prodid).html(dllText);
+                                    $("#id_" + ddlId).addClass("selected");
+                                    $("#ddlPriceAttribute_" + prodid).attr("data-selectid", ddlId);
+                                    $('#hdnpriceattribute_' + prodid).val(dllPriceValue);
+                                    var productPrice = $('#divdeviceprice').attr('data-productPrice');
+                                    productTemplate.fnMobileSim(dllValue, dllPriceValue, prodid,false);
+                                }
+                            </script>
+                        </div>
+                        <div class="seprate center rate sm-width">
+                            <div class="rate-flex">
+                                <div class="flex" id="chooseprice_@item.Id"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="seprate textright">
+                        <div class="btn btn-orange"><span onclick="productTemplate.fnMobileSim('@(item.ProductPrice.Price)', @(item.ProductPrice.PriceValue), @(item.Id),false)">@T("ProductDetail.ChoosePlan")</span><i></i></div>
+                        <a class="btn btn-outline-dark" href="@UrlStrucutre.UrlDecode(Url.RouteUrl("Product", new { SeName = item.SeName }))">View Details</a>
+                    </div>
+                </div>
+
+            </div>
+        }
+
+    }
+    else if (Model.enumProductDetail == Nop.Core.Domain.Enum.EnumProductDetail.Postpaid)
+    {
+        <div class="owl-carousel arrow-center arrow-top-mobile prd-auto-width-mobile" id="choose-owl-slider">
+            @foreach (var item in Model.ProductOverviewModel)
+            {
+                item.ButtonName = Convert.ToString(T("ProductDetail.Choosedevice"));
+                <div class="item-box">@await Html.PartialAsync("_ProductDeviceBox", item)</div>
+            }
+        </div>
+    }
+    else if (Model.enumProductDetail == Nop.Core.Domain.Enum.EnumProductDetail.Fixedline)
+    {
+        <div class="owl-carousel arrow-center arrow-top-mobile prd-auto-width-mobile" id="choose-owl-slider">
+            @foreach (var item in Model.ProductOverviewModel)
+            {
+                item.ButtonName = Convert.ToString(T("ProductDetail.Choosedevice"));
+                <div class="item-box">@await Html.PartialAsync("_ProductDeviceBox", item)</div>
+            }
+        </div>
+    }
+    else if (Model.enumProductDetail == Nop.Core.Domain.Enum.EnumProductDetail.YolinePostpaid)
+    {
+        <div class="owl-carousel arrow-center arrow-top-mobile prd-auto-width-mobile" id="choose-owl-slider">
+            @foreach (var item in Model.ProductOverviewModel)
+            {
+                item.ButtonName = Convert.ToString(T("ProductDetail.Choosedevice"));
+                <div class="item-box">@await Html.PartialAsync("_ProductDeviceBox", item)</div>
+            }
+        </div>
+    }
+    else if (Model.enumProductDetail == Nop.Core.Domain.Enum.EnumProductDetail.Internet)
+    {
+        <div class="owl-carousel arrow-center arrow-top-mobile prd-auto-width-mobile" id="choose-owl-slider">
+            @foreach (var item in Model.ProductOverviewModel)
+            {
+                item.ButtonName = Convert.ToString(T("ProductDetail.Internet.ChooseAccessoryButton"));
+                <div class="item-box">@await Html.PartialAsync("_ProductDeviceBox", item)</div>
+            }
+        </div>
+    }
+
+    if (Model.enumProductDetail == Nop.Core.Domain.Enum.EnumProductDetail.Postpaid ||
+                    Model.enumProductDetail == Nop.Core.Domain.Enum.EnumProductDetail.Fixedline ||
+                    Model.enumProductDetail == Nop.Core.Domain.Enum.EnumProductDetail.YolinePostpaid ||
+                    Model.enumProductDetail == Nop.Core.Domain.Enum.EnumProductDetail.Internet)
+    {
+        @if (userAgentHelper.IsMobileDevice())
+        {
+            <script asp-location="Footer">
+                $(document).ready(function () {
+                    $('#choose-owl-slider').owlCarousel({
+                        loop: false,
+                        margin: 15,
+                        dots: false,
+                        autoWidth: true,
+                        nav: true,
+                        rtl: @(rtl),
+
+                        //for animation
+                        navText: ["", "<div class='timer'><span class='mask'><span class='rotator' style='transform: rotate(1deg);'></span></span></div>"],
+                    });
+
+                    //for animation
+                    var parentID = "#choose-owl-slider";
+                    var animationspeed = @(Nop.Web.EShopHelper.Animationspeed);
+
+                    //function for animation
+                    AnimationCircling(animationspeed, parentID);
+                });
+            </script>
+        }
+        else
+        {
+            <script asp-location="Footer">
+                $(document).ready(function () {
+                    $('#choose-owl-slider').owlCarousel({
+                        loop: false,
+                        margin: 20,
+                        dots: false,
+                        rtl: @(rtl),
+                        nav: true,
+                        responsive: {
+                            0: {
+                                margin: 7,
+                                items: 1,
+                            },
+                            991: {
+                                margin: 7,
+                                items: 3,
+                            },
+                            992: {
+                                margin: 7,
+                                items: 3,
+                            },
+                            1024: {
+                                margin: 10,
+                                items: 4,
+                            },
+                            1280: {
+                                margin: 14,
+                                items: 4,
+                            },
+                            1366: {
+                                margin: 15,
+                                items: 4,
+                            },
+                            1400: {
+                                margin: 20,
+                                items: 4,
+                            }
+                        }
+                    });
+                });
+            </script>
+        }
+    }
+    <input type="hidden" value="@Model.ProductId" id="hdnProductId" />
+}
+
+
+

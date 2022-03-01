@@ -1,0 +1,197 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Language Name="عربي">
+	<LocaleResource Name="Shipping.Aramex">
+		<Value>أرامكس</Value>
+	</LocaleResource>
+
+	<LocaleResource Name="Shipping.Aramex.Configure.UseSandbox">
+		<Value>استخدم صندوق الحماية</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Configure.UseSandbox.Hint">
+		<Value>حدد لتمكين وضع الحماية (بيئة الاختبار).</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Configure.UserName">
+		<Value>اسم المستخدم</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Configure.UserName.Hint">
+		<Value>اسم المستخدم</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Configure.Password">
+		<Value>كلمه السر</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Configure.Password.Hint">
+		<Value>كلمه السر</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Configure.Version">
+		<Value>الإصدار</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Configure.Version.Hint">
+		<Value>الإصدار</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Configure.AccountNumber">
+		<Value>رقم حساب</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Configure.AccountNumber.Hint">
+		<Value>رقم حساب</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Configure.AccountPin">
+		<Value>دبوس الحساب</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Configure.AccountPin.Hint">
+		<Value>دبوس الحساب</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Configure.AccountEntity">
+		<Value>كيان الحساب</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Configure.AccountEntity.Hint">
+		<Value>كيان الحساب</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Configure.AccountCountryCode">
+		<Value>رمز بلد الحساب</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Configure.AccountCountryCode.Hint">
+		<Value>رمز بلد الحساب</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Configure.Source">
+		<Value>مصدر</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Configure.Source.Hint">
+		<Value>مصدر</Value>
+	</LocaleResource>
+
+	<LocaleResource Name="Shipping.Aramex.Tracking.Button">
+		<Value>ترتيب المسار</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Tracking.OrderNumber">
+		<Value>رقم طلبك</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Tracking.OrderNumber.incorrects">
+		<Value>الرقم الذي أدخلته غير صحيح</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Tracking.OrderNumber.detail">
+		<Value>يمكنك العثور على الرقم في إشعار الفاتورة عبر الرسائل القصيرة</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Tracking.OrderNumber.Required">
+		<Value>رقم الطلب مطلوب</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Tracking.Email">
+		<Value>عنوان بريدك الإلكتروني</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Tracking.Email.Detail">
+		<Value>املأ عنوان البريد الإلكتروني نفسه الذي أدخلته في عملية الدفع</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Tracking.Email.Required">
+		<Value>البريد الإلكتروني مطلوب</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Tracking.OrderNotFind">
+		<Value>النظام لا تجد</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Tracking.OrderNotMatchWithEmail">
+		<Value>الطلب غير متطابق مع البريد الإلكتروني</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Tracking.ShipmentNotCreated">
+		<Value>لم يتم شحن الطلب</Value>
+	</LocaleResource>
+
+	<LocaleResource Name="Shipping.Aramex.Shipment.OrderItem.OrderDetail">
+		<Value>تفاصيل الطلب</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Shipment.OrderItem.Quality">
+		<Value>جودة</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Shipment.OrderItem.Taxes">
+		<Value>الضرائب</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Shipment.OrderItem.Prices">
+		<Value>الأسعار</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Shipment.OrderItem.Package">
+		<Value>العبوة 1</Value>
+	</LocaleResource>
+
+	<LocaleResource Name="Shipping.Aramex.Shipment.Activity.OrderActivity">
+		<Value>طلب النشاط</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Shipment.Activity.Date">
+		<Value>تاريخ</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Shipment.Activity.Location">
+		<Value>موقعك</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Shipment.Activity.Activity">
+		<Value>نشاط</Value>
+	</LocaleResource>
+
+	<LocaleResource Name="Shipping.Aramex.Shipment.Breadcrumb.Home">
+		<Value>الصفحة الرئيسية</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Shipment.Breadcrumb.eShop">
+		<Value>متجر إلكتروني</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Shipment.Breadcrumb.Trackyourorder">
+		<Value>أتبع طلبك</Value>
+	</LocaleResource>
+
+	<LocaleResource Name="Shipping.Aramex.Shipment.Trackyourorder.Title">
+		<Value>أتبع طلبك</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Shipment.Trackyourorder.Title.Detail">
+		<Value>أدخل التفاصيل الخاصة بك لتتبع طلبك</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Shipment.Trackyourorder.Description">
+		<Value>من متجرنا إلى بابك</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Shipment.Trackyourorder.OrderNumber">
+		<Value>رقم الطلب</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Shipment.Trackyourorder.Airwaybill">
+		<Value>بوليصة الشحن الجوي</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Shipment.Trackyourorder.Deliverydate">
+		<Value>تاريخ التسليم او الوصول</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Shipment.Trackyourorder.OrderConfirmed">
+		<Value>تم تاكيد الطلب</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Shipment.Trackyourorder.OrderConfirmed.Detail">
+		<Value>أكدنا طلبك في</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Shipment.Trackyourorder.OrderProceeded">
+		<Value>تمت متابعة الطلب</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Shipment.Trackyourorder.OrderProceeded.Detail">
+		<Value>نحن نجهز طلبك</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Shipment.Trackyourorder.ReadytoShip">
+		<Value>على استعداد للسفينة</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Shipment.Trackyourorder.ReadytoShip.Detail">
+		<Value>طلبك جاهز للشحن</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Shipment.Trackyourorder.OutforDelivery">
+		<Value>خارج للتوصيل</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Shipment.Trackyourorder.OutforDelivery.Detail">
+		<Value>طلبك خارج للتسليم</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Shipment.Trackyourorder.Delivered">
+		<Value>أجل تسليم</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Shipment.Trackyourorder.Delivered.Detail">
+		<Value>تم تسليم طلبك</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Shipment.Activity.OrderCancel">
+		<Value>
+			<![CDATA[لقد اتصلنا بك مرتين ولم تكن متاحًا ، لذا<span>قمنا بإلغاء طلبك</span>. إذا كنت ترغب في اختيار منتجات جديدة ، يمكنك زيارة متجرنا عبر الإنترنت أو يمكنك الاتصال بنا للحصول على مزيد من المعلومات حول طلبك.]]>
+		</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Shipment.Trackyourorder.Cancelled">
+		<Value>تم الغاء الأمر او الطلب</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Shipment.Trackyourorder.Cancelled.Detail">
+		<Value>تم إلغاء طلبك</Value>
+	</LocaleResource>
+	<LocaleResource Name="Shipping.Aramex.Shipment.OrderUnreachable">
+		<Value>كان العميل غير قابل للوصول</Value>
+	</LocaleResource>
+</Language>

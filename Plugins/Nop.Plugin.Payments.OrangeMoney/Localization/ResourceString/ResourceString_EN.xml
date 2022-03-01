@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Language Name="English">
+
+  <!-- Configuration-->
+  <LocaleResource Name="Plugins.Payments.OrangeMoney.Fields.MerchantCode">
+    <Value>Merchant Code</Value>
+  </LocaleResource>
+  <LocaleResource Name="Plugins.Payments.OrangeMoney.Fields.MerchantCode.Hint">
+    <Value>Set Merchant Code of OrangeMoney account</Value>
+  </LocaleResource>
+  <LocaleResource Name="Plugins.Payments.OrangeMoney.Fields.ChannelCode">
+    <Value>Channel Code</Value>
+  </LocaleResource>
+  <LocaleResource Name="Plugins.Payments.OrangeMoney.Fields.ChannelCode.Hint">
+    <Value>Set Channel Code of OrangeMoney account </Value>
+  </LocaleResource>
+  <LocaleResource Name="Plugins.Payments.OrangeMoney.Fields.APIEndPoint">
+    <Value>API End Point</Value>
+  </LocaleResource>
+  <LocaleResource Name="Plugins.Payments.OrangeMoney.Fields.APIEndPoint.Hint">
+    <Value>API End Point. You can change end point from advance setting (Configuration > Setting > All Settings).</Value>
+  </LocaleResource>
+  <LocaleResource Name="Plugins.Payments.OrangeMoney.Fields.PSP">
+    <Value>PSP</Value>
+  </LocaleResource>
+  <LocaleResource Name="Plugins.Payments.OrangeMoney.Fields.PSP.Hint">
+    <Value>Set PSP value which will provide OrangeMoney</Value>
+  </LocaleResource>
+
+  <LocaleResource Name="Plugins.Payments.OrangeMoney.PaymentMethodDescription">
+    <Value>OrangeMoney Payment Method</Value>
+  </LocaleResource>
+
+  <LocaleResource Name="Plugins.Payments.OrangeMoney.Fields.RedirectionTip">
+    <Value>This will redirect you to payment page.</Value>
+  </LocaleResource>
+
+  <LocaleResource Name="Plugins.Payments.OrangeMoney.Fields.CallBackURL">
+    <Value>Callback URL</Value>
+  </LocaleResource> 
+  <LocaleResource Name="Plugins.Payments.OrangeMoney.Fields.CallBackURL.Hint">
+    <Value>Callback URL of payment response</Value>
+  </LocaleResource>
+  
+  <!-- Payment Status-->
+  <LocaleResource Name="Plugins.Payments.OrangeMoney.PaymentStatus.Success">
+    <Value>Your payment is successful.</Value>
+  </LocaleResource>
+  <LocaleResource Name="Plugins.Payments.OrangeMoney.PaymentStatus.Fail">
+    <Value>Payment has failed.</Value>
+  </LocaleResource>
+  <LocaleResource Name="Plugins.Payments.OrangeMoney.Payment.Fail.RetryButton">
+    <Value>Retry Payment</Value>
+  </LocaleResource>
+  <LocaleResource Name="Plugins.Payments.OrangeMoney.Payment.Fail.StatusCode">
+    <Value>Payment status code is {0}.</Value>
+  </LocaleResource>
+
+  <LocaleResource Name="Plugins.Payments.OrangeMoney.Payment.Page.Title">
+    <Value>Payment</Value>
+  </LocaleResource>
+  <LocaleResource Name="Plugins.Payments.OrangeMoney.payment.Page.Button.Proceed">
+    <Value>Proceed</Value>
+  </LocaleResource>
+
+
+</Language>

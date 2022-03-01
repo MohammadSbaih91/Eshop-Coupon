@@ -1,0 +1,195 @@
+﻿@using Nop.Services.Helpers
+@using Nop.Core
+@inject IUserAgentHelper userAgentHelper
+@inject IWorkContext workContext
+@{
+    var supportRtl = workContext.WorkingLanguage.Rtl;
+    var rtl = supportRtl ? "true" : "false";
+}
+
+<div id="cartdrawer" class="cart-drawer">
+    <div class="cart-top">
+        <h2>@T("CartDrawer.YourCart")</h2>
+        <div class="top-right">
+            <div class="btn-cart">
+                <a class="btn btn-light" data-toggle="modal" data-target="#additional-service-popup" onclick="LoadServiceProducts()">@T("CartDrawer.AddServices")</a>
+                <a class="btn btn-light" onclick="LoadSuggestedProducts()" data-toggle="modal" data-target="#suggested-products-popup">@T("CartDrawer.SuggestedProducts")</a>
+            </div>
+            <div class="cart-close" onclick="CloseCart()">
+                <i></i>
+            </div>
+        </div>
+    </div>
+    <div class="cart-mobile-button">
+        <div class="btn-cart">
+            <a class="btn btn-light" onclick="LoadSuggestedProducts()" data-toggle="modal" data-target="#suggested-products-popup">@T("CartDrawer.SuggestedProducts")</a>
+            <a class="btn btn-light" data-toggle="modal" data-target="#additional-service-popup">@T("CartDrawer.AddServices")</a>
+        </div>
+    </div>
+    <div id="drawer-cart-data" class="shopping-cart-listmodel">
+        @*Load Data from Ajax*@
+        <div class="ajax-loading-productload" style=""></div>
+    </div>
+</div>
+
+<div class="cart-layer"></div>
+
+<!--Additional Service Popup Modal -->
+<div class="modal fade" id="additional-service-popup" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">@T("Checkout.ChooseAdditionalServices")</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true"></span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="addition-service" id="service-product">
+                    @*Load Data From ajax*@
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Suggested Products Popup Modal -->
+<div class="modal fade suggested-product" id="suggested-products-popup" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">@T("Checkout.SuggestedProducts")</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true"></span>
+                </button>
+            </div>
+            <div class="modal-body" id="cross-sell-product">
+                @*Load Data From ajax*@
+            </div>
+        </div>
+    </div>
+</div>
+
+<script asp-location="Footer">
+    function LoadCartProduct() {
+        $('.shopping-cart-listmodel').html("<div class='ajax-loading-productload' style=''></div>");
+        $.ajax({
+            url: '/ShoppingCart/CartDrawer',
+            data: { prepareAndDisplayOrderReviewData: true },
+            type: 'POST',
+            success: function (data) {
+                $('#cartdrawer').addClass('active');
+                $('.shopping-cart-listmodel').html(data.html);
+            }
+        });
+    }
+
+    function OpenCartDrawer() {
+        $('#cartdrawer').addClass('active');
+        $('.cart-layer').addClass('active');
+        $('body').addClass('scroll-lock');
+        LoadCartProduct();
+    }
+
+    function CloseCart(){
+        $('#cartdrawer').removeClass('active');
+        $('.cart-layer').removeClass('active');
+        $('body').removeClass('scroll-lock');
+    };
+
+    function LoadSuggestedProducts() {
+        $('#cross-sell-product').html("<div class='ajax-loading-productload' style=''></div>");
+        $.ajax({
+            url: '/ShoppingCart/CrossSellProduct',
+            type: 'POST',
+            success: function (data) {
+                if (data.html === '') {
+                    $('#cross-sell-product').html("@T("Checkout.suggestedproduct.emptymessage")")
+                }
+                else {
+                    $('#cross-sell-product').html(data.html)
+                    OwlForCrossSell();
+                }
+            }
+        });
+    }
+
+    function OwlForCrossSell()
+    {
+        @if (userAgentHelper.IsMobileDevice())
+        {
+            <text>
+                $('#suggested-product').owlCarousel({
+                    loop: false,
+                    margin: 15,
+                    nav: true,
+                    dots: false,
+                    rtl: @(rtl),
+                    autoWidth: true,
+                    //for animation
+                    navText: ["", "<div class='timer'><span class='mask'><span class='rotator' style='transform: rotate(1deg);'></span></span></div>"],
+                });
+
+                //for animation
+                var parentID = "#suggested-product";
+                var animationspeed = @(Nop.Web.EShopHelper.Animationspeed);
+
+                //function for animation
+                AnimationCircling(animationspeed, parentID);
+            </text>
+        }
+        else
+        {
+            <text>
+                $('#suggested-product').owlCarousel({
+                    loop: false,
+                    margin: 15,
+                    nav: true,
+                    dots: false,
+                    rtl: @(rtl),
+                    responsive: {
+                        0: {
+                            margin: 7,
+                            items: 2,
+                        },
+                        991: {
+                            margin: 7,
+                            items: 3,
+                        },
+                        992: {
+                            margin: 7,
+                            items: 3,
+                        },
+                        1024: {
+                            margin: 5,
+                            items: 4,
+                        },
+                        1280: {
+                            margin: 7,
+                            items: 4,
+                        },
+                        1366: {
+                            margin: 10,
+                            items: 4,
+                        },
+                        1400: {
+                            margin: 15,
+                            items: 4,
+                        }
+                    }
+                });
+            </text>
+        }
+    }
+
+    function LoadServiceProducts() {
+        $('#service-product').html("<div class='ajax-loading-productload' style=''></div>");
+        $.ajax({
+            url: '/CustomProduct/ServiceProducts',
+            type: 'POST',
+            success: function (data) {
+                $('#service-product').html(data.html)
+            }
+        });
+    }
+</script>

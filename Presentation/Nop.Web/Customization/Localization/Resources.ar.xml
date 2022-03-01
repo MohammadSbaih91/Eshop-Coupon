@@ -1,0 +1,241 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Language Name="English">
+  <LocaleResource Name="Address.Fields.Nationality.Required">
+    <Value>الرجاء اختيار الجنسية</Value>
+  </LocaleResource>
+  <LocaleResource Name="Address.Fields.NationalityType.Required">
+    <Value>الرجاء إختيار نوع بطاقة التعريف</Value>
+  </LocaleResource>
+  <LocaleResource Name="address.fields.identitycardorpassport.required">
+    <Value>الرجاء إدخال رقم بطاقة التعريف او رقم جواز السفر</Value>
+  </LocaleResource>
+  <LocaleResource Name="address.fields.emailconfirm.missmatch">
+    <Value>البريد الإلكتروني غير مطابق</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Orders.List.SearchCategory">
+    <Value>القسم</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Orders.List.SearchCategory.Hint">
+    <Value>البحث بقسم معين	</Value>
+  </LocaleResource>
+  <LocaleResource Name="Address.Fields.EmailConfirm.Required">
+    <Value>البريد الإلكتروني غير مطابق</Value>
+  </LocaleResource>
+  <LocaleResource Name="admin.orders.billingshippinginfo">
+    <Value>الفواتير والشحن</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Orders.Address.Nationality">
+    <Value>جنسية</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Order.BillingAddress.IdentityCardOrPassport">
+    <Value>رقم الوثيقة</Value>
+  </LocaleResource>
+  <LocaleResource Name="enums.nop.core.domain.orders.orderstatus.Unreachable">
+    <Value>لا يمكن الوصول إليه</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Orders.Cancel.ReasonMessage">
+    <Value>الحفاظ على سبب إلغاء الأمر</Value>
+  </LocaleResource>
+  <LocaleResource Name="OrderNotes.WithReason">
+    <Value></Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Promotions.Discounts.Fields.CouponCode.Duplication">
+    <Value>رمز قسيمة الخصم موجود بالفعل</Value>
+  </LocaleResource>
+  <LocaleResource Name="Category.Filter.AreaLabel">
+    <Value>حدد فئة للبحث</Value>
+  </LocaleResource>
+  <LocaleResource Name="Category.Filter.Label">
+    <Value>البحث عن فئة</Value>
+  </LocaleResource>
+  <LocaleResource Name="Product.Filter.Label">
+    <Value>ابحث عن المنتج</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Orders.List.SearchCustomProductType">
+    <Value>نوع المنتج</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Orders.List.SearchCustomProductType.Hint">
+    <Value>نوع المنتج</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Reports.CustomizeReport">
+    <Value>تخصيص التقرير</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Reports.CustomReport.StartDate">
+    <Value>تاريخ البدء</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Reports.CustomReport.StartDate.Hint">
+    <Value>تاريخ البدء</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Reports.CustomReport.EndDate">
+    <Value>تاريخ الانتهاء</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Reports.CustomReport.EndDate.Hint">
+    <Value>تاريخ الانتهاء</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Reports.CustomReport.OrderStatus">
+    <Value>حالة الطلب</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Reports.CustomReport.OrderStatus.Hint">
+    <Value>حالة الطلب</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Reports.CustomReport.ProductName">
+    <Value>اسم المنتج</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Reports.CustomReport.ProductName.Hint">
+    <Value>اسم المنتج</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.CustomizeReport">
+    <Value>نقل</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Report.Customization.OrderId">
+    <Value>طلب #</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Report.Customization.OrderStatus">
+    <Value>حالة الطلب</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Report.Customization.OrderProduct">
+    <Value>اطلب المنتج</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Report.Customization.Vender">
+    <Value>البائع</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Report.Customization.CustomerName">
+    <Value>اسم الزبون</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Report.Customization.PhoneNumber">
+    <Value>رقم الهاتف</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Report.Customization.CustomerAddress">
+    <Value>عنوان</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Report.Customization.CustomerEmail">
+    <Value>البريد الإلكتروني للعميل</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Report.Customization.CreatedOn">
+    <Value>تم إنشاؤها على</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Report.Customization.OrderTotal">
+    <Value>الطلب الكلي</Value>
+  </LocaleResource>
+
+  <LocaleResource Name="Common.Fileds.ProductType">
+    <Value>نوع المنتج</Value>
+  </LocaleResource>
+  <LocaleResource Name="Enums.Nop.Core.Domain.Catalog.CustomProductType.None">
+    <Value>لا شيء</Value>
+  </LocaleResource>
+  <LocaleResource Name="Enums.Nop.Core.Domain.Catalog.CustomProductType.New">
+    <Value>جديد</Value>
+  </LocaleResource>
+  <LocaleResource Name="Enums.Nop.Core.Domain.Catalog.CustomProductType.Upgrade">
+    <Value>تطوير</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Catalog.Products.Fields.CustomProductType">
+    <Value>نوع المنتج المخصص</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Catalog.Products.Fields.CustomProductType.Hint">
+    <Value>يتم استخدام نوع المنتج المخصص لأمر التصفية فقط</Value>
+  </LocaleResource>
+
+
+  <LocaleResource Name="PageTitle.Employee">
+    <Value>تفاصيل الموظف</Value>
+  </LocaleResource>
+  <LocaleResource Name="Employee.Title">
+    <Value>تفاصيل الموظف</Value>
+  </LocaleResource>
+  <LocaleResource Name="Employee.EmployeeName">
+    <Value>اسم الموظف</Value>
+  </LocaleResource>
+  <LocaleResource Name="Employee.EmployeeName.Hint">
+    <Value>اسم الموظف</Value>
+  </LocaleResource>
+  <LocaleResource Name="Employee.EmployeeName.Required">
+    <Value>اسم الموظف مطلوب</Value>
+  </LocaleResource>
+  <LocaleResource Name="Employee.EmployeeId">
+    <Value>الرقم الوظيفي</Value>
+  </LocaleResource>
+  <LocaleResource Name="Employee.EmployeeId.Hint">
+    <Value>الرقم الوظيفي</Value>
+  </LocaleResource>
+  <LocaleResource Name="Employee.EmployeeContactNumber">
+    <Value>رقم الاتصال</Value>
+  </LocaleResource>
+  <LocaleResource Name="Employee.EmployeeContactNumber.Hint">
+    <Value>رقم الاتصال</Value>
+  </LocaleResource>
+  <LocaleResource Name="Employee.EmployeeContactNumber.NotValied">
+    <Value>يجب أن يبدأ رقم الاتصال بالرقم 077</Value>
+  </LocaleResource>
+  <LocaleResource Name="Employee.Email">
+    <Value>البريد الإلكتروني</Value>
+  </LocaleResource>
+  <LocaleResource Name="Employee.Email.Hint">
+    <Value>البريد الإلكتروني</Value>
+  </LocaleResource>
+  <LocaleResource Name="Employee.Email.Required">
+    <Value>البريد الالكتروني مطلوب</Value>
+  </LocaleResource>
+  <LocaleResource Name="Employee.Email.WrongEmail">
+    <Value>البريد الإلكتروني غير صالح</Value>
+  </LocaleResource>
+  <LocaleResource Name="Employee.Months">
+    <Value>شهور التقسيط</Value>
+  </LocaleResource>
+  <LocaleResource Name="Employee.Months.Hint">
+    <Value>شهور التقسيط</Value>
+  </LocaleResource>
+  <LocaleResource Name="Employee.Months.NotValied">
+    <Value>شهور التقسيط غير صالحة</Value>
+  </LocaleResource>
+  <LocaleResource Name="Employee.Amount">
+    <Value>قيمة القسط</Value>
+  </LocaleResource>
+  <LocaleResource Name="Employee.Amount.Hint">
+    <Value>قيمة القسط</Value>
+  </LocaleResource>
+  <LocaleResource Name="Employee.Amount.NotValied">
+    <Value>مبلغ القسط غير صالح</Value>
+  </LocaleResource>
+  <LocaleResource Name="Employee.OrderNumber">
+    <Value>رقم الطلب</Value>
+  </LocaleResource>
+  <LocaleResource Name="Employee.OrderNumber.Hint">
+    <Value>رقم الطلب</Value>
+  </LocaleResource>
+  <LocaleResource Name="Employee.EmployeeDetailAdded">
+    <Value>{0} تمت إضافة تفاصيل الموظف مقابل رقم الطلب </Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.EmployeeOrders">
+    <Value>أمر الموظف</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.EmployeeOrders">
+    <Value>أمر الموظف</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Employee.View">
+    <Value>موظف</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Employee.EditEmployee">
+    <Value>تعديل تفاصيل موظف الطلب</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Employee.BackTolist">
+    <Value>الرجوع للقائمة</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Employee.Updated">
+    <Value>تم تحديث الموظف بنجاح.</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Employee.ExistWithOrder">
+    <Value>{0} تمت إضافة تفاصيل الموظف بالفعل مقابل رقم الطلب </Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Employee.OrderNotExist">
+    <Value>رقم الطلب {0} غير موجود.</Value>
+  </LocaleResource>
+  <LocaleResource Name="employee.save">
+    <Value>حفظ</Value>
+  </LocaleResource>
+  <LocaleResource Name="checkout.employeedetail">
+    <Value>أدخل تفاصيل الموظف</Value>
+  </LocaleResource>
+
+</Language>

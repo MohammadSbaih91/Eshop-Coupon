@@ -1,0 +1,32 @@
+﻿@{
+    Layout = "_ConfigurePlugin";
+    Html.AddCssFileParts("~/Plugins/ProductImportNUpdate/content/styles.css");
+}
+<form asp-controller="ProductImportNUpdate" asp-action="Configure" method="post" enctype="multipart/form-data">
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                @T("Plugin.ProductImportNUpdate.File")
+            </div>
+            <div class="panel-body">
+                <div class="form-horizontal">
+                    <nop-antiforgery-token/>
+                    <div class="form-group">
+                        <div class="col-md-12 drop-container">
+                            <input type="file" id="importfile" name="importfile" class="form-control"/>
+                            <span class="drop-file">@T("Plugin.ProductImportNUpdate.DragDrop")</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="panel panel-footer">
+            <div class="panel-body">
+                <div class="form-group">
+                    <input id="importExl" type="submit" name="import" class="btn btn-primary" value="@T("Plugin.ProductImportNUpdate.submit")"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
